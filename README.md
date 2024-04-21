@@ -7,6 +7,7 @@ O projeto é nosso T.C.C. e fruto de um ano e meio de estudos no SENAI (Serviço
 # 🛠Tecnologias utilizadas
 ● HTML <br>
 ● CSS  <br>
+● React.js  <br>
 ● JavaScript <br>
 ● Node.js <br>
 
