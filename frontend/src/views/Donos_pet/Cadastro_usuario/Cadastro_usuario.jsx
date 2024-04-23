@@ -9,6 +9,14 @@ function Cadastro_usuario() {
       </div>
       <div className='formulario'>
         <h1><b>Boas Vindas!</b></h1>
+        <form action="">
+          <input type="text" name="nome" id="" placeholder="Nome e sobrenome"/>
+          <input type="text" name="email" id="" placeholder="Email"/>
+          <input type="text" name="senha" id="" placeholder="Senha"/>
+          <input type="text" name="confirmarSenha" id="" placeholder="Confirmar Senha"/>
+          <button>Criar conta</button>
+        </form>
+        <p>Já possui uma conta?<a href="">Entrar</a></p>
       </div>
     </div>
   )

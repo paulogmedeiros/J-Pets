@@ -6,16 +6,16 @@ body {
 }
 
 .container{
-    margin: 6% auto;
+    margin: 5% auto;
     display: flex;
-    height: 700px;
-    width: 1400px;
+    height: 750px;
+    width: 1500px;
 }
 
 .imagem{
     background-color: #2641B7;
-    height: 700px;
-    width: 700px;
+    height: 750px;
+    width: 750px;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
 }
@@ -24,8 +24,8 @@ body {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     background-color: #FFFFFF;
-    height: 700px;
-    width: 700px;
+    height: 750px;
+    width: 750px;
 }
 
 h1{
