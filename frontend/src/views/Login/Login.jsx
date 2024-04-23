@@ -18,7 +18,7 @@ function Login() {
                     <input class="input-senha" type="password" name="senha" id="" placeholder='Senha' />
                 </div>
                 <a href="">Esqueceu a senha?</a>
-                <button>Acessar</button>
+                <button className='btn-acessar'>Acessar</button>
             </div>
 
             {/* Imagem */}
