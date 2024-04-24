@@ -1,5 +1,5 @@
 import React from 'react'
-import './Cadastro_usuario.css'
+// import './Cadastro_usuario.css'
 import cachorro from './img/imagem_cachorro.svg'
 import iconeUsuario from './img/icone_usuario.svg'
 import iconeEmail from './img/icone_email.svg'
