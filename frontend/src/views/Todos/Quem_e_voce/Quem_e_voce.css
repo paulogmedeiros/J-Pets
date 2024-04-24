@@ -1,0 +1,25 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.container{
+    border: 2px solid black; 
+}
+
+.titulo{
+    border: 2px solid green;
+}
+
+.imagem{
+    border: 2px solid purple;
+}
+
+.imagem-dono-pet{
+    border: 2px solid blue;
+}
+
+.imagem-empresa{
+    border: 2px solid red;
+}
+
