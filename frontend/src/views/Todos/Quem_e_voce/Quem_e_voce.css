@@ -1,25 +1,77 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{    
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 .container{
-    border: 2px solid black; 
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    background-color: white;
 }
 
 .titulo{
-    border: 2px solid green;
+    height: 200px;
+    width: 692px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo h1{
+    font-size: 80px;
 }
 
 .imagem{
-    border: 2px solid purple;
+    display: flex;
+}
+
+.imagem button{
+    height: 420px;
+    width: 770px;
+    border-radius: 30px;
+    font-size: 40px;
+    border: 6px solid ;
+}
+
+.imagem-dono-pet button{
+    background-color: #DCECF6;
+    border-color: #2641B7;
+    padding-left: 400px;
+}
+
+.imagem-empresa button{
+    background-color: #FCE48D;
+    border-color: #DEA100;
+    padding-right: 470px;
 }
 
 .imagem-dono-pet{
-    border: 2px solid blue;
+    position: relative;
+    margin-right: 130px;
 }
 
 .imagem-empresa{
-    border: 2px solid red;
+    position: relative;
+}
+
+.imagem-dono-pet img{
+    position: absolute;
+    right: 300px;
+}
+
+.imagem-empresa img{
+    position: absolute;
+    left: 300px;
+    
 }
 
