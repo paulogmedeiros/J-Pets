@@ -1,8 +1,8 @@
 import React from 'react'
-// import './Nova_senha.css'
+// import './Redefinir_senha.css'
 import icone_senha from './img/icone_senha.svg'
 
-function Nova_senha() {  
+function Redefinir_senha() {  
   return (
     <div className='container'>
        <div className='titulo'>
@@ -13,6 +13,9 @@ function Nova_senha() {
         <div className='formulario'>
             <form action="">
               <div className='input'>
+                <input type="text" placeholder='Senha atual' /> 
+              </div>
+              <div className='input'>
                 <input type="password" placeholder='Nova senha' />      
               </div>
               <div className='input'>
@@ -20,7 +23,7 @@ function Nova_senha() {
               </div>
                 <div className='btn'>
                   <button id='bt1'><b>Confirmar</b></button>
-                  <button id='bt2'><b>Voltar à tela de login</b></button>
+                  <button id='bt2'><b>Cancelar</b></button>
                 </div>
             </form>
         </div>
@@ -28,4 +31,4 @@ function Nova_senha() {
   )
 }
 
-export default Nova_senha
+export default Redefinir_senha
