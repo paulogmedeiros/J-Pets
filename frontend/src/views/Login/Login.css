@@ -23,13 +23,11 @@ body {
     border-radius: 30px;
     display: flex;
     background-color: white;
-    width: 1500px;
-    height: 750px;
 }
 
 .container .formulario {
-    width: 50%;
-    height: 50%;
+    width: 600px;
+    height: 700px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,12 +36,13 @@ body {
 }
 
 .formulario h1 {
-    padding: 160px 0 60px 0;
+    padding: 0 0 100px 0;
     color: #2641B7;
     font-size: 50px;
 }
 
 .formulario input {
+    font-size: 20px;
     width: 400px;
     height: 55px;
     border: 2px solid #DFDFDF;
@@ -61,7 +60,7 @@ body {
 }
 
 .formulario a {
-    padding: 20px 200px 0 0;
+    padding: 10px 200px 30px 0;
     text-decoration: none;
     font: 20px bolder;
     font-family: 'Poppins', sans-serif;
@@ -72,11 +71,32 @@ body {
     color: black;
 }
 
-/* Código não finalizado */
 .formulario .btn-acessar {
-    
-    height: 55px !important;
-    width: 400px !important;
+    font-size: 16px;
+    background-color: #2641B7;
+    color: white;
+    height: 55px;
+    width: 400px;
     border-radius: 30px;
     border: none;
+}
+
+.btn-acessar:hover {
+    cursor: pointer;
+    background-color: #FFFFFF;
+    color: #2641B7;
+    border: 1px solid #2641B7;
+}
+
+.img-login {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background-color: #DEA100;
+}
+
+.img-login .login_img {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
