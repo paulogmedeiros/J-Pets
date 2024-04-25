@@ -1,5 +1,5 @@
 import React from 'react'
-import './Redefinir_senha_administrador.css'
+// import './Redefinir_senha_administrador.css'
 import icone_senha from './img/icone_senha.svg'
 
 function Redefinir_senha_adm() {  

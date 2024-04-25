@@ -1,5 +1,5 @@
 import React from 'react'
-import './Login.css'
+// import './Login.css'
 import imagem_login from '../../img/imagem_login.png'
 function Login() {
     return (
