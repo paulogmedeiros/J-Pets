@@ -1,8 +1,8 @@
 import React from 'react'
-import './Esqueceu_a_senha.css'
+// import './Esqueceu_a_senha.css'
 import icone_email from './img/icone_email.svg'
 
-function Esqueceu_a_senha() {
+function Esqueceu_a_senha() {  
   return (
     <div className='container'>
         <div className='titulo'>
@@ -14,8 +14,8 @@ function Esqueceu_a_senha() {
             <form action="">
                 <input type="text" placeholder='Email' />
                 <div className='buttons'>
-                    <button>Enviar</button>
-                    <button>Cancelar</button>
+                    <button id='btn1'><b>Enviar</b></button>
+                    <button id='btn2'><b>Cancelar</b></button>
                 </div>
             </form>
         </div>

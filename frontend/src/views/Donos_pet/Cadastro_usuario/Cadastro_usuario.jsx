@@ -1,5 +1,6 @@
 import React from 'react'
 // import './Cadastro_usuario.css'
+// import { Input } from '../../../components/Input'
 import cachorro from './img/imagem_cachorro.svg'
 import iconeUsuario from './img/icone_usuario.svg'
 import iconeEmail from './img/icone_email.svg'
@@ -15,6 +16,7 @@ function Cadastro_usuario() {
           <h1><b>Boas-Vindas!</b></h1>
         </div>
         <form action="" id='form' className='form'>
+        {/* <Input name='teste' iconeUsuario={iconeEmail} placeholder='isso não é um teste' textoAlternativo='icone de email'/> */}
           <div className='input-wrapper'>
              <img src={iconeUsuario} alt="icone de usuario" height={48} width={48}/>
              <input type="text" name="nome" id="nome" placeholder="Nome e sobrenome" />

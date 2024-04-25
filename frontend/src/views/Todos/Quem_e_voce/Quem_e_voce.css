@@ -25,10 +25,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 100px;
 }
 
 .titulo h1{
-    font-size: 80px;
+    font-size: 75px;
 }
 
 .imagem{

@@ -65,9 +65,20 @@ body {
     font-size: 20px;
 }
 
-.formulario button{
+#btn1{
+    font-size: 20px;
     width: 333px;
     height: 70px;
     background-color: #2641B7;
     border-radius: 30px;
+    margin-right: 55px;
+    color: white;
+}
+#btn2{
+    font-size: 20px;
+    width: 237px;
+    height: 70px;
+    text-decoration: underline;
+    border: none;
+    background-color: white;
 }
