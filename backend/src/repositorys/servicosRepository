@@ -1,0 +1,7 @@
+class ServicosRepository{
+    selectServico(){
+        return {mensagem_do_dia:"Já ja e 1?"}
+    }
+}
+
+module.exports = new ServicosRepository()

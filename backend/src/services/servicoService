@@ -1,0 +1,9 @@
+const repository = require("../repositorys/servicosRepository")
+
+class ServicosService{
+    findServico(){
+        return repository.selectServico()
+    }
+}
+
+module.exports = new ServicosService()

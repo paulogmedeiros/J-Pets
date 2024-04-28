@@ -1,0 +1,11 @@
+const service = require("../services/servicoService")
+
+class ServicosController{
+    getServico(req,res){
+        console.log("ola")
+        const result = service.findServico();
+        res.json(result)
+    }
+}
+
+module.exports = new ServicosController()
