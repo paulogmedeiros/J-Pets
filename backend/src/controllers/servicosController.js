@@ -1,4 +1,4 @@
-const service = require("../services/servicoService")
+const service = require("../services/servicoService.js")
 
 class ServicosController{
     async getServico(req,res){

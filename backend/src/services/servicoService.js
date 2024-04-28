@@ -1,4 +1,4 @@
-const repository = require("../repositorys/servicosRepository")
+const repository = require("../repositorys/servicosRepository.js")
 
 class ServicosService{
   
