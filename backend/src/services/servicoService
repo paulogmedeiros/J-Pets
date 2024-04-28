@@ -1,8 +1,9 @@
 const repository = require("../repositorys/servicosRepository")
 
 class ServicosService{
-    findServico(){
-        return repository.selectServico()
+  
+    async findServico(){
+        return await repository.selectServico()
     }
 }
 
