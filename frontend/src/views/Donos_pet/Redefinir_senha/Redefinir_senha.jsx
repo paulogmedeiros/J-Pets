@@ -1,5 +1,5 @@
 import React from 'react'
-import './Redefinir_senha.css'
+//import './Redefinir_senha.css'
 import icone_senha from './img/icone_senha.svg'
 
 function Redefinir_senha() {  

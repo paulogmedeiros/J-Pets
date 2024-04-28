@@ -8,7 +8,6 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100vh;
     background-color: #F3F3F8;
     display: flex;
     justify-content: center;
@@ -24,7 +23,6 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-     
 }
 
 .titulo{
