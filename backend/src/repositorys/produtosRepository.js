@@ -21,12 +21,15 @@ class ProdutosRepository {
     async selectProdutosMarcaModelos(){
         return await this.prisma.produtos.findMany({
             select:{
+                id:true,
                 nome:true,
                  marcas:{
                     select:{
+                        id:true,
                         nome:true,
                         modelos:{
                             select:{
+                                id:true,
                                 nome:true,
                             }
                         }

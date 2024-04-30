@@ -8,9 +8,11 @@ class ServicosRepository{
     async selectServico(){
         return await this.prisma.servicos.findMany({
             select:{
+                id:true,
                 nome:true,
                 animais:{
                     select:{
+                        id:true,
                         nome:true,
                     }
                 }
