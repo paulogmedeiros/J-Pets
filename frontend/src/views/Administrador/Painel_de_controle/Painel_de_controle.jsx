@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import logoJPets_adm from './img/logoJPets.png'
 import './Painel_de_controle.css'
 import pesquisaIcone_adm from './img/pesquisa_icone.svg'
@@ -22,7 +22,7 @@ function Painel_de_controle() {
                 }
                 else {
                     let dados = await resposta.json()
-                    setUsuarios(dados)
+                    setEmpresas(dados)
                 }
             } catch (error) {
                 console.error("Erro ao buscar usuários" + error)
@@ -34,7 +34,7 @@ function Painel_de_controle() {
     })
     return (
         // Container geral para propriedades de fundo
-        <div className="admPainel">
+        <div class="admPainel">
             <nav class="admNavbar navbar navbar-expand-lg">
                 <div class="container-fluid d-flex">
                     <a class="navbar-brand" href="#"><img src={logoJPets_adm} alt="" srcset="" width={50} height={50} /></a>
@@ -94,12 +94,12 @@ function Painel_de_controle() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {empresas.map(usuario => (
-                    <tr key={empresas.id}>
-                        <td>{empresas.nome_fantasia}</td>
-                        <td>{empresas.status_empresa}</td>
-                    </tr>
-                ))}
+                                {empresas.map(empresa => (
+                                    <tr key={empresa.id}>
+                                        <td>{empresa.nome_fantasia}</td>
+                                        <td>{trueFalse(empresa.status_empresa)}</td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
@@ -107,6 +107,15 @@ function Painel_de_controle() {
             </div>
         </div>
     )
+}
+
+function trueFalse(status){
+    if(status===true){
+        return "Ativo"
+    }else{
+        return "Inativo"
+    }
+
 }
 
 export default Painel_de_controle
