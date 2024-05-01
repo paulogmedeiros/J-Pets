@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import logoJPets_adm from './img/logoJPets.png'
-import './Painel_de_controle.css'
-import pesquisaIcone_adm from './img/pesquisa_icone.svg'
-
-function Painel_de_controle() {
+import logoJPets_adm from '../img/logoJPets.png'
+import './Painel_de_controle_produtos.css'
+import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
+import botaoMais from '../img/botao_mais.svg'
+function Painel_de_controle_produtos() {
 
     //Estado para armazenar os usuários
     const [empresas, setEmpresas] = useState([])
@@ -76,21 +76,25 @@ function Painel_de_controle() {
                     </div>
 
                     {/* Tabela */}
-                    <div class="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5">
+                    <div class="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5 text-center">
                         <div className='row '>
-                            <p className='d-flex col-4'>Todas as empresas</p>
-                            <div class="input-group mb-3 col-8 w-50 me-2">
-                                <input type="text" class="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                            <p className='d-flex col-4 mt-5 fs-2 fw-semibold'>Todos os produtos</p>
+                            <div class="input-group d-flex mb-3 col-4 w-25 me-2 mt-5">
+                                <input type="text" class="form-control" placeholder="Pesquisar produto" aria-label="Recipient's username" aria-describedby="basic-addon2" />
                                 <span class="input-group-text" id="basic-addon2"><img src={pesquisaIcone_adm} alt="" srcset="" width={20} color='back' /></span>
                             </div>
+
+                            
+                            <button type="button" class="btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm "><img src={botaoMais} width={30} height={30}/></button>
                         </div>
 
 
-                        <table class="table table-striped">
+                        <table class="table table-striped border border-1">
                             <thead>
-                                <tr>
-                                    <th scope="col">Empresa</th>
-                                    <th scope="col">Status</th>
+                                <tr className='admPainelProduto-tabela-cabecalho text-center '>
+                                    <th scope="col">Produto</th>
+                                    <th scope="col">Marca</th>
+                                    <th scope="col">Modelo</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,13 +113,13 @@ function Painel_de_controle() {
     )
 }
 
-function trueFalse(status){
-    if(status===true){
+function trueFalse(status) {
+    if (status === true) {
         return "Ativo"
-    }else{
+    } else {
         return "Inativo"
     }
 
 }
 
-export default Painel_de_controle
+export default Painel_de_controle_produtos
