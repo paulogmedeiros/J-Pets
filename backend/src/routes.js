@@ -6,6 +6,7 @@ const empresa = require("./controllers/empresasController.js")
 const produtos = require("./controllers/produtosController.js")
 const marcas = require("./controllers/marcasController.js")
 const modelos = require("./controllers/modelosController.js")
+const login = require("./controllers/loginController.js")
 
 
 routes.get("/", (req,res)=>{
@@ -32,4 +33,6 @@ routes.get(("/modelos"), modelos.getModelos)
 routes.post(("/empresas"),empresa.postEmpresa)
 routes.get(("/empresas"), empresa.getEmpresas)
 
+// rota de login
+routes.post("/login",login.logar)
 module.exports = routes
