@@ -1,13 +1,13 @@
-const repository = require("../repositorys/modelosRepository.js")
+const ModelosRepository = require("../repositorys/modelosRepository.js")
 
 class ModelosService{
   
     async createModelos(data){
-        return await repository.insertModelos(data)
+        return await ModelosRepository.insertModelos(data)
     }
 
     async findModelos(){
-        return await repository.selectModelos()
+        return await ModelosRepository.selectModelos()
     }
 }
 

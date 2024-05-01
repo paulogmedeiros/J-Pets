@@ -1,19 +1,19 @@
-const service = require("../services/produtosService.js")
+const produtosService = require("../services/produtosService.js")
 
 class ProdutosController{
     async postProdutos(req,res){
         const data = req.body;
-        const result = await service.createProdutos(data);
+        const result = await produtosService.createProdutos(data);
         res.json(result)
     }
 
     async getProdutos(req,res){
-        const result = await service.findProdutos();
+        const result = await produtosService.findProdutos();
         res.json(result)
     }
 
     async getProdutosMarcaModelos(req,res){
-        const result = await service.findProdutosMarcaModelos();
+        const result = await produtosService.findProdutosMarcaModelos();
         res.json(result)
     }
 }

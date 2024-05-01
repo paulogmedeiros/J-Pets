@@ -1,14 +1,14 @@
-const service = require("../services/marcasService.js")
+const marcasService = require("../services/marcasService.js")
 
 class MarcasController{
     async postMarcas(req,res){
         const data = req.body;
-        const result = await service.createMarcas(data);
+        const result = await marcasService.createMarcas(data);
         res.json(result)
     }
 
     async getMarcas(req,res){
-        const result = await service.findMarcas();
+        const result = await marcasService.findMarcas();
         res.json(result)
     }
 }

@@ -1,13 +1,13 @@
-const repository = require("../repositorys/marcasRepository.js")
+const MarcasRepository = require("../repositorys/marcasRepository.js")
 
 class MarcasService{
   
     async createMarcas(data){
-        return await repository.insertMarcas(data)
+        return await MarcasRepository.insertMarcas(data)
     }
 
     async findMarcas(){
-        return await repository.selectMarcas()
+        return await MarcasRepository.selectMarcas()
     }
 }
 

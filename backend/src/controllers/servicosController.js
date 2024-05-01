@@ -1,8 +1,8 @@
-const service = require("../services/servicoService.js")
+const servicosService = require("../services/servicoService.js")
 
 class ServicosController{
     async getServico(req,res){
-        const result = await service.findServico();
+        const result = await servicosService.findServico();
         res.json(result)
     }
 }
