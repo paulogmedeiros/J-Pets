@@ -18,12 +18,12 @@
 
 .admInfo{
     color: white;
-    background-color: #2641B7;
+    background-color: #2641B7 !important;
 }
 
 .admInfo:hover{
     color: white;
-    background-color: #2641B7;
+    background-color: #2641B7 !important;
     border: none;
 }
 

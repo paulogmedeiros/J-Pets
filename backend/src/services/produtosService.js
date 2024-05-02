@@ -1,17 +1,17 @@
-const repository = require("../repositorys/produtosRepository.js")
+const produtosRepository = require("../repositorys/produtosRepository.js")
 
 class ProdutosService{
   
     async createProdutos(data){
-        return await repository.insertProdutos(data)
+        return await produtosRepository.insertProdutos(data)
     }
 
     async findProdutos(){
-        return await repository.selectProdutos()
+        return await produtosRepository.selectProdutos()
     }
 
     async findProdutosMarcaModelos(){
-        return await repository.selectProdutosMarcaModelos()
+        return await produtosRepository.selectProdutosMarcaModelos()
     }
 }
 

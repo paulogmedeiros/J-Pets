@@ -1,14 +1,14 @@
-const service = require("../services/modelosService.js")
+const modelosService = require("../services/modelosService.js")
 
 class ModelosController{
     async postModelos(req,res){
         const data = req.body;
-        const result = await service.createModelos(data);
+        const result = await modelosService.createModelos(data);
         res.json(result)
     }
 
     async getModelos(req,res){
-        const result = await service.findModelos();
+        const result = await modelosService.findModelos();
         res.json(result)
     }
 }

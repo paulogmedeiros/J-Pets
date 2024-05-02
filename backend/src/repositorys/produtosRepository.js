@@ -19,20 +19,41 @@ class ProdutosRepository {
     }
 
     async selectProdutosMarcaModelos(){
-        return await this.prisma.produtos.findMany({
+        // return await this.prisma.produtos.findMany({
+        //     select:{
+        //         id:true,
+        //         nome:true,
+        //          marcas:{
+        //             select:{
+        //                 id:true,
+        //                 nome:true,
+        //                 modelos:{
+        //                     select:{
+        //                         id:true,
+        //                         nome:true,
+        //                     }
+        //                 }
+        //             }
+
+        //          }
+        //     }
+        // })
+        return await this.prisma.modelos.findMany({
             select:{
+                id:true,
                 nome:true,
-                 marcas:{
-                    select:{
+                marcas:{
+                    select:{    
+                        id:true,
                         nome:true,
-                        modelos:{
+                        produtos:{
                             select:{
+                                id:true,
                                 nome:true,
                             }
                         }
                     }
-
-                 }
+                }
             }
         })
     }
