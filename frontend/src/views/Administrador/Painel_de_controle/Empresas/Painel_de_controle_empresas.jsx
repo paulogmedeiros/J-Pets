@@ -69,9 +69,9 @@ function Painel_de_controle_empresas() {
 
                     <div class="admMenuLateral col-3 mt-5 pr-5">
                         <div id="list-example" class="list-group">
-                            <a class="list-group-item list-group-item-action" href="#list-item-1">Empresas</a>
-                            <a class="list-group-item list-group-item-action" href="#list-item-2">Produtos</a>
-                            <a class="list-group-item list-group-item-action" href="#list-item-3">Serviços</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel/servicos">Serviços</a>
                         </div>
                     </div>
 

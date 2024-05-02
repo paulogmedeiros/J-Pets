@@ -70,9 +70,9 @@ function Painel_de_controle_servicos() {
 
                     <div class="admMenuLateral col-3 mt-5 pr-5">
                         <div id="list-example" class="list-group">
-                            <a class="list-group-item list-group-item-action" href="#list-item-1">Empresas</a>
-                            <a class="list-group-item list-group-item-action" href="#list-item-2">Produtos</a>
-                            <a class="list-group-item list-group-item-action" href="#list-item-3">Serviços</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel/servicos">Serviços</a>
                         </div>
                     </div>
 
@@ -85,8 +85,8 @@ function Painel_de_controle_servicos() {
                                 <span class="input-group-text" id="basic-addon2"><img src={pesquisaIcone_adm} alt="" srcset="" width={20} color='back' /></span>
                             </div>
 
-                            
-                            <button type="button" class="btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm "><img src={botaoMais} width={30} height={30}/></button>
+
+                            <button type="button" class="btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm "><img src={botaoMais} width={30} height={30} /></button>
                         </div>
 
 
