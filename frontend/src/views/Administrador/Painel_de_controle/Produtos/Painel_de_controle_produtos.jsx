@@ -99,7 +99,7 @@ function Painel_de_controle_produtos() {
                             </thead>
                             <tbody>
                                 {produtos.map(produto => (
-                                    <tr key={produto.id}>
+                                    <tr key={produto.marcas.produtos.id}>
                                         <td>{produto.marcas.produtos.nome}</td>
                                         <td>{produto.marcas.nome}</td>
                                         <td>{produto.nome}</td>
