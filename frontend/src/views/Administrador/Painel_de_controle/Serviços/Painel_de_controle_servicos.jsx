@@ -7,15 +7,15 @@ import botaoMais from '../img/botao_mais.svg'
 function Painel_de_controle_servicos() {
 
     //Estado para armazenar os usuários
-    const [empresas, setEmpresas] = useState([])
+    const [servicos, setServicos] = useState([])
 
     useEffect(() => {
 
         // Função carregar usuários
-        async function carregarUsuarios() {
+        async function carregarServicos() {
             try {
                 // Fazer uma chamada da API
-                const resposta = await fetch('/empresas')
+                const resposta = await fetch('/servicos')
                 if (!resposta.ok) {
 
                     // Exibindo erro API
@@ -23,7 +23,7 @@ function Painel_de_controle_servicos() {
                 }
                 else {
                     let dados = await resposta.json()
-                    setEmpresas(dados)
+                    setServicos(dados)
                 }
             } catch (error) {
                 console.error("Erro ao buscar usuários" + error)
@@ -31,7 +31,7 @@ function Painel_de_controle_servicos() {
         }
 
         // Chamando função carregar usuários
-        carregarUsuarios()
+        carregarServicos()
     })
     return (
         // Container geral para propriedades de fundo
@@ -98,10 +98,10 @@ function Painel_de_controle_servicos() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {empresas.map(empresa => (
-                                    <tr key={empresa.id}>
-                                        <td>{empresa.nome_fantasia}</td>
-                                        <td>{trueFalse(empresa.status_empresa)}</td>
+                                {servicos.map(servico => (
+                                    <tr key={servico.id}>
+                                        <td>{servico.nome}</td>
+                                        <td>{servico.animais.nome}</td>
                                     </tr>
                                 ))}
                             </tbody>
