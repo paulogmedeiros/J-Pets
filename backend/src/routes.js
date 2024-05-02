@@ -1,6 +1,8 @@
 const express = require("express")
 const router = express.Router
 const routes = new router()
+
+//controllers
 const servico = require("./controllers/servicosController.js")
 const empresa = require("./controllers/empresasController.js")
 const produtos = require("./controllers/produtosController.js")
@@ -8,7 +10,12 @@ const marcas = require("./controllers/marcasController.js")
 const modelos = require("./controllers/modelosController.js")
 const login = require("./controllers/loginController.js")
 
+//middleware
+const empresaValidation = require("./middleware/empresasValidation.js")
+const toenValidation = require("./middleware/tokenValidation.js")
 
+
+//rotas
 routes.get("/", (req,res)=>{
     res.json({mensagem_do_dia:"Já sorriu hoje?"})
 });
@@ -30,9 +37,13 @@ routes.post(("/modelos"), modelos.postModelos)
 routes.get(("/modelos"), modelos.getModelos)
 
 // rota empresas
-routes.post(("/empresas"),empresa.postEmpresa)
+routes.post(("/empresas"),empresaValidation.validarCriacaoEmpresa,empresa.postEmpresa)
 routes.get(("/empresas"), empresa.getEmpresas)
 
 // rota de login
-routes.post("/login",login.logar)
+routes.post("/login",toenValidation.verificarToken,login.logar)
+
+
+
+
 module.exports = routes
