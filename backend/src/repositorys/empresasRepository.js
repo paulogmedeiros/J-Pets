@@ -24,23 +24,23 @@ class EmpresasRepository {
             }
         })
 
-        // return await this.prisma.login.findUnique({
-        //     where:{
-        //         id:login.id,
-        //     },
-        //     select:{
-        //         id: true,
-        //         email: true,
-        //         senha: true,
-        //         tipo: true,
-        //         empresas:{
-        //             select:{
-        //                 cnpj:true,
-        //                 nome_fantasia: true,
-        //             }
-        //         }
-        //     }
-        // })
+        return await this.prisma.login.findUnique({
+            where:{
+                id:login.id,
+            },
+            select:{
+                id: true,
+                email: true,
+                senha: true,
+                tipo: true,
+                empresas:{
+                    select:{
+                        cnpj:true,
+                        nome_fantasia: true,
+                    }
+                }
+            }
+        })
 
     }
 
