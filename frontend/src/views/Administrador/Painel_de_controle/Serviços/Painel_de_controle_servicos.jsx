@@ -73,7 +73,10 @@ function Painel_de_controle_servicos() {
                     <div class="admMenuLateral col-3 mt-5 pr-5">
                         <div id="list-example" class="list-group">
                             <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
+                            <a class="list-group-item list-group-item-action" href="">Cadastrar admin</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel/marcas">Marcas</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel/modelos">Modelos</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/servicos">Serviços</a>
                         </div>
                     </div>
@@ -97,7 +100,7 @@ function Painel_de_controle_servicos() {
                                 <tr className='admPainelProduto-tabela-cabecalho text-center '>
                                     <th scope="col">Serviço</th>
                                     <th scope="col">Animal</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react'
 import logoJPets_adm from '../img/logoJPets.png'
-import './Painel_de_controle_produtos.css'
+import './Painel_de_controle_modelos.css'
 import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
 import botaoMais from '../img/botao_mais.svg'
 import iconeAtualizar_adm from '../img/icone_atualizar.svg'
 import iconLixeira_adm from '../img/icone_lixeira.svg'
 
-
-function Painel_de_controle_produtos() {
+function Painel_de_controle_modelos() {
 
     //Estado para armazenar os usuários
-    const [produtos, setProdutos] = useState([])
+    const [modelos, setModelos] = useState([])
 
     useEffect(() => {
 
         // Função carregar usuários
-        async function carregarProdutos() {
+        async function carregarModelos() {
             try {
                 // Fazer uma chamada da API
-                const resposta = await fetch('/produtos/marcas/modelos')
+                const resposta = await fetch('/modelos')
                 if (!resposta.ok) {
 
                     // Exibindo erro API
@@ -26,15 +25,15 @@ function Painel_de_controle_produtos() {
                 }
                 else {
                     let dados = await resposta.json()
-                    setProdutos(dados)
+                    setModelos(dados)
                 }
             } catch (error) {
-                console.error("Erro ao buscar usuários" + error)
+                console.error("Erro ao buscar modelos" + error)
             }
         }
 
         // Chamando função carregar usuários
-        carregarProdutos()
+        carregarModelos()
     })
     return (
         // Container geral para propriedades de fundo
@@ -85,31 +84,31 @@ function Painel_de_controle_produtos() {
                     {/* Tabela */}
                     <div class="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5 text-center">
                         <div className='row '>
-                            <p className='d-flex col-4 mt-5 fs-2 fw-semibold'>Todos os produtos</p>
+                            <p className='d-flex col-4 mt-5  fs-2 fw-semibold'>Todos os modelos</p>
                             <div class="input-group d-flex mb-3 col-4 w-25 me-2 mt-5">
-                                <input type="text" class="form-control" placeholder="Pesquisar produto" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                                <input type="text" class="form-control" placeholder="Pesquisar modelo" aria-label="Recipient's username" aria-describedby="basic-addon2" />
                                 <span class="input-group-text" id="basic-addon2"><img src={pesquisaIcone_adm} alt="" srcset="" width={20} color='back' /></span>
                             </div>
 
 
-                            <button type="button" class="btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm "><img src={botaoMais} width={30} height={30}/></button>
+                            <button type="button" class="btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm "><img src={botaoMais} width={30} height={30} /></button>
                         </div>
 
 
                         <table class="table table-striped border border-1">
                             <thead>
                                 <tr className='admPainelProduto-tabela-cabecalho text-center '>
-                                    <th scope="col">Produto</th>
-                                    <th scope="col">Animal</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">Marca</th>
                                     <th scope="col">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {produtos.map(produto => (
-                                    <tr key={produto.id}>
-                                        <td>{produto.marcas.produtos.nome}</td>
+                                {modelos.map(modelo => (
+                                    <tr key={modelo.id}>
                                         <td>teste</td>
-                                        <td><img src={iconeAtualizar_adm} width={25} height={25}/><img src={iconLixeira_adm} width={25} height={25}/> </td>
+                                        <td>teste</td>
+                                        <td><img src={iconeAtualizar_adm} width={25} height={25}/> <img src={iconLixeira_adm} width={25} height={25}/></td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -130,4 +129,4 @@ function trueFalse(status) {
 
 }
 
-export default Painel_de_controle_produtos
+export default Painel_de_controle_modelos

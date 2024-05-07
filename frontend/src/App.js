@@ -14,6 +14,8 @@ import Redefinir_senha_adm from './views/Administrador/Redefinir_senha/Redefinir
 import Painel_de_controle_empresas from './views/Administrador/Painel_de_controle/Empresas/Painel_de_controle_empresas.jsx';
 import Painel_de_controle_produtos from './views/Administrador/Painel_de_controle/Produtos/Painel_de_controle_produtos.jsx';
 import Painel_de_controle_servicos from './views/Administrador/Painel_de_controle/Serviços/Painel_de_controle_servicos.jsx';
+import Painel_de_controle_marcas from './views/Administrador/Painel_de_controle/Marcas/Painel_de_controle_marcas.jsx';
+import Painel_de_controle_modelos from './views/Administrador/Painel_de_controle/Modelos/Painel_de_controle_modelos.jsx';
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +32,8 @@ function App() {
       <Route path='/administrador/painel' element={<Painel_de_controle_empresas/>}/>
       <Route path='/administrador/painel/produtos' element={<Painel_de_controle_produtos/>}/>
       <Route path='/administrador/painel/servicos' element={<Painel_de_controle_servicos/>}/>
+      <Route path='/administrador/painel/marcas' element={<Painel_de_controle_marcas/>}/>
+      <Route path='/administrador/painel/modelos' element={<Painel_de_controle_modelos/>}/>
     </Routes>
     </BrowserRouter>
   );
