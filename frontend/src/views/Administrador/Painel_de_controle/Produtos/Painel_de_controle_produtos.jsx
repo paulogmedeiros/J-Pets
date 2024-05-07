@@ -3,6 +3,10 @@ import logoJPets_adm from '../img/logoJPets.png'
 import './Painel_de_controle_produtos.css'
 import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
 import botaoMais from '../img/botao_mais.svg'
+import iconeAtualizar_adm from '../img/icone_atualizar.svg'
+import iconLixeira_adm from '../img/icone_lixeira.svg'
+
+
 function Painel_de_controle_produtos() {
 
     //Estado para armazenar os usuários
@@ -84,7 +88,7 @@ function Painel_de_controle_produtos() {
                                 <span class="input-group-text" id="basic-addon2"><img src={pesquisaIcone_adm} alt="" srcset="" width={20} color='back' /></span>
                             </div>
 
-                            
+
                             <button type="button" class="btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm "><img src={botaoMais} width={30} height={30}/></button>
                         </div>
 
@@ -93,16 +97,16 @@ function Painel_de_controle_produtos() {
                             <thead>
                                 <tr className='admPainelProduto-tabela-cabecalho text-center '>
                                     <th scope="col">Produto</th>
-                                    <th scope="col">Marca</th>
-                                    <th scope="col">Modelo</th>
+                                    <th scope="col">Animal</th>
+                                    <th scope="col">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {produtos.map(produto => (
                                     <tr key={produto.id}>
                                         <td>{produto.marcas.produtos.nome}</td>
-                                        <td>{produto.marcas.nome}</td>
-                                        <td>{produto.nome}</td>
+                                        <td>teste</td>
+                                        <td><img src={iconeAtualizar_adm} width={25} height={25}/><img src={iconLixeira_adm} width={25} height={25}/> </td>
                                     </tr>
                                 ))}
                             </tbody>

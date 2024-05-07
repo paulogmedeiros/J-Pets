@@ -3,6 +3,8 @@ import logoJPets_adm from '../img/logoJPets.png'
 import './Painel_de_controle_servicos.css'
 import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
 import botaoMais from '../img/botao_mais.svg'
+import iconeAtualizar_adm from '../img/icone_atualizar.svg'
+import iconLixeira_adm from '../img/icone_lixeira.svg'
 
 function Painel_de_controle_servicos() {
 
@@ -95,6 +97,7 @@ function Painel_de_controle_servicos() {
                                 <tr className='admPainelProduto-tabela-cabecalho text-center '>
                                     <th scope="col">Serviço</th>
                                     <th scope="col">Animal</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,6 +105,7 @@ function Painel_de_controle_servicos() {
                                     <tr key={servico.id}>
                                         <td>{servico.nome}</td>
                                         <td>{servico.animais.nome}</td>
+                                        <td><img src={iconeAtualizar_adm} width={25} height={25}/> <img src={iconLixeira_adm} width={25} height={25}/></td>
                                     </tr>
                                 ))}
                             </tbody>
