@@ -15,7 +15,18 @@ class ModelosRepository {
     }
 
     async selectModelos(){
-       return await this.prisma.modelos.findMany()
+       return await this.prisma.modelos.findMany({
+        select:{
+            id:true,
+            nome:true,
+            marcas:{
+                select:{
+                    id:true,
+                    nome:true
+                }
+            }
+        }
+       })
     }
 }
 

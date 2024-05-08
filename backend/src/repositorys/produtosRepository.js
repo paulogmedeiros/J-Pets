@@ -15,7 +15,18 @@ class ProdutosRepository {
     }
 
     async selectProdutos(){
-       return await this.prisma.produtos.findMany()
+       return await this.prisma.produtos.findMany({
+            select:{
+                id:true,
+                nome:true,
+                animais:{
+                    select:{
+                        id:true,
+                        nome:true
+                    }
+                }
+            }
+       })
     }
 
     async selectProdutosMarcaModelos(){
