@@ -8,151 +8,193 @@ datasource db {
 }
 
 model animais {
-  id         Int      @id @default(autoincrement())
-  nome       String   @unique(map: "nome") @db.VarChar(50)
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  id               Int                @id @default(autoincrement())
+  nome             String             @unique(map: "nome") @db.VarChar(50)
+  created_at       DateTime?          @default(now()) @db.Timestamp(0)
+  empresas_animais empresas_animais[]
+  produtos         produtos[]
+  servicos         servicos[]
 }
 
 model avaliacoes {
-  id                      Int      @id @default(autoincrement())
+  id                      Int          @id @default(autoincrement())
   tutor_pet_id            Int
   empresa_id              Int
   numero_avaliacao        Int?
-  comentario_tutores_pets String?  @db.VarChar(1000)
-  comentario_empresa      String?  @db.VarChar(1000)
-  created_at              DateTime @default(now()) @db.Timestamp(0)
+  comentario_tutores_pets String?      @db.VarChar(1000)
+  comentario_empresa      String?      @db.VarChar(1000)
+  created_at              DateTime?    @default(now()) @db.Timestamp(0)
+  empresas                empresas     @relation(fields: [empresa_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_empresas_avaliacoes")
+  tutores_pets            tutores_pets @relation(fields: [tutor_pet_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tutores_pets_avaliacoes")
 
   @@index([empresa_id], map: "fk_empresas_avaliacoes")
   @@index([tutor_pet_id], map: "fk_tutores_pets_avaliacoes")
 }
 
 model empresas {
-  id                Int       @id @default(autoincrement())
-  login_id          Int       @unique(map: "login_id")
-  foto_perfil       String?   @db.VarChar(150)
-  nome_fantasia     String    @unique(map: "nome_fantasia") @db.VarChar(150)
-  cnpj              String    @unique(map: "cnpj") @db.Char(14)
-  endereco          String?   @unique(map: "endereco") @db.VarChar(200)
-  latitude          Float?    @unique(map: "latitude") @db.Float
-  longetude         Float?    @unique(map: "longetude") @db.Float
-  telefone          String?   @unique(map: "telefone") @db.VarChar(20)
-  dia_semana_inicio String?   @db.VarChar(13)
-  dia_semana_fim    String?   @db.VarChar(13)
-  hora_abertura     DateTime? @db.Time(0)
-  hora_fechamento   DateTime? @db.Time(0)
-  cupom             String?   @db.VarChar(100)
-  status_empresa    Boolean?  @default(false)
-  created_at        DateTime  @default(now()) @db.Timestamp(0)
+  id                Int                 @id @default(autoincrement())
+  login_id          Int                 @unique(map: "login_id")
+  foto_perfil       String?             @db.VarChar(150)
+  nome_fantasia     String              @unique(map: "nome_fantasia") @db.VarChar(150)
+  cnpj              String              @unique(map: "cnpj") @db.Char(14)
+  endereco          String?             @unique(map: "endereco") @db.VarChar(200)
+  latitude          Float?              @unique(map: "latitude") @db.Float
+  longetude         Float?              @unique(map: "longetude") @db.Float
+  telefone          String?             @unique(map: "telefone") @db.VarChar(20)
+  dia_semana_inicio String?             @db.VarChar(13)
+  dia_semana_fim    String?             @db.VarChar(13)
+  hora_abertura     DateTime?           @db.Time(0)
+  hora_fechamento   DateTime?           @db.Time(0)
+  nome_cupom        String?             @db.VarChar(50)
+  porcentagem_cupom String?             @db.Char(3)
+  status_pagamento  Boolean?            @default(false)
+  status_ativo      Boolean?            @default(true)
+  created_at        DateTime?           @default(now()) @db.Timestamp(0)
+  avaliacoes        avaliacoes[]
+  login             login               @relation(fields: [login_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_login_empresas")
+  empresas_animais  empresas_animais[]
+  empresas_marcas   empresas_marcas[]
+  empresas_modelos  empresas_modelos[]
+  empresas_produtos empresas_produtos[]
+  empresas_servicos empresas_servicos[]
+  favoritos         favoritos[]
 }
 
 model empresas_animais {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   empresa_id Int
   animal_id  Int
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  animais    animais   @relation(fields: [animal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_animais_empresas_animais")
+  empresas   empresas  @relation(fields: [empresa_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_empresas_empresas_animais")
 
   @@index([animal_id], map: "fk_animais_empresas_animais")
   @@index([empresa_id], map: "fk_empresas_empresas_animais")
 }
 
 model empresas_marcas {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   marca_id   Int
   empresa_id Int
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  empresas   empresas  @relation(fields: [empresa_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_empresas_empresas_marcas")
+  marcas     marcas    @relation(fields: [marca_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_marcas_empresas_marcas")
 
   @@index([empresa_id], map: "fk_empresas_empresas_marcas")
   @@index([marca_id], map: "fk_marcas_empresas_marcas")
 }
 
 model empresas_modelos {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   modelo_id  Int
   empresa_id Int
   estoque    Boolean
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  empresas   empresas  @relation(fields: [empresa_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_empresas_empresas_modelos")
+  modelos    modelos   @relation(fields: [modelo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_modelos_empresas_modelos")
 
   @@index([empresa_id], map: "fk_empresas_empresas_modelos")
   @@index([modelo_id], map: "fk_modelos_empresas_modelos")
 }
 
 model empresas_produtos {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   produto_id Int
   empresa_id Int
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  empresas   empresas  @relation(fields: [empresa_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_empresas_empresas_produtos")
+  produtos   produtos  @relation(fields: [produto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_produtos_empresas_produtos")
 
   @@index([empresa_id], map: "fk_empresas_empresas_produtos")
   @@index([produto_id], map: "fk_produtos_empresas_produtos")
 }
 
 model empresas_servicos {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   servico_id Int
   empresa_id Int
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  empresas   empresas  @relation(fields: [empresa_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_empresas_empresas_servicos")
+  servicos   servicos  @relation(fields: [servico_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_servicos_empresas_servicos")
 
   @@index([empresa_id], map: "fk_empresas_empresas_servicos")
   @@index([servico_id], map: "fk_servicos_empresas_servicos")
 }
 
 model favoritos {
-  id           Int      @id @default(autoincrement())
+  id           Int          @id @default(autoincrement())
   tutor_pet_id Int
   empresa_id   Int
-  created_at   DateTime @default(now()) @db.Timestamp(0)
+  created_at   DateTime?    @default(now()) @db.Timestamp(0)
+  empresas     empresas     @relation(fields: [empresa_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_empresas_favoritos")
+  tutores_pets tutores_pets @relation(fields: [tutor_pet_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tutores_pets_favoritos")
 
   @@index([empresa_id], map: "fk_empresas_favoritos")
   @@index([tutor_pet_id], map: "fk_tutores_pets_favoritos")
 }
 
 model login {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique(map: "email") @db.VarChar(60)
-  senha      String   @db.VarChar(100)
-  tipo       String   @db.Char(3)
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  id           Int           @id @default(autoincrement())
+  email        String        @unique(map: "email") @db.VarChar(60)
+  senha        String        @db.VarChar(100)
+  tipo         String        @db.Char(3)
+  created_at   DateTime?     @default(now()) @db.Timestamp(0)
+  empresas     empresas?
+  tutores_pets tutores_pets?
 }
 
 model marcas {
-  id         Int      @id @default(autoincrement())
-  produto_id Int
-  nome       String   @unique(map: "nome") @db.VarChar(100)
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  id              Int               @id @default(autoincrement())
+  produto_id      Int
+  nome            String            @db.VarChar(100)
+  created_at      DateTime?         @default(now()) @db.Timestamp(0)
+  empresas_marcas empresas_marcas[]
+  produtos        produtos          @relation(fields: [produto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_produtos_marcas")
+  modelos         modelos[]
 
   @@index([produto_id], map: "fk_produtos_marcas")
 }
 
 model modelos {
-  id         Int      @id @default(autoincrement())
-  marca_id   Int
-  nome       String   @db.VarChar(300)
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  id               Int                @id @default(autoincrement())
+  marca_id         Int
+  nome             String             @db.VarChar(300)
+  created_at       DateTime?          @default(now()) @db.Timestamp(0)
+  empresas_modelos empresas_modelos[]
+  marcas           marcas             @relation(fields: [marca_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_marcas_modelos")
 
   @@index([marca_id], map: "fk_marcas_modelos")
 }
 
 model produtos {
-  id         Int      @id @default(autoincrement())
-  animal_id  Int
-  nome       String   @db.VarChar(100)
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  id                Int                 @id @default(autoincrement())
+  animal_id         Int
+  nome              String              @db.VarChar(100)
+  created_at        DateTime?           @default(now()) @db.Timestamp(0)
+  empresas_produtos empresas_produtos[]
+  marcas            marcas[]
+  animais           animais             @relation(fields: [animal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_animais_produtos")
 
   @@index([animal_id], map: "fk_animais_produtos")
 }
 
 model servicos {
-  id         Int      @id @default(autoincrement())
-  animal_id  Int
-  nome       String   @db.VarChar(100)
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  id                Int                 @id @default(autoincrement())
+  animal_id         Int
+  nome              String              @db.VarChar(100)
+  created_at        DateTime?           @default(now()) @db.Timestamp(0)
+  empresas_servicos empresas_servicos[]
+  animais           animais             @relation(fields: [animal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_animais_servicos")
 
   @@index([animal_id], map: "fk_animais_servicos")
 }
 
 model tutores_pets {
-  id         Int      @id @default(autoincrement())
-  login_id   Int?     @unique(map: "login_id")
-  nome       String   @db.VarChar(100)
-  created_at DateTime @default(now()) @db.Timestamp(0)
+  id         Int          @id @default(autoincrement())
+  login_id   Int?         @unique(map: "login_id")
+  nome       String       @db.VarChar(100)
+  created_at DateTime?    @default(now()) @db.Timestamp(0)
+  avaliacoes avaliacoes[]
+  favoritos  favoritos[]
+  login      login?       @relation(fields: [login_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_login_tutores_pets")
 }
