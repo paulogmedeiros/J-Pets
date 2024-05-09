@@ -100,7 +100,7 @@ function Painel_de_controle_empresas() {
                                 {empresas.map(empresa => (
                                     <tr key={empresa.id}>
                                         <td>{empresa.nome_fantasia}</td>
-                                        <td>{trueFalse(empresa.status_empresa)}</td>
+                                        <td>{trueFalse(empresa.status_pagamento)}</td>
                                     </tr>
                                 ))}
                             </tbody>
