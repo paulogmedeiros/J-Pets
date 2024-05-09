@@ -1,7 +1,12 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 // import './Login.css'
-import imagem_login from '../../img/imagem_login.png'
+import imagem_login from '../../../img/imagem_login.png'
 function Login() {
+
+    useEffect(() => {
+        document.title = "Login"
+    })
+
     return (
 
         // Container principal
