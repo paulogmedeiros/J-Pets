@@ -49,7 +49,7 @@ class EmpresasRepository {
             select:{
                 id: true,
                 nome_fantasia:true,
-                status_empresa:true
+                status_pagamento:true
             }
         })
     }

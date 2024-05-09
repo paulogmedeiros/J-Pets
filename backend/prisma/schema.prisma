@@ -9,7 +9,7 @@ datasource db {
 
 model animais {
   id               Int                @id @default(autoincrement())
-  nome             String             @db.VarChar(30)
+  nome             String             @unique(map: "nome") @db.VarChar(50)
   created_at       DateTime?          @default(now()) @db.Timestamp(0)
   empresas_animais empresas_animais[]
   produtos         produtos[]
@@ -21,8 +21,8 @@ model avaliacoes {
   tutor_pet_id            Int
   empresa_id              Int
   numero_avaliacao        Int?
-  comentario_tutores_pets String?      @db.VarChar(400)
-  comentario_empresa      String?      @db.VarChar(400)
+  comentario_tutores_pets String?      @db.VarChar(1000)
+  comentario_empresa      String?      @db.VarChar(1000)
   created_at              DateTime?    @default(now()) @db.Timestamp(0)
   empresas                empresas     @relation(fields: [empresa_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_empresas_avaliacoes")
   tutores_pets            tutores_pets @relation(fields: [tutor_pet_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tutores_pets_avaliacoes")
@@ -34,19 +34,21 @@ model avaliacoes {
 model empresas {
   id                Int                 @id @default(autoincrement())
   login_id          Int                 @unique(map: "login_id")
-  foto_perfil       String?             @db.VarChar(50)
-  nome_fantasia     String              @db.VarChar(50)
-  cnpj              String              @db.Char(14)
-  endereco          String?             @db.VarChar(60)
-  latitude          Float?              @db.Float
-  longetude         Float?              @db.Float
-  telefone          String?             @db.VarChar(20)
+  foto_perfil       String?             @db.VarChar(150)
+  nome_fantasia     String              @unique(map: "nome_fantasia") @db.VarChar(150)
+  cnpj              String              @unique(map: "cnpj") @db.Char(14)
+  endereco          String?             @unique(map: "endereco") @db.VarChar(200)
+  latitude          Float?              @unique(map: "latitude") @db.Float
+  longetude         Float?              @unique(map: "longetude") @db.Float
+  telefone          String?             @unique(map: "telefone") @db.VarChar(20)
   dia_semana_inicio String?             @db.VarChar(13)
   dia_semana_fim    String?             @db.VarChar(13)
   hora_abertura     DateTime?           @db.Time(0)
   hora_fechamento   DateTime?           @db.Time(0)
-  cupom             String?             @db.VarChar(45)
-  status_empresa    Boolean?
+  nome_cupom        String?             @db.VarChar(50)
+  porcentagem_cupom String?             @db.Char(3)
+  status_pagamento  Boolean?            @default(false)
+  status_ativo      Boolean?            @default(true)
   created_at        DateTime?           @default(now()) @db.Timestamp(0)
   avaliacoes        avaliacoes[]
   login             login               @relation(fields: [login_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_login_empresas")
@@ -133,7 +135,7 @@ model favoritos {
 
 model login {
   id           Int           @id @default(autoincrement())
-  email        String        @db.VarChar(60)
+  email        String        @unique(map: "email") @db.VarChar(60)
   senha        String        @db.VarChar(100)
   tipo         String        @db.Char(3)
   created_at   DateTime?     @default(now()) @db.Timestamp(0)
@@ -144,7 +146,7 @@ model login {
 model marcas {
   id              Int               @id @default(autoincrement())
   produto_id      Int
-  nome            String            @db.VarChar(30)
+  nome            String            @db.VarChar(100)
   created_at      DateTime?         @default(now()) @db.Timestamp(0)
   empresas_marcas empresas_marcas[]
   produtos        produtos          @relation(fields: [produto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_produtos_marcas")
@@ -156,7 +158,7 @@ model marcas {
 model modelos {
   id               Int                @id @default(autoincrement())
   marca_id         Int
-  nome             String             @db.VarChar(30)
+  nome             String             @db.VarChar(300)
   created_at       DateTime?          @default(now()) @db.Timestamp(0)
   empresas_modelos empresas_modelos[]
   marcas           marcas             @relation(fields: [marca_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_marcas_modelos")
@@ -167,7 +169,7 @@ model modelos {
 model produtos {
   id                Int                 @id @default(autoincrement())
   animal_id         Int
-  nome              String              @db.VarChar(30)
+  nome              String              @db.VarChar(100)
   created_at        DateTime?           @default(now()) @db.Timestamp(0)
   empresas_produtos empresas_produtos[]
   marcas            marcas[]
@@ -179,7 +181,7 @@ model produtos {
 model servicos {
   id                Int                 @id @default(autoincrement())
   animal_id         Int
-  nome              String              @db.VarChar(30)
+  nome              String              @db.VarChar(100)
   created_at        DateTime?           @default(now()) @db.Timestamp(0)
   empresas_servicos empresas_servicos[]
   animais           animais             @relation(fields: [animal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_animais_servicos")
@@ -190,7 +192,7 @@ model servicos {
 model tutores_pets {
   id         Int          @id @default(autoincrement())
   login_id   Int?         @unique(map: "login_id")
-  nome       String       @db.VarChar(60)
+  nome       String       @db.VarChar(100)
   created_at DateTime?    @default(now()) @db.Timestamp(0)
   avaliacoes avaliacoes[]
   favoritos  favoritos[]

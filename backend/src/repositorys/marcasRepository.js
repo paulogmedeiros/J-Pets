@@ -15,7 +15,18 @@ class MarcasRepository {
     }
 
     async selectMarcas(){
-       return await this.prisma.marcas.findMany()
+       return await this.prisma.marcas.findMany({
+        select:{
+            id:true,
+            nome:true,
+            produtos:{
+                select:{
+                    id:true,
+                    nome:true
+                }
+            }
+        }
+       })
     }
 }
 
