@@ -72,7 +72,7 @@ function Painel_de_controle_modelos() {
 
                     <div class="admMenuLateral col-3 mt-5 pr-5">
                         <div id="list-example" class="list-group">
-                        <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
                             <a class="list-group-item list-group-item-action" href="">Cadastrar admin</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/marcas">Marcas</a>
@@ -106,9 +106,9 @@ function Painel_de_controle_modelos() {
                             <tbody>
                                 {modelos.map(modelo => (
                                     <tr key={modelo.id}>
-                                        <td>teste</td>
-                                        <td>teste</td>
-                                        <td><img src={iconeAtualizar_adm} width={25} height={25}/> <img src={iconLixeira_adm} width={25} height={25}/></td>
+                                        <td>{modelo.nome}</td>
+                                        <td>{modelo.marcas.nome}</td>
+                                        <td><img src={iconeAtualizar_adm} width={25} height={25} /> <img src={iconLixeira_adm} width={25} height={25} /></td>
                                     </tr>
                                 ))}
                             </tbody>

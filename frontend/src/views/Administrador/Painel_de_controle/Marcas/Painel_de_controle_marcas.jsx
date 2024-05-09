@@ -106,8 +106,8 @@ function Painel_de_controle_marcas() {
                             <tbody>
                                 {marcas.map(marca => (
                                     <tr key={marca.id}>
-                                        <td>marca.nome</td>
-                                        <td>marca.produto.nome</td>
+                                        <td>{marca.nome}</td>
+                                        <td>{marca.produtos.nome}</td>
                                         <td><img src={iconeAtualizar_adm} width={25} height={25}/> <img src={iconLixeira_adm} width={25} height={25}/></td>
                                     </tr>
                                 ))}

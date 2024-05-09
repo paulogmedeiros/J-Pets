@@ -18,7 +18,7 @@ function Painel_de_controle_produtos() {
         async function carregarProdutos() {
             try {
                 // Fazer uma chamada da API
-                const resposta = await fetch('/produtos/marcas/modelos')
+                const resposta = await fetch('/produtos')
                 if (!resposta.ok) {
 
                     // Exibindo erro API
@@ -107,8 +107,8 @@ function Painel_de_controle_produtos() {
                             <tbody>
                                 {produtos.map(produto => (
                                     <tr key={produto.id}>
-                                        <td>{produto.marcas.produtos.nome}</td>
-                                        <td>teste</td>
+                                        <td>{produto.nome}</td>
+                                        <td>{produto.animais.nome}</td>
                                         <td><img src={iconeAtualizar_adm} width={25} height={25}/><img src={iconLixeira_adm} width={25} height={25}/> </td>
                                     </tr>
                                 ))}
