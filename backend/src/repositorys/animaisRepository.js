@@ -14,7 +14,7 @@ class AnimaisRepository {
         })
     }
 
-    async selectAnimalPorId(id) {
+    async selectAnimaisPorId(id) {
         return await this.prisma.animais.findFirst({
             where: {
                 id

@@ -6,11 +6,13 @@ class ServicosRepository {
         this.prisma = new PrismaClient();
     }
 
-    async selectServico() {
+    async selectServicos() {
+        // pegando todos os servicos
         return await this.prisma.servicos.findMany({
             select: {
                 id: true,
                 nome: true,
+                animal_id:true,
                 animais: {
                     select: {
                         id: true,
@@ -21,7 +23,8 @@ class ServicosRepository {
         });
     }
 
-    async selectSevicoPorIdNome(animal_id, nome) {
+    async selectSevicosPorIdNome(animal_id, nome) {
+        // pegando servico por id e pelo nome
         return await this.prisma.servicos.findFirst({
             where: {
                 animal_id,
@@ -30,7 +33,17 @@ class ServicosRepository {
         })
     }
 
-    async insertServico(data) {
+    async selectServicosPorId(id){
+        // pegando o servico pelo id
+        return await this.prisma.servicos.findFirst({
+            where:{
+                id
+            }
+        })
+    }
+
+    async insertServicos(data) {
+        // criando novo servico
         return await this.prisma.servicos.create({
             data: {
                 animal_id: data.animal_id,
@@ -39,7 +52,8 @@ class ServicosRepository {
         })
     }
 
-    async update(id, data) {
+    async updateServicos(id, data) {
+        // atualizando o nome do servico
         return await this.prisma.servicos.update({
             where: {
                 id
@@ -49,6 +63,27 @@ class ServicosRepository {
             }
         })
     }
+
+    async deleteServicos(id){
+        return await this.prisma.$transaction(async (prismaTx) => {
+            
+            // excluindo todas entidades que tem relacionamento com servico
+            await prismaTx.empresas_servicos.deleteMany({
+                where:{
+                    servico_id: id
+                }
+            })
+
+            // excluindo o servico
+            await  prismaTx.servicos.delete({
+                where:{
+                    id:id
+                }
+            })
+        })
+    }
+
+
 
 }
 

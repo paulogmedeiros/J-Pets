@@ -25,13 +25,17 @@ routes.get("/", (req,res)=>{
 routes.get("/animais", animais.getAnimais);
 
 // rotas de servicos
-routes.get("/servicos",servico.getServico);
-routes.post("/servicos", servico.postServico);
+routes.get("/servicos",servico.getServicos);
+routes.post("/servicos", servico.postServicos);
+routes.put("/servicos/:id", servico.putServicos);
+routes.delete("/servicos/:id", servico.deleteServicos);
 
-// rota de produtos
+// rota de produtos ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+routes.get("/produtos",produtos.getProdutos);
+routes.get("/produtos/animais/:animalId",produtos.getProdutosPorIdAnimal);
 routes.post("/produtos", produtos.postProdutos);
-routes.get("/produtos", produtos.getProdutos);
-routes.get("/produtos/marcas/modelos", produtos.getProdutosMarcaModelos);
+routes.put("/produtos/:id", produtos.putProdutos);
+routes.delete("/produtos/:id", produtos.deleteProdutos);
 
 // rota de marcas
 routes.post("/marcas", marcas.postMarcas);
