@@ -8,3 +8,16 @@
 .img_login{
     background-color: #DEA100;
 }
+
+.login_titulo{
+    color: #2641B7;
+}
+
+.btn_login{
+    background-color: #2641B7;
+    color: white;
+}
+
+.esqueceu_a_senha_login{
+    color: #2641B7;
+}
