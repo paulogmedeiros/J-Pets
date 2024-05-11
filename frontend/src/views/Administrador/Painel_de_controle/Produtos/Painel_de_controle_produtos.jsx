@@ -92,12 +92,14 @@ function Painel_de_controle_produtos() {
                             </div>
 
 
-                            <button type="button" class="btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm "><img src={botaoMais} width={30} height={30}/></button>
+                            <button type="button" class="btn btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm">
+                                Adicionar novo <span class="badge "><img src={botaoMais} width={20} height={20} /></span>
+                            </button>
                         </div>
 
 
                         <table class="table table-striped border border-1">
-                            <thead>
+                        <thead className="roxo">
                                 <tr className='admPainelProduto-tabela-cabecalho text-center '>
                                     <th scope="col">Produto</th>
                                     <th scope="col">Animal</th>

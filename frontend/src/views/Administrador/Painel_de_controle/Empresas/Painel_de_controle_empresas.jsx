@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import logoJPets_adm from '../img/logoJPets.png'
-// import './Painel_de_controle_empresas.css'
+import './Painel_de_controle_empresas.css'
 import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
 
 function Painel_de_controle_empresas() {
@@ -35,7 +35,7 @@ function Painel_de_controle_empresas() {
     return (
         // Container geral para propriedades de fundo
         <div class="admPainel">
-            <nav class="admNavbar navbar navbar-expand-lg">
+            <nav class="admNavbar navbar navbar-expand-md">
                 <div class="container-fluid d-flex">
                     <a class="navbar-brand" href="#"><img src={logoJPets_adm} alt="" srcset="" width={50} height={50} /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,14 +62,14 @@ function Painel_de_controle_empresas() {
             </nav>
 
             {/* Conteúdo principal  */}
-            <div class="container mt-5">
+            <div class="container-md mt-5">
                 <div class="row">
 
                     {/* Menu lateral */}
 
                     <div class="admMenuLateral col-3 mt-5 pr-5">
                         <div id="list-example" class="list-group">
-                        <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
                             <a class="list-group-item list-group-item-action" href="">Cadastrar admin</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/marcas">Marcas</a>
@@ -82,15 +82,18 @@ function Painel_de_controle_empresas() {
                     <div class="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5 text-center">
                         <div className='row '>
                             <p className='d-flex col-4 mt-5 me-5 fs-5 fw-semibold'>Todas as empresas</p>
+
                             <div class="input-group d-flex mb-3 col-4 w-50 me-3 mt-5">
-                                <input type="text" class="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                                <span class="input-group-text" id="basic-addon2"><img src={pesquisaIcone_adm} alt="" srcset="" width={20} color='back' /></span>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><img src={pesquisaIcone_adm} width={20} height={20} /></button>
+                                </div>
                             </div>
                         </div>
 
 
                         <table class="table table-striped border border-1">
-                            <thead>
+                            <thead className="roxo">
                                 <tr className='text-center'>
                                     <th scope="col">Empresa</th>
                                     <th scope="col">Status</th>
@@ -112,10 +115,10 @@ function Painel_de_controle_empresas() {
     )
 }
 
-function trueFalse(status){
-    if(status===true){
+function trueFalse(status) {
+    if (status === true) {
         return "Ativo"
-    }else{
+    } else {
         return "Inativo"
     }
 

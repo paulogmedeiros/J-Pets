@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    
+
 }
 
 .admPainel{
@@ -35,6 +35,5 @@
 
 .btnAdicionarNovo{
     background-color: #7E57C2;
+    color: white;
 }
-
-
