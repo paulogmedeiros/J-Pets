@@ -38,7 +38,7 @@ class ProdutosController {
         try {
             const body = req.body
             const param = parseInt(req.params.id)
-            await ProdutosService.editProduto(param, body);
+            await ProdutosService.editProdutos(param, body);
             res.status(200).json({ mensage: "Produto atualizado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)

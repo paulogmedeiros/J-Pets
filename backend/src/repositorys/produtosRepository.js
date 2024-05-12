@@ -80,7 +80,7 @@ class ProdutosRepository {
     async deleteProdutos(id) {
         return await this.prisma.$transaction(async (prismaTx) => {
 
-            // excluindo todas entidades que tem relacionamento com servico
+            // excluindo todas entidades que tem relacionamento com produtos
 
             // coleto todas as marcas associadas ao produto
             const marcas = await prismaTx.marcas.findMany({

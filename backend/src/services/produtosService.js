@@ -28,7 +28,7 @@ class ProdutosService{
         return await ProdutosRepository.insertProdutos(data)
     }
 
-    async editProduto(produtoId, data){
+    async editProdutos(produtoId, data){
         // valido se produto com esse id existe
         await this.findProdutosPorId(produtoId)
 
