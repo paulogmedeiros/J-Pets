@@ -1,5 +1,5 @@
-import {useState} from 'react'
-// import './Cadastro_empresa.css'
+import { useState } from 'react'
+import './Cadastro_empresa.css'
 import imagemCadastroEmpresa from './img/imagem_cadastro_empresa.svg'
 
 function Cadastro_empresa() {
@@ -12,59 +12,87 @@ function Cadastro_empresa() {
   // Função que será chamada ao enviar o formulário
   async function cadastrarEmpresa(event) {
 
-      // impede o comportamento padrão de reload da página
-      event.preventDefault()
+    // impede o comportamento padrão de reload da página
+    event.preventDefault()
 
-      // Criando objeto com os dados do usuário que serão enviados para a API
-      const empresasDados = {
-          email,
-          senha,
-          cnpj,
-          nome_fantasia
+    // Criando objeto com os dados do usuário que serão enviados para a API
+    const empresasDados = {
+      email,
+      senha,
+      cnpj,
+      nome_fantasia
+    }
+
+    try {
+      // Realiza POST para a API
+      const resposta = await fetch('/empresas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' // Especificando o corpo como JSON
+        },
+        body: JSON.stringify(empresasDados)
+      })
+
+      // Verifica se a resposta da API foi bem-sucedida
+      if (!resposta.ok) {
+        console.debug("Erro ao criar usuário")
       }
-
-      try {
-          // Realiza POST para a API
-          const resposta = await fetch('/empresas', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json' // Especificando o corpo como JSON
-              },
-              body: JSON.stringify(empresasDados)
-          })
-
-          // Verifica se a resposta da API foi bem-sucedida
-          if (!resposta.ok) {
-              console.debug("Erro ao criar usuário")
-          }
-          else{
-              alert('Usuário cadastrado')
-              console.debug("Usuário inserido!")
-              window.location.href = '/'
-          }
-      } catch (error) {
-          console.debug(error)
+      else {
+        alert('Usuário cadastrado')
+        console.debug("Usuário inserido!")
+        window.location.href = '/'
       }
+    } catch (error) {
+      console.debug(error)
+    }
   }
   return (
-    <div className='cadastroEmpresa'>
-      <div className='cadastroEmpresaConteudo'>
-        <div className='cadastroEmpresaFormulario'>
-          <h1>Criar nova conta</h1>
-          <form onSubmit={cadastrarEmpresa}>
-            <input type="text" value={nome_fantasia} placeholder="Nome fantasia" onChange={ e => setNome_fantasia(e.target.value)}/>
-            <input type="text" value={cnpj} placeholder="CNPJ" onChange={ e => setCNPJ(e.target.value)}/>
-            <input type="text" value={email} placeholder="Email profissional" onChange={ e => setEmail(e.target.value)}/>
-            <input type="password" value={senha} placeholder="Senha" onChange={ e => setSenha(e.target.value)}/>
-            <input type="password" value={senha} placeholder="Confirmar senha" />
-            <button type='submit'>Criar uma conta profissional</button>
-          </form>
-          <p>Já possui uma conta?<a href="">Entrar</a></p>
+    <div className="container">
+
+      <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle">
+
+        <div className=" col-md-5 d-flex-md-5">
+          <p class="titulo_cadastro_empresa fs-1 fw-bold text-center mb-0 mb-md-1">Criar nova conta</p>
+
+          <div class="form-floating mb-1 mb-md-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+            <label for="floatingInput">Nome fantasia</label>
+          </div>
+
+          <div class="form-floating mb-1 mb-md-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Password" />
+            <label for="floatingInput">CNPJ</label>
+          </div>
+
+          <div class="form-floating mb-1 mb-md-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Password" />
+            <label for="floatingInput">Email profissional</label>
+          </div>
+
+          <div class="form-floating mb-1 mb-md-3">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+            <label for="floatingPassword">Senha</label>
+          </div>
+
+          <div class="form-floating mb-1 mb-md-3">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+            <label for="floatingPassword">Confirmar senha</label>
+          </div>
+
+          <a class="btn_cadastro_empresa btn w-100" href="#" role="button">Criar conta profissional</a>
+
+          <p class=" text-body-dark text-center mt-4">
+            Já possui uma conta? <a href="#" class="redirecionamento_cadastro_empresa link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Entrar</a>
+          </p>
         </div>
-        <div className='cadastroEmpresaImagem'>
-          <img src={imagemCadastroEmpresa} alt="" height={516} width={516} />
+
+        <div className="img_login col-md-5 d-flex mt-3 mt-md-0 rounded-4">
+          <img src={imagemCadastroEmpresa} class="img-fluid"></img>
         </div>
+
+
       </div>
+
     </div>
 
   )
