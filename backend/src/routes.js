@@ -51,8 +51,8 @@ routes.put("/modelos/:id", modelos.putModelos);
 routes.delete("/modelos/:id", modelos.deleteModelos);
 
 // rota empresas
-routes.post("/empresas",empresaValidation.validarCriacaoEmpresa,empresa.postEmpresa);
 routes.get("/empresas", empresa.getEmpresas);
+routes.post("/empresas",empresaValidation.validarCriacaoEmpresa,empresa.postEmpresa);
 
 // rota de login
 routes.post("/login",toenValidation.verificarToken,login.logar);

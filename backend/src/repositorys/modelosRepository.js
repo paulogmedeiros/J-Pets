@@ -5,6 +5,7 @@ class ModelosRepository {
         this.prisma = new PrismaClient();
     }
 
+    // retorno todos os modelos
     async selectModelos(){
        return await this.prisma.modelos.findMany({
         select:{
@@ -20,8 +21,8 @@ class ModelosRepository {
        })
     }
 
+    // retorno modelo por id e pelo nome
     async selectModelosPorIdNome(marca_id,nome){
-        // pegando modelo por id e pelo nome
         return await this.prisma.modelos.findFirst({
             where: {
                 marca_id,
@@ -30,6 +31,7 @@ class ModelosRepository {
         })
     }
 
+    // retorno modelos por id
     async selectModelosPorId(id) {
         return await this.prisma.modelos.findFirst({
             where: {
@@ -38,8 +40,8 @@ class ModelosRepository {
         })
     }
 
+    // criando novo modelo
     async insertModelos(data) {
-        // criando novo modelo
         return await this.prisma.modelos.create({
             data:{
                 marca_id: data.marca_id,
@@ -48,8 +50,8 @@ class ModelosRepository {
         })
     }
 
+    // atualizando o nome do modelo
     async updateModelos(id, data) {
-        // atualizando o nome do modelo
         return await this.prisma.modelos.update({
             where: {
                 id
@@ -62,15 +64,13 @@ class ModelosRepository {
 
     async deleteModelos(id) {
         return await this.prisma.$transaction(async (prismaTx) => {
-
-            // excluindo todas entidades que tem relacionamento com marcas
-
+            // excluindo tabelas relacionadas com modelo
             await prismaTx.empresas_modelos.deleteMany({
                 where:{
                     modelo_id:id
                 }
             })
-
+            // excluindo modelo
             await prismaTx.modelos.delete({
                 where:{
                     id

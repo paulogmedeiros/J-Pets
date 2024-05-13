@@ -40,7 +40,7 @@ class ServicosController {
         try {
             const param = parseInt(req.params.id)
             await ServicosService.removeServicos(param);
-            res.status(204).json({ mensage: "Serviço deletado com sucesso" })
+            res.status(200).json({ mensage: "Serviço deletado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)

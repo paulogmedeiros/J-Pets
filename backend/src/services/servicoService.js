@@ -22,13 +22,10 @@ class ServicosService{
 
     async editServicos(servicoId, data){
         // valido se servico com esse id existe
-        await this.findServicosPorId(servicoId)
-
-        // valido se o id do animal é valido
-        await AnimalService.findAnimaisPorId(data.animal_id)
+        const servico = await this.findServicosPorId(servicoId)
 
         // valido se o nome do serviço já existe registrado para o animal escolhido
-        await this.findSevicosPorIdNome(data.animal_id,data.nome)
+        await this.findSevicosPorIdNome(servico.animal_id,data.nome)
         
         // retorno
         return await ServicosRepository.updateServicos(servicoId, data)

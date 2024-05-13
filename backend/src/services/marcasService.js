@@ -30,13 +30,10 @@ class MarcasService {
 
     async editMarcas(marcaId, data){
         // valido se marca com esse id existe
-        await this.findMarcasPorId(marcaId)
-
-        // valido se o id do produto é valido
-        await ProdutosService.findProdutosPorId(data.produto_id)
+        const marca = await this.findMarcasPorId(marcaId)
 
         // valido se o nome da marca já existe registrado para o produto escolhido
-        await this.findMarcasPorIdNome(data.produto_id,data.nome)
+        await this.findMarcasPorIdNome(marca.produto_id,data.nome)
 
         // retorno
         return await MarcasRepository.updateMarcas(marcaId, data)
@@ -61,7 +58,7 @@ class MarcasService {
     }
 
     async findMarcasPorId(marcaId){
-        // valido se produto com esse id existe
+        // valido se marca com esse id existe
         const marca = await MarcasRepository.selectMarcasPorId(marcaId)
         if(!marca){
             throw new ExcecaoIdNaoEncontrado("Marca não encontrada")

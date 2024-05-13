@@ -6,8 +6,8 @@ class ServicosRepository {
         this.prisma = new PrismaClient();
     }
 
+    // retorno todos os servicos
     async selectServicos() {
-        // pegando todos os servicos
         return await this.prisma.servicos.findMany({
             select: {
                 id: true,
@@ -23,8 +23,8 @@ class ServicosRepository {
         });
     }
 
+    // retorno servico por id e pelo nome
     async selectSevicosPorIdNome(animal_id, nome) {
-        // pegando servico por id e pelo nome
         return await this.prisma.servicos.findFirst({
             where: {
                 animal_id,
@@ -33,8 +33,8 @@ class ServicosRepository {
         })
     }
 
+    // retorno o servico pelo id
     async selectServicosPorId(id){
-        // pegando o servico pelo id
         return await this.prisma.servicos.findFirst({
             where:{
                 id
@@ -42,8 +42,8 @@ class ServicosRepository {
         })
     }
 
+    // criando novo servico
     async insertServicos(data) {
-        // criando novo servico
         return await this.prisma.servicos.create({
             data: {
                 animal_id: data.animal_id,
@@ -52,8 +52,8 @@ class ServicosRepository {
         })
     }
 
+    // atualizando o nome do servico
     async updateServicos(id, data) {
-        // atualizando o nome do servico
         return await this.prisma.servicos.update({
             where: {
                 id
@@ -64,6 +64,7 @@ class ServicosRepository {
         })
     }
 
+    // excluindo o servico
     async deleteServicos(id){
         return await this.prisma.$transaction(async (prismaTx) => {
             
@@ -82,8 +83,6 @@ class ServicosRepository {
             })
         })
     }
-
-
 
 }
 

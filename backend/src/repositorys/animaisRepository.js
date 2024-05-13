@@ -5,6 +5,7 @@ class AnimaisRepository {
         this.prisma = new PrismaClient();
     }
 
+    // retorno todos os animais
     async selectAnimais() {
         return await this.prisma.animais.findMany({
             select: {
@@ -14,6 +15,7 @@ class AnimaisRepository {
         })
     }
 
+    // retorno o animal com id especifico
     async selectAnimaisPorId(id) {
         return await this.prisma.animais.findFirst({
             where: {

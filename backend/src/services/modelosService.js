@@ -10,7 +10,7 @@ class ModelosService{
     }
 
     async createModelos(data){
-        // valido se o id do animal é valido
+        // valido se o id da marca é valido
         await MarcaService.findMarcasPorId(data.marca_id)
 
         // valido se o nome do modelo já existe registrado para a marca escolhido
@@ -22,13 +22,10 @@ class ModelosService{
 
     async editModelos(modeloId, data){
         // valido se modelo com esse id existe
-        await this.findModelosPorId(modeloId)
-
-       // valido se o id do animal é valido
-       await MarcaService.findMarcasPorId(data.marca_id)
+        const modelo = await this.findModelosPorId(modeloId)
 
         // valido se o nome do modelo já existe registrado para a marca escolhido
-        await this.findModelosPorIdNome(data.marca_id,data.nome)
+        await this.findModelosPorIdNome(modelo.marca_id,data.nome)
 
         // retorno
         return await ModelosRepository.updateModelos(modeloId, data)

@@ -1,14 +1,14 @@
-const animaisService = require("../services/animaisService.js")
-const filtroExcecoes = require("../exception/exceptionFilter.js")
+const AnimaisService = require("../services/animaisService.js")
+const FiltroExcecoes = require("../exception/exceptionFilter.js")
 
 class AnimaisController {
 
     async getAnimais(req, res) {
         try {
-            const result = await animaisService.findAnimais();
+            const result = await AnimaisService.findAnimais();
             res.status(200).json(result)
         } catch (error) {
-            const retorno = filtroExcecoes.tratarErro(error)
+            const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)
         }
     }

@@ -30,20 +30,16 @@ class ProdutosService{
 
     async editProdutos(produtoId, data){
         // valido se produto com esse id existe
-        await this.findProdutosPorId(produtoId)
-
-        // valido se o id do animal é valido
-        await AnimalService.findAnimaisPorId(data.animal_id)
+        const produto = await this.findProdutosPorId(produtoId)
 
         // valido se o nome do produto já existe registrado para o animal escolhido
-        await this.findProdutosPorIdNome(data.animal_id,data.nome)
+        await this.findProdutosPorIdNome(produto.animal_id,data.nome)
 
         // retorno
         return await ProdutosRepository.updateProdutos(produtoId, data)
     }
 
     async removeProdutos(produtoId){
-        
         // valido se produto com esse id existe
         await this.findProdutosPorId(produtoId)
 

@@ -5,8 +5,8 @@ class ProdutosRepository {
         this.prisma = new PrismaClient();
     }
 
+    // retorno todos os produtos
     async selectProdutos() {
-        // pegando todos os produtos
         return await this.prisma.produtos.findMany({
             select: {
                 id: true,
@@ -22,8 +22,8 @@ class ProdutosRepository {
         })
     }
 
+    // retorno produto por id e pelo nome
     async selectProdutosPorIdNome(animal_id, nome) {
-        // pegando produtos por id e pelo nome
         return await this.prisma.produtos.findFirst({
             where: {
                 animal_id,
@@ -32,8 +32,8 @@ class ProdutosRepository {
         })
     }
 
+    // retorno produto que tenha o animal_id escolhido
     async selectProdutosPorIdAnimal(animalId) {
-        // pegando produto que tenha o animal_id escolhido
         return await this.prisma.produtos.findMany({
             where: {
                 animal_id: animalId
@@ -46,8 +46,8 @@ class ProdutosRepository {
         })
     }
 
+    // retorno o produto pelo id
     async selectProdutosPorId(id) {
-        // pegando o produto pelo id
         return await this.prisma.produtos.findFirst({
             where: {
                 id
@@ -55,8 +55,8 @@ class ProdutosRepository {
         })
     }
 
+    // criando novo produto
     async insertProdutos(data) {
-        // criando novo produto
         return await this.prisma.produtos.create({
             data: {
                 animal_id: data.animal_id,
@@ -65,8 +65,8 @@ class ProdutosRepository {
         })
     }
 
+    // atualizando o nome do produto
     async updateProdutos(id, data) {
-        // atualizando o nome do produto
         return await this.prisma.produtos.update({
             where: {
                 id
@@ -80,9 +80,9 @@ class ProdutosRepository {
     async deleteProdutos(id) {
         return await this.prisma.$transaction(async (prismaTx) => {
 
-            // excluindo todas entidades que tem relacionamento com produtos
+            /** excluindo todas entidades que tem relacionamento com produtos */
 
-            // coleto todas as marcas associadas ao produto
+            // coletando todas as marcas associadas ao produto
             const marcas = await prismaTx.marcas.findMany({
                 where: {
                     produto_id: id
@@ -91,12 +91,13 @@ class ProdutosRepository {
 
             for (const marca of marcas) {
 
+                // coletando todos os modelos associadas a marca
                 const modelos = await prismaTx.modelos.findMany({
                     where: {
                         marca_id: marca.id
                     }
                 })
-
+                // excluindo tabelas relacionadas com modelo
                 for (const modelo of modelos) {
                     await prismaTx.empresas_modelos.deleteMany({
                         where: {
@@ -104,13 +105,13 @@ class ProdutosRepository {
                         }
                     })
                 }
-
+                // excluindo todos os modelo associados a marca
                 await prismaTx.modelos.deleteMany({
                     where: {
                         marca_id: marca.id
                     }
                 })
-
+                // excluindo outra tabelas relacionadas a marca
                 await prismaTx.empresas_marcas.deleteMany({
                     where: {
                         marca_id: marca.id
@@ -118,13 +119,13 @@ class ProdutosRepository {
                 })
 
             }
-
+            // excluindo marca
             await prismaTx.marcas.deleteMany({
                 where: {
                     produto_id: id
                 }
             })
-
+            // excluindo tabela relacionada com produto
             await prismaTx.empresas_produtos.deleteMany({
                 where: {
                     produto_id: id

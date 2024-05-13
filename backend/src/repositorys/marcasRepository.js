@@ -5,6 +5,7 @@ class MarcasRepository {
         this.prisma = new PrismaClient();
     }
 
+    // retorno todos as marcas
     async selectMarcas() {
         return await this.prisma.marcas.findMany({
             select: {
@@ -21,8 +22,8 @@ class MarcasRepository {
         })
     }
 
+    // retorno marcas pelo id do produto escolhido
     async selectMarcasPorIdProduto(produtoId) {
-        // pegando produtos por id e pelo nome
         return await this.prisma.marcas.findMany({
             where: {
                 produto_id: produtoId
@@ -30,6 +31,7 @@ class MarcasRepository {
         })
     }
 
+    // retorno marca por id e pelo nome
     async selectMarcasPorIdNome(produto_id, nome) {
         return await this.prisma.marcas.findFirst({
             where: {
@@ -39,6 +41,7 @@ class MarcasRepository {
         })
     }
 
+    // retorno marca por id
     async selectMarcasPorId(id) {
         return await this.prisma.marcas.findFirst({
             where: {
@@ -47,8 +50,8 @@ class MarcasRepository {
         })
     }
 
+    // criando nova marca
     async insertMarcas(data) {
-        // criando nova marca
         return await this.prisma.marcas.create({
             data: {
                 produto_id: data.produto_id,
@@ -57,8 +60,8 @@ class MarcasRepository {
         })
     }
 
+    // atualizando o nome da marca
     async updateMarcas(id, data) {
-        // atualizando o nome da marca
         return await this.prisma.marcas.update({
             where: {
                 id
@@ -72,9 +75,9 @@ class MarcasRepository {
     async deleteMarcas(id) {
         return await this.prisma.$transaction(async (prismaTx) => {
 
-            // excluindo todas entidades que tem relacionamento com a marca
+            /** excluindo todas entidades que tem relacionamento com marca */
 
-            // coleto todas os modelos associadas ao produto
+            // coletando todos os modelos associadas a marca
             const modelos = await prismaTx.modelos.findMany({
                 where: {
                     marca_id: id
@@ -82,6 +85,7 @@ class MarcasRepository {
             })
 
             for(const modelo of modelos){
+                // excluindo tabelas relacionadas com modelo
                 await prismaTx.empresas_modelos.deleteMany({
                     where:{
                         modelo_id:modelo.id
@@ -89,18 +93,19 @@ class MarcasRepository {
                 })
             }
 
+            // excluindo todos os modelo realcionados com a marca
             await prismaTx.modelos.deleteMany({
                 where:{
                     marca_id: id
                 }
             })
-
+            // excluindo tabela relacionada com marca
             await prismaTx.empresas_marcas.deleteMany({
                 where:{
                     marca_id:id
                 }
             })
-
+            // excluindo marca
             await prismaTx.marcas.delete({
                 where:{
                     id
