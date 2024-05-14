@@ -9,7 +9,7 @@ import 'bootstrap/dist/js/bootstrap.bundle'
 import Login from './views/Todos/Login/Login.jsx'
 import Confirmacao_usuario from './views/Todos/Quem_e_voce/Quem_e_voce.jsx'
 import Esqueceu_a_senha from './views/Todos/Esqueceu_a_senha/Esqueceu_a_senha.jsx';
-import Nova_senha from './views/Todos/Nova_senha/Nova_senha.jsx';
+import Alterar_senha from './views/Todos/Alterar_senha/Alterar_senha.jsx';
 
 // Importando itens da pasta "Donos de pet"
 import Cadastro_usuario from './views/Donos_pet/Cadastro_usuario/Cadastro_usuario.jsx'
@@ -37,7 +37,7 @@ function App() {
       <Route path='/' element={<Login/>}/>
       <Route path='/cadastro/confirmacao' element={<Confirmacao_usuario/>}/>
       <Route path='/senha/recuperacao' element={<Esqueceu_a_senha/>}/>
-      <Route path='/senha/nova' element={<Nova_senha/>}/>
+      <Route path='/senha/alteracao' element={<Alterar_senha/>}/>
 
       {/* Rotas para os itens da pasta "Donos de pet" */}
       <Route path='/cadastro/usuario' element={<Cadastro_usuario/>}/>

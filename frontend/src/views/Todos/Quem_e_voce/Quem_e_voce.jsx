@@ -4,7 +4,7 @@ import imagemEmpresa from './img/imagem_empresa.svg'
 import imagemDonoPet from './img/imagem_dono_de_pet.svg'
 function Quem_e_voce() {
   return (
-    <div className='container'> 
+    <div className='container'>
         <div className='titulo'>
             <h1>Quem é você?</h1>
         </div>
