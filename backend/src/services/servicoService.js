@@ -1,4 +1,4 @@
-const ServicosRepository = require("../repositorys/servicosRepository.js")
+const ServicosRepository = require("../repositories/servicosRepository.js")
 const AnimalService = require("../services/animaisService.js")
 const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
 

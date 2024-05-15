@@ -1,5 +1,5 @@
+const EmpresasRepository = require("../repositories/empresasRepository.js")
 const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
-const EmpresasRepository = require("../repositorys/empresasRepository.js")
 const bcrypt = require("bcryptjs") 
 
 class EmpresasService{

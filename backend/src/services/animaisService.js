@@ -1,4 +1,4 @@
-const animaisRepository = require("../repositorys/animaisRepository.js")
+const animaisRepository = require("../repositories/animaisRepository.js")
 const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
 
 class AnimaisService{

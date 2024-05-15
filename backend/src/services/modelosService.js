@@ -1,4 +1,4 @@
-const ModelosRepository = require("../repositorys/modelosRepository.js")
+const ModelosRepository = require("../repositories/modelosRepository.js")
 const MarcaService = require("../services/marcasService.js")
 const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
 
