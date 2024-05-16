@@ -1,21 +1,26 @@
-const empresasService = require("../services/empresasService.js")
-const filtroExcecoes = require("../exception/exceptionFilter.js")
+const EmpresasService = require("../services/empresasService.js")
+const FiltroExcecoes = require("../exception/exceptionFilter.js")
 
 class EmpresasController {
-    async postEmpresa(req, res) {
+    async getEmpresas(req, res) {
         try {
-            const data = req.body;
-            const result = await empresasService.createEmpresas(data);
-            res.json(result)
+            const result = await EmpresasService.findEmpresas();
+            res.status(200).json(result)
         } catch (error) {
-            const retorno = filtroExcecoes.tratarErro(error)
+            const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)
         }
     }
 
-    async getEmpresas(req, res) {
-        const result = await empresasService.findEmpresas();
-        res.json(result)
+    async postEmpresa(req, res) {
+        try {
+            const data = req.body;
+            const result = await EmpresasService.createEmpresas(data);
+            res.json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
     }
 }
 

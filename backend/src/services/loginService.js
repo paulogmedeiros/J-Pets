@@ -1,4 +1,4 @@
-const loginRepository = require("../repositorys/loginRepository.js")
+const loginRepository = require("../repositories/loginRepository.js")
 const bcrypt = require("bcryptjs") 
 
 class LoginService{

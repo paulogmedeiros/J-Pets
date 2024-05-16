@@ -5,6 +5,17 @@ class EmpresasRepository {
         this.prisma = new PrismaClient();
     }
 
+    // retorno todas as empresas
+    async selectEmpresas(){
+        return await this.prisma.empresas.findMany({
+            select:{
+                id: true,
+                nome_fantasia:true,
+                status_pagamento:true
+            }
+        })
+    }
+
     async insertEmpresas(data) {
 
         const login = await this.prisma.login.create({
@@ -42,16 +53,6 @@ class EmpresasRepository {
             }
         })
 
-    }
-
-    async selectEmpresas(){
-        return await this.prisma.empresas.findMany({
-            select:{
-                id: true,
-                nome_fantasia:true,
-                status_pagamento:true
-            }
-        })
     }
 }
 
