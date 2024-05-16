@@ -73,7 +73,7 @@ function Painel_de_controle_servicos() {
                     <div class="admMenuLateral col-3 mt-5 pr-5">
                         <div id="list-example" class="list-group">
                             <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
-                            <a class="list-group-item list-group-item-action" href="">Cadastrar admin</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel/cadastroAdmin">Cadastrar admin</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/marcas">Marcas</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/modelos">Modelos</a>
@@ -85,14 +85,15 @@ function Painel_de_controle_servicos() {
                     <div class="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5 text-center">
                         <div className='row '>
                             <p className='d-flex col-4 mt-5  fs-2 fw-semibold'>Todos os serviços</p>
-                            <div class="input-group d-flex mb-3 col-4 w-25 me-2 mt-5">
+
+                            <div class="input-group d-flex mb-3 col-4 w-25 h-25 me-2 mt-5">
                                 <input type="text" class="form-control" placeholder="Pesquisar serviço" aria-label="Recipient's username" aria-describedby="basic-addon2" />
                                 <span class="input-group-text" id="basic-addon2"><img src={pesquisaIcone_adm} alt="" srcset="" width={20} color='back' /></span>
                             </div>
 
 
                             <button type="button" class="btn btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm">
-                                Adicionar novo <span class="badge "><img src={botaoMais} width={20} height={20} /></span>
+                                Adicionar novo <span class="badge "><a href="http://localhost:3000/administrador/painel/novoServico"><img src={botaoMais} width={20} height={20} /></a></span>
                             </button>
                         </div>
 

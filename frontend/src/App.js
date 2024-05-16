@@ -21,14 +21,22 @@ import Redefinir_senha_empresa from './views/Empresas/Redefinir_senha/Redefinir_
 
 // Importando itens da pasta "Administrador"
 
-import adm_navbar from './components/componentes_adm/adm_navbar';
+// import adm_navbar from './components/componentes_adm/adm_navbar';
 import Redefinir_senha_adm from './views/Administrador/Redefinir_senha/Redefinir_senha.jsx';
+
+// Importando itens da pasta "Administrador" - Painel de controle
+import Cadastro_admin from './views/Administrador/Painel_de_controle/Cadastro_admin/Cadastro_admin.jsx';
 import Painel_de_controle_empresas from './views/Administrador/Painel_de_controle/Empresas/Painel_de_controle_empresas.jsx';
 import Painel_de_controle_produtos from './views/Administrador/Painel_de_controle/Produtos/Painel_de_controle_produtos.jsx';
 import Painel_de_controle_servicos from './views/Administrador/Painel_de_controle/Serviços/Painel_de_controle_servicos.jsx';
 import Painel_de_controle_marcas from './views/Administrador/Painel_de_controle/Marcas/Painel_de_controle_marcas.jsx';
 import Painel_de_controle_modelos from './views/Administrador/Painel_de_controle/Modelos/Painel_de_controle_modelos.jsx';
 
+// Importando itens da pasta "Administrador" - cadastro
+import Nova_marca from './views/Administrador/Nova_marca/Nova_marca.jsx';
+import Novo_modelo from './views/Administrador/Novo_modelo/Novo_modelo.jsx';
+import Novo_produto from './views/Administrador/Novo_produto/Novo_produto.jsx';
+import Novo_servico from './views/Administrador/Novo_servico/Novo_servico.jsx';
 function App() {
   return (
     <BrowserRouter>
@@ -50,11 +58,22 @@ function App() {
       {/* Rotas para os itens da pasta "Administrador" */}
 
       <Route path='/senha/administrador/redefinicao' element={<Redefinir_senha_adm/>}/>
+
+       {/* Rotas para os itens da pasta "Administrador" - Painel de controle */}
+      <Route path='/administrador/painel/cadastroAdmin' element={<Cadastro_admin/>}/>
       <Route path='/administrador/painel' element={<Painel_de_controle_empresas/>}/>
       <Route path='/administrador/painel/produtos' element={<Painel_de_controle_produtos/>}/>
       <Route path='/administrador/painel/servicos' element={<Painel_de_controle_servicos/>}/>
       <Route path='/administrador/painel/marcas' element={<Painel_de_controle_marcas/>}/>
       <Route path='/administrador/painel/modelos' element={<Painel_de_controle_modelos/>}/>
+
+
+
+      {/* Rotas para os itens da pasta "Administrador" - cadastro */}
+      <Route path='/administrador/painel/novaMarca' element={<Nova_marca/>}/>
+      <Route path='/administrador/painel/novoModelo' element={<Novo_modelo/>}/>
+      <Route path='/administrador/painel/novoProduto' element={<Novo_produto/>}/>
+      <Route path='/administrador/painel/novoServico' element={<Novo_servico/>}/>
     </Routes>
     </BrowserRouter>
   );
