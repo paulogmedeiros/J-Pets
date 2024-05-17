@@ -13,7 +13,7 @@ function Painel_de_controle_modelos() {
 
     useEffect(() => {
 
-        // Função carregar usuários
+        // Função carregar modelos
         async function carregarModelos() {
             try {
                 // Fazer uma chamada da API
@@ -35,6 +35,23 @@ function Painel_de_controle_modelos() {
         // Chamando função carregar usuários
         carregarModelos()
     })
+
+    async function deletarModelo(modelo_id) {
+        if (window.confirm("Tem certeza que deseja deletar essa marca?")) {
+            try {
+                const resposta = await fetch("/modelos")
+            } catch (error) {
+
+            }
+        }
+    }
+
+
+
+
+
+
+
     return (
         // Container geral para propriedades de fundo
         <div class="admPainel">

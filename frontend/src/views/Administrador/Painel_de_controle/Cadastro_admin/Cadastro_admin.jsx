@@ -1,5 +1,6 @@
-import React from 'react'
+import {useState} from 'react'
 import './Cadastro_admin.css'
+
 
 function Cadastro_admin() {
   return (
