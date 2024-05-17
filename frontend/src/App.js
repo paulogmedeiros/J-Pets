@@ -21,8 +21,8 @@ import Redefinir_senha_empresa from './views/Empresas/Redefinir_senha/Redefinir_
 
 // Importando itens da pasta "Administrador"
 
-// import adm_navbar from './components/componentes_adm/adm_navbar';
-import Redefinir_senha_adm from './views/Administrador/Redefinir_senha/Redefinir_senha.jsx';
+import Alterar_senha_admin from './views/Administrador/Alterar_senha_admin/Alterar_senha_admin.jsx';
+
 
 // Importando itens da pasta "Administrador" - Painel de controle
 import Cadastro_admin from './views/Administrador/Painel_de_controle/Cadastro_admin/Cadastro_admin.jsx';
@@ -37,6 +37,8 @@ import Nova_marca from './views/Administrador/Nova_marca/Nova_marca.jsx';
 import Novo_modelo from './views/Administrador/Novo_modelo/Novo_modelo.jsx';
 import Novo_produto from './views/Administrador/Novo_produto/Novo_produto.jsx';
 import Novo_servico from './views/Administrador/Novo_servico/Novo_servico.jsx';
+
+// Rotas para o frontend
 function App() {
   return (
     <BrowserRouter>
@@ -57,7 +59,8 @@ function App() {
 
       {/* Rotas para os itens da pasta "Administrador" */}
 
-      <Route path='/senha/administrador/redefinicao' element={<Redefinir_senha_adm/>}/>
+      <Route path='/administrador/senha/alteracao' element={<Alterar_senha_admin/>}/>
+      
 
        {/* Rotas para os itens da pasta "Administrador" - Painel de controle */}
       <Route path='/administrador/painel/cadastroAdmin' element={<Cadastro_admin/>}/>
