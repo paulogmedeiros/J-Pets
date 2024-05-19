@@ -15,8 +15,8 @@ class EmpresasController {
     async postEmpresa(req, res) {
         try {
             const data = req.body;
-            const result = await EmpresasService.createEmpresas(data);
-            res.json(result)
+            await EmpresasService.createEmpresas(data);
+            res.status(201).json({ mensage: "Empresa cadastrado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)

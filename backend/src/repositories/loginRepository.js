@@ -6,10 +6,31 @@ class LoginRepository {
         this.prisma = new PrismaClient();
     }
 
-    async selectLogar(data) {
+    async selectLogarPorEmail(email) {
         return await this.prisma.login.findFirst({
             where:{
-                email:data.email
+                email:email
+            }
+        })
+    }
+
+    async selectAdministradorPorId(id){
+        return await this.prisma.login.findFirst({
+            where:{
+                id:id
+            },
+            select:{
+                email:true,
+            }
+        })
+    }
+
+    async insertAdministrador(data) {
+        return await this.prisma.login.create({
+            data:{
+                email: data.email,
+                senha: data.senha,
+                tipo: 'ADM',
             }
         })
     }
