@@ -16,41 +16,43 @@ class EmpresasRepository {
         })
     }
 
+    // retorno a empresa que tem esse cnpj
+    async selectEmpresaPorCNPJ(cnpj){
+        return await this.prisma.empresas.findFirst({
+            where:{
+                cnpj:cnpj
+            }
+        })
+    }
+
+    // retorno a empresa que tem esse nome fantasia
+    async selectEmpresaPorNomeFantasia(nomeFantasia){
+        return await this.prisma.empresas.findFirst({
+            where:{
+                nome_fantasia:nomeFantasia
+            }
+        })
+    }
+    
+    // criando nova empresa
     async insertEmpresas(data) {
 
-        const login = await this.prisma.login.create({
-            data: {
-                email: data.email,
-                senha: data.senha,
-                tipo: 'EMP',
-            }
-        })
-
-        await this.prisma.empresas.create({
-            data:{
-              cnpj: data.cnpj,
-              nome_fantasia: data.nome_fantasia,
-              login_id: login.id,
-              status_empresa: false
-            }
-        })
-
-        return await this.prisma.login.findUnique({
-            where:{
-                id:login.id,
-            },
-            select:{
-                id: true,
-                email: true,
-                senha: true,
-                tipo: true,
-                empresas:{
-                    select:{
-                        cnpj:true,
-                        nome_fantasia: true,
-                    }
+        return await this.prisma.$transaction(async (prismaTx) => {
+            const login = await prismaTx.login.create({
+                data: {
+                    email: data.email,
+                    senha: data.senha,
+                    tipo: 'EMP',
                 }
-            }
+            })
+    
+            await prismaTx.empresas.create({
+                data:{
+                  cnpj: data.cnpj,
+                  nome_fantasia: data.nomeFantasia,
+                  login_id: login.id,
+                }
+            })
         })
 
     }

@@ -13,7 +13,7 @@ const login = require("./controllers/loginController.js")
 
 //middleware
 const empresaValidation = require("./middleware/empresasValidation.js")
-const toenValidation = require("./middleware/tokenValidation.js")
+const tokenValidation = require("./middleware/tokenValidation.js")
 
 
 //rotas
@@ -52,10 +52,12 @@ routes.delete("/modelos/:id", modelos.deleteModelos);
 
 // rota empresas
 routes.get("/empresas", empresa.getEmpresas);
-routes.post("/empresas",empresaValidation.validarCriacaoEmpresa,empresa.postEmpresa);
+routes.post("/empresas",empresa.postEmpresa);
 
 // rota de login
-routes.post("/login",toenValidation.verificarToken,login.logar);
+routes.get("/administrador/:id",login.getAdministradorPorId)
+routes.post("/cadastro/administrador",login.postAdministrador);
+routes.post("/login",tokenValidation.verificarToken,login.logar);
 
 
 
