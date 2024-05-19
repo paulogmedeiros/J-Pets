@@ -10,10 +10,11 @@ import Login from './views/Todos/Login/Login.jsx'
 import Confirmacao_usuario from './views/Todos/Quem_e_voce/Quem_e_voce.jsx'
 import Esqueceu_a_senha from './views/Todos/Esqueceu_a_senha/Esqueceu_a_senha.jsx';
 import Alterar_senha from './views/Todos/Alterar_senha/Alterar_senha.jsx';
+import Redefinir_senha from './views/Todos/Redefinir_senha/Redefinir_senha.jsx';
 
 // Importando itens da pasta "Donos de pet"
 import Cadastro_usuario from './views/Donos_pet/Cadastro_usuario/Cadastro_usuario.jsx'
-import Redefinir_senha from './views/Donos_pet/Redefinir_senha/Redefinir_senha.jsx';
+import Redefinir_senha_Donos_pet from './views/Donos_pet/Redefinir_senha/Redefinir_senha.jsx';
 
 // Importando itens da pasta "Empresas"
 import Cadastro_empresa from './views/Empresas/Cadastro_empresa/Cadastro_empresa.jsx'
@@ -48,10 +49,11 @@ function App() {
       <Route path='/cadastro/confirmacao' element={<Confirmacao_usuario/>}/>
       <Route path='/senha/recuperacao' element={<Esqueceu_a_senha/>}/>
       <Route path='/senha/alteracao' element={<Alterar_senha/>}/>
+      <Route path='/senha/redefinir' element={<Redefinir_senha/>}/>
 
       {/* Rotas para os itens da pasta "Donos de pet" */}
       <Route path='/cadastro/usuario' element={<Cadastro_usuario/>}/>
-      <Route path='/senha/redefinicao' element={<Redefinir_senha/>}/>
+      <Route path='/senha/redefinicao' element={<Redefinir_senha_Donos_pet/>}/>
 
       {/* Rotas para os itens da pasta "Empresas" */}
       <Route path='/cadastro/empresa' element={<Cadastro_empresa/>}/>
@@ -60,7 +62,7 @@ function App() {
       {/* Rotas para os itens da pasta "Administrador" */}
 
       <Route path='/administrador/senha/alteracao' element={<Alterar_senha_admin/>}/>
-      
+
 
        {/* Rotas para os itens da pasta "Administrador" - Painel de controle */}
       <Route path='/administrador/painel/cadastroAdmin' element={<Cadastro_admin/>}/>
