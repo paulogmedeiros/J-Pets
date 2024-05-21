@@ -16,19 +16,8 @@
     background-color: #7E57C2 !important;
 }
 
-.admInfo{
-    color: white;
-    background-color: #2641B7 !important;
-}
-
-.admInfo:hover{
-    color: white;
-    background-color: #2641B7 !important;
-    border: none;
-}
 
 .roxo th{
     background-color: #7E57C2;
     color: white;
 }
-

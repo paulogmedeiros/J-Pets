@@ -101,7 +101,7 @@ function Painel_de_controle_modelos() {
                     {/* Tabela */}
                     <div class="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5 text-center">
                         <div className='row '>
-                            <p className='d-flex col-4 mt-5  fs-2 fw-semibold'>Todos os modelos</p>
+                            <p className='d-flex col-4 mt-5  fs-3 fw-semibold'>Todos os modelos</p>
 
                             <div class="input-group d-flex mb-5 col-4 w-25 h-25 me-2 mt-5">
                                 <input type="text" class="form-control" placeholder="Pesquisar modelo" aria-label="Recipient's username" aria-describedby="basic-addon2" />
