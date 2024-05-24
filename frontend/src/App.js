@@ -19,6 +19,9 @@ import Redefinir_senha_Donos_pet from './views/Donos_pet/Redefinir_senha/Redefin
 // Importando itens da pasta "Empresas"
 import Cadastro_empresa from './views/Empresas/Cadastro_empresa/Cadastro_empresa.jsx'
 import Redefinir_senha_empresa from './views/Empresas/Redefinir_senha/Redefinir_senha.jsx';
+import Adicionar_servicos from './views/Empresas/Adicionar_servicos/Adicionar_servicos.jsx';
+import Remover_servicos from './views/Empresas/Remover_servicos/Remover_servicos.jsx';
+import Adicionar_produtos from './views/Empresas/Adicionar_produtos/Adicionar_produtos.jsx';
 
 // Importando itens da pasta "Administrador"
 
@@ -58,6 +61,10 @@ function App() {
       {/* Rotas para os itens da pasta "Empresas" */}
       <Route path='/cadastro/empresa' element={<Cadastro_empresa/>}/>
       <Route path='/senha/empresas/redefinicao' element={<Redefinir_senha_empresa/>}/>
+      <Route path='/empresas/adicionarServicos' element={<Adicionar_servicos/>}/>
+      <Route path='/empresas/removerServicos' element={<Remover_servicos/>}/>
+      <Route path='/empresas/adicionarProdutos' element={<Adicionar_produtos/>}/>
+
 
       {/* Rotas para os itens da pasta "Administrador" */}
 
