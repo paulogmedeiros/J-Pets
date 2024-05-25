@@ -6,15 +6,20 @@ const secret = "MinhaSenha"
 class LoginController {
 
     async logar(req, res) {
-        const data = req.body;
-        const result = await LoginService.logar(data);
-        let usuario_id = result.id;
-        let usuario_tipo = result.tipo;
-        let  token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 120 })
-        res.json({ token })
+        try {
+            const data = req.body;
+            const result = await LoginService.logar(data);
+            let usuario_id = result.id;
+            let usuario_tipo = result.tipo;
+            let token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 120 })
+            res.status(200).json({ token })
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
     }
 
-    async getAdministradorPorId(req,res){
+    async getAdministradorPorId(req, res) {
         try {
             const param = parseInt(req.params.id)
             const result = await LoginService.findAdministradorPorId(param);
@@ -25,7 +30,7 @@ class LoginController {
         }
     }
 
-    async postAdministrador(req,res){
+    async postAdministrador(req, res) {
         try {
             const body = req.body
             await LoginService.createAdministrador(body);
@@ -36,16 +41,27 @@ class LoginController {
         }
     }
 
-    async putSenha(req,res){
+    async putSenhaRecuperacao(req, res) {
         try {
             const body = req.body
             const param = parseInt(req.params.id)
-            await LoginService.editSenha(body,param);
+            await LoginService.editSenhaRecuperacao(body, param);
             res.status(201).json({ mensage: "Usuário atualizado com sucesso" })
         } catch (error) {
-            console.log(error)
-            // const retorno = FiltroExcecoes.tratarErro(error)
-            // res.status(retorno.status).json(retorno.mensage)
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+    async putSenha(req, res) {
+        try {
+            const body = req.body
+            const param = parseInt(req.params.id)
+            await LoginService.editSenha(body, param);
+            res.status(201).json({ mensage: "Usuário atualizado com sucesso" })
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
         }
     }
 }

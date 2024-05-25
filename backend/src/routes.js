@@ -57,8 +57,9 @@ routes.post("/empresas",empresa.postEmpresa);
 // rota de login
 routes.get("/administrador/:id",login.getAdministradorPorId)
 routes.post("/cadastro/administrador",login.postAdministrador);
-routes.post("/login",tokenValidation.verificarToken,login.logar);
-routes.put("/recuperacao/senha/:id",login.putSenha);
+routes.post("/login",login.logar);
+routes.put("/recuperacao/senha/:id",login.putSenhaRecuperacao);
+routes.put("/senha/:id",login.putSenha);
 
 
 
