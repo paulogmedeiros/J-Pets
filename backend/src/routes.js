@@ -53,7 +53,10 @@ routes.delete("/modelos/:id", modelos.deleteModelos);
 
 // rota empresas
 routes.get("/empresas", empresa.getEmpresas);
+routes.get("/empresas/cupom/:id",empresa.getCupom);
 routes.post("/empresas",empresa.postEmpresa);
+routes.put("/empresas/criar/cupom/:id",empresa.putCriarCupom);
+routes.put("/empresas/excluir/cupom/:id",empresa.putExcluirCupom);
 
 // rota de login
 routes.get("/administrador/:id",login.getAdministradorPorId)

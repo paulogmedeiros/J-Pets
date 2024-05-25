@@ -8,34 +8,47 @@ class LoginRepository {
 
     async selectLogarPorEmail(email) {
         return await this.prisma.login.findFirst({
-            where:{
-                email:email
+            where: {
+                email: email
             }
         })
     }
 
-    async selectAdministradorPorId(id){
-        return await this.prisma.login.findFirst({
-            where:{
-                id:id
+    async selectEmpresasPorLoginId(loginId) {
+        return await this.prisma.empresas.findFirst({
+            where: {
+                login_id: loginId
             },
-            select:{
-                email:true,
+            select: {
+                id: true,
+                status_pagamento: true,
+                status_ativo: true
             }
         })
     }
 
-    async selectUsuarioPorId(id){
+    async selectAdministradorPorId(id) {
         return await this.prisma.login.findFirst({
-            where:{
-                id:id
+            where: {
+                id: id
+            },
+            select: {
+                email: true,
+            }
+        })
+    }
+
+    async selectUsuarioPorId(id) {
+        return await this.prisma.login.findFirst({
+            where: {
+                id: id
             },
         })
     }
 
     async insertAdministrador(data) {
         return await this.prisma.login.create({
-            data:{
+            data: {
                 email: data.email,
                 senha: data.senha,
                 tipo: 'ADM',

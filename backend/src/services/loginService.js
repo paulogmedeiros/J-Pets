@@ -14,6 +14,14 @@ class LoginService {
         if (!bcrypt.compareSync(data.senha, user.senha)) {
             throw new ExcecaoIdNaoEncontrado("Email ou senha incorreto")
         }
+
+        if (user.tipo == 'EMP') {
+            const empresa = await LoginRepository.selectEmpresasPorLoginId(user.id)
+            user.statusPagamento = empresa.status_pagamento
+            user.statusAtivo = empresa.status_ativo
+            user.idEmpresa = empresa.id
+        }
+
         return user;
     }
 

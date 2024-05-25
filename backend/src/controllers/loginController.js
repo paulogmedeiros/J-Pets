@@ -11,8 +11,19 @@ class LoginController {
             const result = await LoginService.logar(data);
             let usuario_id = result.id;
             let usuario_tipo = result.tipo;
-            let token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 120 })
-            res.status(200).json({ token })
+            let statusPagamento;
+            let statusAtivo;
+            let idEmpresa;
+            let token;
+            if (result.tipo == 'EMP') {
+                statusPagamento = result.statusPagamento
+                statusAtivo = result.statusAtivo
+                idEmpresa = result.idEmpresa
+                token = jwt.sign({ usuario_id, usuario_tipo, statusPagamento, statusAtivo, idEmpresa }, secret, { expiresIn: 120 })
+            } else {
+                token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 120 })
+            }
+            res.status(200).json(token)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)
