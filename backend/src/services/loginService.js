@@ -88,6 +88,14 @@ class LoginService {
         // retorno
         return await LoginRepository.updateSenha(data, id)
     }
+
+    async createEnvioEmail(data) {
+        // valido se o email já está cadastrado
+        const login = await LoginRepository.selectLogarPorEmail(data.email)
+        if (!login) {
+            throw new ExcecaoIdNaoEncontrado("Email não cadastrado")
+        }
+    }
 }
 
 module.exports = new LoginService()

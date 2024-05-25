@@ -59,6 +59,7 @@ routes.post("/empresas",empresa.postEmpresa);
 routes.get("/administrador/:id",login.getAdministradorPorId)
 routes.post("/cadastro/administrador",login.postAdministrador);
 routes.post("/login",login.logar);
+routes.post("/envio/email",login.postEnvioEmail);
 routes.put("/recuperacao/senha/:id",login.putSenhaRecuperacao);
 routes.put("/senha/:id",login.putSenha);
 

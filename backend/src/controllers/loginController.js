@@ -64,6 +64,17 @@ class LoginController {
             res.status(retorno.status).json(retorno.mensage)
         }
     }
+
+    async postEnvioEmail(req, res) {
+        try {
+            const body = req.body
+            await LoginService.createEnvioEmail(body);
+            res.status(201).json({ mensage: "E-mail enviado" })
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
 }
 
 module.exports = new LoginController()
