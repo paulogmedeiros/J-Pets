@@ -1,16 +1,13 @@
 import React from 'react'
-import './Empresas_Mapa.css'
 import logoJPets from './img/logoJPets.png'
 import iconeCoracao from './img/icone_coracao.svg'
 import iconeUsuarioLogin from './img/icone_usuarioLogin.svg'
-import mapaImg from './img/mapaImg.png'
 import imgEstrela from './img/imgEstrela.svg'
-import imgDesconto from './img/desconto_botao.svg'
-function Empresas_Mapa() {
-  return (
+import mapaImg from './img/mapaImg.png'
 
-    <>
-      {/* Barra de navegação da página */}
+function Perfil_Empresa() {
+  return (
+    <div>
       <nav class="navbarDonoDePet navbar navbar-expand-lg ">
         <div class="container-fluid">
 
@@ -92,62 +89,43 @@ function Empresas_Mapa() {
         </div>
       </nav>
 
-      {/* Conteúdo principal */}
+      {/* conteúdo principal */}
       <div>
+        
+        <div class="row g-0 text-center mt-5 mt-md-2">
+          <div className='p-2'>
+            <img src={logoJPets} width={100} height={100} />
+            <p className='fs-3'>Nome da Empresa</p>
+            <img src={imgEstrela} width={25} />
+            <img src={imgEstrela} width={25} />
+            <img src={imgEstrela} width={25} />
+            <img src={imgEstrela} width={25} />
+            <img src={imgEstrela} width={25} />
+            <p><span className='text-success fw-semibold'>Abertos: </span>seg-sab</p>
+            <p><span className='text-danger fw-semibold'>Fechados: </span>dom</p>
+          </div>
 
-        {/* Título */}
-        <div class="container text-center mt-3 pt-5">
-          <h3>Empresas que trabalham com o modelo <span className='text-warning'>(modelo)</span></h3>
 
-          {/* Empresas */}
-          <div class="row mt-5">
-            <div class="col-md-6">
-              <div class="col-md-6 d-flex border rounded-4 w-auto w-auto p-3 p-md-4 bg-body-secondary mb-5">
-
-                <img src={logoJPets} width={70} height={70} className='img-fluid d-flex' />
-
-                <div className="flex-column">
-                  <p className='ms-md-3 d-flex'>Nome da empresa</p>
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
-                </div>
-                <div className="col-md-3"></div>
-                <button type="button" class="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
-              </div>
-
-              <div class="col-md-6 d-flex border rounded-4  w-auto w-auto p-3 p-md-4 p-3 bg-body-secondary mb-5">
-
-                <img src={logoJPets} width={70} height={70} className='img-fluid d-flex' />
-
-                <div className="flex-column">
-                  <p className='ms-md-3 d-flex'>Nome da empresa</p>
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
-                </div>
-                <div className="col-md-3"></div>
-                <button type="button" class="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
-              </div>
+          <div class="col-sm-6 col-md-5 m-md-5 mt-5 border rounded-4">
+            <p className='fs-4'>Comentários</p>
+            <div className='p-3'>
+            <div>
             </div>
 
-            {/* API */}
-            <div class="col-md-6">
-              <div className='apiTela border rounded-4'>
-                <img src={mapaImg} width={600} height={400} className='img-fluid rounded-4'/>
+              <div class="form-floating ">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Inserir comentário</label>
               </div>
             </div>
           </div>
+
+          <div class="col-sm-6 col-md-6 mt-5">
+            <img src={mapaImg} width={500} height={400} className='img-fluid rounded-3'/>
+            </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
-export default Empresas_Mapa
+export default Perfil_Empresa
