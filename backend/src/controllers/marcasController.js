@@ -1,15 +1,61 @@
-const marcasService = require("../services/marcasService.js")
+const MarcasService = require("../services/marcasService.js")
+const FiltroExcecoes = require("../exception/exceptionFilter.js")
 
-class MarcasController{
-    async postMarcas(req,res){
-        const data = req.body;
-        const result = await marcasService.createMarcas(data);
-        res.json(result)
+class MarcasController {
+
+    async getMarcas(req, res) {
+        try {
+            const result = await MarcasService.findMarcas();
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
     }
 
-    async getMarcas(req,res){
-        const result = await marcasService.findMarcas();
-        res.json(result)
+    async getMarcasPorIdProduto(req, res) {
+        try {
+            const param = parseInt(req.params.produtoId)
+            const result = await MarcasService.findMarcasPorIdProduto(param);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+    async postMarcas(req, res) {
+        try {
+            const body = req.body;
+            await MarcasService.createMarcas(body);
+            res.status(201).json({ mensage: "Marca cadastrada com sucesso" })
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+    async putMarcas(req,res){
+        try {
+            const body = req.body
+            const param = parseInt(req.params.id)
+            await MarcasService.editMarcas(param, body);
+            res.status(200).json({ mensage: "Marca atualizada com sucesso" })
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+    async deleteMarcas(req,res){
+        try {
+            const param = parseInt(req.params.id)
+            await MarcasService.removeMarcas(param);
+            res.status(200).json({ mensage: "Marca deletada com sucesso" })
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
     }
 }
 
