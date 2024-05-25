@@ -1,9 +1,8 @@
 import React from 'react'
-import './Adicionar_produtos.css'
-import Adicionar_produtos_img from './img/Produtos_img.svg'
-function Adicionar_produtos() {
+import Modelos_img from './img/Modelos_img.svg'
+import './Adicionar_modelos.css'
+function Adicionar_modelos() {
   return (
-
     <div className="container">
 
       {/* container para formulario e imagem */}
@@ -13,8 +12,8 @@ function Adicionar_produtos() {
         <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
 
           {/* Título */}
-          <p class="tituloRemoverServicoEmpresa fs-md-2 fs-3 fw-semibold text-center mb-4 mb-md-4 mt-md-5">
-            Adicionar produtos
+          <p class="tituloAdicionarModeloEmpresa fs-md-2 fs-3 fw-semibold text-center mb-4 mb-md-4 mt-md-0">
+            Adicionar modelos
           </p>
 
           {/* lista suspensa para selecionar o animal */}
@@ -29,7 +28,7 @@ function Adicionar_produtos() {
               <option value="Pássaro">teste</option>
               <option value="Peixe">teste</option>
             </select>
-            <label for="floatingSelect">Animal</label>
+            <label for="floatingSelect">Marca</label>
           </div>
 
           {/* lista suspensa para escolher o produto */}
@@ -44,20 +43,15 @@ function Adicionar_produtos() {
               <option value="Pássaro">teste</option>
               <option value="Peixe">teste</option>
             </select>
-            <label for="floatingSelect">Produtos</label>
+            <label for="floatingSelect">Modelos</label>
           </div>
 
-          <a class="btnRemoverServicoEmpresa btn w-100 mt-md-4" href="#" role="button">
+          <a class="btnAdicionarModeloEmpresa btn w-100 mt-md-4" href="#" role="button">
             Adicionar
           </a>
-
-          <div className='text-center'>
-            <a class="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="#" role="button">Adicionar marca</a>
-          </div>
-
         </div>
-        <div className="imgRemoverServicosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4 p-3">
-          <img src={Adicionar_produtos_img} class="img-fluid"></img>
+        <div className="imgAdicionarModeloEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4 p-3">
+          <img src={Modelos_img} class="img-fluid"></img>
         </div>
       </div>
     </div>
@@ -65,4 +59,4 @@ function Adicionar_produtos() {
   )
 }
 
-export default Adicionar_produtos
+export default Adicionar_modelos

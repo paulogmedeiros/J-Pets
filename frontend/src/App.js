@@ -22,7 +22,8 @@ import Redefinir_senha_empresa from './views/Empresas/Redefinir_senha/Redefinir_
 import Adicionar_servicos from './views/Empresas/Adicionar_servicos/Adicionar_servicos.jsx';
 import Remover_servicos from './views/Empresas/Remover_servicos/Remover_servicos.jsx';
 import Adicionar_produtos from './views/Empresas/Adicionar_produtos/Adicionar_produtos.jsx';
-
+import Adicionar_marcas from './views/Empresas/Adicionar_marcas/Adicionar_marcas';
+import Adicionar_modelos from './views/Empresas/Adicionar_modelos/Adicionar_modelos';
 // Importando itens da pasta "Administrador"
 
 import Alterar_senha_admin from './views/Administrador/Alterar_senha_admin/Alterar_senha_admin.jsx';
@@ -47,6 +48,7 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
+      
       {/* Rotas para os itens da pasta "Todos" */}
       <Route path='/' element={<Login/>}/>
       <Route path='/cadastro/confirmacao' element={<Confirmacao_usuario/>}/>
@@ -64,12 +66,11 @@ function App() {
       <Route path='/empresas/adicionarServicos' element={<Adicionar_servicos/>}/>
       <Route path='/empresas/removerServicos' element={<Remover_servicos/>}/>
       <Route path='/empresas/adicionarProdutos' element={<Adicionar_produtos/>}/>
-
+      <Route path='/empresas/adicionarMarcas' element={<Adicionar_marcas/>}/>
+      <Route path='/empresas/adicionarModelos' element={<Adicionar_modelos/>}/>
 
       {/* Rotas para os itens da pasta "Administrador" */}
-
       <Route path='/administrador/senha/alteracao' element={<Alterar_senha_admin/>}/>
-
 
        {/* Rotas para os itens da pasta "Administrador" - Painel de controle */}
       <Route path='/administrador/painel/cadastroAdmin' element={<Cadastro_admin/>}/>
@@ -78,8 +79,6 @@ function App() {
       <Route path='/administrador/painel/servicos' element={<Painel_de_controle_servicos/>}/>
       <Route path='/administrador/painel/marcas' element={<Painel_de_controle_marcas/>}/>
       <Route path='/administrador/painel/modelos' element={<Painel_de_controle_modelos/>}/>
-
-
 
       {/* Rotas para os itens da pasta "Administrador" - cadastro */}
       <Route path='/administrador/painel/novaMarca' element={<Nova_marca/>}/>
