@@ -10,6 +10,7 @@ const produtos = require("./controllers/produtosController.js")
 const marcas = require("./controllers/marcasController.js")
 const modelos = require("./controllers/modelosController.js")
 const login = require("./controllers/loginController.js")
+const donoPet = require("./controllers/donosPetController.js")
 
 //middleware
 const empresaValidation = require("./middleware/empresasValidation.js")
@@ -61,6 +62,7 @@ routes.post("/login",login.logar);
 routes.put("/recuperacao/senha/:id",login.putSenhaRecuperacao);
 routes.put("/senha/:id",login.putSenha);
 
-
+// rota donoPet
+routes.post("/donoPet",donoPet.postDonoPet);
 
 module.exports = routes
