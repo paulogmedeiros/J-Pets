@@ -42,6 +42,15 @@ class LoginService{
         // retorno
         return login
     }
+
+    async editSenha(data,id){
+        // faço a criptografia da senha
+        let salt = bcrypt.genSaltSync(10)
+        data.senha = bcrypt.hashSync(data.senha, salt)
+
+        // retorno
+       return await LoginRepository.updateSenha(data,id)
+   }
 }
 
 module.exports = new LoginService()

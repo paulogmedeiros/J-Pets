@@ -35,6 +35,19 @@ class LoginController {
             res.status(retorno.status).json(retorno.mensage)
         }
     }
+
+    async putSenha(req,res){
+        try {
+            const body = req.body
+            const param = parseInt(req.params.id)
+            await LoginService.editSenha(body,param);
+            res.status(201).json({ mensage: "Usuário atualizado com sucesso" })
+        } catch (error) {
+            console.log(error)
+            // const retorno = FiltroExcecoes.tratarErro(error)
+            // res.status(retorno.status).json(retorno.mensage)
+        }
+    }
 }
 
 module.exports = new LoginController()

@@ -35,6 +35,17 @@ class LoginRepository {
         })
     }
 
+    async updateSenha(data, id) {
+        return await this.prisma.login.update({
+            where: {
+                id
+            },
+            data: {
+                senha: data.senha
+            }
+        })
+    }
+
 }
 
 module.exports = new LoginRepository()

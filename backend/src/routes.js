@@ -58,7 +58,7 @@ routes.post("/empresas",empresa.postEmpresa);
 routes.get("/administrador/:id",login.getAdministradorPorId)
 routes.post("/cadastro/administrador",login.postAdministrador);
 routes.post("/login",tokenValidation.verificarToken,login.logar);
-
+routes.put("/recuperacao/senha/:id",login.putSenha);
 
 
 
