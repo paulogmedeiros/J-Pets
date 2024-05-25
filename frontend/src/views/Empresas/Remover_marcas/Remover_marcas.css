@@ -1,12 +1,12 @@
-.tituloAdicionarProdutosEmpresa {
+.tituloRemoverMarcaEmpresa{
   color: black;
 }
 
-.btnAdicionarProdutosEmpresa {
+.btnRemoverMarcaEmpresa{
   background-color: #DEA100;
   color: white;
 }
 
-.imgAdicionarProdutosEmpresa{
+.imgRemoverMarcaEmpresa{
   background-color: #DEA100;
 }

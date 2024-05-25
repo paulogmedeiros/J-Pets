@@ -1,10 +1,8 @@
 import React from 'react'
-import './Adicionar_produtos.css'
-import Adicionar_produtos_img from './img/Produtos_img.svg'
-
-function Adicionar_produtos() {
+import Produtos_img from './img/Produtos_img.svg'
+import './Remover_produtos.css'
+function Remover_produtos() {
   return (
-
     <div className="container">
 
       {/* container para formulario e imagem */}
@@ -14,8 +12,8 @@ function Adicionar_produtos() {
         <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
 
           {/* Título */}
-          <p class="tituloAdicionarProdutosEmpresa fs-md-2 fs-3 fw-semibold text-center mb-4 mb-md-4 mt-md-5">
-            Adicionar produtos
+          <p class="tituloRemoverProdutosEmpresa fs-md-2 fs-3 fw-semibold text-center mb-4 mb-md-4 mt-md-5">
+            Remover produtos
           </p>
 
           {/* lista suspensa para selecionar o animal */}
@@ -48,17 +46,17 @@ function Adicionar_produtos() {
             <label for="floatingSelect">Produtos</label>
           </div>
 
-          <a class="btnAdicionarProdutosEmpresa btn w-100 mt-md-4" href="#" role="button">
-            Adicionar
+          <a class="btnRemoverProdutosEmpresa btn w-100 mt-md-4" href="#" role="button">
+            Remover
           </a>
 
           <div className='text-center'>
-            <a class="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="#" role="button">Adicionar marca</a>
+            <a class="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="#" role="button">Remover marca</a>
           </div>
 
         </div>
-        <div className="imgAdicionarProdutosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4 p-3">
-          <img src={Adicionar_produtos_img} class="img-fluid"></img>
+        <div className="imgRemoverProdutosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4 p-3">
+          <img src={Produtos_img} class="img-fluid"></img>
         </div>
       </div>
     </div>
@@ -66,4 +64,4 @@ function Adicionar_produtos() {
   )
 }
 
-export default Adicionar_produtos
+export default Remover_produtos

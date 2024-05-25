@@ -1,0 +1,39 @@
+.navbarDonoDePet {
+  background-color: #DCECF6;
+}
+
+.carousel-control-next,
+.carousel-control-prev
+
+/*, .carousel-indicators */
+  {
+  filter: invert(100%);
+}
+
+.CarrosselPagInicial {
+  width: 100%;
+  /* Largura total por padrão */
+  max-width: 700px;
+  /* Máxima largura desejada */
+  height: auto;
+  /* Altura automática */
+  margin: auto;
+  /* Centralizar o carrossel */
+}
+
+.CarrosselPagInicial .carousel-inner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  /* Manter proporção da imagem, cobrir o contêiner */
+}
+
+.btnSaibaMais {
+  background-image: linear-gradient(to right, #DEA100 30%, #A67800 70%);
+  color: white;
+}
+
+.anuncioPagInicial{
+  background: #DCECF6;
+}
+

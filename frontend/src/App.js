@@ -13,10 +13,15 @@ import Alterar_senha from './views/Todos/Alterar_senha/Alterar_senha.jsx';
 import Redefinir_senha from './views/Todos/Redefinir_senha/Redefinir_senha.jsx';
 
 // Importando itens da pasta "Donos de pet"
+import Principal_DonosDePet from './views/Donos_pet/Principal_DonosDePet/Principal_DonosDePet.jsx';
 import Cadastro_usuario from './views/Donos_pet/Cadastro_usuario/Cadastro_usuario.jsx'
 import Redefinir_senha_Donos_pet from './views/Donos_pet/Redefinir_senha/Redefinir_senha.jsx';
+import Empresas_Mapa from './views/Donos_pet/Empresas_Mapa/Empresas_Mapa.jsx';
+
+
 
 // Importando itens da pasta "Empresas"
+import Principal_Empresas from './views/Empresas/Principal_Empresas/Principal_Empresas.jsx';
 import Cadastro_empresa from './views/Empresas/Cadastro_empresa/Cadastro_empresa.jsx'
 import Redefinir_senha_empresa from './views/Empresas/Redefinir_senha/Redefinir_senha.jsx';
 import Adicionar_servicos from './views/Empresas/Adicionar_servicos/Adicionar_servicos.jsx';
@@ -24,8 +29,12 @@ import Remover_servicos from './views/Empresas/Remover_servicos/Remover_servicos
 import Adicionar_produtos from './views/Empresas/Adicionar_produtos/Adicionar_produtos.jsx';
 import Adicionar_marcas from './views/Empresas/Adicionar_marcas/Adicionar_marcas';
 import Adicionar_modelos from './views/Empresas/Adicionar_modelos/Adicionar_modelos';
-// Importando itens da pasta "Administrador"
+import Remover_produtos from './views/Empresas/Remover_produtos/Remover_produtos.jsx';
+import Remover_marcas from './views/Empresas/Remover_marcas/Remover_marcas.jsx';
+import Remover_modelos from './views/Empresas/Remover_modelos/Remover_modelos.jsx';
 
+
+// Importando itens da pasta "Administrador"
 import Alterar_senha_admin from './views/Administrador/Alterar_senha_admin/Alterar_senha_admin.jsx';
 
 
@@ -48,7 +57,7 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-      
+
       {/* Rotas para os itens da pasta "Todos" */}
       <Route path='/' element={<Login/>}/>
       <Route path='/cadastro/confirmacao' element={<Confirmacao_usuario/>}/>
@@ -57,10 +66,13 @@ function App() {
       <Route path='/senha/redefinir' element={<Redefinir_senha/>}/>
 
       {/* Rotas para os itens da pasta "Donos de pet" */}
+      <Route path='/usuario/principal' element={<Principal_DonosDePet/>}/>
       <Route path='/cadastro/usuario' element={<Cadastro_usuario/>}/>
       <Route path='/senha/redefinicao' element={<Redefinir_senha_Donos_pet/>}/>
+      <Route path='/usuario/empresasVisualizar' element={<Empresas_Mapa/>}/>
 
       {/* Rotas para os itens da pasta "Empresas" */}
+      <Route path='/empresas/principal' element={<Principal_Empresas/>}/>
       <Route path='/cadastro/empresa' element={<Cadastro_empresa/>}/>
       <Route path='/senha/empresas/redefinicao' element={<Redefinir_senha_empresa/>}/>
       <Route path='/empresas/adicionarServicos' element={<Adicionar_servicos/>}/>
@@ -68,6 +80,11 @@ function App() {
       <Route path='/empresas/adicionarProdutos' element={<Adicionar_produtos/>}/>
       <Route path='/empresas/adicionarMarcas' element={<Adicionar_marcas/>}/>
       <Route path='/empresas/adicionarModelos' element={<Adicionar_modelos/>}/>
+      <Route path='/empresas/removerProdutos' element={<Remover_produtos/>}/>
+      <Route path='/empresas/removerMarcas' element={<Remover_marcas/>}/>
+      <Route path='/empresas/removerModelos' element={<Remover_modelos/>}/>
+
+
 
       {/* Rotas para os itens da pasta "Administrador" */}
       <Route path='/administrador/senha/alteracao' element={<Alterar_senha_admin/>}/>
