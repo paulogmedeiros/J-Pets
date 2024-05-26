@@ -37,6 +37,9 @@ import Remover_marcas from './views/Empresas/Remover_marcas/Remover_marcas.jsx';
 import Remover_modelos from './views/Empresas/Remover_modelos/Remover_modelos.jsx';
 import Cupons from './views/Empresas/Cupons/Cupons.jsx';
 import Escolher_plano from './views/Empresas/Escolher_plano/Escolher_plano.jsx';
+import Pagamento from './views/Empresas/Pagamento/Pagamento.jsx';
+
+
 
 // Importando itens da pasta "Administrador"
 import Alterar_senha_admin from './views/Administrador/Alterar_senha_admin/Alterar_senha_admin.jsx';
@@ -95,7 +98,7 @@ function App() {
       <Route path='/empresas/removerModelos' element={<Remover_modelos/>}/>
       <Route path='/empresas/cupons' element={<Cupons/>}/>
       <Route path='/empresas/planos' element={<Escolher_plano/>}/>
-
+      <Route path='/empresas/pagamento' element={<Pagamento/>}/>
 
       {/* Rotas para os itens da pasta "Administrador" */}
       <Route path='/administrador/senha/alteracao' element={<Alterar_senha_admin/>}/>
