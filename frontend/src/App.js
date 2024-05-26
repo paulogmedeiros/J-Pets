@@ -18,6 +18,9 @@ import Cadastro_usuario from './views/Donos_pet/Cadastro_usuario/Cadastro_usuari
 import Redefinir_senha_Donos_pet from './views/Donos_pet/Redefinir_senha/Redefinir_senha.jsx';
 import Empresas_Mapa from './views/Donos_pet/Empresas_Mapa/Empresas_Mapa.jsx';
 import Perfil_Empresa from './views/Donos_pet/Perfil_Empresa/Perfil_Empresa.jsx';
+import Perfil_DonosDePet from './views/Donos_pet/Perfil_DonosDePet/Perfil_DonosDePet.jsx';
+import Favoritos from './views/Donos_pet/Favoritos/Favoritos.jsx';
+
 
 
 // Importando itens da pasta "Empresas"
@@ -71,6 +74,9 @@ function App() {
       <Route path='/senha/redefinicao' element={<Redefinir_senha_Donos_pet/>}/>
       <Route path='/usuario/visualizarEmpresas' element={<Empresas_Mapa/>}/>
       <Route path='/usuario/perfilEmpresa' element={<Perfil_Empresa/>}/>
+      <Route path='/usuario/perfil' element={<Perfil_DonosDePet/>}/>
+      <Route path='/usuario/favoritos' element={<Favoritos/>}/>
+
 
 
       {/* Rotas para os itens da pasta "Empresas" */}

@@ -3,9 +3,8 @@ import logoJPets from './img/logoJPets.png'
 import iconeCoracao from './img/icone_coracao.svg'
 import iconeUsuarioLogin from './img/icone_usuarioLogin.svg'
 import imgEstrela from './img/imgEstrela.svg'
-import mapaImg from './img/mapaImg.png'
 
-function Perfil_Empresa() {
+function Favoritos() {
   return (
     <div>
       <nav class="navbarDonoDePet navbar navbar-expand-lg ">
@@ -89,37 +88,65 @@ function Perfil_Empresa() {
         </div>
       </nav>
 
-      {/* conteúdo principal */}
-      <div>
-
-        <div class="row g-0 text-center mt-5 mt-md-2">
-          <div className='p-2'>
-            <img src={logoJPets} width={100} height={100} />
-            <p className='fs-3'>Nome da Empresa</p>
-            <img src={imgEstrela} width={25} />
-            <img src={imgEstrela} width={25} />
-            <img src={imgEstrela} width={25} />
-            <img src={imgEstrela} width={25} />
-            <img src={imgEstrela} width={25} />
-            <p><span className='text-success fw-semibold'>Abertos: </span>seg-sab</p>
-            <p><span className='text-danger fw-semibold'>Fechados: </span>dom</p>
-          </div>
-
-          <div class="col-sm-6 col-md-5 m-md-5 mt-5 border rounded-4">
-            <p className='fs-4'>Comentários</p>
-            <div className='p-3'>
-              <div>
-              </div>
-
-              <div class="form-floating ">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                <label for="floatingTextarea">Inserir comentário</label>
+      <h1 className='m-5 container'>Favoritos</h1>
+      
+      <div className='container text-center'>
+        <div class="row">
+          <div class="col">
+            <div class="card" >
+              <img src={logoJPets} class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text"><img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                </p>
               </div>
             </div>
           </div>
-
-          <div class="col-sm-6 col-md-6 mt-5">
-            <img src={mapaImg} width={500} height={400} className='img-fluid rounded-3' />
+          <div class="col">
+            <div class="card" >
+              <img src={logoJPets} class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text"><img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" >
+              <img src={logoJPets} class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text"><img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" >
+              <img src={logoJPets} class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text"><img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                  <img src={imgEstrela} width={25} />
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -127,4 +154,4 @@ function Perfil_Empresa() {
   )
 }
 
-export default Perfil_Empresa
+export default Favoritos

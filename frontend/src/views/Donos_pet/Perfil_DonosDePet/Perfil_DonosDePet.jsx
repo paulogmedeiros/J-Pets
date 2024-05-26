@@ -2,10 +2,9 @@ import React from 'react'
 import logoJPets from './img/logoJPets.png'
 import iconeCoracao from './img/icone_coracao.svg'
 import iconeUsuarioLogin from './img/icone_usuarioLogin.svg'
-import imgEstrela from './img/imgEstrela.svg'
-import mapaImg from './img/mapaImg.png'
+import './Perfil_DonosDePet.css'
 
-function Perfil_Empresa() {
+function Perfil_DonosDePet() {
   return (
     <div>
       <nav class="navbarDonoDePet navbar navbar-expand-lg ">
@@ -89,37 +88,33 @@ function Perfil_Empresa() {
         </div>
       </nav>
 
-      {/* conteúdo principal */}
-      <div>
 
-        <div class="row g-0 text-center mt-5 mt-md-2">
-          <div className='p-2'>
-            <img src={logoJPets} width={100} height={100} />
-            <p className='fs-3'>Nome da Empresa</p>
-            <img src={imgEstrela} width={25} />
-            <img src={imgEstrela} width={25} />
-            <img src={imgEstrela} width={25} />
-            <img src={imgEstrela} width={25} />
-            <img src={imgEstrela} width={25} />
-            <p><span className='text-success fw-semibold'>Abertos: </span>seg-sab</p>
-            <p><span className='text-danger fw-semibold'>Fechados: </span>dom</p>
-          </div>
 
-          <div class="col-sm-6 col-md-5 m-md-5 mt-5 border rounded-4">
-            <p className='fs-4'>Comentários</p>
-            <div className='p-3'>
-              <div>
-              </div>
 
-              <div class="form-floating ">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                <label for="floatingTextarea">Inserir comentário</label>
-              </div>
+      <div className="text-center mt-md-5 m-5">
+        <h1 className='perfilUsuarioTitulo fw-semibold fs-1'>Meu Perfil</h1>
+      </div>
+      <div class="position-absolute top-50 start-50 translate-middle border rounded-4 p-5 w-75 mt-5 mt-md-3">
+
+        <div class="text-center mt-md-5">
+
+          <div class="row">
+            <div class="col-md-6">
+              <h1 className='fs-2 fw-semibold mb-5'>Jamille Galazi</h1>
+
+              <input class="form-control mb-3 " type="text" value="Email" aria-label="Disabled input example" disabled readonly></input>
+
+              <input class="form-control mb-3 " type="text" value="Senha" aria-label="Disabled input example" disabled readonly />
+
+              <a class="mb-5 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="#">
+                Alterar senha
+              </a>
             </div>
-          </div>
+            
+            <div class="col-md-6 mt-3 mt-md-0">
+              <button type="button" class="btn btn-danger">Desativar conta</button>
+            </div>
 
-          <div class="col-sm-6 col-md-6 mt-5">
-            <img src={mapaImg} width={500} height={400} className='img-fluid rounded-3' />
           </div>
         </div>
       </div>
@@ -127,4 +122,4 @@ function Perfil_Empresa() {
   )
 }
 
-export default Perfil_Empresa
+export default Perfil_DonosDePet
