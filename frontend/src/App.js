@@ -35,7 +35,8 @@ import Adicionar_modelos from './views/Empresas/Adicionar_modelos/Adicionar_mode
 import Remover_produtos from './views/Empresas/Remover_produtos/Remover_produtos.jsx';
 import Remover_marcas from './views/Empresas/Remover_marcas/Remover_marcas.jsx';
 import Remover_modelos from './views/Empresas/Remover_modelos/Remover_modelos.jsx';
-
+import Cupons from './views/Empresas/Cupons/Cupons.jsx';
+import Escolher_plano from './views/Empresas/Escolher_plano/Escolher_plano.jsx';
 
 // Importando itens da pasta "Administrador"
 import Alterar_senha_admin from './views/Administrador/Alterar_senha_admin/Alterar_senha_admin.jsx';
@@ -68,6 +69,7 @@ function App() {
       <Route path='/senha/alteracao' element={<Alterar_senha/>}/>
       <Route path='/senha/redefinir' element={<Redefinir_senha/>}/>
 
+
       {/* Rotas para os itens da pasta "Donos de pet" */}
       <Route path='/usuario/principal' element={<Principal_DonosDePet/>}/>
       <Route path='/cadastro/usuario' element={<Cadastro_usuario/>}/>
@@ -91,7 +93,8 @@ function App() {
       <Route path='/empresas/removerProdutos' element={<Remover_produtos/>}/>
       <Route path='/empresas/removerMarcas' element={<Remover_marcas/>}/>
       <Route path='/empresas/removerModelos' element={<Remover_modelos/>}/>
-
+      <Route path='/empresas/cupons' element={<Cupons/>}/>
+      <Route path='/empresas/planos' element={<Escolher_plano/>}/>
 
 
       {/* Rotas para os itens da pasta "Administrador" */}
