@@ -13,6 +13,18 @@ class ServicosController {
         }
     }
 
+    async getServicosPorIdAnimal(req, res) {
+        try {
+            const animalId = parseInt(req.params.animalId)
+            const empresaId = parseInt(req.params.empresaId)
+            const result = await ServicosService.findServicosPorIdAnimal(animalId,empresaId);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
     async postServicos(req, res) {
         try {
             const body = req.body
@@ -24,7 +36,7 @@ class ServicosController {
         }
     }
 
-    async putServicos(req,res){
+    async putServicos(req, res) {
         try {
             const body = req.body
             const param = parseInt(req.params.id)
@@ -36,7 +48,7 @@ class ServicosController {
         }
     }
 
-    async deleteServicos(req,res){
+    async deleteServicos(req, res) {
         try {
             const param = parseInt(req.params.id)
             await ServicosService.removeServicos(param);

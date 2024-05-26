@@ -11,6 +11,7 @@ const marcas = require("./controllers/marcasController.js")
 const modelos = require("./controllers/modelosController.js")
 const login = require("./controllers/loginController.js")
 const donoPet = require("./controllers/donosPetController.js")
+const empresasSevico = require("./controllers/empresasServicosController.js")
 
 //middleware
 const empresaValidation = require("./middleware/empresasValidation.js")
@@ -27,6 +28,7 @@ routes.get("/animais", animais.getAnimais);
 
 // rotas de servicos
 routes.get("/servicos",servico.getServicos);
+routes.get("/servicos/animais/:animalId/empresa/:empresaId", servico.getServicosPorIdAnimal);
 routes.post("/servicos", servico.postServicos);
 routes.put("/servicos/:id", servico.putServicos);
 routes.delete("/servicos/:id", servico.deleteServicos);
@@ -59,7 +61,7 @@ routes.put("/empresas/criar/cupom/:id",empresa.putCriarCupom);
 routes.put("/empresas/excluir/cupom/:id",empresa.putExcluirCupom);
 
 // rota de login
-routes.get("/administrador/:id",login.getAdministradorPorId)
+routes.get("/administrador/:id",login.getAdministradorPorId);
 routes.post("/cadastro/administrador",login.postAdministrador);
 routes.post("/login",login.logar);
 routes.post("/envio/email",login.postEnvioEmail);
@@ -68,5 +70,9 @@ routes.put("/senha/:id",login.putSenha);
 
 // rota donoPet
 routes.post("/donoPet",donoPet.postDonoPet);
+
+// rota empresasSevico
+routes.post("/empresasSevico",empresasSevico.postEmpresasSevico);
+
 
 module.exports = routes
