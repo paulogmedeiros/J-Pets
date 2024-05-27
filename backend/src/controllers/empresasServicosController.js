@@ -3,6 +3,16 @@ const FiltroExcecoes = require("../exception/exceptionFilter.js")
 
 class EmpresasServicosController {
 
+    async getEmpresasSevicoPorIdEmpresa(req, res) {
+        try {
+            const empresaId = parseInt(req.params.empresaId)
+            const result = await EmpresasServicosService.findEmpresasSevicoPorIdEmpresa(empresaId);
+            res.status(201).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
 
     async postEmpresasSevico(req, res) {
         try {
@@ -15,7 +25,18 @@ class EmpresasServicosController {
         }
     }
 
-    
+    async deleteEmpresasSevico(req, res) {
+        try {
+            const empresaId = parseInt(req.params.empresaId)
+            const data = req.body;
+            await EmpresasServicosService.removeEmpresasServicos(empresaId, data);
+            res.status(201).json({ mensage: "Servicos deletados com sucesso" })
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
 }
 
 module.exports = new EmpresasServicosController()

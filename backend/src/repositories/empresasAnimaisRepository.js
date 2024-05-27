@@ -16,6 +16,24 @@ class EmpresasAnimaisRepository {
         })
     }
 
+    async selectEmpresasAnimaisPorIdEmpresa(empresaId) {
+        return await this.prisma.empresas_animais.findMany({
+            where: {
+                empresa_id: empresaId,
+            },
+            select: {
+                animal_id: true,
+                animais: {
+                    select: {
+                        nome: true
+                    }
+                }
+            }
+
+        })
+    }
+
+
 }
 
 module.exports = new EmpresasAnimaisRepository()

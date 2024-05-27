@@ -14,6 +14,13 @@ class EmpresasAnimaisService {
         return await EmpresasAnimaisRepository.selectEmpresasAnimaisPorEmpresaIdEAnimalId(data)
     }
 
+    async findEmpresasAnimaisPorIdEmpresa(empresaId){
+        // valido se o id da empresa existe
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await EmpresasAnimaisRepository.selectEmpresasAnimaisPorIdEmpresa(empresaId)
+    }
+
 }
 
 
