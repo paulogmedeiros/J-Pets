@@ -40,6 +40,11 @@ import Escolher_plano from './views/Empresas/Escolher_plano/Escolher_plano.jsx';
 import Pagamento from './views/Empresas/Pagamento/Pagamento.jsx';
 import Visualizar_produtos from './views/Empresas/Visualizar_produtos/Visualizar_produtos.jsx';
 import Visualizar_servicos from './views/Empresas/Visualizar_servicos/Visualizar_servicos.jsx';
+import PerfilDeEmpresas from './views/Empresas/PerfilDeEmpresas/PerfilDeEmpresas.jsx';
+import CadastroPerfilProfissional from './views/Empresas/CadastroPerfilProfissional/CadastroPerfilProfissional.jsx';
+import CancelarAssinatura from './views/Empresas/CancelarAssinatura/CancelarAssinatura.jsx';
+import DesativarConta from './views/Empresas/DesativarConta/DesativarConta.jsx';
+
 
 // Importando itens da pasta "Administrador"
 import Alterar_senha_admin from './views/Administrador/Alterar_senha_admin/Alterar_senha_admin.jsx';
@@ -72,7 +77,6 @@ function App() {
       <Route path='/senha/alteracao' element={<Alterar_senha/>}/>
       <Route path='/senha/redefinir' element={<Redefinir_senha/>}/>
 
-
       {/* Rotas para os itens da pasta "Donos de pet" */}
       <Route path='/usuario/principal' element={<Principal_DonosDePet/>}/>
       <Route path='/cadastro/usuario' element={<Cadastro_usuario/>}/>
@@ -81,8 +85,6 @@ function App() {
       <Route path='/usuario/perfilEmpresa' element={<Perfil_Empresa/>}/>
       <Route path='/usuario/perfil' element={<Perfil_DonosDePet/>}/>
       <Route path='/usuario/favoritos' element={<Favoritos/>}/>
-
-
 
       {/* Rotas para os itens da pasta "Empresas" */}
       <Route path='/empresas/principal' element={<Principal_Empresas/>}/>
@@ -101,6 +103,10 @@ function App() {
       <Route path='/empresas/pagamento' element={<Pagamento/>}/>
       <Route path='/empresas/visualizarProdutos' element={<Visualizar_produtos/>}/>
       <Route path='/empresas/visualizarServicos' element={<Visualizar_servicos/>}/>
+      <Route path='/empresas/perfil' element={<PerfilDeEmpresas/>}/>
+      <Route path='/empresas/cadastroPerfil' element={<CadastroPerfilProfissional/>}/>
+      <Route path='/empresas/cancelarAssinatura' element={<CancelarAssinatura/>}/>
+      <Route path='/empresas/desativar' element={<DesativarConta/>}/>
 
       {/* Rotas para os itens da pasta "Administrador" */}
       <Route path='/administrador/senha/alteracao' element={<Alterar_senha_admin/>}/>
