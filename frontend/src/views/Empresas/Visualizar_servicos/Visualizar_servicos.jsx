@@ -113,7 +113,6 @@ function Visualizar_servicos() {
                 <tr>
                   <td>Mark</td>
                   <td>Thornton</td>
-
                 </tr>
               </tbody>
             </table>

@@ -80,14 +80,23 @@ function DesativarConta() {
           <div class="col-md-3 text-center mt-md-5 mb-5 ">
             <div class="list-group">
 
-              <a href="/empresas/perfil" class="list-group-item list-group-item-action ">Geral</a>
+              <a href="/empresas/perfil" class="list-group-item list-group-item-action">Geral</a>
               <a href="/empresas/cadastroPerfil" class="list-group-item list-group-item-action">Cadastrar perfil</a>
               <a href="/empresas/cancelarAssinatura" class="list-group-item list-group-item-action">Cancelar assinatura</a>
-              <a href="/empresas/desativar" class="list-group-item list-group-item-action">Desativar/ativar conta</a>
+              <a href="/empresas/desativar" class="list-group-item list-group-item-action active">Desativar/ativar conta</a>
             </div>
           </div>
 
-
+          <div class="col-md-9 text-center text-md-start">
+            <h1 className='PerfilProfissionalTitulo'>Perfil profissional</h1>
+            <div className=' rounded-3 p-3 border rounded-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded'>
+              <h3 className='text-md-start mb-5'>Jamille Galazi</h3>
+              <div class="w-100"></div>
+              <h4>Desativar conta</h4>
+              <p>Tem certeza que deseja desativar a conta? A sua conta pode ser reativada em outro momento.</p>
+              <button type="button" class="btn btn-danger">Desativar</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -21,3 +21,7 @@
 .esqueceu_a_senha_login{
     color: #2641B7;
 }
+
+.loginContainer{
+    background-color: #DCECF6 !important;
+}
