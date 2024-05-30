@@ -9,7 +9,7 @@ function Painel_de_controle_empresas() {
     const [empresas, setEmpresas] = useState([])
 
     useEffect(() => {
-
+            document.title = "Painel de controle | Empresas"
         // Função carregar usuários
         async function carregarUsuarios() {
             try {
@@ -22,6 +22,7 @@ function Painel_de_controle_empresas() {
                 }
                 else {
                     let dados = await resposta.json()
+                    console.debug(resposta)
                     setEmpresas(dados)
                 }
             } catch (error) {
@@ -32,6 +33,7 @@ function Painel_de_controle_empresas() {
         // Chamando função carregar usuários
         carregarUsuarios()
     })
+
     return (
         // Container geral para propriedades de fundo
         <div class="admPainel">
@@ -85,8 +87,8 @@ function Painel_de_controle_empresas() {
 
                             <div class="input-group d-flex mb-3 col-4 w-50 me-3 mt-5">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><img src={pesquisaIcone_adm} width={20} height={20} /></button>
+                                    <input type="text" class="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                    <button type="button" class="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30}/></button>
                                 </div>
                             </div>
                         </div>

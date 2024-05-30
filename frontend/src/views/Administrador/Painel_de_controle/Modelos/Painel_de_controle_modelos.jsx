@@ -12,45 +12,48 @@ function Painel_de_controle_modelos() {
     const [modelos, setModelos] = useState([])
 
     useEffect(() => {
-
-        // Função carregar modelos
-        async function carregarModelos() {
-            try {
-                // Fazer uma chamada da API
-                const resposta = await fetch('/modelos')
-                if (!resposta.ok) {
-
-                    // Exibindo erro API
-                    console.debug("HTTP erro:" + resposta.status)
-                }
-                else {
-                    let dados = await resposta.json()
-                    setModelos(dados)
-                }
-            } catch (error) {
-                console.error("Erro ao buscar modelos" + error)
-            }
-        }
+        document.title = "Painel de controle | Modelos"
 
         // Chamando função carregar usuários
         carregarModelos()
     })
+    // Função carregar modelos
+    async function carregarModelos() {
+        try {
+            // Fazer uma chamada da API
+            const resposta = await fetch('/modelos')
+            if (!resposta.ok) {
 
-    async function deletarModelo(modelo_id) {
-        if (window.confirm("Tem certeza que deseja deletar essa marca?")) {
-            try {
-                const resposta = await fetch("/modelos")
-            } catch (error) {
-
+                // Exibindo erro API
+                console.debug("HTTP erro:" + resposta.status)
             }
+            else {
+                let dados = await resposta.json()
+                setModelos(dados)
+            }
+        } catch (error) {
+            console.error("Erro ao buscar modelos" + error)
         }
     }
 
 
-
-
-
-
+    async function deletarModelo(modelo_id) {
+        if (window.confirm("Tem certeza que deseja deletar esse modelo?")) {
+            try {
+                const resposta = await fetch("/modelos/" + modelo_id, {
+                    method: "DELETE",
+                });
+                if (!resposta.ok) {
+                    throw new Error("Falha ao deletar modelo");
+                } else {
+                    // não obrigatório
+                    carregarModelos();
+                }
+            } catch (error) {
+                console.error("Erro ao deletar modelo: ", error);
+            }
+        }
+    }
 
     return (
         // Container geral para propriedades de fundo
@@ -109,14 +112,14 @@ function Painel_de_controle_modelos() {
                             </div>
 
 
-                            <button type="button" class="btn btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm">
+                            <button type="button" class="btn btnAdicionarNovoModelo col-2 rounded-5 ms-5 h-25 mt-5 btn btn-sm">
                                 Adicionar novo <span class="badge "><a href="http://localhost:3000/administrador/painel/novoModelo"><img src={botaoMais} width={20} height={20} /></a></span>
                             </button>
                         </div>
 
 
                         <table class="table table-striped border border-1">
-                        <thead className="roxo">
+                            <thead className="roxo">
                                 <tr className='admPainelProduto-tabela-cabecalho text-center '>
                                     <th scope="col">Modelo</th>
                                     <th scope="col">Marca</th>
@@ -128,7 +131,8 @@ function Painel_de_controle_modelos() {
                                     <tr key={modelo.id}>
                                         <td>{modelo.nome}</td>
                                         <td>{modelo.marcas.nome}</td>
-                                        <td><img src={iconeAtualizar_adm} width={25} height={25} /> <img src={iconLixeira_adm} width={25} height={25} /></td>
+                                        <td><img src={iconeAtualizar_adm} width={25} height={25} />
+                                        <img src={iconLixeira_adm} width={25} height={25} onClick={() => deletarModelo(modelo.id)}/></td>
                                     </tr>
                                 ))}
                             </tbody>

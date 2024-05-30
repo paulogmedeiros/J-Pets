@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Cadastro_admin.css'
 import logoJPets_adm from '../img/logoJPets.png'
 
 function Cadastro_admin() {
+
+  useEffect(() => {
+    document.title = "Painel de controle | Cadastro administrador"
+  })
   return (
 
     <div class="admPainel">

@@ -13,29 +13,50 @@ function Painel_de_controle_produtos() {
     const [produtos, setProdutos] = useState([])
 
     useEffect(() => {
+        document.title = "Painel de controle | Produtos"
 
-        // Função carregar usuários
-        async function carregarProdutos() {
+        // Chamando função carregar produtos ao carregar a tela
+        carregarProdutos()
+
+    })
+    // Função carregar produtos
+    async function carregarProdutos() {
+        try {
+            // Fazer uma chamada da API
+            const resposta = await fetch('/produtos')
+            if (!resposta.ok) {
+
+                // Exibindo erro API
+                console.debug("HTTP erro:" + resposta.status)
+            }
+            else {
+                let dados = await resposta.json()
+                setProdutos(dados)
+            }
+        } catch (error) {
+            console.error("Erro ao buscar usuários" + error)
+        }
+    }
+
+    async function deletarProdutos(produto_id) {
+        if (window.confirm("Tem certeza que deseja deletar esse produto?")) {
             try {
-                // Fazer uma chamada da API
-                const resposta = await fetch('/produtos')
+                const resposta = await fetch("/produtos/" + produto_id, {
+                    method: "DELETE",
+                });
                 if (!resposta.ok) {
-
-                    // Exibindo erro API
-                    console.debug("HTTP erro:" + resposta.status)
-                }
-                else {
-                    let dados = await resposta.json()
-                    setProdutos(dados)
+                    throw new Error("Falha ao deletar produto");
+                } else {
+                    // não obrigatório
+                    carregarProdutos();
                 }
             } catch (error) {
-                console.error("Erro ao buscar usuários" + error)
+                console.error("Erro ao deletar produtos: ", error);
             }
         }
+    }
 
-        // Chamando função carregar usuários
-        carregarProdutos()
-    })
+
     return (
         // Container geral para propriedades de fundo
         <div class="admPainel">
@@ -73,7 +94,7 @@ function Painel_de_controle_produtos() {
 
                     <div class="admMenuLateral col-3 mt-5 pr-5">
                         <div id="list-example" class="list-group">
-                        <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
+                            <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/cadastroAdmin">Cadastrar admin</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
                             <a class="list-group-item list-group-item-action" href="/administrador/painel/marcas">Marcas</a>
@@ -93,14 +114,14 @@ function Painel_de_controle_produtos() {
                             </div>
 
 
-                            <button type="button" class="btn btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm">
-                                Adicionar novo <span class="badge "><a href="http://localhost:3000/administrador/painel/novoProduto"><img src={botaoMais} width={20} height={20} /></a></span>
+                            <button type="button" class="btnAdicionarNovoProduto btn col-2 rounded-5 mb-3 ms-2 text-center mt-5 btn btn-sm">
+                                Adicionar novo <span class="badge "><a href="/administrador/painel/novoProduto"><img src={botaoMais} width={20} height={20} /></a></span>
                             </button>
                         </div>
 
 
                         <table class="table table-striped border border-1">
-                        <thead className="roxo">
+                            <thead className="roxo">
                                 <tr className='admPainelProduto-tabela-cabecalho text-center '>
                                     <th scope="col">Produto</th>
                                     <th scope="col">Animal</th>
@@ -112,7 +133,7 @@ function Painel_de_controle_produtos() {
                                     <tr key={produto.id}>
                                         <td>{produto.nome}</td>
                                         <td>{produto.animais.nome}</td>
-                                        <td><img src={iconeAtualizar_adm} width={25} height={25}/><img src={iconLixeira_adm} width={25} height={25}/> </td>
+                                        <td><img src={iconeAtualizar_adm} width={25} height={25} /><img src={iconLixeira_adm} width={25} height={25} onClick={() => deletarProdutos(produto.id)} /> </td>
                                     </tr>
                                 ))}
                             </tbody>

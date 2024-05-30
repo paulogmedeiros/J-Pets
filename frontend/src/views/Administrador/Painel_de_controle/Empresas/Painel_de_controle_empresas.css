@@ -21,3 +21,10 @@
     background-color: #7E57C2;
     color: white;
 }
+.btnPesquisa{
+    background-color: rgba(126, 87, 194, 0.49);
+}
+
+.btnPesquisa:hover{
+    background-color: rgba(126, 87, 194, 0.49) !important;
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import logoJPets_adm from "../img/logoJPets.png";
-import estilos from "./Painel_de_controle_marcas.css";
+import"./Painel_de_controle_marcas.css";
 import pesquisaIcone_adm from "../img/pesquisa_icone.svg";
 import botaoMais from "../img/botao_mais.svg";
 import iconeAtualizar_adm from "../img/icone_atualizar.svg";
@@ -11,9 +11,13 @@ function Painel_de_controle_marcas() {
   const [marcas, setMarcas] = useState([]);
 
   useEffect(() => {
+
+    document.title = "Painel de controle | Marcas"
+
     // Chamando função carregar usuários
     carregarMarcas();
   });
+  
   // Função carregar usuários
   async function carregarMarcas() {
     try {
@@ -126,8 +130,8 @@ function Painel_de_controle_marcas() {
                 </span>
               </div>
 
-              <button type="button" class="btn btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm">Adicionar novo<span class="badge">
-                <a href="http://localhost:3000/administrador/painel/novaMarca"><img src={botaoMais} width={20} height={20} /></a>
+              <button type="button" class="btnAdicionarNovoMarcas col-2 rounded-5 mb-3 h-25 ms-2 mt-5 btn btn-sm">Adicionar novo<span class="badge">
+                <a href="/administrador/painel/novaMarca"><img src={botaoMais} width={20} height={20} /></a>
               </span>
               </button>
             </div>

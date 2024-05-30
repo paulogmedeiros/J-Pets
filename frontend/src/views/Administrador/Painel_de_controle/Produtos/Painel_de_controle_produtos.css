@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    
+
 }
 
 .admPainel{
@@ -33,8 +33,12 @@
 }
 
 
-.btnAdicionarNovo{
+.btnAdicionarNovoProduto{
     background-color: #7E57C2;
+    color: white !important;
 }
 
-
+.btnAdicionarNovoProduto:hover{
+    background-color: #7E57C2 !important;
+    color: white !important;
+}

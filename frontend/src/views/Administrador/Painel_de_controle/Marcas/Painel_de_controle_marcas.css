@@ -32,8 +32,12 @@
     background-color: #7E57C2 !important;
 }
 
-
-.btnAdicionarNovo{
+.btnAdicionarNovoMarcas{
     background-color: #7E57C2;
-    color: white;
+    color: white !important;
+}
+
+.btnAdicionarNovoMarcas:hover{
+    background-color: #7E57C2 !important;
+    color: white !important;
 }

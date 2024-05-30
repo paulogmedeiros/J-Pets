@@ -3,7 +3,7 @@ const AnimalService = require("../services/animaisService.js")
 const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
 
 class ServicosService{
-  
+
     async findServicos(){
         // retorno
         return await ServicosRepository.selectServicos()
@@ -26,7 +26,7 @@ class ServicosService{
 
         // valido se o nome do serviço já existe registrado para o animal escolhido
         await this.findSevicosPorIdNome(servico.animal_id,data.nome)
-        
+
         // retorno
         return await ServicosRepository.updateServicos(servicoId, data)
     }
@@ -50,7 +50,7 @@ class ServicosService{
     }
 
     async findSevicosPorIdNome(animal_id,nome){
-        // valido se o nome do serviço já existe registrado para o animal escolhido 
+        // valido se o nome do serviço já existe registrado para o animal escolhido
         const servicoNome = await ServicosRepository.selectSevicosPorIdNome(animal_id,nome)
         if(servicoNome){
             throw new ExcecaoIdNaoEncontrado("Nome de serviço já cadastrado")

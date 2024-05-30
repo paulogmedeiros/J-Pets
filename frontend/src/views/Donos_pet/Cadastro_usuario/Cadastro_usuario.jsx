@@ -1,10 +1,14 @@
-import React from 'react'
+import {useEffect, useState} from 'react'
 import './Cadastro_usuario.css'
 import cachorro from './img/imagem_cachorro.svg'
 import iconeUsuario from './img/icone_usuario.svg'
 import iconeEmail from './img/icone_email.svg'
 import iconeSenha from './img/icone_senha_login.svg'
+
+
 function Cadastro_usuario() {
+
+
   return (
     <div className="container">
 

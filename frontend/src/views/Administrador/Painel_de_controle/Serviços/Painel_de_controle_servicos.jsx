@@ -13,28 +13,50 @@ function Painel_de_controle_servicos() {
 
     useEffect(() => {
 
-        // Função carregar usuários
-        async function carregarServicos() {
-            try {
-                // Fazer uma chamada da API
-                const resposta = await fetch('/servicos')
-                if (!resposta.ok) {
+        document.title = "Painel de controle | Serviços"
 
-                    // Exibindo erro API
-                    console.debug("HTTP erro:" + resposta.status)
-                }
-                else {
-                    let dados = await resposta.json()
-                    setServicos(dados)
+        // Chamando função carregar servicos
+        carregarServicos()
+
+    })
+
+    // Função carregar usuários
+    async function carregarServicos() {
+        try {
+            // Fazer uma chamada da API
+            const resposta = await fetch('/servicos')
+            if (!resposta.ok) {
+
+                // Exibindo erro API
+                console.debug("HTTP erro:" + resposta.status)
+            }
+            else {
+                let dados = await resposta.json()
+                setServicos(dados)
+            }
+        } catch (error) {
+            console.error("Erro ao buscar usuários" + error)
+        }
+    }
+
+    async function deletarServico(servicos_id) {
+        if (window.confirm("Tem certeza que deseja deletar esse serviço?")) {
+            try {
+                const resposta = await fetch("/servicos/" + servicos_id, {
+                    method: "DELETE",
+                });
+                if (!resposta.ok) {
+                    throw new Error("Falha ao deletar serviço");
+                } else {
+                    // não obrigatório
+                    carregarServicos();
                 }
             } catch (error) {
-                console.error("Erro ao buscar usuários" + error)
+                console.error("Erro ao deletar serviço: ", error);
             }
         }
+    }
 
-        // Chamando função carregar usuários
-        carregarServicos()
-    })
     return (
         // Container geral para propriedades de fundo
         <div class="admPainel">
@@ -92,14 +114,14 @@ function Painel_de_controle_servicos() {
                             </div>
 
 
-                            <button type="button" class="btn btnAdicionarNovo col-4 w-25 h-25 mt-5 btn btn-sm">
+                            <button type="button" class="btnAdicionarNovoServico col-2 rounded-5 h-25 ms-5 mt-5 btn btn-sm">
                                 Adicionar novo <span class="badge "><a href="http://localhost:3000/administrador/painel/novoServico"><img src={botaoMais} width={20} height={20} /></a></span>
                             </button>
                         </div>
 
 
                         <table class="table table-striped border border-1">
-                        <thead className="roxo">
+                            <thead className="roxo">
                                 <tr className='admPainelProduto-tabela-cabecalho text-center '>
                                     <th scope="col">Serviço</th>
                                     <th scope="col">Animal</th>
@@ -111,7 +133,8 @@ function Painel_de_controle_servicos() {
                                     <tr key={servico.id}>
                                         <td>{servico.nome}</td>
                                         <td>{servico.animais.nome}</td>
-                                        <td><img src={iconeAtualizar_adm} width={25} height={25}/> <img src={iconLixeira_adm} width={25} height={25}/></td>
+                                        <td><img src={iconeAtualizar_adm} width={25} height={25} />
+                                        <img src={iconLixeira_adm} width={25} height={25} onClick={() => deletarServico(servico.id)}/></td>
                                     </tr>
                                 ))}
                             </tbody>
