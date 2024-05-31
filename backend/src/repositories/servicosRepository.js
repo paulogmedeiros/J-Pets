@@ -23,12 +23,9 @@ class ServicosRepository {
         });
     }
     
-    // retorno todos os servicos pelo id do animal relacionado
-    async selectServicosPorIdAnimal(animalId, empresaId) {
+    // retorno todos os servicos pelo id do animal relacionado e da empresa
+    async selectServicosPorIdAnimalIdEmpresa(animalId, empresaId) {
         return await this.prisma.servicos.findMany({
-            // where: {
-            //     animal_id: animalId
-            // }
             where: {
                 animal_id: animalId,
                 empresas_servicos: {

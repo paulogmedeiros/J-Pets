@@ -11,8 +11,9 @@ const marcas = require("./controllers/marcasController.js")
 const modelos = require("./controllers/modelosController.js")
 const login = require("./controllers/loginController.js")
 const donoPet = require("./controllers/donosPetController.js")
-const empresasSevico = require("./controllers/empresasServicosController.js")
+const empresasSevicos = require("./controllers/empresasServicosController.js")
 const empresasAnimais = require("./controllers/empresasAnimaisController.js")
+const empresasProdutos = require("./controllers/empresasProdutosController.js")
 
 //middleware
 const empresaValidation = require("./middleware/empresasValidation.js")
@@ -29,13 +30,14 @@ routes.get("/animais", animais.getAnimais);
 
 // rotas de servicos
 routes.get("/servicos",servico.getServicos);
-routes.get("/servicos/animais/:animalId/empresa/:empresaId", servico.getServicosPorIdAnimal);
+routes.get("/servicos/animais/:animalId/empresa/:empresaId", servico.getServicosPorIdAnimalIdEmpresa);
 routes.post("/servicos", servico.postServicos);
 routes.put("/servicos/:id", servico.putServicos);
 routes.delete("/servicos/:id", servico.deleteServicos);
 
 // rota de produtos 
 routes.get("/produtos",produtos.getProdutos);
+routes.get("/produtos/animais/:animalId/empresa/:empresaId", produtos.getProdutosPorIdAnimalIdEmpresa);
 routes.get("/produtos/animais/:animalId",produtos.getProdutosPorIdAnimal);
 routes.post("/produtos", produtos.postProdutos);
 routes.put("/produtos/:id", produtos.putProdutos);
@@ -73,12 +75,15 @@ routes.put("/senha/:id",login.putSenha);
 routes.post("/donoPet",donoPet.postDonoPet);
 
 // rota empresasSevico
-routes.get("/empresasSevico/:empresaId",empresasSevico.getEmpresasSevicoPorIdEmpresa);
-routes.post("/empresasSevico",empresasSevico.postEmpresasSevico);
-routes.delete("/empresasSevico/:empresaId",empresasSevico.deleteEmpresasSevico);
+routes.get("/empresasSevico/:empresaId",empresasSevicos.getEmpresasSevicoPorIdEmpresa);
+routes.post("/empresasSevico",empresasSevicos.postEmpresasSevico);
+routes.delete("/empresasSevico/:empresaId",empresasSevicos.deleteEmpresasSevico);
 
 // rota empresasAnimais
 routes.get("/empresasAnimais/:empresaId", empresasAnimais.getEmpresasAnimaisPorIdEmpresa)
+
+// rota empresasProdutos
+routes.post("/empresasProdutos",empresasProdutos.postEmpresasSevico);
 
 
 module.exports = routes

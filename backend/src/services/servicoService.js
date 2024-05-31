@@ -10,14 +10,14 @@ class ServicosService{
         return await ServicosRepository.selectServicos()
     }
 
-    async findServicosPorIdAnimal(animalId,empresaId){
+    async findServicosPorIdAnimalIdEmpresa(animalId,empresaId){
         // valido se o id do animal é valido
         await AnimalService.findAnimaisPorId(animalId)
 
         // valido se o id da empresa é valido
         await EmpresaService.findEmpresasPorId(empresaId)
 
-        return await ServicosRepository.selectServicosPorIdAnimal(animalId,empresaId)
+        return await ServicosRepository.selectServicosPorIdAnimalIdEmpresa(animalId,empresaId)
     }
 
     async createServicos(data){

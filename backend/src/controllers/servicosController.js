@@ -13,11 +13,11 @@ class ServicosController {
         }
     }
 
-    async getServicosPorIdAnimal(req, res) {
+    async getServicosPorIdAnimalIdEmpresa(req, res) {
         try {
             const animalId = parseInt(req.params.animalId)
             const empresaId = parseInt(req.params.empresaId)
-            const result = await ServicosService.findServicosPorIdAnimal(animalId,empresaId);
+            const result = await ServicosService.findServicosPorIdAnimalIdEmpresa(animalId,empresaId);
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
