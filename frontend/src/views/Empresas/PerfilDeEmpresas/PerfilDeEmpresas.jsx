@@ -26,15 +26,17 @@ function PerfilDeEmpresas() {
           <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav nav-underline">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Início</a>
+                <a class="nav-link active" aria-current="page" href="/empresas/principal">Início</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Produtos
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produto</a></li>
-                  <li><a class="dropdown-item" href="/empresas/removerProdutos">Remover produto</a></li>
+                  <li><a class="dropdown-item" href="/empresas/visualizarProdutos">Visualizar produtos</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produtos</a></li>
+                  <li><a class="dropdown-item" href="/empresas/removerProdutos">Remover produtos</a></li>
                   <li><hr class="dropdown-divider" /></li>
                   <li><a class="dropdown-item" href="/empresas/adicionarMarcas">Adicionar marcas</a></li>
                   <li><a class="dropdown-item" href="/empresas/removerMarcas">Remover marcas</a></li>
@@ -48,12 +50,14 @@ function PerfilDeEmpresas() {
                   Serviços
                 </a>
                 <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><hr class="dropdown-divider" /></li>
                   <li><a class="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
                   <li><a class="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Cupons</a>
+                <a class="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Avaliações</a>
@@ -86,7 +90,7 @@ function PerfilDeEmpresas() {
               <a href="/empresas/desativar" class="list-group-item list-group-item-action">Desativar conta</a>
             </div>
           </div>
-          
+
           <div class="col">
             <div className="text-start">
               <h1 className='tituloPerfilEmpresa'>Perfil profissional</h1>

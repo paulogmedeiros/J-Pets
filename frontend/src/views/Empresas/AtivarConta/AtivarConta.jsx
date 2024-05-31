@@ -1,12 +1,10 @@
 import React from 'react'
-import Produtos_img from './img/Produtos_img.svg'
-import './Remover_produtos.css'
 import logoJPets from './img/logoJPets.png'
-function Remover_produtos() {
+import './AtivarConta.css'
+function AtivarConta() {
   return (
-
-    <>
-    <nav class="navbarEmpresas navbar navbar-expand-lg">
+    <div>
+      <nav class="navbarEmpresas navbar navbar-expand-lg">
         <div class="container-fluid">
 
           {/* Logo do projeto */}
@@ -28,15 +26,17 @@ function Remover_produtos() {
           <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav nav-underline">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Início</a>
+                <a class="nav-link active" aria-current="page" href="/empresas/principal">Início</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Produtos
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produto</a></li>
-                  <li><a class="dropdown-item" href="/empresas/removerProdutos">Remover produto</a></li>
+                  <li><a class="dropdown-item" href="/empresas/visualizarProdutos">Visualizar produtos</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produtos</a></li>
+                  <li><a class="dropdown-item" href="/empresas/removerProdutos">Remover produtos</a></li>
                   <li><hr class="dropdown-divider" /></li>
                   <li><a class="dropdown-item" href="/empresas/adicionarMarcas">Adicionar marcas</a></li>
                   <li><a class="dropdown-item" href="/empresas/removerMarcas">Remover marcas</a></li>
@@ -50,12 +50,14 @@ function Remover_produtos() {
                   Serviços
                 </a>
                 <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><hr class="dropdown-divider" /></li>
                   <li><a class="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
                   <li><a class="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Cupons</a>
+                <a class="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Avaliações</a>
@@ -76,65 +78,33 @@ function Remover_produtos() {
         </div>
       </nav>
 
-      <div className="container">
+      {/* Barra de navegação lateral */}
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-3 text-center mt-md-5 mb-5 ">
+            <div class="list-group">
 
-        {/* container para formulario e imagem */}
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
-
-          {/* container para formulario */}
-          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
-
-            {/* Título */}
-            <p class="tituloRemoverProdutosEmpresa fs-md-2 fs-3 fw-semibold text-center mb-4 mb-md-4 mt-md-5">
-              Remover produtos
-            </p>
-
-            {/* lista suspensa para selecionar o animal */}
-            <div class="form-floating mb-3 mb-md-4">
-              <select
-                class="form-select"
-                id="floatingSelect"
-                aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
-              </select>
-              <label for="floatingSelect">Animal</label>
+              <a href="/empresas/perfil" class="list-group-item list-group-item-action">Geral</a>
+              <a href="/empresas/cadastroPerfil" class="list-group-item list-group-item-action">Cadastrar perfil</a>
+              <a href="/empresas/cancelarAssinatura" class="list-group-item list-group-item-action">Cancelar assinatura</a>
+              <a href="/empresas/desativar" class="list-group-item list-group-item-action active">Desativar/ativar conta</a>
             </div>
-
-            {/* lista suspensa para escolher o produto */}
-            <div class="form-floating mb-3 mb-md-4">
-              <select
-                class="form-select "
-                id="floatingSelect"
-                aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
-              </select>
-              <label for="floatingSelect">Produtos</label>
-            </div>
-
-            <a class="btnRemoverProdutosEmpresa btn w-100 mt-md-4" href="#" role="button">
-              Remover
-            </a>
-
-            <div className='text-center'>
-              <a class="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="#" role="button">Remover marca</a>
-            </div>
-
           </div>
-          <div className="imgRemoverProdutosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4 p-3">
-            <img src={Produtos_img} class="img-fluid"></img>
+
+          <div class="col-md-9 text-center text-md-start">
+            <h1 className='ativarContaTitulo'>Perfil profissional</h1>
+            <div className=' rounded-3 p-3 border rounded-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded'>
+              <h3 className='text-md-start mb-5'>Jamille Galazi</h3>
+              <div class="w-100"></div>
+              <h4>Ativar conta</h4>
+
+              <button type="button" class="btn btn-warning text-white">Ativar</button>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
-export default Remover_produtos
+export default AtivarConta

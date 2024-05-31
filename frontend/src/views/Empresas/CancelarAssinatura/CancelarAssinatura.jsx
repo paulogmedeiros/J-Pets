@@ -26,15 +26,17 @@ function CancelarAssinatura() {
           <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav nav-underline">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Início</a>
+                <a class="nav-link active" aria-current="page" href="/empresas/principal">Início</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Produtos
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produto</a></li>
-                  <li><a class="dropdown-item" href="/empresas/removerProdutos">Remover produto</a></li>
+                  <li><a class="dropdown-item" href="/empresas/visualizarProdutos">Visualizar produtos</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produtos</a></li>
+                  <li><a class="dropdown-item" href="/empresas/removerProdutos">Remover produtos</a></li>
                   <li><hr class="dropdown-divider" /></li>
                   <li><a class="dropdown-item" href="/empresas/adicionarMarcas">Adicionar marcas</a></li>
                   <li><a class="dropdown-item" href="/empresas/removerMarcas">Remover marcas</a></li>
@@ -48,27 +50,29 @@ function CancelarAssinatura() {
                   Serviços
                 </a>
                 <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><hr class="dropdown-divider" /></li>
                   <li><a class="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
                   <li><a class="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Cupons</a>
+                <a class="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Avaliações</a>
               </li>
-              <div class="dropdown me-5 ">
-                <button class="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Nome
-                </button>
-                <ul class="dropdown-menu">
-                  <a class="nav-link disabled ms-3" aria-disabled="true">Nome</a>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li><a class="dropdown-item" href="#">Meu perfil</a></li>
-                  <li><a class="dropdown-item text-danger" href="/">Sair</a></li>
-                </ul>
-              </div>
+            </ul>
+          </div>
+          <div class="dropdown me-5">
+            <button class="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Nome
+            </button>
+            <ul class="dropdown-menu">
+              <a class="nav-link disabled ms-3" aria-disabled="true">Nome</a>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#">Meu perfil</a></li>
+              <li><a class="dropdown-item text-warning" href="/">Sair</a></li>
             </ul>
           </div>
         </div>
@@ -96,9 +100,6 @@ function CancelarAssinatura() {
               <p>Tem certeza que deseja cancelar a assinatura? Você perderá todos os seus benefícios.</p>
               <button type="button" class="btn btn-danger">Cancelar assinatura</button>
             </div>
-
-
-
 
           </div>
         </div>

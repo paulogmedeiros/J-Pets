@@ -1,6 +1,6 @@
 import React from 'react'
 import logoJPets from './img/logoJPets.png'
-
+import './CadastroPerfilProfissional.css'
 function CadastroPerfilProfissional() {
   return (
     <div>
@@ -26,15 +26,17 @@ function CadastroPerfilProfissional() {
           <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav nav-underline">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Início</a>
+                <a class="nav-link active" aria-current="page" href="/empresas/principal">Início</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Produtos
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produto</a></li>
-                  <li><a class="dropdown-item" href="/empresas/removerProdutos">Remover produto</a></li>
+                  <li><a class="dropdown-item" href="/empresas/visualizarProdutos">Visualizar produtos</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produtos</a></li>
+                  <li><a class="dropdown-item" href="/empresas/removerProdutos">Remover produtos</a></li>
                   <li><hr class="dropdown-divider" /></li>
                   <li><a class="dropdown-item" href="/empresas/adicionarMarcas">Adicionar marcas</a></li>
                   <li><a class="dropdown-item" href="/empresas/removerMarcas">Remover marcas</a></li>
@@ -48,12 +50,14 @@ function CadastroPerfilProfissional() {
                   Serviços
                 </a>
                 <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><hr class="dropdown-divider" /></li>
                   <li><a class="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
                   <li><a class="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Cupons</a>
+                <a class="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Avaliações</a>
@@ -87,7 +91,7 @@ function CadastroPerfilProfissional() {
           </div>
 
           <div class="col-md-9 container col-11 text-center ">
-            <h1 className='text-md-start'>Cadastre seu perfil</h1>
+            <h1 className='perfilProfissionalTitulo text-md-start'>Cadastre seu perfil</h1>
 
             <div class="row mt-3  rounded-3 p-3 border rounded-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
               <h3 className='text-start'>Jamille Galazi</h3>

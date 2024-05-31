@@ -44,7 +44,7 @@ import PerfilDeEmpresas from './views/Empresas/PerfilDeEmpresas/PerfilDeEmpresas
 import CadastroPerfilProfissional from './views/Empresas/CadastroPerfilProfissional/CadastroPerfilProfissional.jsx';
 import CancelarAssinatura from './views/Empresas/CancelarAssinatura/CancelarAssinatura.jsx';
 import DesativarConta from './views/Empresas/DesativarConta/DesativarConta.jsx';
-import Ativar_conta from './views/Empresas/Ativar_conta/Ativar_conta';
+import AtivarConta from './views/Empresas/AtivarConta/AtivarConta.jsx';
 
 // Importando itens da pasta "Administrador"
 import Alterar_senha_admin from './views/Administrador/Alterar_senha_admin/Alterar_senha_admin.jsx';
@@ -107,7 +107,7 @@ function App() {
       <Route path='/empresas/cadastroPerfil' element={<CadastroPerfilProfissional/>}/>
       <Route path='/empresas/cancelarAssinatura' element={<CancelarAssinatura/>}/>
       <Route path='/empresas/desativar' element={<DesativarConta/>}/>
-      <Route path='/empresas/ativar' element={<Ativar_conta/>}/>
+      <Route path='/empresas/ativar' element={<AtivarConta/>}/>
 
       {/* Rotas para os itens da pasta "Administrador" */}
       <Route path='/administrador/senha/alteracao' element={<Alterar_senha_admin/>}/>
