@@ -27,7 +27,7 @@ class MarcasService {
 
     async createMarcas(data) {
          // valido se o id do produto é valido
-         await ProdutosService.findProdutosPorId(data.produto_id)
+        await ProdutosService.findProdutosPorId(data.produto_id)
 
         // valido se o nome da marca já existe registrado para o produto escolhido
         await this.findMarcasPorIdNome(data.produto_id,data.nome)
@@ -56,7 +56,7 @@ class MarcasService {
     }
 
     async findMarcasPorIdNome(produto_id,nome){
-        // valido se o nome da marca já existe registrado para o produto escolhido 
+        // valido se o nome da marca já existe registrado para o produto escolhido
         const marcaNome = await MarcasRepository.selectMarcasPorIdNome(produto_id,nome)
         if(marcaNome){
             throw new ExcecaoIdNaoEncontrado("Nome da marca já cadastrado")
@@ -71,7 +71,7 @@ class MarcasService {
         if(!marca){
             throw new ExcecaoIdNaoEncontrado("Marca não encontrada")
         }
-        
+
         // retorno
         return marca
     }

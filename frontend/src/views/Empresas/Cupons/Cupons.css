@@ -1,0 +1,12 @@
+.btnGerarCupom{
+  background-image: linear-gradient(to right, #DEA100 30%, #A67800 70%);
+  color: white;
+}
+
+.containerCupomGerado{
+  background-color: #FCE48D;
+}
+
+.tituloAreaDescontos, .tituloCupom{
+  color: #2641B7;
+}
