@@ -6,6 +6,13 @@ const AnimalService = require("../services/animaisService.js")
 
 class EmpresasProdutosService {
 
+    async findEmpresasProdutosPorIdEmpresa(empresaId){
+        // valido se empresa existe
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await EmpresasProdutosRepository.selectEmpresasProdutosPorIdEmpresa(empresaId)
+   }
+
     async createEmpresasProduto(data) {
         // valido se a empresa já tem o animal cadastrado
         const result = await EmpresasAnimaisServico.findEmpresasAnimaisPorEmpresaIdEAnimalId(data)
@@ -16,6 +23,16 @@ class EmpresasProdutosService {
         } else {
             return await EmpresasProdutosRepository.insertEmpresasProdutosEEmpresaAnimal(data)
         }
+    }
+
+    async removeEmpresasProdutos(empresaId,data){
+        // valido se empresa existe
+        await EmpresaService.findEmpresasPorId(empresaId)
+        // valido se animal existe
+        await AnimalService.findAnimaisPorId(data.animalId)
+        // excluir os servicos da empresa
+        await EmpresasProdutosRepository.deleteEmpresasProdutos(empresaId,data)
+
     }
 
 }

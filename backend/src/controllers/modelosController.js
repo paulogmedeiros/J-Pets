@@ -13,6 +13,17 @@ class ModelosController{
         }
     }
 
+    async getModelosPorIdEmpresa(req,res){
+        try {
+            const param = parseInt(req.params.empresaId)
+            const result = await ModelosService.findModelosPorIdEmpresa(param);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
     async postModelos(req,res){
         try {
             const body = req.body

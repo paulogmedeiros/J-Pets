@@ -7,7 +7,7 @@ class EmpresasServicosController {
         try {
             const empresaId = parseInt(req.params.empresaId)
             const result = await EmpresasServicosService.findEmpresasSevicoPorIdEmpresa(empresaId);
-            res.status(201).json(result)
+            res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)
@@ -30,7 +30,7 @@ class EmpresasServicosController {
             const empresaId = parseInt(req.params.empresaId)
             const data = req.body;
             await EmpresasServicosService.removeEmpresasServicos(empresaId, data);
-            res.status(201).json({ mensage: "Servicos deletados com sucesso" })
+            res.status(200).json({ mensage: "Servicos deletados com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)

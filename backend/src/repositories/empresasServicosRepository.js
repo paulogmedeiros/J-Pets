@@ -16,7 +16,13 @@ class EmpresasServicosRepository {
                 servico_id: true,
                 servicos: {
                     select: {
-                        nome: true
+                        nome: true,
+                        animais: {
+                            select: {
+                                id: true,
+                                nome: true
+                            }
+                        }
                     }
                 }
             }
