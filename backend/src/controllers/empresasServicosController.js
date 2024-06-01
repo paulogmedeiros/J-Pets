@@ -6,7 +6,8 @@ class EmpresasServicosController {
     async getEmpresasSevicoPorIdEmpresa(req, res) {
         try {
             const empresaId = parseInt(req.params.empresaId)
-            const result = await EmpresasServicosService.findEmpresasSevicoPorIdEmpresa(empresaId);
+            const animalId = parseInt(req.params.animalId)
+            const result = await EmpresasServicosService.findEmpresasSevicoPorIdEmpresa(empresaId,animalId);
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)

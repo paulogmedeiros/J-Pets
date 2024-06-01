@@ -13,6 +13,19 @@ class MarcasController {
         }
     }
 
+
+    async getMarcasPorIdProdutoIdEmpresa(req, res) {
+        try {
+            const produtoId = parseInt(req.params.produtoId)
+            const empresaId = parseInt(req.params.empresaId)
+            const result = await MarcasService.findMarcasPorIdProdutoIdEmpresa(produtoId,empresaId);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
     async getMarcasPorIdProduto(req, res) {
         try {
             const param = parseInt(req.params.produtoId)

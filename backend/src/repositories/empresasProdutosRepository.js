@@ -6,10 +6,13 @@ class EmpresasServicosRepository {
         this.prisma = new PrismaClient();
     }
 
-    async selectEmpresasProdutosPorIdEmpresa(empresaId) {
+    async selectEmpresasProdutosPorIdEmpresa(empresaId, animalId) {
         return await this.prisma.empresas_produtos.findMany({
             where: {
-                empresa_id: empresaId
+                empresa_id: empresaId,
+                produtos: {
+                    animal_id: animalId
+                }
             },
             select: {
                 produto_id: true,
@@ -96,7 +99,7 @@ class EmpresasServicosRepository {
                         }
                     }
                 });
-                
+
             }
 
 

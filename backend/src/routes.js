@@ -47,6 +47,7 @@ routes.delete("/produtos/:id", produtos.deleteProdutos);
 
 // rota de marcas
 routes.get("/marcas",marcas.getMarcas);
+routes.get("/marcas/produtos/:produtoId/empresa/:empresaId", marcas.getMarcasPorIdProdutoIdEmpresa);
 routes.get("/marcas/produtos/:produtoId",marcas.getMarcasPorIdProduto);
 routes.post("/marcas", marcas.postMarcas);
 routes.put("/marcas/:id", marcas.putMarcas);
@@ -77,18 +78,21 @@ routes.put("/senha/:id",login.putSenha);
 // rota donoPet
 routes.post("/donoPet",donoPet.postDonoPet);
 
-// rota empresasSevico
-routes.get("/empresasSevico/:empresaId",empresasSevicos.getEmpresasSevicoPorIdEmpresa);
-routes.post("/empresasSevico",empresasSevicos.postEmpresasSevico);
-routes.delete("/empresasSevico/:empresaId",empresasSevicos.deleteEmpresasSevico);
-
 // rota empresasAnimais
 routes.get("/empresasAnimais/:empresaId", empresasAnimais.getEmpresasAnimaisPorIdEmpresa);
 
+// rota empresasSevico
+routes.get("/empresasSevico/:empresaId/animais/:animalId",empresasSevicos.getEmpresasSevicoPorIdEmpresa);
+routes.post("/empresasSevico",empresasSevicos.postEmpresasSevico);
+routes.delete("/empresasSevico/:empresaId",empresasSevicos.deleteEmpresasSevico);
+
 // rota empresasProdutos
-routes.get("/empresasProdutos/:empresaId",empresasProdutos.getEmpresasProdutosPorIdEmpresa);
+routes.get("/empresasProdutos/:empresaId/animais/:animalId",empresasProdutos.getEmpresasProdutosPorIdEmpresa);
 routes.post("/empresasProdutos",empresasProdutos.postEmpresasProdutos);
 routes.delete("/empresasProdutos/:empresaId",empresasProdutos.deleteEmpresasProdutos);
+
+// rota empresasMarcas
+// routes.post("/empresasMarcas",empresasMarcas.postEmpresasMarcas);
 
 
 module.exports = routes

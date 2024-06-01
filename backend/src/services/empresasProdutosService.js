@@ -6,11 +6,14 @@ const AnimalService = require("../services/animaisService.js")
 
 class EmpresasProdutosService {
 
-    async findEmpresasProdutosPorIdEmpresa(empresaId){
+    async findEmpresasProdutosPorIdEmpresa(empresaId,animalId){
         // valido se empresa existe
         await EmpresaService.findEmpresasPorId(empresaId)
 
-        return await EmpresasProdutosRepository.selectEmpresasProdutosPorIdEmpresa(empresaId)
+        // valido se animal existe
+        await AnimalService.findAnimaisPorId(animalId)
+
+        return await EmpresasProdutosRepository.selectEmpresasProdutosPorIdEmpresa(empresaId,animalId)
    }
 
     async createEmpresasProduto(data) {

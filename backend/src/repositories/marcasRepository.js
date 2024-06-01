@@ -22,6 +22,19 @@ class MarcasRepository {
         })
     }
 
+    async selectMarcasPorIdProdutoIdEmpresa(produtoId, empresaId) {
+        return await this.prisma.marcas.findMany({
+            where: {
+                produto_id: produtoId,
+                empresas_marcas: {
+                    none: {
+                        empresa_id: empresaId,
+                    },
+                },
+            },
+        })
+    }
+
     // retorno marcas pelo id do produto escolhido
     async selectMarcasPorIdProduto(produtoId) {
         return await this.prisma.marcas.findMany({
@@ -84,30 +97,30 @@ class MarcasRepository {
                 }
             })
 
-            for(const modelo of modelos){
+            for (const modelo of modelos) {
                 // excluindo tabelas relacionadas com modelo
                 await prismaTx.empresas_modelos.deleteMany({
-                    where:{
-                        modelo_id:modelo.id
+                    where: {
+                        modelo_id: modelo.id
                     }
                 })
             }
 
             // excluindo todos os modelo realcionados com a marca
             await prismaTx.modelos.deleteMany({
-                where:{
+                where: {
                     marca_id: id
                 }
             })
             // excluindo tabela relacionada com marca
             await prismaTx.empresas_marcas.deleteMany({
-                where:{
-                    marca_id:id
+                where: {
+                    marca_id: id
                 }
             })
             // excluindo marca
             await prismaTx.marcas.delete({
-                where:{
+                where: {
                     id
                 }
             })

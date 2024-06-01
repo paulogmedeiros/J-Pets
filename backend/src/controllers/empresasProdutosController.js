@@ -6,7 +6,8 @@ class EmpresasProdutosController {
     async getEmpresasProdutosPorIdEmpresa(req, res) {
         try {
             const empresaId = parseInt(req.params.empresaId)
-            const result = await EmpresasProdutosService.findEmpresasProdutosPorIdEmpresa(empresaId);
+            const animalId = parseInt(req.params.animalId)
+            const result = await EmpresasProdutosService.findEmpresasProdutosPorIdEmpresa(empresaId,animalId);
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
@@ -27,15 +28,15 @@ class EmpresasProdutosController {
     }
 
     async deleteEmpresasProdutos(req, res) {
-        // try {
+        try {
             const empresaId = parseInt(req.params.empresaId)
             const data = req.body;
             await EmpresasProdutosService.removeEmpresasProdutos(empresaId, data);
             res.status(200).json({ mensage: "Produtos deletados com sucesso" })
-        // } catch (error) {
-        //     const retorno = FiltroExcecoes.tratarErro(error)
-        //     res.status(retorno.status).json(retorno.mensage)
-        // }
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
     }
 
 }
