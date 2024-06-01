@@ -14,6 +14,8 @@ const donoPet = require("./controllers/donosPetController.js")
 const empresasSevicos = require("./controllers/empresasServicosController.js")
 const empresasAnimais = require("./controllers/empresasAnimaisController.js")
 const empresasProdutos = require("./controllers/empresasProdutosController.js")
+const empresasMarcas = require("./controllers/empresasMarcasController.js")
+const empresasModelos = require("./controllers/empresasModelosController.js")
 
 //middleware
 const empresaValidation = require("./middleware/empresasValidation.js")
