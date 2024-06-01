@@ -14,23 +14,23 @@ function Alterar_senha() {
             <img src={icone_senha} width={48} height={48} />
           </div>
 
-          <p class="titulo_alterar_senha fs-1 fw-bold text-center mb-2 mb-md-2">Alteração de senha</p>
+          <p className="titulo_alterar_senha fs-1 fw-bold text-center mb-2 mb-md-2">Alteração de senha</p>
           <p className='text-center'>Altere sua senha.</p>
 
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+          <div className="form-floating mb-3">
+            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
             <label for="floatingPassword">Nova senha</label>
           </div>
 
-          <div class="form-floating mt-md-3 mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+          <div className="form-floating mt-md-3 mb-3">
+            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
             <label for="floatingPassword">Confirmação da nova senha</label>
           </div>
 
-          <a class="btn_alterar_senha btn w-100 " href="#" role="button">Confirmar</a>
+          <a className="btn_alterar_senha btn w-100 " href="#" role="button">Confirmar</a>
 
-          <p class="text-body-dark text-center mt-4">
-            <a href="#" class="esqueceu_a_senha_login link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Cancelar</a>
+          <p className="text-body-dark text-center mt-4">
+            <a href="#" className="esqueceu_a_senha_login link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Cancelar</a>
           </p>
         </div>
       </div>

@@ -26,75 +26,75 @@ const PaymentForm = () => {
   return (
 
     <div>
-      <nav class="navbarEmpresas navbar navbar-expand-lg">
-        <div class="container-fluid">
+      <nav className="navbarEmpresas navbar navbar-expand-lg">
+        <div className="container-fluid">
 
           {/* Logo do projeto */}
-          <a class="navbar-brand" href="#">
+          <a className="navbar-brand" href="#">
             <img src={logoJPets} width={45} height={45} />
           </a>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
           {/* Itens da barra de navegação */}
-          <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-underline">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/empresas/principal">Início</a>
+          <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul className="navbar-nav nav-underline">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="/empresas/principal">Início</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Produtos
                 </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/empresas/visualizarProdutos">Visualizar produtos</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li><a class="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produtos</a></li>
-                  <li><a class="dropdown-item" href="/empresas/removerProdutos">Remover produtos</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li><a class="dropdown-item" href="/empresas/adicionarMarcas">Adicionar marcas</a></li>
-                  <li><a class="dropdown-item" href="/empresas/removerMarcas">Remover marcas</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li><a class="dropdown-item" href="/empresas/adicionarModelos">Adicionar modelos</a></li>
-                  <li><a class="dropdown-item" href="/empresas/removerModelos">Remover modelos</a></li>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/empresas/visualizarProdutos">Visualizar produtos</a></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><a className="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produtos</a></li>
+                  <li><a className="dropdown-item" href="/empresas/removerProdutos">Remover produtos</a></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><a className="dropdown-item" href="/empresas/adicionarMarcas">Adicionar marcas</a></li>
+                  <li><a className="dropdown-item" href="/empresas/removerMarcas">Remover marcas</a></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><a className="dropdown-item" href="/empresas/adicionarModelos">Adicionar modelos</a></li>
+                  <li><a className="dropdown-item" href="/empresas/removerModelos">Remover modelos</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Serviços
                 </a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li><a class="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
-                  <li><a class="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
+                <ul className="dropdown-menu">
+                <li><a className="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><a className="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
+                  <li><a className="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/empresas/cupons">Cupons</a>
+              <li className="nav-item">
+                <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Avaliações</a>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Avaliações</a>
               </li>
             </ul>
           </div>
-          <div class="dropdown me-5">
-            <button class="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div className="dropdown me-5">
+            <button className="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               Nome
             </button>
-            <ul class="dropdown-menu">
-              <a class="nav-link disabled ms-3" aria-disabled="true">Nome</a>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a class="dropdown-item text-warning" href="/">Sair</a></li>
+            <ul className="dropdown-menu">
+              <a className="nav-link disabled ms-3" aria-disabled="true">Nome</a>
+              <li><hr className="dropdown-divider" /></li>
+              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
+              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
             </ul>
           </div>
         </div>
@@ -103,10 +103,10 @@ const PaymentForm = () => {
 
       {/* Card do cartao de credito */}
 
-      <div class="text-center mt-5">
-        <div class="row">
+      <div className="text-center mt-5">
+        <div className="row">
 
-          <div class="container col-md-5 pb-4 shadow-sm p-3 mb-5 bg-body-tertiary rounded border rounded-5">
+          <div className="container col-md-5 pb-4 shadow-sm p-3 mb-5 bg-body-tertiary rounded border rounded-5">
 
             <Cards
               number={state.number}
@@ -174,7 +174,7 @@ const PaymentForm = () => {
                   </div>
                 </div>
                 <div className='d-grid'>
-                  <button type="button" class="btnCartaoCredito btn">Enviar</button>
+                  <button type="button" className="btnCartaoCredito btn">Enviar</button>
                 </div>
               </form>
             </div>
@@ -182,25 +182,25 @@ const PaymentForm = () => {
 
           <div className="col-md-6 pe-md-5 col-12">
             <h3 className='fw-semibold mt-4 mt-md-0'>Resumo da compra</h3>
-            <div class="container text-center shadow-sm mb-5 bg-body-tertiary rounded border rounded-5">
-              <div class="row">
-                <div class="col">
+            <div className="container text-center shadow-sm mb-5 bg-body-tertiary rounded border rounded-5">
+              <div className="row">
+                <div className="col">
                   <p>Mensalidade:</p>
                   <p>Desconto:</p>
                 </div>
-                <div class="col">
+                <div className="col">
                   <p>R$300</p>
                   <p>-R$150</p>
                 </div>
               </div>
 
 
-              <div class="row">
-                <div class="col">
+              <div className="row">
+                <div className="col">
                   <h3>Total</h3>
 
                 </div>
-                <div class="col">
+                <div className="col">
                   <h3>R$150</h3>
 
                 </div>

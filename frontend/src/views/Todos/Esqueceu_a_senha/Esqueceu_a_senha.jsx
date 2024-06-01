@@ -11,21 +11,21 @@ function Esqueceu_a_senha() {
                 <div className="col-md-5 d-flex-md-5">
 
                     <div className="text-center">
-                        <img src={icone_email} class="img-fluid" width={90} height={90}></img>
+                        <img src={icone_email} className="img-fluid" width={90} height={90}></img>
                     </div>
 
-                    <p class="EsqueceuASenhaTitulo fs-1 fw-bold text-center mb-2 mb-md-2">Esqueceu a sua senha?</p>
+                    <p className="EsqueceuASenhaTitulo fs-1 fw-bold text-center mb-2 mb-md-2">Esqueceu a sua senha?</p>
 
                     <p className='text-center'>Nós enviaremos um email para que você possa redefinir a sua senha.</p>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control rounded-5 w-md-75" id="floatingInput" placeholder="name@example.com" />
+                    <div className="form-floating mb-3">
+                        <input type="email" className="form-control rounded-5 w-md-75" id="floatingInput" placeholder="name@example.com" />
                         <label for="floatingInput">Email</label>
                     </div>
 
-                    <a class="btnEsqueceuASenha btn w-100 rounded-5" href="#" role="button">Enviar</a>
+                    <a className="btnEsqueceuASenha btn w-100 rounded-5" href="#" role="button">Enviar</a>
 
-                    <p class="text-body-dark text-center mt-4 ">
-                        <a href="#" class="cancelarEsqueceuASenha link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Cancelar</a>
+                    <p className="text-body-dark text-center mt-4 ">
+                        <a href="#" className="cancelarEsqueceuASenha link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Cancelar</a>
                     </p>
                 </div>
 

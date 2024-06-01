@@ -7,68 +7,68 @@ import imgEstrela from './img/imgEstrela.svg'
 function Favoritos() {
   return (
     <div>
-      <nav class="navbarDonoDePet navbar navbar-expand-lg ">
-        <div class="container-fluid">
+      <nav className="navbarDonoDePet navbar navbar-expand-lg ">
+        <div className="container-fluid">
 
           {/* Logo do projeto */}
-          <a class="navbar-brand" href="#">
+          <a className="navbar-brand" href="#">
             <img src={logoJPets} width={45} height={45} />
           </a>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
           {/* Itens da barra de navegação */}
-          <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-underline">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Início</a>
+          <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul className="navbar-nav nav-underline">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">Início</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Cachorro
                 </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/">Action</a></li>
-                  <li><a class="dropdown-item" href="/">Another action</a></li>
-                  <li><a class="dropdown-item" href="/">Something else here</a></li>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/">Action</a></li>
+                  <li><a className="dropdown-item" href="/">Another action</a></li>
+                  <li><a className="dropdown-item" href="/">Something else here</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Gato
                 </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/">Action</a></li>
-                  <li><a class="dropdown-item" href="/">Another action</a></li>
-                  <li><a class="dropdown-item" href="/">Something else here</a></li>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/">Action</a></li>
+                  <li><a className="dropdown-item" href="/">Another action</a></li>
+                  <li><a className="dropdown-item" href="/">Something else here</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Pássaro
                 </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/">Action</a></li>
-                  <li><a class="dropdown-item" href="/">Another action</a></li>
-                  <li><a class="dropdown-item" href="/">Something else here</a></li>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/">Action</a></li>
+                  <li><a className="dropdown-item" href="/">Another action</a></li>
+                  <li><a className="dropdown-item" href="/">Something else here</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Peixe
                 </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/">Action</a></li>
-                  <li><a class="dropdown-item" href="/">Another action</a></li>
-                  <li><a class="dropdown-item" href="/">Something else here</a></li>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/">Action</a></li>
+                  <li><a className="dropdown-item" href="/">Another action</a></li>
+                  <li><a className="dropdown-item" href="/">Something else here</a></li>
                 </ul>
               </li>
             </ul>
@@ -89,15 +89,15 @@ function Favoritos() {
       </nav>
 
       <h1 className='m-5 container'>Favoritos</h1>
-      
+
       <div className='container text-center'>
-        <div class="row">
-          <div class="col">
-            <div class="card" >
-              <img src={logoJPets} class="card-img-top" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text"><img src={imgEstrela} width={25} />
+        <div className="row">
+          <div className="col">
+            <div className="card" >
+              <img src={logoJPets} className="card-img-top" />
+              <div className="card-body">
+                <h5 className="card-title">Card title</h5>
+                <p className="card-text"><img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
@@ -106,12 +106,12 @@ function Favoritos() {
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card" >
-              <img src={logoJPets} class="card-img-top" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text"><img src={imgEstrela} width={25} />
+          <div className="col">
+            <div className="card" >
+              <img src={logoJPets} className="card-img-top" />
+              <div className="card-body">
+                <h5 className="card-title">Card title</h5>
+                <p className="card-text"><img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
@@ -120,12 +120,12 @@ function Favoritos() {
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card" >
-              <img src={logoJPets} class="card-img-top" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text"><img src={imgEstrela} width={25} />
+          <div className="col">
+            <div className="card" >
+              <img src={logoJPets} className="card-img-top" />
+              <div className="card-body">
+                <h5 className="card-title">Card title</h5>
+                <p className="card-text"><img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
@@ -134,12 +134,12 @@ function Favoritos() {
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card" >
-              <img src={logoJPets} class="card-img-top" />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text"><img src={imgEstrela} width={25} />
+          <div className="col">
+            <div className="card" >
+              <img src={logoJPets} className="card-img-top" />
+              <div className="card-body">
+                <h5 className="card-title">Card title</h5>
+                <p className="card-text"><img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
                   <img src={imgEstrela} width={25} />
