@@ -3,27 +3,40 @@ const FiltroExcecoes = require("../exception/exceptionFilter.js")
 
 class EmpresasMarcasController {
 
-    // async getEmpresasSevicoPorIdEmpresa(req, res) {
-    //     try {
-    //         const empresaId = parseInt(req.params.empresaId)
-    //         const result = await EmpresasServicosService.findEmpresasSevicoPorIdEmpresa(empresaId);
-    //         res.status(200).json(result)
-    //     } catch (error) {
-    //         const retorno = FiltroExcecoes.tratarErro(error)
-    //         res.status(retorno.status).json(retorno.mensage)
-    //     }
-    // }
+    async getEmpresasMarcasPorIdEmpresaIdAnimal(req, res) {
+        try {
+            const empresaId = parseInt(req.params.empresaId)
+            const animalId = parseInt(req.params.animalId)
+            const result = await EmpresasMarcasService.findEmpresasMarcasPorIdEmpresaIdAnimal(empresaId,animalId);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
 
-    // async postEmpresasSevico(req, res) {
-    //     try {
-    //         const data = req.body;
-    //         await EmpresasServicosService.createEmpresasServicos(data);
-    //         res.status(201).json({ mensage: "Servicos cadastrados com sucesso" })
-    //     } catch (error) {
-    //         const retorno = FiltroExcecoes.tratarErro(error)
-    //         res.status(retorno.status).json(retorno.mensage)
-    //     }
-    // }
+    async getEmpresasMarcasPorIdEmpresaIdProduto(req, res) {
+        try {
+            const empresaId = parseInt(req.params.empresaId)
+            const produtoId = parseInt(req.params.produtoId)
+            const result = await EmpresasMarcasService.findEmpresasMarcasPorIdEmpresaIdProduto(empresaId,produtoId);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+    async postEmpresasMarcas(req, res) {
+        try {
+            const data = req.body;
+            await EmpresasMarcasService.createEmpresasMarcas(data);
+            res.status(201).json({ mensage: "Marcas cadastrados com sucesso" })
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
 
     // async deleteEmpresasSevico(req, res) {
     //     try {

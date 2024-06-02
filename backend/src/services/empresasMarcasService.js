@@ -6,24 +6,26 @@ const AnimalService = require("../services/animaisService.js")
 
 class EmpresasMarcasService {
 
-    // async findEmpresasSevicoPorIdEmpresa(empresaId){
-    //      // valido se empresa existe
-    //      await EmpresaService.findEmpresasPorId(empresaId)
+    async findEmpresasMarcasPorIdEmpresaIdAnimal(empresaId,animalId){
+        // valido se empresa existe
+        await EmpresaService.findEmpresasPorId(empresaId)
 
-    //      return await EmpresasServicosRepository.selectEmpresasSevicoPorIdEmpresa(empresaId)
-    // }
+        // valido se animal existe
+        await AnimalService.findAnimaisPorId(animalId)
 
-    // async createEmpresasServicos(data) {
-    //     // valido se a empresa já tem o animal cadastrado
-    //     const result = await EmpresasAnimaisServico.findEmpresasAnimaisPorEmpresaIdEAnimalId(data)
+        return await EmpresasMarcasRepository.selectEmpresasMarcasPorIdEmpresaIdAnimal(empresaId,animalId)
+   }
 
-    //     // valido se a empresa já tiver o animal cadastrado criar apenas os relacionamentos com os serviço, caso contrario cria o relacionamento com o animal tambem
-    //     if (result) {
-    //         return await EmpresasServicosRepository.insertEmpresasServicos(data)
-    //     } else {
-    //         return await EmpresasServicosRepository.insertEmpresasServicosEEmpresaAnimal(data)
-    //     }
-    // }
+   async findEmpresasMarcasPorIdEmpresaIdProduto(empresaId,produtoId){
+    // valido se empresa existe
+    await EmpresaService.findEmpresasPorId(empresaId)
+
+    return await EmpresasMarcasRepository.selectEmpresasMarcasPorIdEmpresaIdProduto(empresaId,produtoId)
+}
+
+    async createEmpresasMarcas(data) {
+       return await EmpresasMarcasRepository.insertEmpresasMarcas(data)
+    }
 
     // async removeEmpresasServicos(empresaId,data){
     //     // valido se empresa existe

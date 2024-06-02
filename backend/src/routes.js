@@ -56,6 +56,7 @@ routes.delete("/marcas/:id", marcas.deleteMarcas);
 // rota de modelos
 routes.get("/modelos", modelos.getModelos);
 routes.get("/modelos/:empresaId", modelos.getModelosPorIdEmpresa)
+routes.get("/modelos/marcas/:marcasId/empresa/:empresaId", modelos.getModelosPorIdProdutoIdEmpresa);
 routes.post("/modelos", modelos.postModelos);
 routes.put("/modelos/:id", modelos.putModelos);
 routes.delete("/modelos/:id", modelos.deleteModelos);
@@ -92,7 +93,13 @@ routes.post("/empresasProdutos",empresasProdutos.postEmpresasProdutos);
 routes.delete("/empresasProdutos/:empresaId",empresasProdutos.deleteEmpresasProdutos);
 
 // rota empresasMarcas
-// routes.post("/empresasMarcas",empresasMarcas.postEmpresasMarcas);
+routes.get("/empresasMarcas/:empresaId/animais/:animalId",empresasMarcas.getEmpresasMarcasPorIdEmpresaIdAnimal);
+routes.get("/empresasMarcas/:empresaId/produto/:produtoId",empresasMarcas.getEmpresasMarcasPorIdEmpresaIdProduto);
+routes.post("/empresasMarcas",empresasMarcas.postEmpresasMarcas);
 
+// rota empresasModelos
+routes.get("/empresasModelos/:empresaId/marca/:marcaId",empresasModelos.getEmpresasModelosPorIdEmpresaIdMarca);
+routes.post("/empresasModelos",empresasModelos.postEmpresasModelos);
+routes.delete("/empresasModelos/:empresaId",empresasModelos.deleteEmpresasModelos);
 
 module.exports = routes

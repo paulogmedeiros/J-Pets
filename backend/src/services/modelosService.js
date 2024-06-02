@@ -9,6 +9,13 @@ class ModelosService {
         return await ModelosRepository.selectModelos()
     }
 
+    async findModelosPorIdProdutoIdEmpresa(marcaId,empresaId){
+        // valido se o id da empresa é valido
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await ModelosRepository.selectModelosPorIdProdutoIdEmpresa(marcaId,empresaId)
+    }
+
     async findModelosPorIdEmpresa(empresaId) {
         // valido se empresa existe
         await EmpresaService.findEmpresasPorId(empresaId)

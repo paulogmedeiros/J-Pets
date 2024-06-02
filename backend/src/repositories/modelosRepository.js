@@ -21,6 +21,21 @@ class ModelosRepository {
         })
     }
 
+    async selectModelosPorIdProdutoIdEmpresa(marcaId, empresaId) {
+        console.log(marcaId,empresaId)
+        return await this.prisma.modelos.findMany({
+            where: {
+                marca_id: marcaId,
+                empresas_modelos: {
+                    none: {
+                        empresa_id: empresaId,
+                    },
+                },
+            },
+        })
+    }
+
+
     async selectModelosPorIdEmpresa(empresaId) {
         return await this.prisma.modelos.findMany({
             where: {

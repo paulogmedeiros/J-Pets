@@ -7,40 +7,58 @@ class EmpresasMarcasRepository {
     }
 
 
-    // async selectEmpresasSevicoPorIdEmpresa(empresaId) {
-    //     return await this.prisma.empresas_servicos.findMany({
-    //         where: {
-    //             empresa_id: empresaId
-    //         },
-    //         select: {
-    //             servico_id: true,
-    //             servicos: {
-    //                 select: {
-    //                     nome: true,
-    //                     animais: {
-    //                         select: {
-    //                             id: true,
-    //                             nome: true
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     })
-    // }
+    async selectEmpresasMarcasPorIdEmpresaIdAnimal(empresaId, animalId) {
+        return await this.prisma.empresas_marcas.findMany({
+            where: {
+                empresa_id: empresaId,
+                marcas:{
+                    produtos:{
+                        animal_id: animalId
+                    }
+                }
+            },
+            select: {
+                marca_id: true,
+                marcas:{
+                    select:{
+                        nome:true
+                    }
+                }
+            }
+        })
+    }
 
-    // async insertEmpresasServicos(data) {
-    //     return await this.prisma.$transaction(async (prismaTx) => {
-    //         for (const servicoId of data.servicosId) {
-    //             await prismaTx.empresas_servicos.create({
-    //                 data: {
-    //                     empresa_id: data.empresaId,
-    //                     servico_id: servicoId
-    //                 }
-    //             })
-    //         }
-    //     })
-    // }
+    async selectEmpresasMarcasPorIdEmpresaIdProduto(empresaId, produtoId) {
+        return await this.prisma.empresas_marcas.findMany({
+            where: {
+                empresa_id: empresaId,
+                marcas:{
+                    produto_id: produtoId
+                }
+            },
+            select: {
+                marca_id: true,
+                marcas:{
+                    select:{
+                        nome:true
+                    }
+                }
+            }
+        })
+    }
+
+    async insertEmpresasMarcas(data) {
+        return await this.prisma.$transaction(async (prismaTx) => {
+            for (const marcaId of data.marcasId) {
+                await prismaTx.empresas_marcas.create({
+                    data: {
+                        empresa_id: data.empresaId,
+                        marca_id: marcaId
+                    }
+                })
+            }
+        })
+    }
 
     // async insertEmpresasServicosEEmpresaAnimal(data) {
     //     return await this.prisma.$transaction(async (prismaTx) => {

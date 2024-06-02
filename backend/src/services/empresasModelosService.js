@@ -6,34 +6,24 @@ const AnimalService = require("../services/animaisService.js")
 
 class EmpresasModelosService {
 
-    // async findEmpresasSevicoPorIdEmpresa(empresaId){
-    //      // valido se empresa existe
-    //      await EmpresaService.findEmpresasPorId(empresaId)
+    async findEmpresasModelosPorIdEmpresaIdMarca(marcaId, empresaId) {
+        // valido se empresa existe
+        await EmpresaService.findEmpresasPorId(empresaId)
 
-    //      return await EmpresasServicosRepository.selectEmpresasSevicoPorIdEmpresa(empresaId)
-    // }
+        return await EmpresasModelosRepository.selectEmpresasModelosPorIdEmpresaIdMarca(marcaId,empresaId)
+    }
 
-    // async createEmpresasServicos(data) {
-    //     // valido se a empresa já tem o animal cadastrado
-    //     const result = await EmpresasAnimaisServico.findEmpresasAnimaisPorEmpresaIdEAnimalId(data)
+    async createEmpresasModelos(data) {
+        return await EmpresasModelosRepository.insertEmpresasModelos(data)
+    }
 
-    //     // valido se a empresa já tiver o animal cadastrado criar apenas os relacionamentos com os serviço, caso contrario cria o relacionamento com o animal tambem
-    //     if (result) {
-    //         return await EmpresasServicosRepository.insertEmpresasServicos(data)
-    //     } else {
-    //         return await EmpresasServicosRepository.insertEmpresasServicosEEmpresaAnimal(data)
-    //     }
-    // }
+    async removeEmpresasModelos(empresaId,data){
+        // valido se empresa existe
+        await EmpresaService.findEmpresasPorId(empresaId)
+        // excluir os servicos da empresa
+        await EmpresasModelosRepository.deleteEmpresasModelos(empresaId,data)
 
-    // async removeEmpresasServicos(empresaId,data){
-    //     // valido se empresa existe
-    //     await EmpresaService.findEmpresasPorId(empresaId)
-    //     // valido se animal existe
-    //     await AnimalService.findAnimaisPorId(data.animalId)
-    //     // excluir os servicos da empresa
-    //     await EmpresasServicosRepository.deleteEmpresasServicos(empresaId,data)
-
-    // }
+    }
 
 }
 
