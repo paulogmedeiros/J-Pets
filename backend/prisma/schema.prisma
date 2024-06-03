@@ -37,7 +37,12 @@ model empresas {
   foto_perfil       String?             @db.VarChar(150)
   nome_fantasia     String              @unique(map: "nome_fantasia") @db.VarChar(150)
   cnpj              String              @unique(map: "cnpj") @db.Char(14)
-  endereco          String?             @unique(map: "endereco") @db.VarChar(200)
+  cep               String?             @db.Char(8)
+  rua               String?             @db.VarChar(150)
+  bairro            String?             @db.VarChar(100)
+  cidade            String?             @db.VarChar(100)
+  uf                String?             @db.Char(2)
+  numero_residencia String?             @db.VarChar(10)
   latitude          Float?              @unique(map: "latitude") @db.Float
   longetude         Float?              @unique(map: "longetude") @db.Float
   telefone          String?             @unique(map: "telefone") @db.VarChar(20)
@@ -197,4 +202,14 @@ model tutores_pets {
   avaliacoes avaliacoes[]
   favoritos  favoritos[]
   login      login?       @relation(fields: [login_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_login_tutores_pets")
+}
+
+model cartoes {
+  id              Int       @id @default(autoincrement())
+  numero_cartao   String    @unique(map: "numero_cartao") @db.Char(16)
+  nome_completo   String    @db.VarChar(100)
+  data_vencimento String    @db.Char(5)
+  cvv             String    @db.Char(3)
+  valor_conta     Decimal?  @db.Decimal(10, 2)
+  created_at      DateTime? @default(now()) @db.Timestamp(0)
 }
