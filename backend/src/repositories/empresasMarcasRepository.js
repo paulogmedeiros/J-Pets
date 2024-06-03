@@ -60,52 +60,33 @@ class EmpresasMarcasRepository {
         })
     }
 
-    // async insertEmpresasServicosEEmpresaAnimal(data) {
-    //     return await this.prisma.$transaction(async (prismaTx) => {
-    //         await prismaTx.empresas_animais.create({
-    //             data: {
-    //                 animal_id: data.animalId,
-    //                 empresa_id: data.empresaId
-    //             }
-    //         })
-    //         for (const servicoId of data.servicosId) {
-    //             await prismaTx.empresas_servicos.create({
-    //                 data: {
-    //                     empresa_id: data.empresaId,
-    //                     servico_id: servicoId
-    //                 }
-    //             })
-    //         }
-    //     })
-    // }
-
-    // async deleteEmpresasServicos(empresaId, data) {
-    //     return await this.prisma.$transaction(async (prismaTx) => {
-    //         for (const servicoId of data.servicosId) {
-    //             await prismaTx.empresas_servicos.deleteMany({
-    //                 where: {
-    //                     empresa_id: empresaId,
-    //                     servico_id: servicoId
-    //                 }
-    //             })
-    //         }
-
-    //         const servico = await prismaTx.empresas_servicos.findFirst({
-    //             where: {
-    //                 empresa_id: empresaId
-    //             }
-    //         })
-
-    //         if (!servico) {
-    //             await prismaTx.empresas_animais.deleteMany({
-    //                 where: {
-    //                     animal_id: data.animalId,
-    //                     empresa_id: empresaId
-    //                 }
-    //             })
-    //         }
-    //     })
-    // }
+    async deleteEmpresasMarcas(empresaId, data) {
+        return await this.prisma.$transaction(async (prismaTx) => {
+            for (const marcaId of data.marcasId) {
+                await prismaTx.empresas_marcas.deleteMany({
+                    where: {
+                        empresa_id: empresaId,
+                        marca_id: marcaId
+                    }
+                })
+                await prismaTx.empresas_modelos.deleteMany({
+                    where: {
+                        empresa_id: empresaId,
+                        modelo_id: {
+                            in: (
+                                await prismaTx.modelos.findMany({
+                                    where: {
+                                        marca_id: marcaId
+                                    },
+                                    select: { id: true }
+                                })
+                            ).map(modelo => modelo.id)
+                        }
+                    }
+                });
+            }
+        })
+    }
 
 }
 

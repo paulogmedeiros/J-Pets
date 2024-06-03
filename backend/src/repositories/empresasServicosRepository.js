@@ -7,7 +7,7 @@ class EmpresasServicosRepository {
     }
 
 
-    async selectEmpresasSevicoPorIdEmpresa(empresaId,animalId) {
+    async selectEmpresasSevicoPorIdEmpresaIdAnimal(empresaId,animalId) {
         return await this.prisma.empresas_servicos.findMany({
             where: {
                 empresa_id: empresaId,
@@ -24,6 +24,28 @@ class EmpresasServicosRepository {
                             select: {
                                 id: true,
                                 nome: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    async selectEmpresasSevicoPorIdEmpresa(empresaId) {
+        return await this.prisma.empresas_servicos.findMany({
+            where: {
+                empresa_id: empresaId,
+            },
+            select:{
+                servicos:{
+                    select:{
+                        id: true,
+                        nome: true,
+                        animais:{
+                            select:{
+                                id:true,
+                                nome:true
                             }
                         }
                     }

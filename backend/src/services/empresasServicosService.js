@@ -6,15 +6,22 @@ const AnimalService = require("../services/animaisService.js")
 
 class EmpresasServicosService {
 
-    async findEmpresasSevicoPorIdEmpresa(empresaId,animalId){
+    async findEmpresasSevicoPorIdEmpresaIdAnimal(empresaId,animalId){
          // valido se empresa existe
          await EmpresaService.findEmpresasPorId(empresaId)
 
          // valido se animal existe
         await AnimalService.findAnimaisPorId(animalId)
 
-         return await EmpresasServicosRepository.selectEmpresasSevicoPorIdEmpresa(empresaId,animalId)
+         return await EmpresasServicosRepository.selectEmpresasSevicoPorIdEmpresaIdAnimal(empresaId,animalId)
     }
+
+    async findEmpresasSevicoPorIdEmpresa(empresaId){
+        // valido se empresa existe
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await EmpresasServicosRepository.selectEmpresasSevicoPorIdEmpresa(empresaId)
+   }
 
     async createEmpresasServicos(data) {
         // valido se a empresa já tem o animal cadastrado

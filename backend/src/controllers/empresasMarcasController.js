@@ -38,17 +38,17 @@ class EmpresasMarcasController {
         }
     }
 
-    // async deleteEmpresasSevico(req, res) {
-    //     try {
-    //         const empresaId = parseInt(req.params.empresaId)
-    //         const data = req.body;
-    //         await EmpresasServicosService.removeEmpresasServicos(empresaId, data);
-    //         res.status(200).json({ mensage: "Servicos deletados com sucesso" })
-    //     } catch (error) {
-    //         const retorno = FiltroExcecoes.tratarErro(error)
-    //         res.status(retorno.status).json(retorno.mensage)
-    //     }
-    // }
+    async deleteEmpresasMarcas(req, res) {
+        try {
+            const empresaId = parseInt(req.params.empresaId)
+            const data = req.body;
+            await EmpresasMarcasService.removeEmpresasMarcas(empresaId, data);
+            res.status(200).json({ mensage: "Servicos deletados com sucesso" })
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
 
 }
 

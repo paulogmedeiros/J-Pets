@@ -83,7 +83,8 @@ routes.post("/donoPet",donoPet.postDonoPet);
 routes.get("/empresasAnimais/:empresaId", empresasAnimais.getEmpresasAnimaisPorIdEmpresa);
 
 // rota empresasSevico
-routes.get("/empresasSevico/:empresaId/animais/:animalId",empresasSevicos.getEmpresasSevicoPorIdEmpresa);
+routes.get("/empresasSevico/:empresaId/animais/:animalId",empresasSevicos.getEmpresasSevicoPorIdEmpresaIdAnimal);
+routes.get("/empresasSevico/:empresaId",empresasSevicos.getEmpresasSevicoPorIdEmpresa);
 routes.post("/empresasSevico",empresasSevicos.postEmpresasSevico);
 routes.delete("/empresasSevico/:empresaId",empresasSevicos.deleteEmpresasSevico);
 
@@ -96,9 +97,11 @@ routes.delete("/empresasProdutos/:empresaId",empresasProdutos.deleteEmpresasProd
 routes.get("/empresasMarcas/:empresaId/animais/:animalId",empresasMarcas.getEmpresasMarcasPorIdEmpresaIdAnimal);
 routes.get("/empresasMarcas/:empresaId/produto/:produtoId",empresasMarcas.getEmpresasMarcasPorIdEmpresaIdProduto);
 routes.post("/empresasMarcas",empresasMarcas.postEmpresasMarcas);
+routes.delete("/empresasMarcas/:empresaId",empresasMarcas.deleteEmpresasMarcas);
 
 // rota empresasModelos
 routes.get("/empresasModelos/:empresaId/marca/:marcaId",empresasModelos.getEmpresasModelosPorIdEmpresaIdMarca);
+routes.get("/empresasModelos/:empresaId",empresasModelos.getEmpresasModelosPorIdEmpresa);
 routes.post("/empresasModelos",empresasModelos.postEmpresasModelos);
 routes.delete("/empresasModelos/:empresaId",empresasModelos.deleteEmpresasModelos);
 

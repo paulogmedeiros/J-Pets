@@ -13,6 +13,13 @@ class EmpresasModelosService {
         return await EmpresasModelosRepository.selectEmpresasModelosPorIdEmpresaIdMarca(marcaId,empresaId)
     }
 
+    async findEmpresasModelosPorIdEmpresa(empresaId) {
+        // valido se empresa existe
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await EmpresasModelosRepository.selectEmpresasModelosPorIdEmpresa(empresaId)
+    }
+
     async createEmpresasModelos(data) {
         return await EmpresasModelosRepository.insertEmpresasModelos(data)
     }

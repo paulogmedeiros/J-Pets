@@ -7,19 +7,53 @@ class EmpresasModelosRepository {
     }
 
 
-    async selectEmpresasModelosPorIdEmpresaIdMarca(marcaId,empresaId) {
+    async selectEmpresasModelosPorIdEmpresaIdMarca(marcaId, empresaId) {
         return await this.prisma.empresas_modelos.findMany({
-            where:{
+            where: {
                 empresa_id: empresaId,
-                modelos:{
+                modelos: {
                     marca_id: marcaId
                 },
             },
-            select:{
-                modelo_id:true,
-                modelos:{
-                    select:{
-                        nome:true
+            select: {
+                modelo_id: true,
+                modelos: {
+                    select: {
+                        nome: true
+                    }
+                }
+            }
+        })
+    }
+
+    async selectEmpresasModelosPorIdEmpresa(empresaId) {
+        return await this.prisma.empresas_modelos.findMany({
+            where: {
+                empresa_id: empresaId
+            },
+            select: {
+                modelos: {
+                    select: {
+                        id: true,
+                        nome: true,
+                        marcas: {
+                            select: {
+                                id: true,
+                                nome: true,
+                                produtos: {
+                                    select: {
+                                        id: true,
+                                        nome: true,
+                                        animais: {
+                                            select: {
+                                                id: true,
+                                                nome: true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

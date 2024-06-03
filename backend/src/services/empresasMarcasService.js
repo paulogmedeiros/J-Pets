@@ -27,15 +27,13 @@ class EmpresasMarcasService {
        return await EmpresasMarcasRepository.insertEmpresasMarcas(data)
     }
 
-    // async removeEmpresasServicos(empresaId,data){
-    //     // valido se empresa existe
-    //     await EmpresaService.findEmpresasPorId(empresaId)
-    //     // valido se animal existe
-    //     await AnimalService.findAnimaisPorId(data.animalId)
-    //     // excluir os servicos da empresa
-    //     await EmpresasServicosRepository.deleteEmpresasServicos(empresaId,data)
+    async removeEmpresasMarcas(empresaId,data){
+        // valido se empresa existe
+        await EmpresaService.findEmpresasPorId(empresaId)
+        // excluir os servicos da empresa
+        await EmpresasMarcasRepository.deleteEmpresasMarcas(empresaId,data)
 
-    // }
+    }
 
 }
 
