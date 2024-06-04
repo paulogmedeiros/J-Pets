@@ -10,8 +10,8 @@ class TokenValidation {
             if(erro){
                 return res.status(401).json("Usuário não autenticado")
             }else{
-                // req.usuario_id = decoded.usuario_id
-                // req.usuario_tipo = decoded.usuario_tipo
+                req.usuario_id = decoded.usuario_id
+                req.usuario_tipo = decoded.usuario_tipo
                 next()
             }
         })

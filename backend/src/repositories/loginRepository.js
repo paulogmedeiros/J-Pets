@@ -38,6 +38,38 @@ class LoginRepository {
         })
     }
 
+    async selectEmpresaPorId(id) {
+        return await this.prisma.login.findFirst({
+            where: {
+                id: id
+            },
+            select: {
+                email: true,
+                empresas: {
+                    select: {
+                        nome_fantasia: true
+                    }
+                }
+            }
+        })
+    }
+
+    async selectDonoPetPorId(id) {
+        return await this.prisma.login.findFirst({
+            where: {
+                id: id
+            },
+            select: {
+                email: true,
+                tutores_pets: {
+                    select: {
+                        nome: true
+                    }
+                }
+            }
+        })
+    }
+
     async selectUsuarioPorId(id) {
         return await this.prisma.login.findFirst({
             where: {

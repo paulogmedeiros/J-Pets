@@ -70,7 +70,7 @@ routes.put("/empresas/criar/cupom/:id",empresa.putCriarCupom);
 routes.put("/empresas/excluir/cupom/:id",empresa.putExcluirCupom);
 
 // rota de login
-routes.get("/administrador/:id",login.getAdministradorPorId);
+routes.get("/administrador/:id",tokenValidation.verificarToken,login.getAdministradorPorId);
 routes.post("/cadastro/administrador",login.postAdministrador);
 routes.post("/login",login.logar);
 routes.post("/envio/email",login.postEnvioEmail);

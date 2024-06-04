@@ -25,14 +25,32 @@ class LoginService {
         return user;
     }
 
-    async findAdministradorPorId(id) {
+    async findAdministradorPorId(id, usuarioTipo) {
         // coleto o usuario com o id e verifico se ele existe
-        const usuarioAdm = await LoginRepository.selectAdministradorPorId(id)
-        if (!usuarioAdm) {
-            throw new ExcecaoIdNaoEncontrado("Usuario não encontrado")
+        let usuario;
+        if (usuarioTipo === "ADM") {
+            usuario = await LoginRepository.selectAdministradorPorId(id)
+            if (!usuario) {
+                throw new ExcecaoIdNaoEncontrado("Usuario não encontrado")
+            }
+            // retorno
+            return usuario
+        } else if (usuarioTipo === "EMP") {
+            usuario = await LoginRepository.selectEmpresaPorId(id)
+            if (!usuario) {
+                throw new ExcecaoIdNaoEncontrado("Usuario não encontrado")
+            }
+            // retorno
+            return usuario
+        } else {
+            usuario = await LoginRepository.selectDonoPetPorId(id)
+            if (!usuario) {
+                throw new ExcecaoIdNaoEncontrado("Usuario não encontrado")
+            }
+            // retorno
+            return usuario
         }
-        // retorno
-        return usuarioAdm
+
     }
     async createAdministrador(data) {
         // valido se o email já está cadastrado

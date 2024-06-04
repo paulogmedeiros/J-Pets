@@ -19,9 +19,9 @@ class LoginController {
                 statusPagamento = result.statusPagamento
                 statusAtivo = result.statusAtivo
                 idEmpresa = result.idEmpresa
-                token = jwt.sign({ usuario_id, usuario_tipo, statusPagamento, statusAtivo, idEmpresa }, secret, { expiresIn: 120 })
+                token = jwt.sign({ usuario_id, usuario_tipo, statusPagamento, statusAtivo, idEmpresa }, secret, { expiresIn: 86400 })
             } else {
-                token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 120 })
+                token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 86400 })
             }
             res.status(200).json(token)
         } catch (error) {
@@ -32,8 +32,9 @@ class LoginController {
 
     async getAdministradorPorId(req, res) {
         try {
+            const usuarioTipo = req.usuario_tipo
             const param = parseInt(req.params.id)
-            const result = await LoginService.findAdministradorPorId(param);
+            const result = await LoginService.findAdministradorPorId(param,usuarioTipo);
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
