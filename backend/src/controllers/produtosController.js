@@ -12,6 +12,18 @@ class ProdutosController {
         }
     }
 
+    async getProdutosPorIdAnimalIdEmpresa(req, res) {
+        try {
+            const animalId = parseInt(req.params.animalId)
+            const empresaId = parseInt(req.params.empresaId)
+            const result = await ProdutosService.findProdutosPorIdAnimalIdEmpresa(animalId,empresaId);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
     async getProdutosPorIdAnimal(req, res) {
         try {
             const param = parseInt(req.params.animalId)

@@ -1,5 +1,6 @@
 const ProdutosRepository = require("../repositories/produtosRepository.js")
 const AnimalService = require("../services/animaisService.js")
+const EmpresaService = require("../services/empresasService.js")
 const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
 
 class ProdutosService{
@@ -15,6 +16,16 @@ class ProdutosService{
 
         // retorno
         return await ProdutosRepository.selectProdutosPorIdAnimal(animalId)
+    }
+
+    async findProdutosPorIdAnimalIdEmpresa(animalId,empresaId){
+        // valido se o id do animal é valido
+        await AnimalService.findAnimaisPorId(animalId)
+
+        // valido se o id da empresa é valido
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await ProdutosRepository.selectProdutosPorIdAnimalIdEmpresa(animalId,empresaId)
     }
 
     async createProdutos(data){

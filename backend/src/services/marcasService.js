@@ -1,5 +1,6 @@
 const MarcasRepository = require("../repositories/marcasRepository.js")
 const ProdutosService = require("../services/produtosService.js")
+const EmpresaService = require("../services/empresasService.js")
 const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
 
 class MarcasService {
@@ -15,6 +16,13 @@ class MarcasService {
 
         // retorno
         return await MarcasRepository.selectMarcasPorIdProduto(produtoId)
+    }
+
+    async findMarcasPorIdProdutoIdEmpresa(produtoId,empresaId){
+        // valido se o id da empresa é valido
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await MarcasRepository.selectMarcasPorIdProdutoIdEmpresa(produtoId,empresaId)
     }
 
     async createMarcas(data) {

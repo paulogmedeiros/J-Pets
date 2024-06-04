@@ -1,16 +1,24 @@
 const EmpresasRepository = require("../repositories/empresasRepository.js")
 const LoginService = require("../services/loginService.js")
-const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
-const bcrypt = require("bcryptjs") 
+const { ExcecaoIdNaoEncontrado } = require('../exception/customExceptions.js')
+const bcrypt = require("bcryptjs")
+const caminhoServer = require("path")
 
-class EmpresasService{
+class EmpresasService {
 
-    async findEmpresas(){
+    async findEmpresas() {
         // retorno
         return await EmpresasRepository.selectEmpresas()
     }
-  
-    async createEmpresas(data){
+
+    async findCupom(id) {
+        // valido se o nome fantasia já está cadastrado
+        await this.findEmpresasPorId(id)
+        
+        return await EmpresasRepository.selectCupom(id)
+    }
+
+    async createEmpresas(data) {
         // valido se o cnpj já está cadastrado
         await this.findEmpresasPorCnpj(data.cnpj)
 
@@ -28,21 +36,54 @@ class EmpresasService{
         return await EmpresasRepository.insertEmpresas(data)
     }
 
-    async findEmpresasPorCnpj(cnpj){
+    async editCriarCupom(data, id) {
+        // valido se o nome fantasia já está cadastrado
+        await this.findEmpresasPorId(id)
+
+        return await EmpresasRepository.updateCriarCupom(data, id)
+    }
+
+    async editEmpresaImagem(param,nomeImagem,arquivo) {
+
+        const result =  await EmpresasRepository.updateEmpresasImagem(param,nomeImagem)
+
+        arquivo.mv(caminhoServer+"/../public/img/"+result.foto_perfil)
+
+        return result
+    }
+
+    async editExcluirCupom(id) {
+        // valido se o nome fantasia já está cadastrado
+        await this.findEmpresasPorId(id)
+
+        return await EmpresasRepository.updateExcluirCupom(id)
+    }
+
+    async findEmpresasPorCnpj(cnpj) {
         // valido se o cnpj já está cadastrado
         const empresa = await EmpresasRepository.selectEmpresaPorCNPJ(cnpj)
-        if(empresa){
+        if (empresa) {
             throw new ExcecaoIdNaoEncontrado("CNPJ já cadastrado")
         }
         // retorno
         return empresa
     }
 
-    async findEmpresasPorNomeFantasia(nomeFantasia){
+    async findEmpresasPorNomeFantasia(nomeFantasia) {
         // valido se o nome fantasia já está cadastrado
         const empresa = await EmpresasRepository.selectEmpresaPorNomeFantasia(nomeFantasia)
-        if(empresa){
+        if (empresa) {
             throw new ExcecaoIdNaoEncontrado("Nome fantasia já cadastrado")
+        }
+        // retorno
+        return empresa
+    }
+
+    async findEmpresasPorId(id) {
+        // valido se empresa existe
+        const empresa = await EmpresasRepository.selectEmpresasPorId(id)
+        if (!empresa) {
+            throw new ExcecaoIdNaoEncontrado("Empresa não encontrada")
         }
         // retorno
         return empresa

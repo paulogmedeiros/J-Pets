@@ -14,7 +14,7 @@ function Painel_de_controle_empresas() {
         async function carregarUsuarios() {
             try {
                 // Fazer uma chamada da API
-                const resposta = await fetch('/empresas')
+                const resposta = await fetch(process.env.REACT_APP_URL_API +'/empresas')
                 if (!resposta.ok) {
 
                     // Exibindo erro API
@@ -36,25 +36,25 @@ function Painel_de_controle_empresas() {
 
     return (
         // Container geral para propriedades de fundo
-        <div class="admPainel">
-            <nav class="admNavbar navbar navbar-expand-md">
-                <div class="container-fluid d-flex">
-                    <a class="navbar-brand" href="#"><img src={logoJPets_adm} alt="" srcset="" width={50} height={50} /></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+        <div className="admPainel">
+            <nav className="admNavbar navbar navbar-expand-md">
+                <div className="container-fluid d-flex">
+                    <a className="navbar-brand" href="#"><img src={logoJPets_adm} alt="" srcSet="" width={50} height={50} /></a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse justify-content-end pe-5 me-5" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <div class="dropdown">
-                                    <button class="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div className="collapse navbar-collapse justify-content-end pe-5 me-5" id="navbarNavDropdown">
+                        <ul className="navbar-nav">
+                            <li className="nav-item dropdown">
+                                <div className="dropdown">
+                                    <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         P.G.
                                     </button>
-                                    <ul class="dropdown-menu ">
-                                        <li><a class="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
-                                        <li><hr class="dropdown-divider" /></li>
-                                        <li><a class="dropdown-item" href="#">Meu perfil</a></li>
-                                        <li><a class="dropdown-item" href="#">Sair</a></li>
+                                    <ul className="dropdown-menu ">
+                                        <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
+                                        <li><hr className="dropdown-divider" /></li>
+                                        <li><a className="dropdown-item" href="#">Meu perfil</a></li>
+                                        <li><a className="dropdown-item" href="#">Sair</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -64,37 +64,37 @@ function Painel_de_controle_empresas() {
             </nav>
 
             {/* Conteúdo principal  */}
-            <div class="container-md mt-5">
-                <div class="row">
+            <div className="container-md mt-5">
+                <div className="row">
 
                     {/* Menu lateral */}
 
-                    <div class="admMenuLateral col-3 mt-5 pr-5">
-                        <div id="list-example" class="list-group">
-                            <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
-                            <a class="list-group-item list-group-item-action" href="/administrador/painel/cadastroAdmin">Cadastrar admin</a>
-                            <a class="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
-                            <a class="list-group-item list-group-item-action" href="/administrador/painel/marcas">Marcas</a>
-                            <a class="list-group-item list-group-item-action" href="/administrador/painel/modelos">Modelos</a>
-                            <a class="list-group-item list-group-item-action" href="/administrador/painel/servicos">Serviços</a>
+                    <div className="admMenuLateral col-3 mt-5 pr-5">
+                        <div id="list-example" className="list-group">
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/cadastroAdmin">Cadastrar admin</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/marcas">Marcas</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/modelos">Modelos</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/servicos">Serviços</a>
                         </div>
                     </div>
 
                     {/* Tabela */}
-                    <div class="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5 text-center">
+                    <div className="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5 text-center">
                         <div className='row '>
                             <p className='d-flex col-4 mt-5 me-5 fs-5 fw-semibold'>Todas as empresas</p>
 
-                            <div class="input-group d-flex mb-3 col-4 w-50 me-3 mt-5">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="button-addon2" />
-                                    <button type="button" class="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30}/></button>
+                            <div className="input-group d-flex mb-3 col-4 w-50 me-3 mt-5">
+                                <div className="input-group mb-3">
+                                    <input type="text" className="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                    <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30}/></button>
                                 </div>
                             </div>
                         </div>
 
 
-                        <table class="table table-striped border border-1">
+                        <table className="table table-striped border border-1">
                             <thead className="roxo">
                                 <tr className='text-center'>
                                     <th scope="col">Empresa</th>

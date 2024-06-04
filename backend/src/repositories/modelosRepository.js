@@ -6,23 +6,72 @@ class ModelosRepository {
     }
 
     // retorno todos os modelos
-    async selectModelos(){
-       return await this.prisma.modelos.findMany({
-        select:{
-            id:true,
-            nome:true,
-            marcas:{
-                select:{
-                    id:true,
-                    nome:true
+    async selectModelos() {
+        return await this.prisma.modelos.findMany({
+            select: {
+                id: true,
+                nome: true,
+                marcas: {
+                    select: {
+                        id: true,
+                        nome: true
+                    }
                 }
             }
-        }
-       })
+        })
     }
 
+    async selectModelosPorIdProdutoIdEmpresa(marcaId, empresaId) {
+        console.log(marcaId,empresaId)
+        return await this.prisma.modelos.findMany({
+            where: {
+                marca_id: marcaId,
+                empresas_modelos: {
+                    none: {
+                        empresa_id: empresaId,
+                    },
+                },
+            },
+        })
+    }
+
+
+    async selectModelosPorIdEmpresa(empresaId) {
+        return await this.prisma.modelos.findMany({
+            where: {
+                empresas_modelos: {
+                    some: {
+                        empresa_id: empresaId
+                    }
+                }
+            }, select: {
+                id: true,
+                nome: true,
+                marcas: {
+                    select: {
+                        id: true,
+                        nome: true,
+                        produtos: {
+                            select: {
+                                id: true,
+                                nome: true,
+                                animais: {
+                                    select: {
+                                        id: true,
+                                        nome: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+
     // retorno modelo por id e pelo nome
-    async selectModelosPorIdNome(marca_id,nome){
+    async selectModelosPorIdNome(marca_id, nome) {
         return await this.prisma.modelos.findFirst({
             where: {
                 marca_id,
@@ -43,7 +92,7 @@ class ModelosRepository {
     // criando novo modelo
     async insertModelos(data) {
         return await this.prisma.modelos.create({
-            data:{
+            data: {
                 marca_id: data.marca_id,
                 nome: data.nome
             }
@@ -66,13 +115,13 @@ class ModelosRepository {
         return await this.prisma.$transaction(async (prismaTx) => {
             // excluindo tabelas relacionadas com modelo
             await prismaTx.empresas_modelos.deleteMany({
-                where:{
-                    modelo_id:id
+                where: {
+                    modelo_id: id
                 }
             })
             // excluindo modelo
             await prismaTx.modelos.delete({
-                where:{
+                where: {
                     id
                 }
             })

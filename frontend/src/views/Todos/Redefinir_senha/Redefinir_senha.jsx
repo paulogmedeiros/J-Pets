@@ -14,23 +14,23 @@ function Redefinir_senha() {
             <img src={icone_senha} width={90} height={90} />
           </div>
 
-          <p class="AlterarSenhaTodosTitulo fs-1 fw-bold text-center mb-2 mb-md-2 mt-3">Redefinição de senha</p>
+          <p className="AlterarSenhaTodosTitulo fs-1 fw-bold text-center mb-2 mb-md-2 mt-3">Redefinição de senha</p>
           <p className='text-center'>Redefina sua senha.</p>
 
-          <div class="form-floating mt-md-3 mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+          <div className="form-floating mt-md-3 mb-3">
+            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
             <label for="floatingPassword">Nova senha</label>
           </div>
 
-          <div class="form-floating mt-md-3 mb-4">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+          <div className="form-floating mt-md-3 mb-4">
+            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
             <label for="floatingPassword">Confirmação da nova senha</label>
           </div>
 
-          <a class="btnAlterarSenhaTodos btn w-100" href="#" role="button">Confirmar</a>
+          <a className="btnAlterarSenhaTodos btn w-100" href="#" role="button">Confirmar</a>
 
-          <p class="text-body-dark text-center mt-3">
-            <a href="#" class="cancelarAlterarSenhaTodos link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Voltar à tela de login</a>
+          <p className="text-body-dark text-center mt-3">
+            <a href="#" className="cancelarAlterarSenhaTodos link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Voltar à tela de login</a>
           </p>
         </div>
       </div>
