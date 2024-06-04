@@ -16,7 +16,7 @@ class App {
 
         this.server.use(express.json())
 
-        this.server.use(express.static("public"))
+        this.server.use("/public/img",express.static("public/img"))
 
         this.server.use(fileUpload())
 

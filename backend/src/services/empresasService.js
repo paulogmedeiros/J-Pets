@@ -2,6 +2,7 @@ const EmpresasRepository = require("../repositories/empresasRepository.js")
 const LoginService = require("../services/loginService.js")
 const { ExcecaoIdNaoEncontrado } = require('../exception/customExceptions.js')
 const bcrypt = require("bcryptjs")
+const caminhoServer = require("path")
 
 class EmpresasService {
 
@@ -40,6 +41,15 @@ class EmpresasService {
         await this.findEmpresasPorId(id)
 
         return await EmpresasRepository.updateCriarCupom(data, id)
+    }
+
+    async editEmpresaImagem(param,nomeImagem,arquivo) {
+
+        const result =  await EmpresasRepository.updateEmpresasImagem(param,nomeImagem)
+
+        arquivo.mv(caminhoServer+"/../public/img/"+result.foto_perfil)
+
+        return result
     }
 
     async editExcluirCupom(id) {

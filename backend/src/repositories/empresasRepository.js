@@ -105,6 +105,17 @@ class EmpresasRepository {
             }
         })
     }
+
+    async updateEmpresasImagem(id,foto_perfil) {
+        return await this.prisma.empresas.update({
+            where: {
+                id: id
+            },
+            data: {
+                foto_perfil
+            }
+        })
+    }
 }
 
 module.exports = new EmpresasRepository()
