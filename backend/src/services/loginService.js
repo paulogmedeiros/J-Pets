@@ -20,6 +20,12 @@ class LoginService {
             user.statusPagamento = empresa.status_pagamento
             user.statusAtivo = empresa.status_ativo
             user.idEmpresa = empresa.id
+            user.nome = empresa.nome_fantasia
+        }
+
+        if (user.tipo == 'DNP') {
+            const donoPet = await LoginRepository.selectDonoPetPorLoginId(user.id)
+            user.nome = donoPet.nome
         }
 
         return user;

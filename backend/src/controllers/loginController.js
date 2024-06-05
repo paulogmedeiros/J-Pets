@@ -11,6 +11,7 @@ class LoginController {
             const result = await LoginService.logar(data);
             let usuario_id = result.id;
             let usuario_tipo = result.tipo;
+            let nome;
             let statusPagamento;
             let statusAtivo;
             let idEmpresa;
@@ -19,7 +20,11 @@ class LoginController {
                 statusPagamento = result.statusPagamento
                 statusAtivo = result.statusAtivo
                 idEmpresa = result.idEmpresa
-                token = jwt.sign({ usuario_id, usuario_tipo, statusPagamento, statusAtivo, idEmpresa }, secret, { expiresIn: 86400 })
+                nome = result.nome
+                token = jwt.sign({ usuario_id, usuario_tipo, statusPagamento, statusAtivo, idEmpresa, nome }, secret, { expiresIn: 86400 })
+            } else if(result.tipo == 'DNP') {
+                nome = result.nome
+                token = jwt.sign({ usuario_id, usuario_tipo, nome }, secret, { expiresIn: 86400 })
             } else {
                 token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 86400 })
             }
