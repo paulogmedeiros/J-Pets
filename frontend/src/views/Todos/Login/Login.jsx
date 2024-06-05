@@ -56,11 +56,11 @@ function Login() {
 
         <div className="loginContainer container">
 
-            <div className="row justify-content-center border border-2 rounded-4 col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+            <div className="row justify-content-center border border-2 shadow-sm mb-5 bg-body-tertiary rounded rounded-4 col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
                 <div className="col-md-6 d-flex-md-5 ">
 
-                    <p className="login_titulo fs-1 fw-bold text-center mt-3 mb-2 mb-md-5">Login</p>
+                    <p className="login_titulo fs-1 fw-bold text-center mt-5 mb-2 mb-md-5">Login</p>
 
                     <div className="form-floating mb-3">
                         <input type="email"

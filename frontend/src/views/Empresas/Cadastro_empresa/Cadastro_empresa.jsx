@@ -61,9 +61,9 @@ function Cadastro_empresa() {
   return (
     <div className="container">
 
-      <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle">
+      <div className="row justify-content-center border border-2 shadow-sm mb-5 bg-body-tertiary rounded rounded-4 col-12  col-md-8 position-absolute top-50 start-50 translate-middle">
 
-        <div className=" col-md-5 d-flex-md-5">
+        <div className=" col-md-5 d-flex-md-5 p-5 ">
           <p className="titulo_cadastro_empresa fs-1 fw-bold text-center mb-0 mb-md-1">Criar nova conta</p>
 
           <div className="form-floating mb-1 mb-md-3">
@@ -125,7 +125,7 @@ function Cadastro_empresa() {
             Já possui uma conta? <a href="/" className="redirecionamento_cadastro_empresa link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Entrar</a>
           </p>
         </div>
-        <div className="img_login col-md-5 d-flex mt-3 mt-md-0 rounded-4">
+        <div className="img_login col-md-6 d-flex mt-3 ms-5 mt-md-0 rounded-4">
           <img src={imagemCadastroEmpresa} className="img-fluid"></img>
         </div>
       </div>
