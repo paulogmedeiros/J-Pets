@@ -16,6 +16,7 @@ const empresasAnimais = require("./controllers/empresasAnimaisController.js")
 const empresasProdutos = require("./controllers/empresasProdutosController.js")
 const empresasMarcas = require("./controllers/empresasMarcasController.js")
 const empresasModelos = require("./controllers/empresasModelosController.js")
+const cartoes = require("./controllers/cartoesController.js")
 
 //middleware
 const empresaValidation = require("./middleware/empresasValidation.js")
@@ -105,5 +106,8 @@ routes.get("/empresasModelos/:empresaId/marca/:marcaId",empresasModelos.getEmpre
 routes.get("/empresasModelos/:empresaId",empresasModelos.getEmpresasModelosPorIdEmpresa);
 routes.post("/empresasModelos",empresasModelos.postEmpresasModelos);
 routes.delete("/empresasModelos/:empresaId",empresasModelos.deleteEmpresasModelos);
+
+// rota cartoes
+routes.post("/cartoes/:empresaId",cartoes.postCartoes)
 
 module.exports = routes
