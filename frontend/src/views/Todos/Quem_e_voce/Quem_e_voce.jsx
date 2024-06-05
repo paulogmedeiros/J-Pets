@@ -1,8 +1,13 @@
-import React from 'react'
+import {useEffect} from 'react'
 import './Quem_e_voce.css'
 import imagemEmpresa from './img/imagem_empresa.svg'
 import imagemDonoPet from './img/imagem_dono_de_pet.svg'
 function Quem_e_voce() {
+
+    useEffect(() => {
+        document.title = "Quem é você?"
+    })
+
     return (
         <div className="container">
 
@@ -17,17 +22,18 @@ function Quem_e_voce() {
                         <div className="row col-12">
                             <div className="col-md-6 d-flex">
 
-                                <button type="button" className="btnConfirmacaoDonoDePet btn border border-3 rounded-5 border-primary">
+                                <a href='/cadastro/usuario' type="button"
+                                    className="btnConfirmacaoDonoDePet btn border border-3 rounded-5 border-primary">
                                     <p className="text-md-center fw-bold fs-4">Dono de pet</p>
                                     <img src={imagemDonoPet} className='img-fluid' width={410} />
-                                </button>
+                                </a>
                             </div>
 
                             <div className="col-md-6 d-flex mt-3 mt-md-0">
-                                <button type="button" className="btnConfirmacaoEmpresa btn border border-3 rounded-5 border-warning">
+                                <a href='/cadastro/empresa' type="button" className="btnConfirmacaoEmpresa btn border border-3 rounded-5 border-warning">
                                     <p className="text-md-center fw-bold fs-4">Empresa</p>
                                     <img src={imagemEmpresa} className='img-fluid' width={355} />
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
