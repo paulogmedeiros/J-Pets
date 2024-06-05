@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './Login.css'
 import imagem_login from '../../../img/imagem_login.png'
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
 
@@ -28,15 +29,22 @@ function Login() {
                 throw new Error("Erro na requisição" + resposta.status);
             } else {
                 window.alert("Logado com sucesso!");
-                const { token, tipo } = await resposta.json();
+                const token = await resposta.json();
+                alert(token)
+                const decodedToken = jwtDecode(token);
+                const { usuario_tipo } = decodedToken;
 
-                if (tipo === 'EMP') {
-                    window.alert("Redirecionando para página principal de empresa");
+                if (usuario_tipo === 'EMP') {
+
                     window.location.href = '/empresas/principal';
-                } else {
-                    window.alert("Redirecionando para página principal de usuário comum");
+                } else if (usuario_tipo === 'DNP') {
+
                     window.location.href = '/usuario/principal';
                 }
+                else {
+                    window.location.href = '/administrador/painel';
+                }
+
                 localStorage.setItem("token", token);
             }
         } catch (error) {
