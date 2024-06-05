@@ -45,7 +45,7 @@ function Login() {
                     window.location.href = '/administrador/painel';
                 }
 
-                localStorage.setItem("token", token);
+                localStorage.setItem("decodedToken", decodedToken);
             }
         } catch (error) {
             console.error("Erro ao fazer login", error);
