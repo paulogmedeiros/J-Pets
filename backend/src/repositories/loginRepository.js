@@ -22,7 +22,19 @@ class LoginRepository {
             select: {
                 id: true,
                 status_pagamento: true,
-                status_ativo: true
+                status_ativo: true,
+                nome_fantasia: true
+            }
+        })
+    }
+
+    async selectDonoPetPorLoginId(loginId) {
+        return await this.prisma.tutores_pets.findFirst({
+            where: {
+                login_id: loginId
+            },
+            select: {
+                nome:true
             }
         })
     }
