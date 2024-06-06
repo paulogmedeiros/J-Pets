@@ -18,7 +18,7 @@ function Principal_DonosDePet() {
         <div className="container-fluid">
 
           {/* Logo do projeto */}
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/usuario/principal">
             <img src={logoJPets} width={45} height={45} />
           </a>
           <button
@@ -36,7 +36,7 @@ function Principal_DonosDePet() {
           <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul className="navbar-nav nav-underline">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Início</a>
+                <a className="nav-link active" aria-current="page" href="/usuario/principal">Início</a>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -83,13 +83,24 @@ function Principal_DonosDePet() {
           <div className='d-flex justify-content-end'>
             <div className=''>
               <span>
-                <img src={iconeCoracao} width={40} height={40} />
+                <a href="/usuario/favoritos"><img src={iconeCoracao} width={40} height={40} /></a>
               </span>
             </div>
-            <div className=''>
-              <span>
-                <a href="/"><img src={iconeUsuarioLogin} width={40} height={40} /></a>
-              </span>
+            <div className="dropdown me-5">
+              <button className="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                  {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+                </span>
+              </button>
+              <ul className="dropdown-menu">
+                <a className="nav-link disabled ms-3" aria-disabled="true"> <span className='d-inline-block ' style={{ maxWidth: '100px' }}>
+                  {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+                </span>
+                </a>
+                <li><hr className="dropdown-divider" /></li>
+                <li><a className="dropdown-item" href="#">Meu perfil</a></li>
+                <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              </ul>
             </div>
           </div>
         </div>
@@ -120,42 +131,42 @@ function Principal_DonosDePet() {
         <div className="row">
           <div className="col-md-3">
             <div className="card mb-3">
-              <img src={imgDogWalking} className="card-img-top" alt="..."/>
-                <div className="card-body">
-                  <h5 className="card-title">Pet Walking</h5>
-                  <p className="card-text"></p>
+              <img src={imgDogWalking} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Pet Walking</h5>
+                <p className="card-text"></p>
 
-                </div>
+              </div>
             </div>
           </div>
           <div className="col-md-3">
-          <div className="card mb-3">
-              <img src={imgVeterinario} className="card-img-top" alt="..."/>
-                <div className="card-body">
-                  <h5 className="card-title">Veterinários</h5>
-                  <p className="card-text"></p>
+            <div className="card mb-3">
+              <img src={imgVeterinario} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Veterinários</h5>
+                <p className="card-text"></p>
 
-                </div>
+              </div>
             </div>
           </div>
           <div className="col-md-3">
-          <div className="card mb-3">
-              <img src={imgRacao} className="card-img-top" alt="..."/>
-                <div className="card-body">
-                  <h5 className="card-title">Produtos diversos</h5>
-                  <p className="card-text"></p>
+            <div className="card mb-3">
+              <img src={imgRacao} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Produtos diversos</h5>
+                <p className="card-text"></p>
 
-                </div>
+              </div>
             </div>
           </div>
           <div className="col-md-3">
-          <div className="card">
-              <img src={imgServicos} className="card-img-top" alt="..."/>
-                <div className="card-body">
-                  <h5 className="card-title">Pet Care</h5>
-                  <p className="card-text"></p>
+            <div className="card">
+              <img src={imgServicos} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Pet Care</h5>
+                <p className="card-text"></p>
 
-                </div>
+              </div>
             </div>
           </div>
         </div>

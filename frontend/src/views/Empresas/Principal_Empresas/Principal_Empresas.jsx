@@ -12,7 +12,7 @@ function Principal_Empresas() {
           <div className="container-fluid">
 
             {/* Logo do projeto */}
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="/empresas/principal">
               <img src={logoJPets} width={45} height={45} />
             </a>
             <button
@@ -75,7 +75,7 @@ function Principal_Empresas() {
                 </span>
               </button>
               <ul className="dropdown-menu">
-                <a className="nav-link disabled ms-3" aria-disabled="true"> <span className='d-inline-block text-truncate' style={{ maxWidth: '100px' }}>
+                <a className="nav-link disabled ms-3" aria-disabled="true"> <span className='d-inline-block ' style={{ maxWidth: '100px' }}>
                   {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
                 </span>
                 </a>

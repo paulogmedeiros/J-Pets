@@ -36,7 +36,7 @@ function Cadastro_usuario() {
     }
 
     try {
-      console.log(process.env.REACT_APP_URL_API)
+    
       const resposta = await fetch(`${process.env.REACT_APP_URL_API}/donoPet`, { // rota da API para cadastrar donos de pet
         method: 'POST',
         headers: {
