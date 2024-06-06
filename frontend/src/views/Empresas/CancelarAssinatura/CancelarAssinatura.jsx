@@ -50,7 +50,7 @@ function CancelarAssinatura() {
                   Serviços
                 </a>
                 <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><a className="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
                   <li><a className="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
@@ -66,10 +66,14 @@ function CancelarAssinatura() {
           </div>
           <div className="dropdown me-5">
             <button className="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Nome
+              <span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+              </span>
             </button>
             <ul className="dropdown-menu">
-              <a className="nav-link disabled ms-3" aria-disabled="true">Nome</a>
+              <a className="nav-link disabled ms-3" aria-disabled="true"><span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+              </span></a>
               <li><hr className="dropdown-divider" /></li>
               <li><a className="dropdown-item" href="#">Meu perfil</a></li>
               <li><a className="dropdown-item text-warning" href="/">Sair</a></li>

@@ -7,6 +7,7 @@ import iconeAtualizar_adm from "../img/icone_atualizar.svg";
 import iconLixeira_adm from "../img/icone_lixeira.svg";
 
 function Painel_de_controle_marcas() {
+  
   //Estado para armazenar os usuários
   const [marcas, setMarcas] = useState([]);
 

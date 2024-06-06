@@ -5,7 +5,7 @@ import logoJPets from './img/logoJPets.png'
 function Adicionar_servicos() {
   return (
     <>
-    <nav className="navbarEmpresas navbar navbar-expand-lg">
+      <nav className="navbarEmpresas navbar navbar-expand-lg">
         <div className="container-fluid">
 
           {/* Logo do projeto */}
@@ -51,7 +51,7 @@ function Adicionar_servicos() {
                   Serviços
                 </a>
                 <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><a className="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
                   <li><a className="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
@@ -67,10 +67,14 @@ function Adicionar_servicos() {
           </div>
           <div className="dropdown me-5">
             <button className="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Nome
+              <span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+              </span>
             </button>
             <ul className="dropdown-menu">
-              <a className="nav-link disabled ms-3" aria-disabled="true">Nome</a>
+              <a className="nav-link disabled ms-3" aria-disabled="true"><span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+              </span></a>
               <li><hr className="dropdown-divider" /></li>
               <li><a className="dropdown-item" href="#">Meu perfil</a></li>
               <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
@@ -79,59 +83,59 @@ function Adicionar_servicos() {
         </div>
       </nav>
 
-    <div className="container">
+      <div className="container">
 
-      {/* container para formulario e imagem */}
-      <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+        {/* container para formulario e imagem */}
+        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
-        {/* container para formulario */}
-        <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
+          {/* container para formulario */}
+          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
 
-          {/* Título */}
-          <p className="tituloAdicionarServicoEmpresa fs-2 fw-semibold text-center mb-4 mb-md-5">
-            Adicionar serviços
-          </p>
+            {/* Título */}
+            <p className="tituloAdicionarServicoEmpresa fs-2 fw-semibold text-center mb-4 mb-md-5">
+              Adicionar serviços
+            </p>
 
-          {/* lista suspensa para selecionar o animal */}
-          <div className="form-floating mb-3 mb-md-3">
-            <select
-              className="form-select"
-              id="floatingSelect"
-              aria-label="Floating label select example">
-              <option value="">Selecione</option>
-              <option value="Cachorro">teste</option>
-              <option value="Gato">teste</option>
-              <option value="Pássaro">teste</option>
-              <option value="Peixe">teste</option>
-            </select>
-            <label for="floatingSelect">Animal</label>
+            {/* lista suspensa para selecionar o animal */}
+            <div className="form-floating mb-3 mb-md-3">
+              <select
+                className="form-select"
+                id="floatingSelect"
+                aria-label="Floating label select example">
+                <option value="">Selecione</option>
+                <option value="Cachorro">teste</option>
+                <option value="Gato">teste</option>
+                <option value="Pássaro">teste</option>
+                <option value="Peixe">teste</option>
+              </select>
+              <label for="floatingSelect">Animal</label>
+            </div>
+
+            {/* lista suspensa para escolher o serviço */}
+            <div className="form-floating mb-3 mb-md-3">
+              <select
+                className="form-select "
+                id="floatingSelect"
+                aria-label="Floating label select example">
+                <option value="">Selecione</option>
+                <option value="Cachorro">teste</option>
+                <option value="Gato">teste</option>
+                <option value="Pássaro">teste</option>
+                <option value="Peixe">teste</option>
+              </select>
+              <label for="floatingSelect">Serviços</label>
+            </div>
+
+            <a className="btnAdicionarServicoEmpresa btn w-100" href="#" role="button">
+              Confirmar
+            </a>
           </div>
-
-          {/* lista suspensa para escolher o serviço */}
-          <div className="form-floating mb-3 mb-md-3">
-            <select
-              className="form-select "
-              id="floatingSelect"
-              aria-label="Floating label select example">
-              <option value="">Selecione</option>
-              <option value="Cachorro">teste</option>
-              <option value="Gato">teste</option>
-              <option value="Pássaro">teste</option>
-              <option value="Peixe">teste</option>
-            </select>
-            <label for="floatingSelect">Serviços</label>
+          <div className="imgAdicionarServicosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4">
+            <img src={Servicos_img} className="img-fluid"></img>
           </div>
-
-          <a className="btnAdicionarServicoEmpresa btn w-100" href="#" role="button">
-            Confirmar
-          </a>
-        </div>
-        <div className="imgAdicionarServicosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4">
-          <img src={Servicos_img} className="img-fluid"></img>
         </div>
       </div>
-    </div>
-</>
+    </>
   )
 }
 

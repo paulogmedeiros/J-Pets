@@ -30,7 +30,7 @@ function Login() {
             } else {
                 window.alert("Logado com sucesso!");
                 const token = await resposta.json();
-                alert(token)
+
                 const decodedToken = jwtDecode(token);
                 const { usuario_tipo } = decodedToken;
 
@@ -45,7 +45,7 @@ function Login() {
                     window.location.href = '/administrador/painel';
                 }
 
-                localStorage.setItem("decodedToken", decodedToken);
+                localStorage.setItem("decodedToken", JSON.stringify(decodedToken));
             }
         } catch (error) {
             console.error("Erro ao fazer login", error);

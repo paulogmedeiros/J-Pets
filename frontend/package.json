@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
     "jwt-decode": "^4.0.0",
     "postcss-dir-pseudo-class": "^8.0.1",
     "postcss-pseudo-class-any-link": "^9.0.2",
