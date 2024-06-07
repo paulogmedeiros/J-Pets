@@ -23,6 +23,17 @@ class EmpresasController {
         }
     }
 
+    async getEmpresaPorId(req, res) {
+        try {
+            const param = parseInt(req.params.id)
+            const result = await EmpresasService.findEmpresaPorId(param);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
     async postEmpresa(req, res) {
         try {
             const data = req.body;
@@ -60,6 +71,18 @@ class EmpresasController {
             const data = req.body;
             const param = parseInt(req.params.id)
             const result = await EmpresasService.editCriarCupom(data,param);
+            res.status(201).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+    async putCriarInformacoesEmpresa(req,res){
+        try {
+            const data = req.body;
+            const param = parseInt(req.params.id)
+            const result = await EmpresasService.editCriarInformacoesEmpresa(data,param);
             res.status(201).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)

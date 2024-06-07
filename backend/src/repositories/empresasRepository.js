@@ -36,6 +36,14 @@ class EmpresasRepository {
         })
     }
 
+    async selectEmpresaPorId(id) {
+        return await this.prisma.empresas.findFirst({
+            where: {
+                id: id
+            }
+        })
+    }
+
     // retorno a empresa que tem esse nome fantasia
     async selectEmpresaPorNomeFantasia(nomeFantasia) {
         return await this.prisma.empresas.findFirst({
@@ -49,6 +57,14 @@ class EmpresasRepository {
         return await this.prisma.empresas.findFirst({
             where: {
                 id
+            }
+        })
+    }
+
+    async selectEmpresaPorTelefone(telefone){
+        return await this.prisma.empresas.findFirst({
+            where:{
+                telefone
             }
         })
     }
@@ -74,6 +90,27 @@ class EmpresasRepository {
             })
         })
 
+    }
+
+    async insertCriarInformacoesEmpresa(data,id) {
+        return await this.prisma.empresas.update({
+            where: {
+                id: id
+            },
+            data: {
+                cep: data.cep,
+                rua: data.rua,
+                bairro: data.bairro,
+                cidade: data.cidade,
+                uf: data.uf,
+                telefone: data.telefone,
+                numero_residencia: data.numeroResidencia,
+                dia_semana_fim: data.diaSemanaFim,
+                dia_semana_inicio: data.diaSemanaInicio,
+                hora_abertura: data.horaAbertura,
+                hora_fechamento: data.horaFechamento,
+            }
+        })
     }
 
     async updateCriarCupom(data, id) {

@@ -66,8 +66,10 @@ routes.delete("/modelos/:id", modelos.deleteModelos);
 routes.get("/empresas", empresa.getEmpresas);
 routes.put("/empresas/imagem/:id", empresa.putEmpresasImagem);
 routes.get("/empresas/cupom/:id",empresa.getCupom);
+routes.get("/empresas/:id",empresa.getEmpresaPorId);
 routes.post("/empresas",empresa.postEmpresa);
 routes.put("/empresas/criar/cupom/:id",empresa.putCriarCupom);
+routes.put("/empresas/informacoes/:id",empresa.putCriarInformacoesEmpresa);
 routes.put("/empresas/excluir/cupom/:id",empresa.putExcluirCupom);
 
 // rota de login

@@ -12,10 +12,17 @@ class EmpresasService {
     }
 
     async findCupom(id) {
-        // valido se o nome fantasia já está cadastrado
+        // valido o id da empresa existe já está cadastrado
         await this.findEmpresasPorId(id)
-        
+
         return await EmpresasRepository.selectCupom(id)
+    }
+
+    async findEmpresaPorId(id) {
+        // valido o id da empresa existe já está cadastrado
+        await this.findEmpresasPorId(id)
+
+        return await EmpresasRepository.selectEmpresaPorId(id)
     }
 
     async createEmpresas(data) {
@@ -37,23 +44,41 @@ class EmpresasService {
     }
 
     async editCriarCupom(data, id) {
-        // valido se o nome fantasia já está cadastrado
+        // valido o id da empresa existe já está cadastrado
         await this.findEmpresasPorId(id)
 
         return await EmpresasRepository.updateCriarCupom(data, id)
     }
 
-    async editEmpresaImagem(param,nomeImagem,arquivo) {
+    async editCriarInformacoesEmpresa(data, id) {
+        // valido o id da empresa existe já está cadastrado
+        const empresa = await this.findEmpresasPorId(id)
 
-        const result =  await EmpresasRepository.updateEmpresasImagem(param,nomeImagem)
+        // valido se o numero de contato já está registrado no sistema
+        if (data.telefone != empresa.telefone) {
+            const empresaTelefone = await EmpresasRepository.selectEmpresaPorTelefone(data.telefone)
+            if (empresaTelefone) {
+                throw new ExcecaoIdNaoEncontrado("Numero de contato já cadastrado")
+            }
+        }
+        const horaAbertura = new Date('1970-01-01T12:45:00Z').toISOString();
+        const horaFechamento = new Date('1970-01-01T12:45:00Z').toISOString();
+        data.horaAbertura = horaAbertura
+        data.horaFechamento = horaFechamento
+        return await EmpresasRepository.insertCriarInformacoesEmpresa(data, id)
+    }
 
-        arquivo.mv(caminhoServer+"/../public/img/"+result.foto_perfil)
+    async editEmpresaImagem(param, nomeImagem, arquivo) {
+
+        const result = await EmpresasRepository.updateEmpresasImagem(param, nomeImagem)
+
+        arquivo.mv(caminhoServer + "/../public/img/" + result.foto_perfil)
 
         return result
     }
 
     async editExcluirCupom(id) {
-        // valido se o nome fantasia já está cadastrado
+        // valido o id da empresa existe já está cadastrado
         await this.findEmpresasPorId(id)
 
         return await EmpresasRepository.updateExcluirCupom(id)
