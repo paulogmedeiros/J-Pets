@@ -21,7 +21,7 @@ class ModelosRepository {
         })
     }
 
-    async selectModelosPorIdProdutoIdEmpresa(marcaId, empresaId) {
+    async selectModelosPorIdMarcaIdEmpresa(marcaId, empresaId) {
         console.log(marcaId,empresaId)
         return await this.prisma.modelos.findMany({
             where: {
@@ -36,38 +36,38 @@ class ModelosRepository {
     }
 
 
-    async selectModelosPorIdEmpresa(empresaId) {
-        return await this.prisma.modelos.findMany({
-            where: {
-                empresas_modelos: {
-                    some: {
-                        empresa_id: empresaId
-                    }
-                }
-            }, select: {
-                id: true,
-                nome: true,
-                marcas: {
-                    select: {
-                        id: true,
-                        nome: true,
-                        produtos: {
-                            select: {
-                                id: true,
-                                nome: true,
-                                animais: {
-                                    select: {
-                                        id: true,
-                                        nome: true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        })
-    }
+    // async selectModelosPorIdEmpresa(empresaId) {
+    //     return await this.prisma.modelos.findMany({
+    //         where: {
+    //             empresas_modelos: {
+    //                 some: {
+    //                     empresa_id: empresaId
+    //                 }
+    //             }
+    //         }, select: {
+    //             id: true,
+    //             nome: true,
+    //             marcas: {
+    //                 select: {
+    //                     id: true,
+    //                     nome: true,
+    //                     produtos: {
+    //                         select: {
+    //                             id: true,
+    //                             nome: true,
+    //                             animais: {
+    //                                 select: {
+    //                                     id: true,
+    //                                     nome: true
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     })
+    // }
 
 
     // retorno modelo por id e pelo nome

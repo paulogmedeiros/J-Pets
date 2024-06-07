@@ -25,6 +25,18 @@ class ServicosController {
         }
     }
 
+    async getServicosPorId(req, res) {
+        try {
+            const id = parseInt(req.params.id)
+            const result = await ServicosService.findServicosPorId(id);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+
     async postServicos(req, res) {
         try {
             const body = req.body

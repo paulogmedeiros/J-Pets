@@ -9,19 +9,19 @@ class ModelosService {
         return await ModelosRepository.selectModelos()
     }
 
-    async findModelosPorIdProdutoIdEmpresa(marcaId,empresaId){
+    async findModelosPorIdMarcaIdEmpresa(marcaId,empresaId){
         // valido se o id da empresa é valido
         await EmpresaService.findEmpresasPorId(empresaId)
 
-        return await ModelosRepository.selectModelosPorIdProdutoIdEmpresa(marcaId,empresaId)
+        return await ModelosRepository.selectModelosPorIdMarcaIdEmpresa(marcaId,empresaId)
     }
 
-    async findModelosPorIdEmpresa(empresaId) {
-        // valido se empresa existe
-        await EmpresaService.findEmpresasPorId(empresaId)
+    // async findModelosPorIdEmpresa(empresaId) {
+    //     // valido se empresa existe
+    //     await EmpresaService.findEmpresasPorId(empresaId)
 
-        return await ModelosRepository.selectModelosPorIdEmpresa(empresaId)
-    }
+    //     return await ModelosRepository.selectModelosPorIdEmpresa(empresaId)
+    // }
 
     async createModelos(data) {
         // valido se o id da marca é valido

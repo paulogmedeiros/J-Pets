@@ -13,11 +13,11 @@ class ModelosController{
         }
     }
 
-    async getModelosPorIdProdutoIdEmpresa(req, res) {
+    async getModelosPorIdMarcaIdEmpresa(req, res) {
         try {
             const marcasId = parseInt(req.params.marcasId)
             const empresaId = parseInt(req.params.empresaId)
-            const result = await ModelosService.findModelosPorIdProdutoIdEmpresa(marcasId,empresaId);
+            const result = await ModelosService.findModelosPorIdMarcaIdEmpresa(marcasId,empresaId);
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
@@ -25,16 +25,27 @@ class ModelosController{
         }
     }
 
-    async getModelosPorIdEmpresa(req,res){
+    async getModelosPorId(req, res) {
         try {
-            const param = parseInt(req.params.empresaId)
-            const result = await ModelosService.findModelosPorIdEmpresa(param);
+            const id = parseInt(req.params.id)
+            const result = await ModelosService.findModelosPorId(id);
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)
         }
     }
+
+    // async getModelosPorIdEmpresa(req,res){
+    //     try {
+    //         const param = parseInt(req.params.empresaId)
+    //         const result = await ModelosService.findModelosPorIdEmpresa(param);
+    //         res.status(200).json(result)
+    //     } catch (error) {
+    //         const retorno = FiltroExcecoes.tratarErro(error)
+    //         res.status(retorno.status).json(retorno.mensage)
+    //     }
+    // }
 
     async postModelos(req,res){
         try {

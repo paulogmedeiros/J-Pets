@@ -35,11 +35,11 @@ class LoginController {
         }
     }
 
-    async getAdministradorPorId(req, res) {
+    async getUsuarioPorId(req, res) {
         try {
             const usuarioTipo = req.usuario_tipo
             const param = parseInt(req.params.id)
-            const result = await LoginService.findAdministradorPorId(param,usuarioTipo);
+            const result = await LoginService.findUsuarioPorId(param,usuarioTipo);
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)

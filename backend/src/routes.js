@@ -34,6 +34,7 @@ routes.get("/animais", animais.getAnimais);
 // rotas de servicos
 routes.get("/servicos",servico.getServicos);
 routes.get("/servicos/animais/:animalId/empresa/:empresaId", servico.getServicosPorIdAnimalIdEmpresa);
+routes.get("/servicos/:id", servico.getServicosPorId);
 routes.post("/servicos", servico.postServicos);
 routes.put("/servicos/:id", servico.putServicos);
 routes.delete("/servicos/:id", servico.deleteServicos);
@@ -42,6 +43,7 @@ routes.delete("/servicos/:id", servico.deleteServicos);
 routes.get("/produtos",produtos.getProdutos);
 routes.get("/produtos/animais/:animalId/empresa/:empresaId", produtos.getProdutosPorIdAnimalIdEmpresa);
 routes.get("/produtos/animais/:animalId",produtos.getProdutosPorIdAnimal);
+routes.get("/produtos/:id", produtos.getProdutosPorId);
 routes.post("/produtos", produtos.postProdutos);
 routes.put("/produtos/:id", produtos.putProdutos);
 routes.delete("/produtos/:id", produtos.deleteProdutos);
@@ -50,14 +52,16 @@ routes.delete("/produtos/:id", produtos.deleteProdutos);
 routes.get("/marcas",marcas.getMarcas);
 routes.get("/marcas/produtos/:produtoId/empresa/:empresaId", marcas.getMarcasPorIdProdutoIdEmpresa);
 routes.get("/marcas/produtos/:produtoId",marcas.getMarcasPorIdProduto);
+routes.get("/marcas/:id", marcas.getMarcasPorId);
 routes.post("/marcas", marcas.postMarcas);
 routes.put("/marcas/:id", marcas.putMarcas);
 routes.delete("/marcas/:id", marcas.deleteMarcas);
 
 // rota de modelos
 routes.get("/modelos", modelos.getModelos);
-routes.get("/modelos/:empresaId", modelos.getModelosPorIdEmpresa)
-routes.get("/modelos/marcas/:marcasId/empresa/:empresaId", modelos.getModelosPorIdProdutoIdEmpresa);
+// routes.get("/modelos/empresa/:empresaId", modelos.getModelosPorIdEmpresa)
+routes.get("/modelos/:id", modelos.getModelosPorId);
+routes.get("/modelos/marcas/:marcasId/empresa/:empresaId", modelos.getModelosPorIdMarcaIdEmpresa);
 routes.post("/modelos", modelos.postModelos);
 routes.put("/modelos/:id", modelos.putModelos);
 routes.delete("/modelos/:id", modelos.deleteModelos);
@@ -73,7 +77,7 @@ routes.put("/empresas/informacoes/:id",empresa.putCriarInformacoesEmpresa);
 routes.put("/empresas/excluir/cupom/:id",empresa.putExcluirCupom);
 
 // rota de login
-routes.get("/administrador/:id",tokenValidation.verificarToken,login.getAdministradorPorId);
+routes.get("/usuario/:id",tokenValidation.verificarToken,login.getUsuarioPorId);
 routes.post("/cadastro/administrador",login.postAdministrador);
 routes.post("/login",login.logar);
 routes.post("/envio/email",login.postEnvioEmail);

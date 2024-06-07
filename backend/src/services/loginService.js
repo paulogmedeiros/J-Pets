@@ -31,7 +31,7 @@ class LoginService {
         return user;
     }
 
-    async findAdministradorPorId(id, usuarioTipo) {
+    async findUsuarioPorId(id, usuarioTipo) {
         // coleto o usuario com o id e verifico se ele existe
         let usuario;
         if (usuarioTipo === "ADM") {
