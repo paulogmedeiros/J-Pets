@@ -72,6 +72,9 @@ routes.put("/empresas/imagem/:id", empresa.putEmpresasImagem);
 routes.get("/empresas/cupom/:id",empresa.getCupom);
 routes.get("/empresas/:id",empresa.getEmpresaPorId);
 routes.post("/empresas",empresa.postEmpresa);
+routes.put("/empresas/cancelar/assinatura/:id",empresa.putCancelarAssinatura);
+routes.put("/empresas/status/:id",empresa.putStatus);
+routes.put("/empresas/remover/foto/:id",empresa.putRemoverFotoPerfil);
 routes.put("/empresas/criar/cupom/:id",empresa.putCriarCupom);
 routes.put("/empresas/informacoes/:id",empresa.putCriarInformacoesEmpresa);
 routes.put("/empresas/excluir/cupom/:id",empresa.putExcluirCupom);
@@ -86,6 +89,7 @@ routes.put("/senha/:id",login.putSenha);
 
 // rota donoPet
 routes.post("/donoPet",donoPet.postDonoPet);
+routes.delete("/donoPet/:loginId",donoPet.deleteDonoPetPorIdLogin);
 
 // rota empresasAnimais
 routes.get("/empresasAnimais/:empresaId", empresasAnimais.getEmpresasAnimaisPorIdEmpresa);

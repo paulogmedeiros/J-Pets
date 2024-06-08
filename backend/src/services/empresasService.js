@@ -50,6 +50,36 @@ class EmpresasService {
         return await EmpresasRepository.updateCriarCupom(data, id)
     }
 
+    async editCancelarAssinatura(id) {
+        // valido o id da empresa existe já está cadastrado
+        await this.findEmpresasPorId(id)
+
+        return await EmpresasRepository.updateCancelarAssinatura(id)
+    }
+
+    async editRemoverFotoPerfil(id) {
+        // valido o id da empresa existe já está cadastrado
+        await this.findEmpresasPorId(id)
+
+        return await EmpresasRepository.updateRemoverFotoPerfil(id)
+    }
+
+    async editStatus(id) {
+        // valido o id da empresa existe já está cadastrado
+        const empresa = await this.findEmpresasPorId(id)
+        let status;
+        if(empresa.status_ativo){
+            status = false
+            if(empresa.status_pagamento){
+                throw new ExcecaoIdNaoEncontrado("É necessario cancelar sua assinatura primeiro para desativar a conta")
+            }
+        }else{
+            status = true
+        }
+
+        return await EmpresasRepository.updateStatus(id, status)
+    }
+
     async editCriarInformacoesEmpresa(data, id) {
         // valido o id da empresa existe já está cadastrado
         const empresa = await this.findEmpresasPorId(id)

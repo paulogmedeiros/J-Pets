@@ -13,6 +13,17 @@ class DonosPetController {
             res.status(retorno.status).json(retorno.mensage)
         }
     }
+
+    async deleteDonoPetPorIdLogin(req,res){
+        try {
+            const param = parseInt(req.params.loginId)
+            const result = await DonosPetService.removeDonoPetPorIdLogin(param);
+            res.status(201).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
 }
 
 module.exports = new DonosPetController()

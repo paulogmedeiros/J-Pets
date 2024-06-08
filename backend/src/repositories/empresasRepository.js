@@ -128,6 +128,39 @@ class EmpresasRepository {
         })
     }
 
+    async updateCancelarAssinatura(id) {
+        return await this.prisma.empresas.update({
+            where: {
+                id: id
+            },
+            data: {
+                status_pagamento: false
+            },
+        })
+    }
+
+    async updateRemoverFotoPerfil(id) {
+        return await this.prisma.empresas.update({
+            where: {
+                id: id
+            },
+            data: {
+                foto_perfil: null
+            },
+        })
+    }
+
+    async updateStatus(id, status) {
+        return await this.prisma.empresas.update({
+            where: {
+                id: id
+            },
+            data: {
+                status_ativo: status
+            },
+        })
+    }
+
     async updateExcluirCupom(id) {
         return await this.prisma.empresas.update({
             where: {

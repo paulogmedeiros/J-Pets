@@ -17,6 +17,20 @@ class DonosPetService{
         return await DonosPetRepository.insertDonoPet(data)
     }
 
+    async removeDonoPetPorIdLogin(loginId){
+        // valido se usuario existe
+        const donoPet = await DonosPetRepository.selectLoginDonoPets(loginId)
+        if(!donoPet){
+            throw new ExcecaoIdNaoEncontrado("Usuário não cadastrado")
+        }
+        // valido se o usuario é do perfil dono de pet
+        if(donoPet.tipo != 'DNP'){
+            throw new ExcecaoIdNaoEncontrado("Usuário não é do perfil tutor de pet")
+        }
+        // retorno
+        return await DonosPetRepository.deleteDonoPetPorIdLogin(loginId,donoPet.tutores_pets.id)
+    }
+
 }
 
 

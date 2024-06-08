@@ -78,6 +78,39 @@ class EmpresasController {
         }
     }
 
+    async putCancelarAssinatura(req,res){
+        try {
+            const param = parseInt(req.params.id)
+            const result = await EmpresasService.editCancelarAssinatura(param);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+    async putRemoverFotoPerfil(req,res){
+        try {
+            const param = parseInt(req.params.id)
+            const result = await EmpresasService.editRemoverFotoPerfil(param);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+    async putStatus(req,res){
+        try {
+            const param = parseInt(req.params.id)
+            const result = await EmpresasService.editStatus(param);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
     async putCriarInformacoesEmpresa(req,res){
         try {
             const data = req.body;
