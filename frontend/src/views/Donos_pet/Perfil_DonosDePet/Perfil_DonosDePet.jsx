@@ -5,6 +5,7 @@ import iconeUsuarioLogin from './img/icone_usuarioLogin.svg'
 import './Perfil_DonosDePet.css'
 
 function Perfil_DonosDePet() {
+
   return (
     <div>
       <nav className="navbarDonoDePet navbar navbar-expand-lg ">
@@ -91,7 +92,7 @@ function Perfil_DonosDePet() {
                 </span>
                 </a>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Meu perfil</a></li>
+                <li><a className="dropdown-item" href="/usuario/perfil">Meu perfil</a></li>
                 <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
               </ul>
             </div>

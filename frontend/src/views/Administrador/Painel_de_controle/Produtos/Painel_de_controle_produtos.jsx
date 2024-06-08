@@ -23,7 +23,7 @@ function Painel_de_controle_produtos() {
     async function carregarProdutos() {
         try {
             // Fazer uma chamada da API
-            const resposta = await fetch(process.env.REACT_APP_URL_API +'/produtos')
+            const resposta = await fetch(process.env.REACT_APP_URL_API + '/produtos')
             if (!resposta.ok) {
 
                 // Exibindo erro API
@@ -41,7 +41,7 @@ function Painel_de_controle_produtos() {
     async function deletarProdutos(produto_id) {
         if (window.confirm("Tem certeza que deseja deletar esse produto?")) {
             try {
-                const resposta = await fetch(process.env.REACT_APP_URL_API +"/produtos/" + produto_id, {
+                const resposta = await fetch(process.env.REACT_APP_URL_API + "/produtos/" + produto_id, {
                     method: "DELETE",
                 });
                 if (!resposta.ok) {
@@ -62,7 +62,7 @@ function Painel_de_controle_produtos() {
         <div className="admPainel">
             <nav className="admNavbar navbar navbar-expand-lg">
                 <div className="container-fluid d-flex">
-                    <a className="navbar-brand" href="#"><img src={logoJPets_adm} alt="" srcSet="" width={50} height={50} /></a>
+                    <a className="navbar-brand" href="/administrador/painel"><img src={logoJPets_adm} alt="" srcSet="" width={50} height={50} /></a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -110,7 +110,7 @@ function Painel_de_controle_produtos() {
 
                             <div className="input-group d-flex mb-3 col-4 w-25 h-25 me-2 mt-5">
                                 <input type="text" className="form-control" placeholder="Pesquisar produto" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                                <span className="input-group-text" id="basic-addon2"><img src={pesquisaIcone_adm} alt="" srcSet="" width={20} color='back' /></span>
+                                <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30} /></button>
                             </div>
 
 

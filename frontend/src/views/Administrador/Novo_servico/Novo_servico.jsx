@@ -1,43 +1,61 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Novo_servico.css";
 import imgCadastroItens from "../img/imgCadastro.svg";
 import logoJPets_adm from '../img/logoJPets.png'
+import iconeVoltar from '../img/iconeVoltar.svg'
 
 function Novo_servico() {
-  const [animal, setAnimal] = useState("");
-  const [nomeServico, setNomeServico] = useState("");
 
-  // Função que será chamada ao enviar o formulário
-  async function AdicionarServico(event) {
-    // impede o comportamento padrão de reload da página
+  const [animais, setAnimal] = useState([])
+  const [nome, setNome] = useState('')
+  const [animal_id, setAnimalId] = useState('')
 
+  useEffect(() => {
+    document.title = "Cadastro | Serviços"
+    pegarIdAnimais()
+  }, [])
 
-    // Criando objeto com os dados do usuário que serão enviados para a API
+  async function pegarIdAnimais() {
+    const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+
+    const dados = await resposta.json()
+    setAnimal(dados)
+  }
+
+  async function cadastrarServico(event) {
+    event.preventDefault()
+
     const servicoDados = {
-      animal,
-      nomeServico
-    };
+      animal_id,
+      nome
+    }
+
+    window.alert(servicoDados.animal_id)
+    window.alert(servicoDados.nome)
 
     try {
-      // Realiza POST para a API
-      const resposta = await fetch(process.env.REACT_APP_URL_API +"/servicos", {
-        method: "POST",
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos", {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json", // Especificando o corpo como JSON
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(servicoDados),
+        body: JSON.stringify(servicoDados)
       });
 
-      // Verifica se a resposta da API foi bem-sucedida
+      const responseData = await resposta.json();
+
       if (!resposta.ok) {
-        console.debug("Erro ao inserir novo serviço");
+        console.error("Erro ao cadastrar serviços:", responseData);
+        window.alert("Erro ao cadastrar serviços: " + JSON.stringify(responseData));
+        throw new Error('Erro ao cadastrar serviços: ' + resposta.statusText);
       } else {
-        alert("Serviço cadastrado!");
-        console.debug("Serviço inserido!");
-        window.location.href = "/administrador/painel";
+        console.log("Resposta do servidor:", responseData);
+        window.alert("Serviço cadastrado com sucesso");
+        window.location.href = "/administrador/painel/servicos";
       }
     } catch (error) {
-      console.debug(error);
+      console.error("Erro ao cadastrar serviço:", error);
+      window.alert("Erro ao cadastrar serviço: " + error.message);
     }
   }
 
@@ -46,7 +64,7 @@ function Novo_servico() {
     <div className="admPainel">
       <nav className="admNavbar navbar navbar-expand-md">
         <div className="container-fluid d-flex">
-          <a className="navbar-brand" href="#"><img src={logoJPets_adm} alt="" srcSet="" width={50} height={50} /></a>
+          <a className="navbar-brand" href="/administrador/painel"><img src={logoJPets_adm} alt="" srcSet="" width={50} height={50} /></a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -70,52 +88,62 @@ function Novo_servico() {
         </div>
       </nav>
 
+      <a href="/administrador/painel/servicos" type="button" class="btnVoltarServico btn m-5 rounded-5"><span><img src={iconeVoltar} width={20} height={20} /></span> Voltar</a>
       <div className="container">
         {/* container para formulario e imagem */}
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
-          {/* container para formulario */}
-          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
-            {/* Título */}
-            <p className="tituloNovoServico fs-1 fw-semibold text-center mb-4 mb-md-5">
-              Novo serviço
-            </p>
 
-            {/* lista suspensa para selecionar o animal */}
-            <div className="form-floating mb-3 mb-md-3">
-              <select
-                value={animal}
-                onChange={(e) => setAnimal(e.target.value)}
-                className="form-select "
-                id="floatingSelect"
-                aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">Cachorro</option>
-                <option value="Gato">Gato</option>
-                <option value="Pássaro">Pássaro</option>
-                <option value="Peixe">Peixe</option>
-              </select>
-              <label for="floatingSelect">Animal</label>
+        <div className=" justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+
+          <div className="row border rounded-4 bg-light shadow-sm mb-5 bg-body-tertiary rounded">
+            {/* container para formulario */}
+            <div className="col-md-6 d-flex-md-5 mt-5 mt-md-0">
+              {/* Título */}
+              <p className="tituloNovoServico fs-1 fw-semibold text-center mb-4 mb-md-5 mt-5">
+                Novo serviço
+              </p>
+
+              {/* lista suspensa para selecionar o animal */}
+              <div className="form-floating mb-3 mb-md-3">
+                <select
+                  value={animal_id}
+                  onChange={e => setAnimalId(e.target.value)}
+
+                  className="form-select"
+                  id="floatingSelect"
+                  aria-label="Floating label select example">
+
+                  {animais.map(animal => (
+                    <option
+                      key={animal.animal_id}
+                      value={animal.animal_id}>{animal.nome}
+                    </option>
+                  ))}
+                </select>
+                <label for="floatingSelect">Animal</label>
+              </div>
+
+              {/* Input para inserir o nome do servico */}
+              <div className="form-floating mb-3 mb-md-5">
+                <input
+                  type="text"
+                  value={nome}
+                  onChange={e => setNome(e.target.value)}
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder=""
+                />
+                <label for="floatingInput">Nome do serviço</label>
+              </div>
+
+              <button
+                onClick={cadastrarServico}
+                className="btnNovoServico btn w-100">
+                Cadastrar serviço
+              </button>
             </div>
-
-            {/* Input para inserir o nome do servico */}
-            <div className="form-floating mb-3 mb-md-5">
-              <input
-                type="text"
-                value={nomeServico}
-                onChange={(e) => setNomeServico(e.target.value)}
-                className="form-control"
-                id="floatingInput"
-                placeholder=""
-              />
-              <label for="floatingInput">Nome do serviço</label>
+            <div className="imgNovoServico col-md-6 d-flex mt-3 mt-md-0 rounded-4">
+              <img src={imgCadastroItens} className="img-fluid p-3"></img>
             </div>
-
-            <a onClick={() => AdicionarServico()} className="btnNovoServico btn w-100" href="#" role="button">
-              Cadastrar serviço
-            </a>
-          </div>
-          <div className="imgNovoServico col-md-5 d-flex mt-3 mt-md-0 rounded-4">
-            <img src={imgCadastroItens} className="img-fluid"></img>
           </div>
         </div>
       </div>

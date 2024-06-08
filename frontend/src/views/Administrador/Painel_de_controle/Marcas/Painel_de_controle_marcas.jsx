@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import logoJPets_adm from "../img/logoJPets.png";
-import"./Painel_de_controle_marcas.css";
+import "./Painel_de_controle_marcas.css";
 import pesquisaIcone_adm from "../img/pesquisa_icone.svg";
 import botaoMais from "../img/botao_mais.svg";
 import iconeAtualizar_adm from "../img/icone_atualizar.svg";
 import iconLixeira_adm from "../img/icone_lixeira.svg";
 
 function Painel_de_controle_marcas() {
-  
+
   //Estado para armazenar os usuários
   const [marcas, setMarcas] = useState([]);
 
@@ -23,7 +23,7 @@ function Painel_de_controle_marcas() {
   async function carregarMarcas() {
     try {
       // Fazer uma chamada da API
-      const resposta = await fetch(process.env.REACT_APP_URL_API +"/marcas");
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/marcas");
       if (!resposta.ok) {
         // Exibindo erro API
         console.debug("HTTP erro:" + resposta.status);
@@ -39,7 +39,7 @@ function Painel_de_controle_marcas() {
   async function deletarMarca(marca_id) {
     if (window.confirm("Tem certeza que deseja deletar essa marca?")) {
       try {
-        const resposta = await fetch(process.env.REACT_APP_URL_API +"/marcas/" + marca_id, {
+        const resposta = await fetch(process.env.REACT_APP_URL_API + "/marcas/" + marca_id, {
           method: "DELETE",
         });
         if (!resposta.ok) {
@@ -59,7 +59,7 @@ function Painel_de_controle_marcas() {
     <div className="admPainel">
       <nav className="admNavbar navbar navbar-expand-lg">
         <div className="container-fluid d-flex">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/administrador/painel">
             <img src={logoJPets_adm} alt="" srcSet="" width={50} height={50} />
           </a>
           <button
@@ -126,9 +126,7 @@ function Painel_de_controle_marcas() {
               </p>
               <div className="input-group d-flex mb-5 col-4 w-25 h-25 me-2 mt-5">
                 <input type="text" className="form-control" placeholder="Pesquisar marca" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                <span className="input-group-text" id="basic-addon2">
-                  <img src={pesquisaIcone_adm} alt="" srcSet="" width={20} color="black" />
-                </span>
+                <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30} /></button>
               </div>
 
               <button type="button" className="btnAdicionarNovoMarcas col-2 rounded-5 mb-3 h-25 ms-2 mt-5 btn btn-sm">Adicionar novo<span className="badge">
