@@ -81,8 +81,8 @@ class EmpresasController {
     async putCancelarAssinatura(req,res){
         try {
             const param = parseInt(req.params.id)
-            const result = await EmpresasService.editCancelarAssinatura(param);
-            res.status(200).json(result)
+            await EmpresasService.editCancelarAssinatura(param);
+            res.status(200).json({mensage: "Assinatura cancelada!!!"})
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)
