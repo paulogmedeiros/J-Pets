@@ -70,6 +70,7 @@ routes.delete("/modelos/:id", modelos.deleteModelos);
 
 // rota empresas
 routes.get("/empresas", empresa.getEmpresas);
+routes.get("/empresas/:tipo/servicosProdutos/:id", empresa.getEmpresasPeloProudutoOuServico);
 routes.put("/empresas/imagem/:id", empresa.putEmpresasImagem);
 routes.get("/empresas/cupom/:id",empresa.getCupom);
 routes.get("/empresas/:id",empresa.getEmpresaPorId);

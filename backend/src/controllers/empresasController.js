@@ -34,6 +34,18 @@ class EmpresasController {
         }
     }
 
+    async getEmpresasPeloProudutoOuServico(req, res) {
+        try {
+            const tipo = req.params.tipo
+            const id = parseInt(req.params.id)
+            const result = await EmpresasService.findEmpresasPeloProudutoOuServico(tipo,id);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
     async postEmpresa(req, res) {
         try {
             const data = req.body;
@@ -52,12 +64,12 @@ class EmpresasController {
             nomeImagem = nomeImagem.split(".")
             let extensao = nomeImagem[nomeImagem.length - 1]
             if (extensao === "png") {
-                nomeImagem = new Date().getTime()+"."+extensao
+                nomeImagem = new Date().getTime() + "." + extensao
                 let arquivo = req.files.imagem
-                const result = await EmpresasService.editEmpresaImagem(param,nomeImagem,arquivo);
+                const result = await EmpresasService.editEmpresaImagem(param, nomeImagem, arquivo);
                 res.status(200).json(result)
             } else {
-                res.status(400).json({mensage:"arquivo invalido"})
+                res.status(400).json({ mensage: "arquivo invalido" })
             }
 
         } catch (error) {
@@ -66,11 +78,11 @@ class EmpresasController {
         }
     }
 
-    async putCriarCupom(req,res){
+    async putCriarCupom(req, res) {
         try {
             const data = req.body;
             const param = parseInt(req.params.id)
-            const result = await EmpresasService.editCriarCupom(data,param);
+            const result = await EmpresasService.editCriarCupom(data, param);
             res.status(201).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
@@ -78,18 +90,18 @@ class EmpresasController {
         }
     }
 
-    async putCancelarAssinatura(req,res){
+    async putCancelarAssinatura(req, res) {
         try {
             const param = parseInt(req.params.id)
             await EmpresasService.editCancelarAssinatura(param);
-            res.status(200).json({mensage: "Assinatura cancelada!!!"})
+            res.status(200).json({ mensage: "Assinatura cancelada!!!" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)
         }
     }
 
-    async putRemoverFotoPerfil(req,res){
+    async putRemoverFotoPerfil(req, res) {
         try {
             const param = parseInt(req.params.id)
             const result = await EmpresasService.editRemoverFotoPerfil(param);
@@ -100,7 +112,7 @@ class EmpresasController {
         }
     }
 
-    async putStatus(req,res){
+    async putStatus(req, res) {
         try {
             const param = parseInt(req.params.id)
             const result = await EmpresasService.editStatus(param);
@@ -111,11 +123,11 @@ class EmpresasController {
         }
     }
 
-    async putCriarInformacoesEmpresa(req,res){
+    async putCriarInformacoesEmpresa(req, res) {
         try {
             const data = req.body;
             const param = parseInt(req.params.id)
-            const result = await EmpresasService.editCriarInformacoesEmpresa(data,param);
+            const result = await EmpresasService.editCriarInformacoesEmpresa(data, param);
             res.status(201).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
@@ -123,7 +135,7 @@ class EmpresasController {
         }
     }
 
-    async putExcluirCupom(req,res){
+    async putExcluirCupom(req, res) {
         try {
             const param = parseInt(req.params.id)
             const result = await EmpresasService.editExcluirCupom(param);

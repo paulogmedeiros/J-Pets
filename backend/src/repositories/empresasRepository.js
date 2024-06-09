@@ -44,6 +44,30 @@ class EmpresasRepository {
         })
     }
 
+    async selectEmpresasPorServicoId(id) {
+        return await this.prisma.empresas.findMany({
+            where: {
+                empresas_servicos: {
+                    some: {
+                        servico_id: id
+                    }
+                }
+            }
+        })
+    }
+
+    async selectEmpresaPorModeloId(modeloId) {
+        return await this.prisma.empresas.findMany({
+            where: {
+                empresas_modelos: {
+                    some: {
+                        modelo_id: modeloId
+                    }
+                }
+            }
+        })
+    }
+    
     // retorno a empresa que tem esse nome fantasia
     async selectEmpresaPorNomeFantasia(nomeFantasia) {
         return await this.prisma.empresas.findFirst({
@@ -61,9 +85,9 @@ class EmpresasRepository {
         })
     }
 
-    async selectEmpresaPorTelefone(telefone){
+    async selectEmpresaPorTelefone(telefone) {
         return await this.prisma.empresas.findFirst({
-            where:{
+            where: {
                 telefone
             }
         })
@@ -92,7 +116,7 @@ class EmpresasRepository {
 
     }
 
-    async insertCriarInformacoesEmpresa(data,id) {
+    async insertCriarInformacoesEmpresa(data, id) {
         return await this.prisma.empresas.update({
             where: {
                 id: id
@@ -176,7 +200,7 @@ class EmpresasRepository {
         })
     }
 
-    async updateEmpresasImagem(id,foto_perfil) {
+    async updateEmpresasImagem(id, foto_perfil) {
         return await this.prisma.empresas.update({
             where: {
                 id: id

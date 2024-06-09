@@ -25,6 +25,14 @@ class EmpresasService {
         return await EmpresasRepository.selectEmpresaPorId(id)
     }
 
+    async findEmpresasPeloProudutoOuServico(tipo, id) {
+        if (tipo == 'SVC') {
+            return await EmpresasRepository.selectEmpresasPorServicoId(id)
+        } else {
+            return await EmpresasRepository.selectEmpresaPorModeloId(id)
+        }
+    }
+
     async createEmpresas(data) {
         // valido se o cnpj já está cadastrado
         await this.findEmpresasPorCnpj(data.cnpj)
@@ -68,12 +76,12 @@ class EmpresasService {
         // valido o id da empresa existe já está cadastrado
         const empresa = await this.findEmpresasPorId(id)
         let status;
-        if(empresa.status_ativo){
+        if (empresa.status_ativo) {
             status = false
-            if(empresa.status_pagamento){
+            if (empresa.status_pagamento) {
                 throw new ExcecaoGenericaDeErro("É necessario cancelar sua assinatura primeiro para desativar a conta")
             }
-        }else{
+        } else {
             status = true
         }
 
