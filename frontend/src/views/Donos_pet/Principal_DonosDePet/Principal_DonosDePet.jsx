@@ -9,8 +9,39 @@ import imgDogWalking from './img/dogWalking.svg'
 import imgRacao from './img/racao.svg'
 import imgVeterinario from './img/veterinario.svg'
 import imgServicos from './img/servicos.svg'
+import { NavLink } from '@mantine/core';
 
 function Principal_DonosDePet() {
+
+  function Demo() {
+    return (
+      <>
+        <NavLink
+          href="#required-for-focus"
+          label="First parent link"
+          childrenOffset={28}>
+
+          <NavLink href="#required-for-focus" label="First child link" />
+          <NavLink label="Second child link" href="#required-for-focus" />
+          <NavLink label="Nested parent link" childrenOffset={28} href="#required-for-focus">
+            <NavLink label="First child link" href="#required-for-focus" />
+            <NavLink label="Second child link" href="#required-for-focus" />
+            <NavLink label="Third child link" href="#required-for-focus" />
+          </NavLink>
+        </NavLink>
+
+        <NavLink
+          href="#required-for-focus"
+          label="Second parent link"
+          childrenOffset={28}
+        >
+          <NavLink label="First child link" href="#required-for-focus" />
+          <NavLink label="Second child link" href="#required-for-focus" />
+          <NavLink label="Third child link" href="#required-for-focus" />
+        </NavLink>
+      </>
+    );
+  }
   return (
     <>
       {/* Inicio da barra de navegação */}
@@ -43,9 +74,31 @@ function Principal_DonosDePet() {
                   Cachorro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+
+                    <NavLink
+                      href="#required-for-focus"
+                      label="First parent link"
+                      childrenOffset={28}>
+
+                      <NavLink href="#required-for-focus" label="First child link" />
+                      <NavLink label="Second child link" href="#required-for-focus" />
+                      <NavLink label="Nested parent link" childrenOffset={28} href="#required-for-focus">
+                        <NavLink label="First child link" href="#required-for-focus" />
+                        <NavLink label="Second child link" href="#required-for-focus" />
+                        <NavLink label="Third child link" href="#required-for-focus" />
+                      </NavLink>
+                    </NavLink>
+
+                    <NavLink
+                      href="#required-for-focus"
+                      label="Second parent link"
+                      childrenOffset={28}
+                    >
+                      <NavLink label="First child link" href="#required-for-focus" />
+                      <NavLink label="Second child link" href="#required-for-focus" />
+                      <NavLink label="Third child link" href="#required-for-focus" />
+                    </NavLink>
+                  
                 </ul>
               </li>
               <li className="nav-item dropdown">

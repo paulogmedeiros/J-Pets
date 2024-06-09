@@ -1,8 +1,49 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import Servicos_img from './img/Servicos_img.svg'
 import './Adicionar_servicos.css'
 import logoJPets from './img/logoJPets.png'
+
 function Adicionar_servicos() {
+
+  const [animais, setAnimal] = useState([])
+  const [servicos, setServicos] = useState([])
+  const [animalId, setAnimalId] = useState('')
+  const [servicosId, setServicosId] = useState([])
+  const [idEmpresa, setdEmpresa] = useState('')
+  const [opcaoSelecionada, setOpcaoSelecionada] = useState([]);
+  const [opcoes, setOpcoes] = useState([]);
+
+  useEffect(() => {
+    document.title = "Cadastro | Serviços"
+    pegarIdAnimais()
+
+  }, [])
+
+  async function pegarIdAnimais() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setAnimal(dados)
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
+  async function selectServicos() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos/animais/" + animalId + "/empresa/" )
+      const dados = await resposta.json()
+      console.log(dados)
+      setAnimal(dados)
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
   return (
     <>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -86,10 +127,10 @@ function Adicionar_servicos() {
       <div className="container">
 
         {/* container para formulario e imagem */}
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+        <div className="row justify-content-center border rounded-4 bg-light shadow-sm mb-5 bg-body-tertiary rounded col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
           {/* container para formulario */}
-          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
+          <div className="col-md-6 d-flex-md-5 mt-5 mt-md-0 p-5">
 
             {/* Título */}
             <p className="tituloAdicionarServicoEmpresa fs-2 fw-semibold text-center mb-4 mb-md-5">
@@ -99,14 +140,18 @@ function Adicionar_servicos() {
             {/* lista suspensa para selecionar o animal */}
             <div className="form-floating mb-3 mb-md-3">
               <select
+                value={animalId}
+                onChange={e => setAnimalId(e.target.value)}
                 className="form-select"
                 id="floatingSelect"
                 aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
+
+                {animais.map(animal => (
+                  <option
+                    key={animal.id}
+                    value={animal.id}>{animal.nome}</option>
+                ))}
+
               </select>
               <label for="floatingSelect">Animal</label>
             </div>
@@ -130,7 +175,7 @@ function Adicionar_servicos() {
               Confirmar
             </a>
           </div>
-          <div className="imgAdicionarServicosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4">
+          <div className="imgAdicionarServicosEmpresa col-md-6 d-flex mt-3 mt-md-0 rounded-4">
             <img src={Servicos_img} className="img-fluid"></img>
           </div>
         </div>
