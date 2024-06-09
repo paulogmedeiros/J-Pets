@@ -69,9 +69,8 @@ class EmpresasController {
                 const result = await EmpresasService.editEmpresaImagem(param, nomeImagem, arquivo);
                 res.status(200).json(result)
             } else {
-                res.status(400).json({ mensage: "arquivo invalido" })
+                res.status(400).json({ mensage: "Valido para cadastro apenas imagens .png" })
             }
-
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json(retorno.mensage)
