@@ -91,10 +91,6 @@ class EmpresasService {
                 throw new ExcecaoIdNaoEncontrado("Numero de contato já cadastrado")
             }
         }
-        const horaAbertura = new Date('1970-01-01T12:45:00Z').toISOString();
-        const horaFechamento = new Date('1970-01-01T12:45:00Z').toISOString();
-        data.horaAbertura = horaAbertura
-        data.horaFechamento = horaFechamento
         return await EmpresasRepository.insertCriarInformacoesEmpresa(data, id)
     }
 

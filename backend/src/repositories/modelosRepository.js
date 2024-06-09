@@ -22,7 +22,6 @@ class ModelosRepository {
     }
 
     async selectModelosPorIdMarcaIdEmpresa(marcaId, empresaId) {
-        console.log(marcaId,empresaId)
         return await this.prisma.modelos.findMany({
             where: {
                 marca_id: marcaId,
@@ -32,6 +31,14 @@ class ModelosRepository {
                     },
                 },
             },
+        })
+    }
+
+    async selectModelosPorIdMarca(marcaId) {
+        return await this.prisma.modelos.findMany({
+            where: {
+                marca_id: marcaId,
+            }
         })
     }
 

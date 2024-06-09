@@ -25,6 +25,18 @@ class ModelosController{
         }
     }
 
+    async getModelosPorIdMarca(req, res) {
+        try {
+            const marcasId = parseInt(req.params.marcasId)
+            const result = await ModelosService.findModelosPorIdMarca(marcasId);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
+
     async getModelosPorId(req, res) {
         try {
             const id = parseInt(req.params.id)

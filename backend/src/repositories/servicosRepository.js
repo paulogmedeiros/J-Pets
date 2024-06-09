@@ -37,6 +37,15 @@ class ServicosRepository {
         })
     }
 
+    // retorno servico por id no animal
+    async selectServicosPorIdAnimal(animalId) {
+        return await this.prisma.servicos.findMany({
+            where: {
+                animal_id: animalId,
+            }
+        })
+    }
+
     // retorno servico por id e pelo nome
     async selectSevicosPorIdNome(animal_id, nome) {
         return await this.prisma.servicos.findFirst({

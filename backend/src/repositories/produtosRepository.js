@@ -50,11 +50,6 @@ class ProdutosRepository {
         return await this.prisma.produtos.findMany({
             where: {
                 animal_id: animalId
-            },
-            select: {
-                id: true,
-                nome: true,
-                animal_id: true
             }
         })
     }

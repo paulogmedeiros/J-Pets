@@ -25,6 +25,17 @@ class ServicosController {
         }
     }
 
+    async getServicosPorIdAnimal(req, res) {
+        try {
+            const animalId = parseInt(req.params.animalId)
+            const result = await ServicosService.findServicosPorIdAnimal(animalId);
+            res.status(200).json(result)
+        } catch (error) {
+            const retorno = FiltroExcecoes.tratarErro(error)
+            res.status(retorno.status).json(retorno.mensage)
+        }
+    }
+
     async getServicosPorId(req, res) {
         try {
             const id = parseInt(req.params.id)

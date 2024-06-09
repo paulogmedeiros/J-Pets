@@ -35,6 +35,7 @@ routes.get("/animais", animais.getAnimais);
 routes.get("/servicos",servico.getServicos);
 routes.get("/servicos/animais/:animalId/empresa/:empresaId", servico.getServicosPorIdAnimalIdEmpresa);
 routes.get("/servicos/:id", servico.getServicosPorId);
+routes.get("/servicos/animais/:animalId", servico.getServicosPorIdAnimal);
 routes.post("/servicos", servico.postServicos);
 routes.put("/servicos/:id", servico.putServicos);
 routes.delete("/servicos/:id", servico.deleteServicos);
@@ -61,6 +62,7 @@ routes.delete("/marcas/:id", marcas.deleteMarcas);
 routes.get("/modelos", modelos.getModelos);
 // routes.get("/modelos/empresa/:empresaId", modelos.getModelosPorIdEmpresa)
 routes.get("/modelos/:id", modelos.getModelosPorId);
+routes.get("/modelos/marcas/:marcasId", modelos.getModelosPorIdMarca);
 routes.get("/modelos/marcas/:marcasId/empresa/:empresaId", modelos.getModelosPorIdMarcaIdEmpresa);
 routes.post("/modelos", modelos.postModelos);
 routes.put("/modelos/:id", modelos.putModelos);

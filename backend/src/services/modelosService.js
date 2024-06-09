@@ -10,10 +10,20 @@ class ModelosService {
     }
 
     async findModelosPorIdMarcaIdEmpresa(marcaId,empresaId){
+        // valido se o id da marca é valido
+        await MarcaService.findMarcasPorId(marcaId)
+        
         // valido se o id da empresa é valido
         await EmpresaService.findEmpresasPorId(empresaId)
 
         return await ModelosRepository.selectModelosPorIdMarcaIdEmpresa(marcaId,empresaId)
+    }
+
+    async findModelosPorIdMarca(marcaId){
+        // valido se o id da marca é valido
+        await MarcaService.findMarcasPorId(marcaId)
+        // retorno
+        return await ModelosRepository.selectModelosPorIdMarca(marcaId)
     }
 
     // async findModelosPorIdEmpresa(empresaId) {
