@@ -9,7 +9,7 @@ class MarcasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -22,7 +22,7 @@ class MarcasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -33,7 +33,7 @@ class MarcasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -44,7 +44,7 @@ class MarcasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -52,10 +52,10 @@ class MarcasController {
         try {
             const body = req.body;
             await MarcasService.createMarcas(body);
-            res.status(201).json({ mensage: "Marca cadastrada com sucesso" })
+            res.status(201).json({ message: "Marca cadastrada com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -64,10 +64,10 @@ class MarcasController {
             const body = req.body
             const param = parseInt(req.params.id)
             await MarcasService.editMarcas(param, body);
-            res.status(200).json({ mensage: "Marca atualizada com sucesso" })
+            res.status(200).json({ message: "Marca atualizada com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -75,10 +75,10 @@ class MarcasController {
         try {
             const param = parseInt(req.params.id)
             await MarcasService.removeMarcas(param);
-            res.status(200).json({ mensage: "Marca deletada com sucesso" })
+            res.status(200).json({ message: "Marca deletada com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 }

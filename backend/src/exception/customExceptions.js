@@ -1,6 +1,6 @@
 class ExcecaoGenericaDeErro extends Error {
-    constructor(mensage) {
-        super(mensage);
+    constructor(message) {
+        super(message);
         this.name = 'ExcecaoGenericaDeErro';
         this.status = 400
     }

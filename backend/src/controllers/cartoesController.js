@@ -8,10 +8,10 @@ class CartoesController {
             const data = req.body;
             const param = parseInt(req.params.empresaId)
             await CartoesService.createCartoes(param,data);
-            res.status(201).json({mensage:"Transação realizada com sucesso"})
+            res.status(201).json({message:"Transação realizada com sucesso"})
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 

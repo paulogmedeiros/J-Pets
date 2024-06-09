@@ -9,7 +9,7 @@ class ModelosController{
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -21,7 +21,7 @@ class ModelosController{
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -32,7 +32,7 @@ class ModelosController{
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -44,7 +44,7 @@ class ModelosController{
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -55,7 +55,7 @@ class ModelosController{
     //         res.status(200).json(result)
     //     } catch (error) {
     //         const retorno = FiltroExcecoes.tratarErro(error)
-    //         res.status(retorno.status).json(retorno.mensage)
+    //         res.status(retorno.status).json(retorno.message)
     //     }
     // }
 
@@ -63,10 +63,10 @@ class ModelosController{
         try {
             const body = req.body
             await ModelosService.createModelos(body);
-            res.status(201).json({ mensage: "Modelo cadastrado com sucesso" })
+            res.status(201).json({ message: "Modelo cadastrado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -75,10 +75,10 @@ class ModelosController{
             const body = req.body
             const param = parseInt(req.params.id)
             await ModelosService.editModelos(param, body);
-            res.status(200).json({ mensage: "Modelo atualizado com sucesso" })
+            res.status(200).json({ message: "Modelo atualizado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -86,10 +86,10 @@ class ModelosController{
         try {
             const param = parseInt(req.params.id)
             await ModelosService.removeModelos(param);
-            res.status(200).json({ mensage: "Modelo deletado com sucesso" })
+            res.status(200).json({ message: "Modelo deletado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 

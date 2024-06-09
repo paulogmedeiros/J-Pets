@@ -8,10 +8,10 @@ class EmpresasAnimaisController {
         try {
             const param = parseInt(req.params.empresaId)
             await EmpresasAnimaisService.findEmpresasAnimaisPorEmpresaIdEAnimalId(param);
-            res.status(201).json({ mensage: "Animal cadastrados com sucesso" })
+            res.status(201).json({ message: "Animal cadastrados com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -22,7 +22,7 @@ class EmpresasAnimaisController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 

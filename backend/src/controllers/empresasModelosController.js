@@ -11,7 +11,7 @@ class EmpresasModelosController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -22,7 +22,7 @@ class EmpresasModelosController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -30,10 +30,10 @@ class EmpresasModelosController {
         try {
             const data = req.body;
             await EmpresasModelosService.createEmpresasModelos(data);
-            res.status(201).json({ mensage: "Modelos cadastrados com sucesso" })
+            res.status(201).json({ message: "Modelos cadastrados com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -42,10 +42,10 @@ class EmpresasModelosController {
             const empresaId = parseInt(req.params.empresaId)
             const data = req.body;
             await EmpresasModelosService.removeEmpresasModelos(empresaId, data);
-            res.status(200).json({ mensage: "Modelos deletados com sucesso" })
+            res.status(200).json({ message: "Modelos deletados com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
