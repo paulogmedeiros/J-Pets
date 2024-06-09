@@ -1,5 +1,5 @@
 const EmpresasAnimaisRepository = require("../repositories/empresasAnimaisRepository.js")
-const { ExcecaoIdNaoEncontrado } = require('../exception/customExceptions.js')
+const { ExcecaoGenericaDeErro } = require('../exception/customExceptions.js')
 const EmpresaService = require("../services/empresasService.js")
 const AnimalService = require("../services/animaisService.js")
 

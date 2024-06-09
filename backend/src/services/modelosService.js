@@ -1,6 +1,6 @@
 const ModelosRepository = require("../repositories/modelosRepository.js")
 const MarcaService = require("../services/marcasService.js")
-const { ExcecaoIdNaoEncontrado } = require('../exception/customExceptions.js')
+const { ExcecaoGenericaDeErro } = require('../exception/customExceptions.js')
 const EmpresaService = require("../services/empresasService.js")
 class ModelosService {
 
@@ -68,7 +68,7 @@ class ModelosService {
         // valido se o nome do modelo já existe registrado para a marca escolhido
         const modeloNome = await ModelosRepository.selectModelosPorIdNome(marca_id, nome)
         if (modeloNome) {
-            throw new ExcecaoIdNaoEncontrado("Nome do modelo já cadastrado")
+            throw new ExcecaoGenericaDeErro("Nome do modelo já cadastrado")
         }
         // retorno
         return modeloNome
@@ -78,7 +78,7 @@ class ModelosService {
         // valido se modelo com esse id existe
         const modelo = await ModelosRepository.selectModelosPorId(modeloId)
         if (!modelo) {
-            throw new ExcecaoIdNaoEncontrado("Modelo não encontrado")
+            throw new ExcecaoGenericaDeErro("Modelo não encontrado")
         }
 
         // retorno

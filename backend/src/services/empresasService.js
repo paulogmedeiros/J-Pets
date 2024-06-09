@@ -1,6 +1,6 @@
 const EmpresasRepository = require("../repositories/empresasRepository.js")
 const LoginService = require("../services/loginService.js")
-const { ExcecaoIdNaoEncontrado } = require('../exception/customExceptions.js')
+const { ExcecaoGenericaDeErro } = require('../exception/customExceptions.js')
 const bcrypt = require("bcryptjs")
 const caminhoServer = require("path")
 
@@ -71,7 +71,7 @@ class EmpresasService {
         if(empresa.status_ativo){
             status = false
             if(empresa.status_pagamento){
-                throw new ExcecaoIdNaoEncontrado("É necessario cancelar sua assinatura primeiro para desativar a conta")
+                throw new ExcecaoGenericaDeErro("É necessario cancelar sua assinatura primeiro para desativar a conta")
             }
         }else{
             status = true
@@ -88,7 +88,7 @@ class EmpresasService {
         if (data.telefone != empresa.telefone) {
             const empresaTelefone = await EmpresasRepository.selectEmpresaPorTelefone(data.telefone)
             if (empresaTelefone) {
-                throw new ExcecaoIdNaoEncontrado("Numero de contato já cadastrado")
+                throw new ExcecaoGenericaDeErro("Numero de contato já cadastrado")
             }
         }
         return await EmpresasRepository.insertCriarInformacoesEmpresa(data, id)
@@ -114,7 +114,7 @@ class EmpresasService {
         // valido se o cnpj já está cadastrado
         const empresa = await EmpresasRepository.selectEmpresaPorCNPJ(cnpj)
         if (empresa) {
-            throw new ExcecaoIdNaoEncontrado("CNPJ já cadastrado")
+            throw new ExcecaoGenericaDeErro("CNPJ já cadastrado")
         }
         // retorno
         return empresa
@@ -124,7 +124,7 @@ class EmpresasService {
         // valido se o nome fantasia já está cadastrado
         const empresa = await EmpresasRepository.selectEmpresaPorNomeFantasia(nomeFantasia)
         if (empresa) {
-            throw new ExcecaoIdNaoEncontrado("Nome fantasia já cadastrado")
+            throw new ExcecaoGenericaDeErro("Nome fantasia já cadastrado")
         }
         // retorno
         return empresa
@@ -134,7 +134,7 @@ class EmpresasService {
         // valido se empresa existe
         const empresa = await EmpresasRepository.selectEmpresasPorId(id)
         if (!empresa) {
-            throw new ExcecaoIdNaoEncontrado("Empresa não encontrada")
+            throw new ExcecaoGenericaDeErro("Empresa não encontrada")
         }
         // retorno
         return empresa

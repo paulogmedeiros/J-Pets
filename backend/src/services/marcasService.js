@@ -1,7 +1,7 @@
 const MarcasRepository = require("../repositories/marcasRepository.js")
 const ProdutosService = require("../services/produtosService.js")
 const EmpresaService = require("../services/empresasService.js")
-const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
+const {ExcecaoGenericaDeErro} =  require('../exception/customExceptions.js')
 
 class MarcasService {
 
@@ -59,7 +59,7 @@ class MarcasService {
         // valido se o nome da marca já existe registrado para o produto escolhido
         const marcaNome = await MarcasRepository.selectMarcasPorIdNome(produto_id,nome)
         if(marcaNome){
-            throw new ExcecaoIdNaoEncontrado("Nome da marca já cadastrado")
+            throw new ExcecaoGenericaDeErro("Nome da marca já cadastrado")
         }
         // retorno
         return marcaNome
@@ -69,7 +69,7 @@ class MarcasService {
         // valido se marca com esse id existe
         const marca = await MarcasRepository.selectMarcasPorId(marcaId)
         if(!marca){
-            throw new ExcecaoIdNaoEncontrado("Marca não encontrada")
+            throw new ExcecaoGenericaDeErro("Marca não encontrada")
         }
 
         // retorno

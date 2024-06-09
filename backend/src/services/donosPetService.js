@@ -1,6 +1,6 @@
 const DonosPetRepository = require("../repositories/donosPetRepository.js")
 const LoginService = require("../services/loginService.js")
-const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
+const {ExcecaoGenericaDeErro} =  require('../exception/customExceptions.js')
 const bcrypt = require("bcryptjs") 
 
 class DonosPetService{
@@ -21,11 +21,11 @@ class DonosPetService{
         // valido se usuario existe
         const donoPet = await DonosPetRepository.selectLoginDonoPets(loginId)
         if(!donoPet){
-            throw new ExcecaoIdNaoEncontrado("Usuário não cadastrado")
+            throw new ExcecaoGenericaDeErro("Usuário não cadastrado")
         }
         // valido se o usuario é do perfil dono de pet
         if(donoPet.tipo != 'DNP'){
-            throw new ExcecaoIdNaoEncontrado("Usuário não é do perfil tutor de pet")
+            throw new ExcecaoGenericaDeErro("Usuário não é do perfil tutor de pet")
         }
         // retorno
         return await DonosPetRepository.deleteDonoPetPorIdLogin(loginId,donoPet.tutores_pets.id)

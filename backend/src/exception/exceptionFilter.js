@@ -1,10 +1,10 @@
-const { ExcecaoIdNaoEncontrado } = require('./customExceptions')
+const { ExcecaoGenericaDeErro } = require('./customExceptions')
 
 class FiltroExcecoes {
 
     tratarErro(erro) {
         switch (true) {
-            case erro instanceof ExcecaoIdNaoEncontrado:
+            case erro instanceof ExcecaoGenericaDeErro:
                 return { mensage: erro.message, status: erro.status }
                 break;
             default:

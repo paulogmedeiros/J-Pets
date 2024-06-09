@@ -1,7 +1,7 @@
 const ServicosRepository = require("../repositories/servicosRepository.js")
 const AnimalService = require("../services/animaisService.js")
 const EmpresaService = require("../services/empresasService.js")
-const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
+const {ExcecaoGenericaDeErro} =  require('../exception/customExceptions.js')
 
 class ServicosService{
 
@@ -61,7 +61,7 @@ class ServicosService{
         // valido se servico com esse id existe
         const servico = await ServicosRepository.selectServicosPorId(servicoId)
         if(!servico){
-            throw new ExcecaoIdNaoEncontrado("Servico não encontrado")
+            throw new ExcecaoGenericaDeErro("Servico não encontrado")
         }
         // retorno
         return servico
@@ -71,7 +71,7 @@ class ServicosService{
         // valido se o nome do serviço já existe registrado para o animal escolhido
         const servicoNome = await ServicosRepository.selectSevicosPorIdNome(animal_id,nome)
         if(servicoNome){
-            throw new ExcecaoIdNaoEncontrado("Nome de serviço já cadastrado")
+            throw new ExcecaoGenericaDeErro("Nome de serviço já cadastrado")
         }
         // retorno
         return servicoNome
