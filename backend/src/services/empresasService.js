@@ -22,7 +22,13 @@ class EmpresasService {
         // valido o id da empresa existe já está cadastrado
         await this.findEmpresasPorId(id)
 
-        return await EmpresasRepository.selectEmpresaPorId(id)
+        const empresa = await EmpresasRepository.selectEmpresaPorId(id)
+
+        if(!empresa.foto_perfil){
+            empresa.foto_perfil = "default.png"
+        }
+
+        return empresa
     }
 
     async findEmpresasPeloProudutoOuServico(tipo, id) {
