@@ -9,6 +9,11 @@
     color: white;
 }
 
+.btn_cadastro_usuario:hover{
+    background-color: #2641B7;
+    color: white;
+}
+
 .titulo_cadastro_usuario{
     color: #2641B7;
 }

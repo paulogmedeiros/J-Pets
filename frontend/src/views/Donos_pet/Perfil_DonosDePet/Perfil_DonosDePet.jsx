@@ -5,13 +5,14 @@ import iconeUsuarioLogin from './img/icone_usuarioLogin.svg'
 import './Perfil_DonosDePet.css'
 
 function Perfil_DonosDePet() {
+
   return (
     <div>
       <nav className="navbarDonoDePet navbar navbar-expand-lg ">
         <div className="container-fluid">
 
           {/* Logo do projeto */}
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/usuario/principal">
             <img src={logoJPets} width={45} height={45} />
           </a>
           <button
@@ -29,7 +30,7 @@ function Perfil_DonosDePet() {
           <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul className="navbar-nav nav-underline">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Início</a>
+                <a className="nav-link active" aria-current="page" href="/usuario/principal">Início</a>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -79,10 +80,21 @@ function Perfil_DonosDePet() {
                 <img src={iconeCoracao} width={40} height={40} />
               </span>
             </div>
-            <div className=''>
-              <span>
-                <a href="/"><img src={iconeUsuarioLogin} width={40} height={40} /></a>
-              </span>
+            <div className="dropdown me-5">
+              <button className="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                  {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+                </span>
+              </button>
+              <ul className="dropdown-menu">
+                <a className="nav-link disabled ms-3" aria-disabled="true"> <span className='d-inline-block ' style={{ maxWidth: '100px' }}>
+                  {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+                </span>
+                </a>
+                <li><hr className="dropdown-divider" /></li>
+                <li><a className="dropdown-item" href="/usuario/perfil">Meu perfil</a></li>
+                <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              </ul>
             </div>
           </div>
         </div>

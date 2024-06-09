@@ -53,7 +53,7 @@ class EmpresasController {
             res.status(201).json({ mensage: "Empresa cadastrado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.mensage})
         }
     }
 

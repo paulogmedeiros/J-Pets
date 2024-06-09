@@ -50,7 +50,7 @@ import Avaliacoes from './views/Empresas/Avaliacoes/Avaliacoes.jsx';
 
 // Importando itens da pasta "Administrador"
 import Alterar_senha_admin from './views/Administrador/Alterar_senha_admin/Alterar_senha_admin.jsx';
-
+import Perfil_admin from './views/Administrador/Perfil_admin/Perfil_admin.jsx';
 
 // Importando itens da pasta "Administrador" - Painel de controle
 import Cadastro_admin from './views/Administrador/Painel_de_controle/Cadastro_admin/Cadastro_admin.jsx';
@@ -114,6 +114,7 @@ function App() {
 
       {/* Rotas para os itens da pasta "Administrador" */}
       <Route path='/administrador/senha/alteracao' element={<Alterar_senha_admin/>}/>
+      <Route path='/administrador/perfil' element={<Perfil_admin/>}/>
 
        {/* Rotas para os itens da pasta "Administrador" - Painel de controle */}
       <Route path='/administrador/painel/cadastroAdmin' element={<Cadastro_admin/>}/>

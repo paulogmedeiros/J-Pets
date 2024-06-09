@@ -12,7 +12,7 @@ function Cadastro_admin() {
     <div className="admPainel">
       <nav className="admNavbar navbar navbar-expand-md">
         <div className="container-fluid d-flex">
-          <a className="navbar-brand" href="#"><img src={logoJPets_adm} alt="" srcSet="" width={50} height={50} /></a>
+          <a className="navbar-brand" href="/administrador/painel"><img src={logoJPets_adm} alt="" srcSet="" width={50} height={50} /></a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -39,7 +39,7 @@ function Cadastro_admin() {
 
         <div className="row justify-content-center col-12 ps-4 col-md-10 position-absolute top-50 start-50 translate-middle ">
 
-          <div className="col-md-5 d-flex-md-5">
+          <div className="col-md-5 d-flex-md-5 border rounded-4 p-5 bg-light shadow-sm p-3 mb-5 bg-body-tertiary rounded">
             <p className="tituloCadastroAdmin fs-1 fw-bold text-center mb-2 mb-md-4">Cadastro administrador</p>
 
             <div className="form-floating mb-3">
