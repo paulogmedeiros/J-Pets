@@ -7,7 +7,7 @@ class EmpresasValidation {
         const { error, value } = criacaoEmpresasDTO.validate(req.body);
 
         if (error) {
-            return res.status(400).json({ mensagem: error.details[0].message });
+            return res.status(400).json({ message: error.details[0].message });
         }
 
         next();

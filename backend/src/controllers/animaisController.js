@@ -9,7 +9,7 @@ class AnimaisController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 

@@ -31,7 +31,7 @@ class LoginController {
             res.status(200).json(token)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -43,7 +43,7 @@ class LoginController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -51,10 +51,10 @@ class LoginController {
         try {
             const body = req.body
             await LoginService.createAdministrador(body);
-            res.status(201).json({ mensage: "Usuário cadastrado com sucesso" })
+            res.status(201).json({ message: "Usuário cadastrado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -63,10 +63,10 @@ class LoginController {
             const body = req.body
             const param = parseInt(req.params.id)
             await LoginService.editSenhaRecuperacao(body, param);
-            res.status(201).json({ mensage: "Usuário atualizado com sucesso" })
+            res.status(201).json({ message: "Usuário atualizado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -75,10 +75,10 @@ class LoginController {
             const body = req.body
             const param = parseInt(req.params.id)
             await LoginService.editSenha(body, param);
-            res.status(201).json({ mensage: "Usuário atualizado com sucesso" })
+            res.status(201).json({ message: "Usuário atualizado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -86,10 +86,10 @@ class LoginController {
         try {
             const body = req.body
             await LoginService.createEnvioEmail(body);
-            res.status(201).json({ mensage: "E-mail enviado" })
+            res.status(201).json({ message: "E-mail enviado" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 }

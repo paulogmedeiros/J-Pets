@@ -11,7 +11,7 @@ class EmpresasProdutosController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -20,10 +20,10 @@ class EmpresasProdutosController {
         try {
             const data = req.body;
             await EmpresasProdutosService.createEmpresasProduto(data);
-            res.status(201).json({ mensage: "Produtos cadastrados com sucesso" })
+            res.status(201).json({ message: "Produtos cadastrados com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -32,10 +32,10 @@ class EmpresasProdutosController {
             const empresaId = parseInt(req.params.empresaId)
             const data = req.body;
             await EmpresasProdutosService.removeEmpresasProdutos(empresaId, data);
-            res.status(200).json({ mensage: "Produtos deletados com sucesso" })
+            res.status(200).json({ message: "Produtos deletados com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 

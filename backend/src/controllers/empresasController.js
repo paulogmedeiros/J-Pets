@@ -8,7 +8,7 @@ class EmpresasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -19,7 +19,7 @@ class EmpresasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -30,7 +30,7 @@ class EmpresasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -42,7 +42,7 @@ class EmpresasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -50,10 +50,10 @@ class EmpresasController {
         try {
             const data = req.body;
             await EmpresasService.createEmpresas(data);
-            res.status(201).json({ mensage: "Empresa cadastrado com sucesso" })
+            res.status(201).json({ message: "Empresa cadastrado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json({message: retorno.mensage})
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -69,11 +69,11 @@ class EmpresasController {
                 const result = await EmpresasService.editEmpresaImagem(param, nomeImagem, arquivo);
                 res.status(200).json(result)
             } else {
-                res.status(400).json({ mensage: "Valido para cadastro apenas imagens .png" })
+                res.status(400).json({ message: "Valido para cadastro apenas imagens .png" })
             }
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -85,7 +85,7 @@ class EmpresasController {
             res.status(201).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -93,10 +93,10 @@ class EmpresasController {
         try {
             const param = parseInt(req.params.id)
             await EmpresasService.editCancelarAssinatura(param);
-            res.status(200).json({ mensage: "Assinatura cancelada!!!" })
+            res.status(200).json({ message: "Assinatura cancelada!!!" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -107,7 +107,7 @@ class EmpresasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -118,7 +118,7 @@ class EmpresasController {
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -130,7 +130,7 @@ class EmpresasController {
             res.status(201).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
@@ -141,7 +141,7 @@ class EmpresasController {
             res.status(201).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json(retorno.mensage)
+            res.status(retorno.status).json({message: retorno.message})
         }
     }
 
