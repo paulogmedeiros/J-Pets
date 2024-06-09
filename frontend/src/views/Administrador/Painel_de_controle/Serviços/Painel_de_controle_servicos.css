@@ -42,3 +42,7 @@
     background-color: #7E57C2 !important;
     color: white !important;
 }
+
+.imgLixeiraAdm, .imgAtualizarAdm{
+    cursor: pointer;
+}

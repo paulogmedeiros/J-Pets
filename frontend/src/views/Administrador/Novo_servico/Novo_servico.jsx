@@ -16,10 +16,17 @@ function Novo_servico() {
   }, [])
 
   async function pegarIdAnimais() {
-    const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
 
-    const dados = await resposta.json()
-    setAnimal(dados)
+      const dados = await resposta.json()
+      console.log(dados)
+      setAnimal(dados)
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+
   }
 
   async function cadastrarServico(event) {
@@ -35,9 +42,9 @@ function Novo_servico() {
 
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos", {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(servicoDados)
       });
@@ -88,7 +95,12 @@ function Novo_servico() {
         </div>
       </nav>
 
-      <a href="/administrador/painel/servicos" type="button" class="btnVoltarServico btn m-5 rounded-5"><span><img src={iconeVoltar} width={20} height={20} /></span> Voltar</a>
+      <a href="/administrador/painel/servicos" type="button" class="btnVoltarServico btn m-5 rounded-5">
+        <span>
+          <img src={iconeVoltar} width={20} height={20} />
+        </span>
+        Voltar
+      </a>
       <div className="container">
         {/* container para formulario e imagem */}
 
@@ -106,7 +118,9 @@ function Novo_servico() {
               <div className="form-floating mb-3 mb-md-3">
                 <select
                   value={animal_id}
-                  onChange={e => setAnimalId(e.target.value)}
+                  onChange={e => {
+                    setAnimalId(e.target.value);
+                  }}
 
                   className="form-select"
                   id="floatingSelect"
@@ -114,8 +128,9 @@ function Novo_servico() {
 
                   {animais.map(animal => (
                     <option
-                      key={animal.animal_id}
-                      value={animal.animal_id}>{animal.nome}
+                      key={animal.id}
+                      value={animal.id}>
+                      {animal.nome}
                     </option>
                   ))}
                 </select>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import './Cadastro_empresa.css'
+import imagem_login from './img/imagem_login.png'
 import imagemCadastroEmpresa from './img/imagem_cadastro_empresa.svg'
+import { notifications } from '@mantine/notifications'
 
 function Cadastro_empresa() {
 
@@ -15,6 +17,7 @@ function Cadastro_empresa() {
   const [cnpj, setCNPJ] = useState('')
   const [nomeFantasia, setNomeFantasia] = useState('')
   const [erroSenha, setErroSenha] = useState(''); // Novo estado para mensagem de erro
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{color: "red", fontSize: "20px"}}></i>
 
   // Função que será chamada ao enviar o formulário
   async function cadastrarEmpresa(event) {
@@ -37,33 +40,37 @@ function Cadastro_empresa() {
 
     try {
       // Realiza POST para a API
-      const resposta = await fetch(process.env.REACT_APP_URL_API + '/empresas', {
+      const result = await fetch(process.env.REACT_APP_URL_API + '/empresas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json' // Especificando o corpo como JSON
         },
         body: JSON.stringify(empresasDados)
       })
+      const resposta = await result.json()
 
       if (resposta.status === 201) { // Verifica se o status é 201 Created
         console.log("Usuário cadastrado com sucesso!");
         window.alert('Usuário cadastrado com sucesso!');
-        window.location.href = '/'; // Redireciona para a página de
+        window.location.href = '/'; // Redireciona para a página de login
       } else if (!resposta.ok) {
-        console.error("Erro ao criar usuário:", resposta.statusText);
-        window.alert('Erro ao criar usuário: ' + resposta.statusText);
+        throw new Error(resposta.message)
+        // console.error("Erro ao criar usuário:", resposta.statusText);
+        // window.alert('Erro ao criar usuário: ' + resposta.statusText);
       }
     } catch (error) {
-      console.error("Erro ao criar usuário:", error);
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
     }
 
   }
   return (
     <div className="container">
 
-      <div className="row justify-content-center border border-2 shadow-sm mb-5 bg-body-tertiary rounded rounded-4 col-12  col-md-8 position-absolute top-50 start-50 translate-middle">
+      <div className="row justify-content-center col-12 border shadow-sm mb-5 bg-body-tertiary rounded rounded-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
-        <div className=" col-md-5 d-flex-md-5 p-5 ">
+        <div className="col-md-6 d-flex-md-5 p-5">
+
           <p className="titulo_cadastro_empresa fs-1 fw-bold text-center mb-0 mb-md-1">Criar nova conta</p>
 
           <div className="form-floating mb-1 mb-md-3">
@@ -125,8 +132,8 @@ function Cadastro_empresa() {
             Já possui uma conta? <a href="/" className="redirecionamento_cadastro_empresa link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Entrar</a>
           </p>
         </div>
-        <div className="img_login col-md-6 d-flex mt-3 ms-5 mt-md-0 rounded-4">
-          <img src={imagemCadastroEmpresa} className="img-fluid"></img>
+        <div className="img_login col-md-6 d-flex mt-3 mt-md-0 rounded-4">
+          <img src={imagem_login} className="img-fluid"></img>
         </div>
       </div>
     </div>

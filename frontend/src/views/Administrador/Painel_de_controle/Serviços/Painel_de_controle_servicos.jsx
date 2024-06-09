@@ -10,6 +10,9 @@ function Painel_de_controle_servicos() {
 
     //Estado para armazenar os usuários
     const [servicos, setServicos] = useState([])
+    const [pesquisar, setPesquisar] = useState('')
+    const [nomeServico, setNomeServico] = useState('')
+    const [idServico, setIdServico] = useState('')
 
     useEffect(() => {
 
@@ -19,6 +22,43 @@ function Painel_de_controle_servicos() {
         carregarServicos()
 
     })
+
+    async function atualizarServico(event) {
+
+        event.preventDefault()
+
+        const servicoDados = {
+            nome: nomeServico
+        }
+
+        try {
+            const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos/" + idServico, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(servicoDados)
+            });
+
+            const responseData = await resposta.json();
+
+            if (!resposta.ok) {
+                console.error("Erro ao cadastrar serviços:", responseData);
+                window.alert("Erro ao cadastrar serviços: " + JSON.stringify(responseData));
+                throw new Error('Erro ao cadastrar serviços: ' + resposta.statusText);
+            } else {
+                console.log("Resposta do servidor:", responseData);
+
+                window.location.href = "/administrador/painel/servicos";
+            }
+        } catch (error) {
+            console.error("Erro ao cadastrar serviço:", error);
+            window.alert("Erro ao cadastrar serviço: " + error.message);
+        }
+    }
+
+
+
 
     // Função carregar usuários
     async function carregarServicos() {
@@ -58,6 +98,7 @@ function Painel_de_controle_servicos() {
     }
 
     return (
+
         // Container geral para propriedades de fundo
         <div className="admPainel">
             <nav className="admNavbar navbar navbar-expand-lg">
@@ -109,10 +150,13 @@ function Painel_de_controle_servicos() {
                             <p className='d-flex col-4 mt-5  fs-3 fw-semibold'>Todos os serviços</p>
 
                             <div className="input-group d-flex mb-3 col-4 w-25 h-25 me-2 mt-5">
-                                <input type="text" className="form-control" placeholder="Pesquisar serviço" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                                <input type="text"
+                                    value={pesquisar}
+                                    onChange={(e) => setPesquisar(e.target.value)}
+                                    className="form-control"
+                                    placeholder="Pesquisar serviço" aria-label="Recipient's username" aria-describedby="basic-addon2" />
                                 <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30} /></button>
                             </div>
-
 
                             <button type="button" className="btnAdicionarNovoServico col-2 rounded-5 h-25 ms-5 mt-5 btn btn-sm">
                                 Adicionar novo <span className="badge "><a href="http://localhost:3000/administrador/painel/novoServico"><img src={botaoMais} width={20} height={20} /></a></span>
@@ -129,12 +173,20 @@ function Painel_de_controle_servicos() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {servicos.map(servico => (
+                                {servicos.filter((e) => e.nome.includes(pesquisar) || e.nome.toUpperCase().includes(pesquisar) || e.nome.toLowerCase().includes(pesquisar) || pesquisar == '').map(servico => (
                                     <tr key={servico.id}>
                                         <td>{servico.nome}</td>
                                         <td>{servico.animais.nome}</td>
-                                        <td><img src={iconeAtualizar_adm} width={25} height={25} />
-                                            <img src={iconLixeira_adm} width={25} height={25} onClick={() => deletarServico(servico.id)} /></td>
+                                        <td>
+                                            <img src={iconeAtualizar_adm}
+                                                width={25}
+                                                height={25}
+                                                className='imgAtualizarAdm'
+                                                onClick={() => { setNomeServico(servico.nome); setIdServico(servico.id) }}
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" />
+                                            <img src={iconLixeira_adm} width={25} height={25} onClick={() => deletarServico(servico.id)} className='imgLixeiraAdm' />
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -142,17 +194,33 @@ function Painel_de_controle_servicos() {
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Atualizar serviço</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <input type="text"
+                                    value={nomeServico}
+                                    onChange={(e) => setNomeServico(e.target.value)}
+                                    class="form-control"
+                                    id="floatingInput"
+                                    placeholder="name@example.com" />
+                                <label for="floatingInput">Nome do serviço</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="button" onClick={atualizarServico} class="btn btn-primary">Salvar alterações</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
-}
-
-function trueFalse(status) {
-    if (status === true) {
-        return "Ativo"
-    } else {
-        return "Inativo"
-    }
 
 }
-
 export default Painel_de_controle_servicos

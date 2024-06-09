@@ -36,7 +36,7 @@ function Cadastro_usuario() {
     }
 
     try {
-    
+
       const resposta = await fetch(`${process.env.REACT_APP_URL_API}/donoPet`, { // rota da API para cadastrar donos de pet
         method: 'POST',
         headers: {
@@ -57,16 +57,17 @@ function Cadastro_usuario() {
       console.debug(error)
     }
   }
+  
   return (
     <div className="container">
 
-      <div className="row justify-content-center border border-2 shadow-sm mb-5 bg-body-tertiary rounded rounded-4 col-12  col-md-8 position-absolute top-50 start-50 translate-middle">
+      <div className="row justify-content-center col-12 border rounded-4 shadow-sm mb-5 bg-body-tertiary rounded col-md-8 position-absolute top-50 start-50 translate-middle">
 
-        <div className="img_cadastro_usuario col-md-5 d-flex me-5 mt-3 mt-md-0 rounded-4">
+        <div className="img_cadastro_usuario col-md-6 d-flex mt-3 mt-md-0 rounded-4">
           <img src={cachorro} className="img-fluid"></img>
         </div>
 
-        <div className=" col-md-5 d-flex-md-5 p-5 ms-5">
+        <div className=" col-md-6 d-flex-md-5 p-5">
           <p className="titulo_cadastro_usuario fs-1 fw-bold text-center mb-0 mb-md-1">Boas-vindas!</p>
 
           <div className="form-floating mb-1 mb-md-3">
