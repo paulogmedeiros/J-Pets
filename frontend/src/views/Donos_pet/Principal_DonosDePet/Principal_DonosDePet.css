@@ -1,5 +1,5 @@
 .navbarDonoDePet {
-  background-color: #DCECF6;
+  background-color: #DCECF6 !important;
 }
 
 .btnSaibaMais {
@@ -9,14 +9,6 @@
 
 .anuncioPagInicial{
   background: #DCECF6;
-}
-
-.menuDropdown{
-  position: relative;
-}
-
-.DropdownItem{
-  position: absolute;
 }
 
 .show{

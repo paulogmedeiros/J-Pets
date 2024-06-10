@@ -104,9 +104,9 @@ const PaymentForm = () => {
       {/* Card do cartao de credito */}
 
       <div className="text-center mt-5">
-        <div className="row">
+        <div className="row justify-content-center">
 
-          <div className="container col-md-5 pb-4 shadow-sm p-3 mb-5 bg-body-tertiary rounded border rounded-5">
+          <div className="container col-md-4 pb-4 shadow-sm p-3 mb-5 bg-body-tertiary rounded border rounded-5">
 
             <Cards
               number={state.number}
@@ -180,9 +180,9 @@ const PaymentForm = () => {
             </div>
           </div>
 
-          <div className="col-md-6 pe-md-5 col-12">
+          <div className="col-md-7  col-12">
             <h3 className='fw-semibold mt-4 mt-md-0'>Resumo da compra</h3>
-            <div className="container text-center shadow-sm mb-5 bg-body-tertiary rounded border rounded-5">
+            <div className="container col-6 text-center shadow-sm mb-5 bg-body-tertiary rounded border rounded-5">
               <div className="row">
                 <div className="col">
                   <p>Mensalidade:</p>

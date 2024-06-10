@@ -12,17 +12,30 @@ import imgServicos from './img/servicos.svg'
 import { NavLink } from '@mantine/core';
 
 function Principal_DonosDePet() {
-  const [produtosEServicos, setProdutosEServicos] = useState(false)
+
+  useEffect(() => {
+
+    document.title = "Página inicial"
+  })
+
+  const [produtosEServicos, setProdutosEServicos] = useState(false);
+  const [submenuOpen, setSubmenuOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setProdutosEServicos(!produtosEServicos);
+  };
+
+  const toggleSubmenu = (e) => {
+    e.preventDefault();
+    setSubmenuOpen(!submenuOpen);
+  };
 
   return (
     <>
-      {/* Inicio da barra de navegação */}
-      <nav className="navbarDonoDePet navbar navbar-expand-lg ">
+      <nav className="navbarDonoDePet navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-
-          {/* Logo do projeto */}
           <a className="navbar-brand" href="/usuario/principal">
-            <img src={logoJPets} width={45} height={45} />
+            <img src={logoJPets} width={45} height={45} alt="Logo" />
           </a>
           <button
             className="navbar-toggler"
@@ -35,7 +48,6 @@ function Principal_DonosDePet() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Itens da barra de navegação */}
           <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul className="navbar-nav nav-underline">
               <li className="nav-item">
@@ -43,73 +55,59 @@ function Principal_DonosDePet() {
               </li>
               <li className="nav-item dropdown">
                 <a
-                  onClick={(e) => setProdutosEServicos(!produtosEServicos)}
-                  className="menuTitulo nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  onClick={toggleDropdown}
+                  className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded={produtosEServicos}>
                   Cachorro
                 </a>
-                <ul className={produtosEServicos ? "show menuDropdown" : "hide"}>
-                  <li className='DropdownItem'>
-                    <NavLink
-                      href="#required-for-focus"
-                      label="First parent link"
-                      childrenOffset={28}>
-                      <NavLink href="#required-for-focus" label="First child link" />
-                      <NavLink label="Second child link" href="#required-for-focus" />
-                      <NavLink label="Nested parent link" childrenOffset={28} href="#required-for-focus">
-                        <NavLink label="First child link" href="#required-for-focus" />
-                        <NavLink label="Second child link" href="#required-for-focus" />
-                        <NavLink label="Third child link" href="#required-for-focus" />
-                      </NavLink>
-                    </NavLink>
-                    <NavLink
-                      href="#required-for-focus"
-                      label="Second parent link"
-                      childrenOffset={28}
-                    >
-                      <NavLink label="First child link" href="#required-for-focus" />
-                      <NavLink label="Second child link" href="#required-for-focus" />
-                      <NavLink label="Third child link" href="#required-for-focus" />
-                    </NavLink>
+                <ul className={`dropdown-menu ${produtosEServicos ? 'show' : ''}`}>
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li className="dropdown-submenu">
+                    <a className="dropdown-item dropdown-toggle" href="#" onClick={toggleSubmenu}>Submenu</a>
+                    <ul className={`dropdown-menu ${submenuOpen ? 'show' : ''}`}>
+                      <li><a className="dropdown-item" href="#">teste</a></li>
+                      <li><a className="dropdown-item" href="#">teste</a></li>
+                    </ul>
                   </li>
 
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Gato
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="">Action</a></li>
-                  <li><a className="dropdown-item" href="">Another action</a></li>
-                  <li><a className="dropdown-item" href="">Something else here</a></li>
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Pássaro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Peixe
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
             </ul>
           </div>
           <div className='d-flex justify-content-end'>
-            <div className=''>
+            <div>
               <span>
-                <a href="/usuario/favoritos"><img src={iconeCoracao} width={40} height={40} /></a>
+                <a href="/usuario/favoritos"><img src={iconeCoracao} width={40} height={40} alt="Favoritos" /></a>
               </span>
             </div>
             <div className="dropdown me-5">
@@ -119,9 +117,10 @@ function Principal_DonosDePet() {
                 </span>
               </button>
               <ul className="dropdown-menu">
-                <a className="nav-link disabled ms-3" aria-disabled="true"> <span className='d-inline-block ' style={{ maxWidth: '100px' }}>
-                  {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
-                </span>
+                <a className="nav-link disabled ms-3" aria-disabled="true">
+                  <span className='d-inline-block' style={{ maxWidth: '100px' }}>
+                    {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+                  </span>
                 </a>
                 <li><hr className="dropdown-divider" /></li>
                 <li><a className="dropdown-item" href="/usuario/perfil">Meu perfil</a></li>
@@ -132,12 +131,11 @@ function Principal_DonosDePet() {
         </div>
       </nav>
 
-      {/* Imagem de anúncio */}
-      <div className="anuncioPagInicial container text-center mt-5 border rounded-5 p-5 mb-5">
+      <div className="anuncioPagInicial container text-center mt-5 border rounded-5 p-5 shadow-sm p-3 mb-5 rounded mb-5">
         <div className="row">
           <div className="col-md-6">
             <div className="text-center">
-              <img src={imgAnuncio} width={400} height={500} className="img-fluid rounded" />
+              <img src={imgAnuncio} width={400} height={500} className="img-fluid rounded" alt="Anúncio" />
             </div>
           </div>
           <div className="col-md-6">
@@ -146,59 +144,55 @@ function Principal_DonosDePet() {
               <h5>Tenha seu trabalho divulgado aqui!</h5>
               <p>Até <span className='text-warning fw-bold'>50% OFF</span> na primeira mensalidade!</p>
             </div>
-            <a className="btnSaibaMais btn" href="#" role="button">Saiba mais <span><img src={iconeFlecha} width={20} /></span></a>
+            <a className="btnSaibaMais btn" href="/cadastro/empresa" role="button">Saiba mais <span><img src={iconeFlecha} width={20} alt="Saiba mais" /></span></a>
           </div>
         </div>
       </div>
 
-      {/* Exibição de serviços */}
       <div className='text-center m-3'>
         <h2 className='mb-4 mt-5'>Alguns dos nossos serviços</h2>
         <div className="row">
+
           <div className="col-md-3">
-            <div className="card mb-3">
-              <img src={imgDogWalking} className="card-img-top" alt="..." />
+            <div className="card mb-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+              <img src={imgDogWalking} className="card-img-top" alt="Dog Walking" />
               <div className="card-body">
                 <h5 className="card-title">Pet Walking</h5>
                 <p className="card-text"></p>
-
               </div>
             </div>
           </div>
-          <div className="col-md-3">
-            <div className="card mb-3">
-              <img src={imgVeterinario} className="card-img-top" alt="..." />
+          <div className="col-md-3 ">
+            <div className="card mb-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+              <img src={imgVeterinario} className="card-img-top" alt="Veterinário" />
               <div className="card-body">
                 <h5 className="card-title">Veterinários</h5>
                 <p className="card-text"></p>
-
               </div>
             </div>
           </div>
           <div className="col-md-3">
-            <div className="card mb-3">
-              <img src={imgRacao} className="card-img-top" alt="..." />
+            <div className="card mb-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+              <img src={imgRacao} className="card-img-top" alt="Ração" />
               <div className="card-body">
                 <h5 className="card-title">Produtos diversos</h5>
                 <p className="card-text"></p>
-
               </div>
             </div>
           </div>
           <div className="col-md-3">
-            <div className="card">
-              <img src={imgServicos} className="card-img-top" alt="..." />
+            <div className="card shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+              <img src={imgServicos} className="card-img-top" alt="Serviços" />
               <div className="card-body">
                 <h5 className="card-title">Pet Care</h5>
                 <p className="card-text"></p>
-
               </div>
             </div>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Principal_DonosDePet
+export default Principal_DonosDePet;
