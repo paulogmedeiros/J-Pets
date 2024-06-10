@@ -10,3 +10,19 @@
 .anuncioPagInicial{
   background: #DCECF6;
 }
+
+.menuDropdown{
+  position: relative;
+}
+
+.DropdownItem{
+  position: absolute;
+}
+
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;
+}

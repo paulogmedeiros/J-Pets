@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import Servicos_img from './img/Servicos_img.svg'
 import './Adicionar_servicos.css'
 import logoJPets from './img/logoJPets.png'
+import { MultiSelect } from '@mantine/core';
+import { notifications } from '@mantine/notifications'
+import { Loader } from '@mantine/core';
 
 function Adicionar_servicos() {
 
@@ -9,15 +12,60 @@ function Adicionar_servicos() {
   const [servicos, setServicos] = useState([])
   const [animalId, setAnimalId] = useState('')
   const [servicosId, setServicosId] = useState([])
-  const [idEmpresa, setdEmpresa] = useState('')
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
   const [opcaoSelecionada, setOpcaoSelecionada] = useState([]);
   const [opcoes, setOpcoes] = useState([]);
+  const [carregando, setCarregando] = useState(false)
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
 
   useEffect(() => {
     document.title = "Cadastro | Serviços"
     pegarIdAnimais()
 
   }, [])
+
+  async function cadastrarServicos(event) {
+    event.preventDefault()
+
+    const servicoDados = {
+      empresaId: parseInt(idEmpresa),
+      animalId: parseInt(animalId),
+      servicosId: opcoes.map(opcao => {
+        return parseInt(opcao)
+      })
+    }
+    console.log(servicoDados)
+    try {
+      setCarregando(true)
+
+      // Realiza POST para a API
+      const result = await fetch(process.env.REACT_APP_URL_API + '/empresasSevico', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' // Especificando o corpo como JSON
+        },
+        body: JSON.stringify(servicoDados)
+      })
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+        setCarregando(false)
+      }, 1500);
+
+    } catch (error) {
+      setCarregando(false)
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
 
   async function pegarIdAnimais() {
     try {
@@ -32,12 +80,15 @@ function Adicionar_servicos() {
     }
   }
 
-  async function selectServicos() {
+  async function selectServicos(animalId) {
     try {
-      const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos/animais/" + animalId + "/empresa/" )
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos/animais/" + animalId + "/empresa/" + idEmpresa)
       const dados = await resposta.json()
       console.log(dados)
-      setAnimal(dados)
+
+      setServicos(dados.map(value => {
+        return { value: value.id.toString(), label: value.nome }
+      }))
 
     } catch (error) {
       window.alert("Erro ao carregar animais", error)
@@ -141,11 +192,15 @@ function Adicionar_servicos() {
             <div className="form-floating mb-3 mb-md-3">
               <select
                 value={animalId}
-                onChange={e => setAnimalId(e.target.value)}
+                onChange={e => {
+                  setAnimalId(e.target.value);
+                  selectServicos(e.target.value)
+                }}
                 className="form-select"
                 id="floatingSelect"
                 aria-label="Floating label select example">
 
+                  <option value="">Selecione</option>
                 {animais.map(animal => (
                   <option
                     key={animal.id}
@@ -157,23 +212,22 @@ function Adicionar_servicos() {
             </div>
 
             {/* lista suspensa para escolher o serviço */}
-            <div className="form-floating mb-3 mb-md-3">
-              <select
-                className="form-select "
-                id="floatingSelect"
-                aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
-              </select>
+            <div className=" mb-3 mb-md-3">
+
               <label for="floatingSelect">Serviços</label>
+              <MultiSelect className='multipleSelect'
+                onChange={(e) => setOpcoes(e)}
+                placeholder="Selecione"
+                data={servicos}
+              />
             </div>
 
-            <a className="btnAdicionarServicoEmpresa btn w-100" href="#" role="button">
-              Confirmar
-            </a>
+            <button
+              onClick={cadastrarServicos}
+              className="btnAdicionarServicoEmpresa btn w-100"
+              role="button">
+              {carregando ? <Loader color="white" /> : "Confirmar"}
+            </button>
           </div>
           <div className="imgAdicionarServicosEmpresa col-md-6 d-flex mt-3 mt-md-0 rounded-4">
             <img src={Servicos_img} className="img-fluid"></img>

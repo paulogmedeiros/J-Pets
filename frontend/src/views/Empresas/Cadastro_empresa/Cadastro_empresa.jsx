@@ -58,7 +58,7 @@ function Cadastro_empresa() {
         throw new Error(resposta.message)
       }
 
-      notifications.show({ message: resposta.mensage, color: "white", icon: sucessIcon });
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
       setTimeout(() => {
         setCarregando(false)
         window.location.href = '/';

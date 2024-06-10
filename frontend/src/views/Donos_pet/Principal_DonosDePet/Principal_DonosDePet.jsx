@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import logoJPets from './img/logoJPets.png'
 import iconeCoracao from './img/icone_coracao.svg'
 import iconeUsuarioLogin from './img/icone_usuarioLogin.svg'
@@ -12,36 +12,8 @@ import imgServicos from './img/servicos.svg'
 import { NavLink } from '@mantine/core';
 
 function Principal_DonosDePet() {
+  const [produtosEServicos, setProdutosEServicos] = useState(false)
 
-  function Demo() {
-    return (
-      <>
-        <NavLink
-          href="#required-for-focus"
-          label="First parent link"
-          childrenOffset={28}>
-
-          <NavLink href="#required-for-focus" label="First child link" />
-          <NavLink label="Second child link" href="#required-for-focus" />
-          <NavLink label="Nested parent link" childrenOffset={28} href="#required-for-focus">
-            <NavLink label="First child link" href="#required-for-focus" />
-            <NavLink label="Second child link" href="#required-for-focus" />
-            <NavLink label="Third child link" href="#required-for-focus" />
-          </NavLink>
-        </NavLink>
-
-        <NavLink
-          href="#required-for-focus"
-          label="Second parent link"
-          childrenOffset={28}
-        >
-          <NavLink label="First child link" href="#required-for-focus" />
-          <NavLink label="Second child link" href="#required-for-focus" />
-          <NavLink label="Third child link" href="#required-for-focus" />
-        </NavLink>
-      </>
-    );
-  }
   return (
     <>
       {/* Inicio da barra de navegação */}
@@ -70,16 +42,17 @@ function Principal_DonosDePet() {
                 <a className="nav-link active" aria-current="page" href="/usuario/principal">Início</a>
               </li>
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a
+                  onClick={(e) => setProdutosEServicos(!produtosEServicos)}
+                  className="menuTitulo nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Cachorro
                 </a>
-                <ul className="dropdown-menu">
-
+                <ul className={produtosEServicos ? "show menuDropdown" : "hide"}>
+                  <li className='DropdownItem'>
                     <NavLink
                       href="#required-for-focus"
                       label="First parent link"
                       childrenOffset={28}>
-
                       <NavLink href="#required-for-focus" label="First child link" />
                       <NavLink label="Second child link" href="#required-for-focus" />
                       <NavLink label="Nested parent link" childrenOffset={28} href="#required-for-focus">
@@ -88,7 +61,6 @@ function Principal_DonosDePet() {
                         <NavLink label="Third child link" href="#required-for-focus" />
                       </NavLink>
                     </NavLink>
-
                     <NavLink
                       href="#required-for-focus"
                       label="Second parent link"
@@ -98,7 +70,8 @@ function Principal_DonosDePet() {
                       <NavLink label="Second child link" href="#required-for-focus" />
                       <NavLink label="Third child link" href="#required-for-focus" />
                     </NavLink>
-                  
+                  </li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -106,9 +79,9 @@ function Principal_DonosDePet() {
                   Gato
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="">Action</a></li>
+                  <li><a className="dropdown-item" href="">Another action</a></li>
+                  <li><a className="dropdown-item" href="">Something else here</a></li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
