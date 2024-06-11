@@ -9,7 +9,6 @@ import imgDogWalking from './img/dogWalking.svg'
 import imgRacao from './img/racao.svg'
 import imgVeterinario from './img/veterinario.svg'
 import imgServicos from './img/servicos.svg'
-import { NavLink } from '@mantine/core';
 
 function Principal_DonosDePet() {
 
@@ -18,115 +17,48 @@ function Principal_DonosDePet() {
     document.title = "Página inicial"
   })
 
-  const [produtosEServicos, setProdutosEServicos] = useState(false);
-  const [submenuOpen, setSubmenuOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setProdutosEServicos(!produtosEServicos);
-  };
-
-  const toggleSubmenu = (e) => {
-    e.preventDefault();
-    setSubmenuOpen(!submenuOpen);
-  };
-
   return (
     <>
-      <nav className="navbarDonoDePet navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/usuario/principal">
-            <img src={logoJPets} width={45} height={45} alt="Logo" />
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
 
-          <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-            <ul className="navbar-nav nav-underline">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/usuario/principal">Início</a>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
-              <li className="nav-item dropdown">
-                <a
-                  onClick={toggleDropdown}
-                  className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded={produtosEServicos}>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-auto-close="outside" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Cachorro
                 </a>
-                <ul className={`dropdown-menu ${produtosEServicos ? 'show' : ''}`}>
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li className="dropdown-submenu">
-                    <a className="dropdown-item dropdown-toggle" href="#" onClick={toggleSubmenu}>Submenu</a>
-                    <ul className={`dropdown-menu ${submenuOpen ? 'show' : ''}`}>
-                      <li><a className="dropdown-item" href="#">teste</a></li>
-                      <li><a className="dropdown-item" href="#">teste</a></li>
+                <ul className="dropdown-menu">
+                  <li className='dropend'>
+                    <a className="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                      Produtos
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li><a href="" className="dropdown-item">Teste 1</a></li>
+                      <li><a href="" className="dropdown-item">Teste 2</a></li>
+                      <li><a href="" className="dropdown-item">Teste 3</a></li>
+                      <li><a href="" className="dropdown-item">Teste 4</a></li>
                     </ul>
                   </li>
-
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Gato
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
                   <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Pássaro
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Peixe
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
               </li>
             </ul>
-          </div>
-          <div className='d-flex justify-content-end'>
-            <div>
-              <span>
-                <a href="/usuario/favoritos"><img src={iconeCoracao} width={40} height={40} alt="Favoritos" /></a>
-              </span>
-            </div>
-            <div className="dropdown me-5">
-              <button className="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
-                  {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
-                </span>
-              </button>
-              <ul className="dropdown-menu">
-                <a className="nav-link disabled ms-3" aria-disabled="true">
-                  <span className='d-inline-block' style={{ maxWidth: '100px' }}>
-                    {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
-                  </span>
-                </a>
-                <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="/usuario/perfil">Meu perfil</a></li>
-                <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
-              </ul>
-            </div>
           </div>
         </div>
       </nav>
