@@ -127,6 +127,7 @@ class LoginService {
         if (!login) {
             throw new ExcecaoGenericaDeErro("Email não cadastrado")
         }
+        return login
     }
 }
 

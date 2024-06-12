@@ -1,6 +1,7 @@
 const LoginService = require("../services/loginService.js")
 const FiltroExcecoes = require("../exception/exceptionFilter.js")
 const jwt = require("jsonwebtoken")
+const nodemailer = require('nodemailer');
 const secret = "MinhaSenha"
 
 class LoginController {
@@ -22,7 +23,7 @@ class LoginController {
                 idEmpresa = result.idEmpresa
                 nome = result.nome
                 token = jwt.sign({ usuario_id, usuario_tipo, statusPagamento, statusAtivo, idEmpresa, nome }, secret, { expiresIn: 86400 })
-            } else if(result.tipo == 'DNP') {
+            } else if (result.tipo == 'DNP') {
                 nome = result.nome
                 token = jwt.sign({ usuario_id, usuario_tipo, nome }, secret, { expiresIn: 86400 })
             } else {
@@ -31,7 +32,7 @@ class LoginController {
             res.status(200).json(token)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json({message: retorno.message})
+            res.status(retorno.status).json({ message: retorno.message })
         }
     }
 
@@ -39,11 +40,11 @@ class LoginController {
         try {
             const usuarioTipo = req.usuario_tipo
             const param = parseInt(req.params.id)
-            const result = await LoginService.findUsuarioPorId(param,usuarioTipo);
+            const result = await LoginService.findUsuarioPorId(param, usuarioTipo);
             res.status(200).json(result)
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json({message: retorno.message})
+            res.status(retorno.status).json({ message: retorno.message })
         }
     }
 
@@ -54,7 +55,7 @@ class LoginController {
             res.status(201).json({ message: "Usuário cadastrado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json({message: retorno.message})
+            res.status(retorno.status).json({ message: retorno.message })
         }
     }
 
@@ -66,7 +67,7 @@ class LoginController {
             res.status(201).json({ message: "Usuário atualizado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json({message: retorno.message})
+            res.status(retorno.status).json({ message: retorno.message })
         }
     }
 
@@ -78,18 +79,62 @@ class LoginController {
             res.status(201).json({ message: "Usuário atualizado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json({message: retorno.message})
+            res.status(retorno.status).json({ message: retorno.message })
         }
     }
 
     async postEnvioEmail(req, res) {
         try {
             const body = req.body
-            await LoginService.createEnvioEmail(body);
-            res.status(201).json({ message: "E-mail enviado" })
+            const user = await LoginService.createEnvioEmail(body);
+            const usuario_id = user.id;
+            const usuario_tipo = user.tipo;
+
+            // Configuração do transporte de e-mail
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'zenzin1237@gmail.com',
+                    pass: 'tjxt zlqx sdrj zylg'
+                }
+            });
+
+            // Crio o token
+            const token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 3600 })
+
+            const mailOptions = {
+                from: 'zenzin1237@gmail.com',
+                to: user.email,
+                subject: 'Recuperação de senha',
+                html: `
+                    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                        <h2 style="color: #2641B7;">Recuperação de Senha</h2>
+                        <p>Olá,</p>
+                        <p>Você está recebendo este e-mail porque você (ou alguém) solicitou a redefinição da senha para sua conta.</p>
+                        <p>Por favor, clique no botão abaixo ou cole o link em seu navegador para concluir o processo dentro de uma hora da recepção deste email:</p>
+                        <p>
+                            <a href="http://localhost:3000/senha/alteracao/${token}" style="background-color: #2641B7; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                                Redefinir Senha
+                            </a>
+                        </p>
+                        <p>Se você não solicitou isso, por favor ignore este email e sua senha permanecerá inalterada.</p>
+                        <br>
+                        <p>Atenciosamente,</p>
+                        <p>Equipe J-Pets</p>
+                    </div>
+                `,
+            };
+
+            transporter.sendMail(mailOptions, (err, response) => {
+                if (err) {
+                    console.error('Erro ao enviar o email:', err);
+                    return res.status(500).json({ message: "Erro ao enviar o email" });
+                }
+                return res.status(200).json({ message: "E-mail enviado" })
+            });
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
-            res.status(retorno.status).json({message: retorno.message})
+            res.status(retorno.status).json(retorno.message)
         }
     }
 }
