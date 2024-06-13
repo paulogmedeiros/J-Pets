@@ -6,6 +6,7 @@ import iconeVoltar from '../img/iconeVoltar.svg'
 
 function Novo_servico() {
 
+
   const [animais, setAnimal] = useState([])
   const [nome, setNome] = useState('')
   const [animal_id, setAnimalId] = useState('')
@@ -15,33 +16,36 @@ function Novo_servico() {
     pegarIdAnimais()
   }, [])
 
+  // função para pegar o ID dos animais e colocar na lista suspensa
   async function pegarIdAnimais() {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
 
       const dados = await resposta.json()
-      console.log(dados)
+      console.log(dados) // console log para teste
       setAnimal(dados)
 
     } catch (error) {
       window.alert("Erro ao carregar animais", error)
     }
-
   }
 
+  //função para cadastrar serviço (servicos > postServicos)
   async function cadastrarServico(event) {
     event.preventDefault()
 
+    // dados para enviar para o backend
     const servicoDados = {
-      animal_id,
+      animal_id: parseInt(animal_id),
       nome
     }
 
+    // window alert para teste
     window.alert(servicoDados.animal_id)
     window.alert(servicoDados.nome)
 
     try {
-      const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos", {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos", { // rota para cadastrar serviços
         method: "POST",
         headers: {
           "Content-Type": "application/json"

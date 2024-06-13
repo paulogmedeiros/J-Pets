@@ -1,8 +1,58 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import './Nova_marca.css'
 import imgCadastroItens from '../img/imgCadastro.svg'
 import logoJPets_adm from '../img/logoJPets.png'
+import { notifications } from '@mantine/notifications'
+import { Loader } from '@mantine/core';
+import iconeVoltar from '../img/iconeVoltar.svg'
+
 function Nova_marca() {
+
+  const [animais, setAnimal] = useState([])
+  const [produtos, setProdutos] = useState([])
+  const [produto_id, setProduto_id] = useState([])
+  const [nome, setNome] = useState('')
+  const [animal_id, setAnimal_id] = useState('')
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
+  useEffect(() => {
+    document.title = "Cadastro | Marcas"
+    pegarIdAnimais()
+  }, [])
+
+  // função para pegar o ID dos animais e colocar na lista suspensa
+  async function pegarIdAnimais() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+
+      const dados = await resposta.json()
+      console.log(dados) // console log para teste
+      setAnimal(dados)
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
+  async function pegarProdutosPorIdAnimal(animal_id) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/produtos/animais/" + animal_id)
+
+      const dados = await resposta.json()
+      console.log(dados) // console log para teste
+      console.log(dados)
+
+      setProdutos(dados.map(value => {
+        return { value: value.id.toString(), label: value.nome }
+      }))
+
+    } catch (error) {
+      window.alert("Erro ao carregar produtos", error)
+    }
+  }
+
+
   return (
     <div className="admPainel">
       <nav className="admNavbar navbar navbar-expand-md">
@@ -31,7 +81,6 @@ function Nova_marca() {
         </div>
       </nav>
 
-
       <div className="container">
 
         {/* container para formulario e imagem */}
@@ -45,21 +94,45 @@ function Nova_marca() {
 
             {/* lista suspensa para selecionar o animal */}
             <div className="form-floating mb-3 mb-md-3">
-              <select className="form-select " id="floatingSelect" aria-label="Floating label select example">
+              <select
+                value={animal_id}
+                onChange={e => {
+                  setAnimal_id(e.target.value);
+                  pegarProdutosPorIdAnimal(e.target.value)
+                }}
 
-                <option value="1">Animal 1</option>
-                <option value="2">Animal 2</option>
-                <option value="3">Animal 3</option>
+                className="form-select "
+                id="floatingSelect"
+                aria-label="Floating label select example">
+
+                <option value="">Selecione</option>
+                {animais.map(animal => (
+                  <option
+                    key={animal.id}
+                    value={animal.id}>{animal.nome}</option>
+                ))}
+
               </select>
               <label for="floatingSelect">Animal</label>
             </div>
 
             {/* lista suspensa para selecionar o produto */}
             <div className="form-floating mb-3 mb-md-3">
-              <select className="form-select" id="floatingSelect" aria-label="Floating label select example">
-                <option value="1">Produto 1</option>
-                <option value="2">Produto 2</option>
-                <option value="3">Produto 3</option>
+              <select
+                value={produto_id}
+                onChange={(e) => setProdutos(e)}
+                data={produtos}
+                className="form-select"
+                id="floatingSelect"
+                aria-label="Floating label select example">
+
+                <option value="">Selecione</option>
+                {produtos.map(produto => (
+                  <option
+                    key={produto.id}
+                    value={produto.id}>{produto.nome}</option>
+                ))}
+
               </select>
               <label for="floatingSelect">Produto</label>
             </div>

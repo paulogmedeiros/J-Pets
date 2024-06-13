@@ -211,7 +211,7 @@ function Adicionar_servicos() {
               <label for="floatingSelect">Animal</label>
             </div>
 
-            {/* lista suspensa para escolher o serviço */}
+            {/* select multilevel para escolher o serviço */}
             <div className=" mb-3 mb-md-3">
 
               <label for="floatingSelect">Serviços</label>
