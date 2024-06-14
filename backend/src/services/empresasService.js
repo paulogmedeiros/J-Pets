@@ -24,7 +24,7 @@ class EmpresasService {
 
         const empresa = await EmpresasRepository.selectEmpresaPorId(id)
 
-        if(!empresa.foto_perfil){
+        if (!empresa.foto_perfil) {
             empresa.foto_perfil = "default.png"
         }
 
@@ -40,6 +40,13 @@ class EmpresasService {
     }
 
     async createEmpresas(data) {
+        // valido se o cnpj é valido o formato
+        const cnpjVerificacao = this.validatorCNPJ(data.cnpj)
+        
+        if (!cnpjVerificacao) {
+            throw new ExcecaoGenericaDeErro("CNPJ inválido")
+        }
+
         // valido se o cnpj já está cadastrado
         await this.findEmpresasPorCnpj(data.cnpj)
 
@@ -152,6 +159,38 @@ class EmpresasService {
         }
         // retorno
         return empresa
+    }
+
+    validatorCNPJ(cnpj) {
+        cnpj = cnpj.replace(/[^\d]+/g, '');
+
+        if (cnpj.length != 14) return false;
+
+        let tamanhoTotal = cnpj.length - 2;
+        let cnpjSemDigitos = cnpj.substring(0, tamanhoTotal);
+        const digitosVerificadores = cnpj.substring(tamanhoTotal);
+        let soma = 0;
+        let pos = tamanhoTotal - 7;
+        for (let i = tamanhoTotal; i >= 1; i--) {
+            soma += cnpjSemDigitos.charAt(tamanhoTotal - i) * pos--;
+            if (pos < 2) pos = 9;
+        }
+        let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+        if (resultado != digitosVerificadores.charAt(0)) return false;
+
+        tamanhoTotal = tamanhoTotal + 1;
+        cnpjSemDigitos = cnpj.substring(0, tamanhoTotal);
+        soma = 0;
+        pos = tamanhoTotal - 7;
+        for (let i = tamanhoTotal; i >= 1; i--) {
+            soma += cnpjSemDigitos.charAt(tamanhoTotal - i) * pos--;
+            if (pos < 2) pos = 9;
+        }
+
+        resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+        if (resultado != digitosVerificadores.charAt(1)) return false;
+
+        return true;
     }
 }
 

@@ -20,6 +20,7 @@ const cartoes = require("./controllers/cartoesController.js")
 
 //middleware
 const empresaValidation = require("./middleware/empresasValidation.js")
+const produtosValidation = require("./middleware/produtosValidation.js")
 const tokenValidation = require("./middleware/tokenValidation.js")
 
 
@@ -45,7 +46,7 @@ routes.get("/produtos",produtos.getProdutos);
 routes.get("/produtos/animais/:animalId/empresa/:empresaId", produtos.getProdutosPorIdAnimalIdEmpresa);
 routes.get("/produtos/animais/:animalId",produtos.getProdutosPorIdAnimal);
 routes.get("/produtos/:id", produtos.getProdutosPorId);
-routes.post("/produtos", produtos.postProdutos);
+routes.post("/produtos",produtosValidation.validarCriacaoProdutos, produtos.postProdutos);
 routes.put("/produtos/:id", produtos.putProdutos);
 routes.delete("/produtos/:id", produtos.deleteProdutos);
 
@@ -74,11 +75,11 @@ routes.get("/empresas/:tipo/servicosProdutos/:id", empresa.getEmpresasPeloProudu
 routes.put("/empresas/imagem/:id", empresa.putEmpresasImagem);
 routes.get("/empresas/cupom/:id",empresa.getCupom);
 routes.get("/empresas/:id",empresa.getEmpresaPorId);
-routes.post("/empresas",empresa.postEmpresa);
+routes.post("/empresas",empresaValidation.validarCriacaoEmpresa,empresa.postEmpresa);
 routes.put("/empresas/cancelar/assinatura/:id",empresa.putCancelarAssinatura);
 routes.put("/empresas/status/:id",empresa.putStatus);
 routes.put("/empresas/remover/foto/:id",empresa.putRemoverFotoPerfil);
-routes.put("/empresas/criar/cupom/:id",empresa.putCriarCupom);
+routes.put("/empresas/criar/cupom/:id",empresaValidation.validarCupomEmpresa,empresa.putCriarCupom);
 routes.put("/empresas/informacoes/:id",empresa.putCriarInformacoesEmpresa);
 routes.put("/empresas/excluir/cupom/:id",empresa.putExcluirCupom);
 

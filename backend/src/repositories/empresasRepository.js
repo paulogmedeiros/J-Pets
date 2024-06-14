@@ -147,7 +147,8 @@ class EmpresasRepository {
                 nome_cupom: data.nomeCupom
             },
             select: {
-                nome_cupom: true
+                nome_cupom: true,
+                porcentagem_cupom: true
             }
         })
     }
