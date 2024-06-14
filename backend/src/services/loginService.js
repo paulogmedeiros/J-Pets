@@ -113,12 +113,12 @@ class LoginService {
             throw new ExcecaoGenericaDeErro("A senha não pode ser igual a anterior")
         }
 
-        // faço a criptografia da senha
-        let salt = bcrypt.genSaltSync(10)
-        data.senha = bcrypt.hashSync(data.senha, salt)
-
-        // retorno
-        return await LoginRepository.updateSenha(data, id)
+         // faço a criptografia da senha
+         let salt = bcrypt.genSaltSync(10)
+         data.novaSenha = bcrypt.hashSync(data.novaSenha, salt)
+ 
+         // retorno
+         return await LoginRepository.updateSenha(data.novaSenha, id)
     }
 
     async createEnvioEmail(data) {

@@ -117,7 +117,7 @@ class LoginRepository {
                 id
             },
             data: {
-                senha: data.senha
+                senha: data
             }
         })
     }
