@@ -62,8 +62,8 @@ class LoginController {
     async putSenhaRecuperacao(req, res) {
         try {
             const body = req.body
-            const param = parseInt(req.params.id)
-            await LoginService.editSenhaRecuperacao(body, param);
+            const id = parseInt(req.usuario_id)
+            await LoginService.editSenhaRecuperacao(body, id);
             res.status(201).json({ message: "Usuário atualizado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
@@ -101,7 +101,7 @@ class LoginController {
 
             // Crio o token
             const token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 3600 })
-
+            
             const mailOptions = {
                 from: 'zenzin1237@gmail.com',
                 to: user.email,
@@ -125,9 +125,9 @@ class LoginController {
                 `,
             };
 
-            transporter.sendMail(mailOptions, (err, response) => {
-                if (err) {
-                    console.error('Erro ao enviar o email:', err);
+            transporter.sendMail(mailOptions, (erro, response) => {
+                if (erro) {
+                    console.error('Erro ao enviar o email:', erro);
                     return res.status(500).json({ message: "Erro ao enviar o email" });
                 }
                 return res.status(200).json({ message: "E-mail enviado" })
