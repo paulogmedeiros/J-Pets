@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import './Cadastro_empresa.css'
-import imagem_login from './img/imagem_login.png'
 import imagemCadastroEmpresa from './img/imagem_cadastro_empresa.svg'
 import { notifications } from '@mantine/notifications'
 import { Loader } from '@mantine/core';
@@ -140,8 +139,8 @@ function Cadastro_empresa() {
             Já possui uma conta? <a href="/" className="redirecionamento_cadastro_empresa link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Entrar</a>
           </p>
         </div>
-        <div className="img_login col-md-6 d-flex mt-3 mt-md-0 rounded-4">
-          <img src={imagem_login} className="img-fluid"></img>
+        <div className="img_login col-md-6 d-flex mt-3 mt-md-0 rounded-4 p-5">
+          <img src={imagemCadastroEmpresa} className="img-fluid"></img>
         </div>
       </div>
     </div>

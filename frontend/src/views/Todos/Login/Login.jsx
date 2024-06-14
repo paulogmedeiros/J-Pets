@@ -57,9 +57,9 @@ function Login() {
 
         <div className="loginContainer container">
 
-            <div className="row justify-content-center border shadow-sm mb-5 bg-body-tertiary rounded rounded-4 col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+            <div className="row justify-content-center border shadow-sm mb-5 bg-body-tertiary rounded rounded-4 col-12 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
-                <div className="col-md-6 d-flex-md-5">
+                <div className="col-md-6 d-flex-md-5 p-5">
 
                     <p className="login_titulo fs-1 fw-bold text-center mt-5 mb-2 mb-md-5">Login</p>
 
