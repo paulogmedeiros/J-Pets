@@ -200,7 +200,7 @@ function Adicionar_servicos() {
                 id="floatingSelect"
                 aria-label="Floating label select example">
 
-                  <option value="">Selecione</option>
+                <option value="">Selecione</option>
                 {animais.map(animal => (
                   <option
                     key={animal.id}

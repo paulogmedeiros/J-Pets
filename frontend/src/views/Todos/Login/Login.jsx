@@ -46,6 +46,7 @@ function Login() {
                 }
 
                 localStorage.setItem("decodedToken", JSON.stringify(decodedToken));
+                localStorage.setItem("token", JSON.stringify(token));
             }
         } catch (error) {
             console.error("Erro ao fazer login", error);

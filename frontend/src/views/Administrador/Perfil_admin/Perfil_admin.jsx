@@ -1,8 +1,18 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import './Perfil_admin.css'
 import logoJPets_adm from '../img/logoJPets.png'
 
+
 function Perfil_admin() {
+  const [email, setEmail] = useState('');
+  const [usuario_id, setUsuario_id] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.usuario_id)
+  const [token, setToken] = useState(JSON.parse(localStorage.getItem("decodedToken")))
+
+  useEffect(() => {
+    document.title = "Perfil | Administrador"
+  }, []);
+
+
   return (
     <div>
       <div className="admPainel">
@@ -35,12 +45,11 @@ function Perfil_admin() {
 
       <div className="container">
 
-
         <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
           <div className="col-md-9 text-center text-md-start ">
             <h1 className='perfilAdmTitulo'>Meu perfil</h1>
             <div className=' rounded-3 p-5 border rounded-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded'>
-              <h3 className='text-md-start mb-5'>Jamille Galazi</h3>
+              <h3 className='text-md-start mb-5'>Administrador</h3>
               <div className="w-100"></div>
               <p>Email</p>
               <div class="form-floating mb-3">
@@ -52,7 +61,7 @@ function Perfil_admin() {
                 <input type="password" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled />
                 <label for="floatingInputDisabled">Senha</label>
               </div>
-              <a href="/senha/alteracao" className='alterarSenhaAdm'>Alterar senha</a>
+              <a href="/administrador/senha/alteracao" className='alterarSenhaAdm'>Alterar senha</a>
             </div>
           </div>
         </div>

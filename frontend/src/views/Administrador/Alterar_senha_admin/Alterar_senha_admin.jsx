@@ -1,9 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
 import imgSenha from '../img/img_senha.svg'
 import './Alterar_senha_admin.css'
 import logoJPets_adm from '../img/logoJPets.png'
-
+import { notifications } from '@mantine/notifications'
+import { Loader } from '@mantine/core';
 function Alterar_senha_admin() {
+
+  const [senha, setSenha] = useState('')
+  const [novaSenha, setNovaSenha] = useState('')
+  const [confirmarSenha, setConfirmarSenha] = useState('')
+  const [erroSenha, setErroSenha] = useState(''); // Novo estado para mensagem de erro
+  const [usuario_id, setUsuario_id] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.usuario_id)
+
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
+  async function alterarSenhaAdmin(event) {
+    event.preventDefault()
+
+    // tratamento pra ver se as senhas são iguais
+    if (senha !== confirmarSenha) {
+      setErroSenha("As senhas não coincidem")
+      return; // Adiciona este retorno para sair da função se as senhas não coincidirem
+    }
+
+    const alterarSenhaDados = {
+      senha,
+      novaSenha
+    }
+
+    try {
+      const result = await fetch(process.env.REACT_APP_URL_API + '/senha/' + usuario_id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(alterarSenhaDados)
+      })
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+
+        window.location.href = '/administrador/perfil';
+      }, 1500);
+
+    } catch (error) {
+     
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+
+  }
   return (
 
     <div className="admPainel">
@@ -35,32 +88,56 @@ function Alterar_senha_admin() {
 
       <div className="container">
 
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+        <div className="row justify-content-center col-12 ps-4 col-md-5 border shadow-sm mb-5 bg-body-tertiary rounded rounded-4 position-absolute top-50 start-50 translate-middle ">
 
-          <div className="col-md-5 d-flex-md-5 mt-5 pt-5">
+          <div className="col-md-8 d-flex-md-5 p-5">
             <div className='text-center'>
               <img src={imgSenha} width={60} height={60} />
             </div>
 
             <p className="AlterarSenhaAdminTitulo fs-1 fw-bold text-center mb-2 mb-md-5 mt-3">Alteração de senha</p>
 
+            {/* input para a senha atual */}
             <div className="form-floating mt-md-5 mb-3 mt-3">
-              <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+              <input
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password" />
               <label for="floatingPassword">Senha atual</label>
             </div>
 
-
+            {/* input para a nova senha */}
             <div className="form-floating mt-md-3 mb-3">
-              <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+              <input
+                value={novaSenha}
+                onChange={(e) => setNovaSenha(e.target.value)}
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password" />
               <label for="floatingPassword">Nova senha</label>
             </div>
 
+            {/* input para a confirmação da senha */}
             <div className="form-floating mt-md-3 mb-4">
-              <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+              <input
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
+              type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password" />
               <label for="floatingPassword">Confirmação da nova senha</label>
+              {erroSenha && <div className="text-danger">{erroSenha}</div>}
             </div>
 
-            <a className="btnAlterarSenhaAdmin btn w-100" href="#" role="button">Confirmar</a>
+            <button
+            onClick={alterarSenhaAdmin}
+            className="btnAlterarSenhaAdmin btn w-100"
+            role="button">Confirmar</button>
 
             <p className="text-body-dark text-center mt-3">
               <a href="#" className="cancelarAlterarSenhaAdmin link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Cancelar</a>
