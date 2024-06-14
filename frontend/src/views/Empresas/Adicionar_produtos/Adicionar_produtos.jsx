@@ -1,8 +1,95 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import './Adicionar_produtos.css'
 import Adicionar_produtos_img from './img/Produtos_img.svg'
 import logoJPets from './img/logoJPets.png'
+import { MultiSelect } from '@mantine/core';
+import { notifications } from '@mantine/notifications'
+
 function Adicionar_produtos() {
+  const [animais, setAnimal] = useState([])
+  const [produtos, setProdutos] = useState([])
+  const [animalId, setAnimalId] = useState('')
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
+  const [opcoes, setOpcoes] = useState([]);
+
+
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
+  useEffect(() => {
+    document.title = 'Cadastro | Produtos'
+    pegarIdAnimais() // lista de animais carrega ao entrar na página
+  }, [])
+
+  // função para cadastrar produtos
+  async function cadastrarProdutos(event) {
+    event.preventDefault()
+
+    const produtoDados = {
+      empresaId: parseInt(idEmpresa),
+      animalId: parseInt(animalId),
+      produtosId: opcoes.map(opcao => {
+        return parseInt(opcao)
+      })
+    }
+    console.log(produtoDados)
+    try {
+      const result = await fetch(process.env.REACT_APP_URL_API + '/empresasProdutos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' // Especificando o corpo como JSON
+        },
+        body: JSON.stringify(produtoDados)
+      })
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+
+      }, 1500);
+    } catch (error) {
+
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
+  // função para pegar o ID dos animais
+  async function pegarIdAnimais() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setAnimal(dados)
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
+  // função para selecionar produtos a partir do animal escohido
+  async function selectProdutos(animalId) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/produtos/animais/" + animalId + "/empresa/" + idEmpresa)
+      const dados = await resposta.json()
+      console.log(dados)
+
+      setProdutos(dados.map(value => {
+        return { value: value.id.toString(), label: value.nome }
+      }))
+
+    } catch (error) {
+      window.alert(error)
+      window.alert("Erro ao carregar produtos", error)
+    }
+  }
+
   return (
     <>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -86,10 +173,10 @@ function Adicionar_produtos() {
       <div className="container">
 
         {/* container para formulario e imagem */}
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+        <div className="row justify-content-center border rounded-4 bg-light shadow-sm mb-5 bg-body-tertiary rounded col-12 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
           {/* container para formulario */}
-          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
+          <div className="col-md-6 d-flex-md-5 mt-5 mt-md-0 p-5">
 
             {/* Título */}
             <p className="tituloAdicionarProdutosEmpresa fs-md-2 fs-3 fw-semibold text-center mb-4 mb-md-4 mt-md-5">
@@ -99,43 +186,50 @@ function Adicionar_produtos() {
             {/* lista suspensa para selecionar o animal */}
             <div className="form-floating mb-3 mb-md-4">
               <select
+                value={animalId}
+                onChange={(e) => {
+                  setAnimalId(e.target.value);
+                  selectProdutos(e.target.value)
+                }}
                 className="form-select"
                 id="floatingSelect"
                 aria-label="Floating label select example">
+
                 <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
+                {animais.map(animal => (
+                  <option
+                    key={animal.id}
+                    value={animal.id}>{animal.nome}</option>
+                ))}
+
               </select>
               <label for="floatingSelect">Animal</label>
             </div>
 
             {/* lista suspensa para escolher o produto */}
-            <div className="form-floating mb-3 mb-md-4">
-              <select
-                className="form-select "
-                id="floatingSelect"
-                aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
-              </select>
+            <div className=" mb-3 mb-md-3">
+
               <label for="floatingSelect">Produtos</label>
+              <MultiSelect className='multipleSelect'
+                onChange={(e) => setOpcoes(e)}
+                placeholder="Selecione"
+                data={produtos}
+              />
             </div>
 
-            <a className="btnAdicionarProdutosEmpresa btn w-100 mt-md-4" href="#" role="button">
+            <button
+            onClick={cadastrarProdutos}
+            className="btnAdicionarProdutosEmpresa btn w-100 "
+            role="button">
               Adicionar
-            </a>
+            </button>
 
             <div className='text-center'>
-              <a className="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="#" role="button">Adicionar marca</a>
+              <a className="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="/empresas/adicionarMarcas" role="button">Adicionar marca</a>
             </div>
 
           </div>
-          <div className="imgAdicionarProdutosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4 p-3">
+          <div className="imgAdicionarProdutosEmpresa text-center justify-content-center col-md-6 d-flex mt-3 mt-md-0 rounded-4 p-3">
             <img src={Adicionar_produtos_img} className="img-fluid"></img>
           </div>
         </div>

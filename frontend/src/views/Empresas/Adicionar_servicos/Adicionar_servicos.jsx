@@ -11,9 +11,7 @@ function Adicionar_servicos() {
   const [animais, setAnimal] = useState([])
   const [servicos, setServicos] = useState([])
   const [animalId, setAnimalId] = useState('')
-  const [servicosId, setServicosId] = useState([])
   const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
-  const [opcaoSelecionada, setOpcaoSelecionada] = useState([]);
   const [opcoes, setOpcoes] = useState([]);
   const [carregando, setCarregando] = useState(false)
   const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
@@ -22,7 +20,6 @@ function Adicionar_servicos() {
   useEffect(() => {
     document.title = "Cadastro | Serviços"
     pegarIdAnimais()
-
   }, [])
 
   async function cadastrarServicos(event) {
@@ -66,7 +63,6 @@ function Adicionar_servicos() {
     }
   }
 
-
   async function pegarIdAnimais() {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
@@ -80,6 +76,7 @@ function Adicionar_servicos() {
     }
   }
 
+// função para selecionar serviços a partir do animal escohido
   async function selectServicos(animalId) {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos/animais/" + animalId + "/empresa/" + idEmpresa)
@@ -91,7 +88,7 @@ function Adicionar_servicos() {
       }))
 
     } catch (error) {
-      window.alert("Erro ao carregar animais", error)
+      window.alert("Erro ao carregar serviços", error)
     }
   }
 
