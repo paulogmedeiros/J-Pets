@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import './Cadastro_empresa.css'
-import imagem_login from './img/imagem_login.png'
 import imagemCadastroEmpresa from './img/imagem_cadastro_empresa.svg'
 import { notifications } from '@mantine/notifications'
+import { Loader } from '@mantine/core';
 
 function Cadastro_empresa() {
 
@@ -17,13 +17,16 @@ function Cadastro_empresa() {
   const [cnpj, setCNPJ] = useState('')
   const [nomeFantasia, setNomeFantasia] = useState('')
   const [erroSenha, setErroSenha] = useState(''); // Novo estado para mensagem de erro
-  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{color: "red", fontSize: "20px"}}></i>
+  const [carregando, setCarregando] = useState(false)
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
 
   // Função que será chamada ao enviar o formulário
   async function cadastrarEmpresa(event) {
 
     // impede o comportamento padrão de reload da página
     event.preventDefault()
+    setCarregando(true)
 
     // tratamento pra ver se as senhas são iguais
     if (senha !== confirmarSenha) {
@@ -48,17 +51,20 @@ function Cadastro_empresa() {
         body: JSON.stringify(empresasDados)
       })
       const resposta = await result.json()
+      console.log(resposta.status, result.status)
 
-      if (resposta.status === 201) { // Verifica se o status é 201 Created
-        console.log("Usuário cadastrado com sucesso!");
-        window.alert('Usuário cadastrado com sucesso!');
-        window.location.href = '/'; // Redireciona para a página de login
-      } else if (!resposta.ok) {
+      if (result.status >= 400) { // Verifica se o status é 201 Created
         throw new Error(resposta.message)
-        // console.error("Erro ao criar usuário:", resposta.statusText);
-        // window.alert('Erro ao criar usuário: ' + resposta.statusText);
       }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+        setCarregando(false)
+        window.location.href = '/';
+      }, 1500);
+
     } catch (error) {
+      setCarregando(false)
       console.log(error)
       notifications.show({ message: error.message, color: "white", icon: errorIcon });
     }
@@ -126,14 +132,15 @@ function Cadastro_empresa() {
 
           <button
             onClick={cadastrarEmpresa}
-            className="btn_cadastro_empresa btn w-100">Criar conta profissional</button>
+
+            className="btn_cadastro_empresa btn w-100">{carregando ? <Loader color="white" /> : "Criar conta profissional"} </button>
 
           <p className=" text-body-dark text-center mt-4">
             Já possui uma conta? <a href="/" className="redirecionamento_cadastro_empresa link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Entrar</a>
           </p>
         </div>
-        <div className="img_login col-md-6 d-flex mt-3 mt-md-0 rounded-4">
-          <img src={imagem_login} className="img-fluid"></img>
+        <div className="img_login col-md-6 d-flex mt-3 mt-md-0 rounded-4 p-5">
+          <img src={imagemCadastroEmpresa} className="img-fluid"></img>
         </div>
       </div>
     </div>

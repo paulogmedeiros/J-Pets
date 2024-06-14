@@ -1,8 +1,100 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import Servicos_img from './img/Servicos_img.svg'
 import './Adicionar_servicos.css'
 import logoJPets from './img/logoJPets.png'
+import { MultiSelect } from '@mantine/core';
+import { notifications } from '@mantine/notifications'
+import { Loader } from '@mantine/core';
+
 function Adicionar_servicos() {
+
+  const [animais, setAnimal] = useState([])
+  const [servicos, setServicos] = useState([])
+  const [animalId, setAnimalId] = useState('')
+  const [servicosId, setServicosId] = useState([])
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
+  const [opcaoSelecionada, setOpcaoSelecionada] = useState([]);
+  const [opcoes, setOpcoes] = useState([]);
+  const [carregando, setCarregando] = useState(false)
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
+  useEffect(() => {
+    document.title = "Cadastro | Serviços"
+    pegarIdAnimais()
+
+  }, [])
+
+  async function cadastrarServicos(event) {
+    event.preventDefault()
+
+    const servicoDados = {
+      empresaId: parseInt(idEmpresa),
+      animalId: parseInt(animalId),
+      servicosId: opcoes.map(opcao => {
+        return parseInt(opcao)
+      })
+    }
+    console.log(servicoDados)
+    try {
+      setCarregando(true)
+
+      // Realiza POST para a API
+      const result = await fetch(process.env.REACT_APP_URL_API + '/empresasSevico', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' // Especificando o corpo como JSON
+        },
+        body: JSON.stringify(servicoDados)
+      })
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+        setCarregando(false)
+      }, 1500);
+
+    } catch (error) {
+      setCarregando(false)
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
+
+  async function pegarIdAnimais() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setAnimal(dados)
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
+  async function selectServicos(animalId) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos/animais/" + animalId + "/empresa/" + idEmpresa)
+      const dados = await resposta.json()
+      console.log(dados)
+
+      setServicos(dados.map(value => {
+        return { value: value.id.toString(), label: value.nome }
+      }))
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
   return (
     <>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -86,10 +178,10 @@ function Adicionar_servicos() {
       <div className="container">
 
         {/* container para formulario e imagem */}
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+        <div className="row justify-content-center border rounded-4 bg-light shadow-sm mb-5 bg-body-tertiary rounded col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
           {/* container para formulario */}
-          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
+          <div className="col-md-6 d-flex-md-5 mt-5 mt-md-0 p-5">
 
             {/* Título */}
             <p className="tituloAdicionarServicoEmpresa fs-2 fw-semibold text-center mb-4 mb-md-5">
@@ -99,38 +191,45 @@ function Adicionar_servicos() {
             {/* lista suspensa para selecionar o animal */}
             <div className="form-floating mb-3 mb-md-3">
               <select
+                value={animalId}
+                onChange={e => {
+                  setAnimalId(e.target.value);
+                  selectServicos(e.target.value)
+                }}
                 className="form-select"
                 id="floatingSelect"
                 aria-label="Floating label select example">
+
                 <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
+                {animais.map(animal => (
+                  <option
+                    key={animal.id}
+                    value={animal.id}>{animal.nome}</option>
+                ))}
+
               </select>
               <label for="floatingSelect">Animal</label>
             </div>
 
-            {/* lista suspensa para escolher o serviço */}
-            <div className="form-floating mb-3 mb-md-3">
-              <select
-                className="form-select "
-                id="floatingSelect"
-                aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
-              </select>
+            {/* select multilevel para escolher o serviço */}
+            <div className=" mb-3 mb-md-3">
+
               <label for="floatingSelect">Serviços</label>
+              <MultiSelect className='multipleSelect'
+                onChange={(e) => setOpcoes(e)}
+                placeholder="Selecione"
+                data={servicos}
+              />
             </div>
 
-            <a className="btnAdicionarServicoEmpresa btn w-100" href="#" role="button">
-              Confirmar
-            </a>
+            <button
+              onClick={cadastrarServicos}
+              className="btnAdicionarServicoEmpresa btn w-100"
+              role="button">
+              {carregando ? <Loader color="white" /> : "Confirmar"}
+            </button>
           </div>
-          <div className="imgAdicionarServicosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4">
+          <div className="imgAdicionarServicosEmpresa col-md-6 d-flex mt-3 mt-md-0 rounded-4">
             <img src={Servicos_img} className="img-fluid"></img>
           </div>
         </div>

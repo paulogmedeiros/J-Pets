@@ -99,7 +99,7 @@ function Principal_Empresas() {
               <h5>Tenha seu trabalho divulgado aqui!</h5>
               <p>Até <span className='text-warning fw-bold'>50% OFF</span> na primeira mensalidade!</p>
 
-              <a className="btnSaibaMais btn w-50 mt-md-5 rounded-5" href="#" role="button">Assine já!</a>
+              <a className="btnSaibaMais btn w-50 mt-md-5 rounded-5" href="/empresas/planos" role="button">Assine já!</a>
             </div>
           </div>
           <div className="col-md-6">

@@ -58,8 +58,6 @@ function Painel_de_controle_servicos() {
     }
 
 
-
-
     // Função carregar usuários
     async function carregarServicos() {
         try {

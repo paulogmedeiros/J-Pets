@@ -6,9 +6,9 @@ function Esqueceu_a_senha() {
     return (
         <div className="container">
 
-            <div className="row border border-2 rounded-4 p-3 justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+            <div className="row border rounded-4 p-3 justify-content-center col-12 ps-4 col-md-5 border shadow-sm mb-5 bg-body-tertiary rounded rounded-4 position-absolute top-50 start-50 translate-middle ">
 
-                <div className="col-md-5 d-flex-md-5">
+                <div className="col-md-10 d-flex-md-5 p-5">
 
                     <div className="text-center">
                         <img src={icone_email} className="img-fluid" width={90} height={90}></img>

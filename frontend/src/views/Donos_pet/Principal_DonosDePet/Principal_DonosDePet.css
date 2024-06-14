@@ -1,5 +1,5 @@
 .navbarDonoDePet {
-  background-color: #DCECF6;
+  background-color: #DCECF6 !important;
 }
 
 .btnSaibaMais {
@@ -10,3 +10,4 @@
 .anuncioPagInicial{
   background: #DCECF6;
 }
+

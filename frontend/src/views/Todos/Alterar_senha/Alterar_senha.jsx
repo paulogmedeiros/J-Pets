@@ -17,6 +17,12 @@ function Alterar_senha() {
           <p className="titulo_alterar_senha fs-1 fw-bold text-center mb-2 mb-md-2">Alteração de senha</p>
           <p className='text-center'>Altere sua senha.</p>
 
+
+          <div className="form-floating mb-3">
+            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+            <label for="floatingPassword">Senha atual</label>
+          </div>
+
           <div className="form-floating mb-3">
             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
             <label for="floatingPassword">Nova senha</label>

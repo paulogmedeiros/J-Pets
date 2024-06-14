@@ -50,6 +50,7 @@ class ServicosController {
 
     async postServicos(req, res) {
         try {
+            console.log(req.body)
             const body = req.body
             body.animal_id = parseInt(body.animal_id)
             await ServicosService.createServicos(body);

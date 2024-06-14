@@ -103,13 +103,12 @@ function Perfil_DonosDePet() {
 
 
 
-      <div className="text-center mt-md-5 m-5">
-        <h1 className='perfilUsuarioTitulo fw-semibold fs-1'>Meu Perfil</h1>
-      </div>
-      <div className="position-absolute top-50 start-50 translate-middle border rounded-4 p-5 w-75 mt-5 mt-md-3">
 
-        <div className="text-center mt-md-5">
+        <h1 className='perfilUsuarioTitulo fw-semibold fs-1  mt-5 text-center'>Meu Perfil</h1>
 
+      <div className="position-absolute top-50 start-50 translate-middle border rounded-4 p-5 w-50 mt-5 mt-md-3">
+
+        <div className="text-center ">
           <div className="row">
             <div className="col-md-6">
               <h1 className='fs-2 fw-semibold mb-5'>Jamille Galazi</h1>

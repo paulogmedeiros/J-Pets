@@ -1,8 +1,101 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import './Nova_marca.css'
 import imgCadastroItens from '../img/imgCadastro.svg'
 import logoJPets_adm from '../img/logoJPets.png'
+import { notifications } from '@mantine/notifications'
+import { Loader } from '@mantine/core';
+import iconeVoltar from '../img/iconeVoltar.svg'
+
 function Nova_marca() {
+
+  const [animais, setAnimal] = useState([])
+  const [produtos, setProdutos] = useState([])
+  const [produto_id, setProduto_id] = useState('')
+  const [nome, setNome] = useState('')
+  const [animal_id, setAnimal_id] = useState('')
+  const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
+  useEffect(() => {
+    document.title = "Cadastro | Marcas"
+    pegarIdAnimais()
+  }, [])
+
+  // função para cadastrar marcas (marcas > postMarcas)
+  async function cadastrarMarca(event) {
+    event.preventDefault()
+
+    const marcaDados = {
+      produto_id: parseInt(produto_id),
+      nome
+    }
+
+    window.alert(marcaDados.produto_id)
+    window.alert(marcaDados.nome)
+
+    try {
+      // Realiza POST para a API
+      const result = await fetch(process.env.REACT_APP_URL_API + '/marcas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' // Especificando o corpo como JSON
+        },
+        body: JSON.stringify(marcaDados)
+      })
+      const resposta = await result.json()
+      console.log(resposta.status, result.status) // console log para teste
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+      }, 1500);
+
+    } catch (error) {
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+
+  }
+
+
+  // função para pegar o ID dos animais e colocar na lista suspensa
+  // (animais > getAnimais)
+  async function pegarIdAnimais() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+      const dados = await resposta.json()
+      console.log(dados) // console log para teste
+      setAnimal(dados)
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
+  // função para pegar os produtos correspondentes dos animais
+  // (produtos > getProdutosPorIdAnimal)
+  async function pegarProdutosPorIdAnimal(animal_id) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/produtos/animais/" + animal_id)
+      const dados = await resposta.json()
+      console.log(dados) // console log para teste
+      setProdutos(dados.map(value => {
+        return { value: value.id.toString(), label: value.nome }
+      }))
+    } catch (error) {
+      window.alert("Erro ao carregar produtos", error)
+    }
+  }
+
+  // condição para carregar os produtos toda vez que seleciona um animal
+  useEffect(() => {
+    if (animal_id) {
+      pegarProdutosPorIdAnimal(animal_id)
+    }
+  }, [animal_id])
+
   return (
     <div className="admPainel">
       <nav className="admNavbar navbar navbar-expand-md">
@@ -31,57 +124,77 @@ function Nova_marca() {
         </div>
       </nav>
 
+      <a href="/administrador/painel/marcas" type="button" class="btnVoltarServico btn m-5 rounded-5">
+        <span>
+          <img src={iconeVoltar} width={20} height={20} />
+        </span>
+        Voltar
+      </a>
 
       <div className="container">
-
-        {/* container para formulario e imagem */}
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
-
-          {/* container para formulario */}
-          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
-
-            {/* Título */}
+        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle border rounded-4 bg-light shadow-sm mb-5 bg-body-tertiary rounded">
+          <div className="col-md-6 d-flex-md-5 mt-5 mt-md-0 p-5">
             <p className="tituloNovaMarca fs-1 fw-semibold text-center mb-0 mb-md-4">Nova marca</p>
-
-            {/* lista suspensa para selecionar o animal */}
             <div className="form-floating mb-3 mb-md-3">
-              <select className="form-select " id="floatingSelect" aria-label="Floating label select example">
 
-                <option value="1">Animal 1</option>
-                <option value="2">Animal 2</option>
-                <option value="3">Animal 3</option>
+              {/* lista suspensa para  selecionar o ID do animal*/}
+              <select
+                value={animal_id}
+                onChange={e => {
+                  setAnimal_id(e.target.value);
+                }}
+                className="form-select "
+                id="floatingSelect"
+                aria-label="Floating label select example">
+                <option value="">Selecione</option>
+                {animais.map(animal => (
+                  <option
+                    key={animal.id}
+                    value={animal.id}>{animal.nome}</option>
+                ))}
               </select>
-              <label for="floatingSelect">Animal</label>
+              <label htmlFor="floatingSelect">Animal</label>
             </div>
 
-            {/* lista suspensa para selecionar o produto */}
             <div className="form-floating mb-3 mb-md-3">
-              <select className="form-select" id="floatingSelect" aria-label="Floating label select example">
-                <option value="1">Produto 1</option>
-                <option value="2">Produto 2</option>
-                <option value="3">Produto 3</option>
+
+              {/* lista suspensa para selecionar o produto correspondente ao animal */}
+              <select
+                value={produto_id}
+                onChange={(e) => setProduto_id(e.target.value)}
+                className="form-select"
+                id="floatingSelect"
+                aria-label="Floating label select example">
+
+                <option value="">Selecione</option>
+                {produtos.map(produto => (
+                  <option
+                    key={produto.value}
+                    value={produto.value}>{produto.label}</option>
+                ))}
               </select>
-              <label for="floatingSelect">Produto</label>
+              <label htmlFor="floatingSelect">Produto</label>
             </div>
 
-            {/* Input para inserir o nome da marca */}
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" id="floatingInput" placeholder="" />
-              <label for="floatingInput">Nome da marca</label>
+              <input
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              type="text"
+              className="form-control"
+              id="floatingInput"
+              placeholder="" />
+              <label htmlFor="floatingInput">Nome da marca</label>
             </div>
-
-
-            <a className="btnNovaMarca btn w-100" href="#" role="button">Cadastrar marca</a>
-
+            <button
+            onClick={cadastrarMarca}
+            className="btnNovaMarca btn w-100"
+            role="button">Cadastrar marca</button>
           </div>
-
-          <div className="imgNovaMarca col-md-5 d-flex mt-3 mt-md-0 rounded-4">
-            <img src={imgCadastroItens} className="img-fluid"></img>
+          <div className="imgNovaMarca col-md-6 d-flex mt-3 mt-md-0 rounded-4">
+            <img src={imgCadastroItens} className="img-fluid" alt="Cadastro Itens" />
           </div>
-
-
         </div>
-
       </div>
     </div>
   )

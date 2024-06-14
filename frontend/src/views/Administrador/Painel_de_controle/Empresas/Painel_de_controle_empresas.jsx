@@ -53,7 +53,7 @@ function Painel_de_controle_empresas() {
                                     <ul className="dropdown-menu ">
                                         <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
                                         <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" href="#">Meu perfil</a></li>
+                                        <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
                                         <li><a className="dropdown-item" href="#">Sair</a></li>
                                     </ul>
                                 </div>
