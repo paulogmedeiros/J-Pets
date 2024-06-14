@@ -87,7 +87,7 @@ routes.get("/usuario/:id",tokenValidation.verificarToken,login.getUsuarioPorId);
 routes.post("/cadastro/administrador",login.postAdministrador);
 routes.post("/login",login.logar);
 routes.post("/envio/email",login.postEnvioEmail);
-routes.put("/recuperacao/senha/:id",login.putSenhaRecuperacao);
+routes.put("/recuperacao/senha",tokenValidation.verificarToken,login.putSenhaRecuperacao);
 routes.put("/senha/:id",login.putSenha);
 
 // rota donoPet
