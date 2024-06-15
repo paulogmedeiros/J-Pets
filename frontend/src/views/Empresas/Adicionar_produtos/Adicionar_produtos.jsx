@@ -12,7 +12,6 @@ function Adicionar_produtos() {
   const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
   const [opcoes, setOpcoes] = useState([]);
 
-
   const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
   const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
 
@@ -22,7 +21,7 @@ function Adicionar_produtos() {
   }, [])
 
   // função para cadastrar produtos
-  async function cadastrarProdutos(event) {
+  async function adicionarProdutos(event) {
     event.preventDefault()
 
     const produtoDados = {
@@ -218,7 +217,7 @@ function Adicionar_produtos() {
             </div>
 
             <button
-            onClick={cadastrarProdutos}
+            onClick={adicionarProdutos}
             className="btnAdicionarProdutosEmpresa btn w-100 "
             role="button">
               Adicionar

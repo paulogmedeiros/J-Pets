@@ -69,8 +69,8 @@ function Novo_produto() {
       console.log(error)
       notifications.show({ message: error.message, color: "white", icon: errorIcon });
     }
-
   }
+
   return (
 
     <div className="admPainel">
@@ -150,7 +150,6 @@ function Novo_produto() {
                 placeholder="" />
               <label for="floatingInput">Nome do produto</label>
             </div>
-
 
             <button
               onClick={cadastrarProduto}
