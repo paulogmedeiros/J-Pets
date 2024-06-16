@@ -1,8 +1,118 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import Modelos_img from './img/Modelos_img.svg'
 import './Adicionar_modelos.css'
 import logoJPets from './img/logoJPets.png'
+import { MultiSelect } from '@mantine/core';
+import { notifications } from '@mantine/notifications'
 function Adicionar_modelos() {
+
+  const [animais, setAnimal] = useState([])
+  const [marca_id, setMarca_id] = useState('')
+  const [animalId, setAnimalId] = useState('')
+  const [modelos, setModelos] = useState([])
+  const [marcas, setMarcas] = useState([])
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
+  const [opcoes, setOpcoes] = useState([]);
+
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
+  useEffect(() => {
+    document.title = 'Cadastro | Modelos'
+    pegarIdAnimais() // lista de animais carrega ao entrar na página
+  }, [])
+
+  // função para pegar o ID dos animais
+  // (animais > getAnimais)
+  async function pegarIdAnimais() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setAnimal(dados)
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
+  // função para pegar as marcas por id empresa e id animal
+  // (Empresas_Marcas > getEmpresasMarcasPorIdEmpresaIdAnimal)
+  async function pegarEmpresasMarcasPorIdEmpresaIdAnimal(animalId) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasMarcas/" + idEmpresa + "/animais/" + animalId)
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setMarcas(dados.map(value => {
+        return { value: value.marca_id.toString(), label: value.marcas.nome }
+      }))
+
+    } catch (error) {
+      window.alert("Erro ao carregar marcas", error)
+    }
+  }
+
+  useEffect(() => {
+    if (animalId) {
+      pegarEmpresasMarcasPorIdEmpresaIdAnimal(animalId)
+    }
+  }, [animalId])
+
+  // função para pegar os modelos disponíveis de acordo com a marca escolhida
+  // (modelos > getModelosPorIdMarcaIdEmpresa)
+  async function pegarModelosPorIdMarcaIdEmpresa(marca_id) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/modelos/marcas/" + marca_id + "/empresa/" + idEmpresa)
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setModelos(dados.map(value => {
+        return { value: value.id.toString(), label: value.nome }
+      }))
+    } catch (error) {
+      window.alert("Erro ao carregar modelos", error)
+    }
+  }
+
+  // função para adicionar modelos
+  // (Empresas_Modelos > postEmpresasModelos)
+  async function adicionarModelos(event) {
+    event.preventDefault()
+
+    const modeloDados = {
+      empresaId: parseInt(idEmpresa),
+      modelosId: opcoes.map(opcao => {
+        return parseInt(opcao)
+      })
+    }
+    console.log(modeloDados)
+
+    try {
+      const result = await fetch(process.env.REACT_APP_URL_API + "/empresasModelos", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(modeloDados)
+      })
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+
+      }, 1500);
+    } catch (error) {
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
   return (
     <>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -86,51 +196,77 @@ function Adicionar_modelos() {
       <div className="container">
 
         {/* container para formulario e imagem */}
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+        <div className="row justify-content-center border rounded-4 bg-light shadow-sm mb-5 bg-body-tertiary rounded col-12 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
           {/* container para formulario */}
-          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
+          <div className="col-md-6 p-5 d-flex-md-5 mt-5 mt-md-0">
 
             {/* Título */}
             <p className="tituloAdicionarModeloEmpresa fs-md-2 fs-3 fw-semibold text-center mb-4 mb-md-4 mt-md-0">
               Adicionar modelos
             </p>
 
+            {/* lista suspensa para escolher o animal */}
+            <div className="form-floating mb-3 mb-md-4">
+              <select
+                value={animalId}
+                onChange={(e) => {
+                  setAnimalId(e.target.value);
+                }}
+                className="form-select"
+                id="floatingSelect"
+                aria-label="Floating label select example">
+
+                <option value="">Selecione</option>
+                {animais.map(animal => (
+                  <option
+                    key={animal.id}
+                    value={animal.id}>{animal.nome}</option>
+                ))}
+
+              </select>
+              <label for="floatingSelect">Animal</label>
+            </div>
+
             {/* lista suspensa para selecionar o animal */}
             <div className="form-floating mb-3 mb-md-4">
               <select
+                value={marca_id}
+                onChange={(e) => {
+                  setMarca_id(e.target.value);
+                  pegarModelosPorIdMarcaIdEmpresa(e.target.value)
+                }}
                 className="form-select"
                 id="floatingSelect"
                 aria-label="Floating label select example">
                 <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
+                {marcas.map(marca => (
+                  <option
+                    key={marca.value}
+                    value={marca.value}>{marca.label}</option>
+                ))}
+
               </select>
               <label for="floatingSelect">Marca</label>
             </div>
 
             {/* lista suspensa para escolher o produto */}
-            <div className="form-floating mb-3 mb-md-4">
-              <select
-                className="form-select "
-                id="floatingSelect"
-                aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
-              </select>
+            <div className=" mb-3 mb-md-4">
               <label for="floatingSelect">Modelos</label>
+              <MultiSelect className='multipleSelect'
+                onChange={(e) => setOpcoes(e)}
+                placeholder="Selecione"
+                data={modelos}
+              />
             </div>
-
-            <a className="btnAdicionarModeloEmpresa btn w-100 mt-md-4" href="#" role="button">
+            <button
+            onClick={adicionarModelos}
+            className="btnAdicionarModeloEmpresa btn w-100 mt-md-4"
+            role="button">
               Adicionar
-            </a>
+            </button>
           </div>
-          <div className="imgAdicionarModeloEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4 p-3">
+          <div className="imgAdicionarModeloEmpresa col-md-6 justify-content-center d-flex mt-3 mt-md-0 rounded-4 p-3">
             <img src={Modelos_img} className="img-fluid"></img>
           </div>
         </div>
