@@ -67,7 +67,7 @@ class EmpresasController {
                 nomeImagem = new Date().getTime() + "." + extensao
                 let arquivo = req.files.imagem
                 const result = await EmpresasService.editEmpresaImagem(param, nomeImagem, arquivo);
-                res.status(200).json(result)
+                res.status(200).json({ message: "Imagem atualizada com sucesso" })
             } else {
                 res.status(400).json({ message: "Valido para cadastro apenas imagens .png" })
             }
@@ -82,7 +82,7 @@ class EmpresasController {
             const data = req.body;
             const param = parseInt(req.params.id)
             const result = await EmpresasService.editCriarCupom(data, param);
-            res.status(201).json(result)
+            res.status(201).json({ message: "Cupom cadastrado com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json({message: retorno.message})
@@ -127,7 +127,7 @@ class EmpresasController {
             const data = req.body;
             const param = parseInt(req.params.id)
             const result = await EmpresasService.editCriarInformacoesEmpresa(data, param);
-            res.status(201).json(result)
+            res.status(201).json({ message: "Alterações cadastradas com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json({message: retorno.message})
@@ -138,7 +138,7 @@ class EmpresasController {
         try {
             const param = parseInt(req.params.id)
             const result = await EmpresasService.editExcluirCupom(param);
-            res.status(201).json(result)
+            res.status(201).json({ message: "Cupom excluido com sucesso" })
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json({message: retorno.message})

@@ -1,7 +1,46 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import logoJPets from './img/logoJPets.png'
 import './PerfilDeEmpresas.css'
+
 function PerfilDeEmpresas() {
+
+  const [email, setEmail] = useState('');
+  const [nome, setNome] = useState('');
+  const decodedToken = JSON.parse(localStorage.getItem("decodedToken"))
+  const token= JSON.parse(localStorage.getItem("token"))
+  const usuario_id = decodedToken['usuario_id']
+
+  useEffect(() => {
+    document.title = "Perfil | Empresa"
+    pegarInformacoes()
+  }, []);
+
+  async function pegarInformacoes(){
+    try {
+
+      if(!usuario_id){
+        window.location.href = './'
+      }
+
+      const resposta = await fetch(process.env.REACT_APP_URL_API + '/usuario/' + usuario_id, {
+        method: 'GET',
+        headers: {
+          'x-access-token': token
+        }
+      })
+
+      if(!resposta.ok){
+        throw new Error('HTTP Erro' + resposta.status)
+      }
+
+      const dados = await resposta.json()
+      setEmail(dados.email)
+      setNome(dados.empresas.nome_fantasia)
+    } catch (error) {
+      throw new Error('HTTP Erro' + error)
+    }
+  }
+
   return (
     <div>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -102,16 +141,16 @@ function PerfilDeEmpresas() {
                     <button type="button" className="btn btn-secondary m-3 rounded-4">Remover</button>
                   </div>
                   <div className="col p-4">
-                    <h2>Jamille Galazi</h2>
+                    <h2>{nome}</h2>
                   </div>
                 </div>
-
+                <hr />
                 <div className="container text-center mt-5">
                   <div className="row">
                     <div className="col-md-6">
 
                       <p className='text-start'>Email</p>
-                      <input className="form-control mb-3" type="text" value="Exemplo" aria-label="Disabled input example" disabled readonly />
+                      <input className="form-control mb-3" type="text" value={email} aria-label="Disabled input example" disabled readonly />
                       <p className='text-start'>Senha</p>
                       <input className="form-control" type="password" value="Senha" aria-label="Disabled input example" disabled
                         readonly />
@@ -119,10 +158,10 @@ function PerfilDeEmpresas() {
                         <a href="/senha/alteracao">Alterar senha</a>
                       </div>
                     </div>
-                    <div className="col">
+                    {/* <div className="col">
                       <p className='text-start'>Contato</p>
                       <input className="form-control mb-3" type="text" value="279999999 " aria-label="Disabled input example" disabled readonly />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

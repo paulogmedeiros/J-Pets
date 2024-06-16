@@ -15,7 +15,7 @@ const produtoDTO = Joi.object({
         .min(3)
         .max(30)
         .required()
-        .pattern(/^[a-zA-Z\s]*$/)
+        .pattern(/^[a-zA-ZÀ-ÿ\s]*$/)
         .empty('')
         .messages({
             'string.base': 'O nome deve ser uma string.',

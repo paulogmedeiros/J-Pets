@@ -5,13 +5,40 @@ import logoJPets_adm from '../img/logoJPets.png'
 
 function Perfil_admin() {
   const [email, setEmail] = useState('');
-  const [usuario_id, setUsuario_id] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.usuario_id)
-  const [token, setToken] = useState(JSON.parse(localStorage.getItem("decodedToken")))
+  const decodedToken = JSON.parse(localStorage.getItem("decodedToken"))
+  const token= JSON.parse(localStorage.getItem("token"))
+  const usuario_id = decodedToken['usuario_id']
 
   useEffect(() => {
     document.title = "Perfil | Administrador"
+    pegarEmail()
   }, []);
 
+  async function pegarEmail(){
+    try {
+
+      if(!usuario_id){
+        window.location.href = './'
+      }
+
+      const resposta = await fetch(process.env.REACT_APP_URL_API + '/usuario/' + usuario_id, {
+        method: 'GET',
+        headers: {
+          'x-access-token': token
+        }
+      })
+
+      if(!resposta.ok){
+        throw new Error('HTTP Erro' + resposta.status)
+      }
+
+      const dados = await resposta.json()
+      setEmail(dados.email)
+
+    } catch (error) {
+      throw new Error('HTTP Erro' + error)
+    }
+  }
 
   return (
     <div>
@@ -54,12 +81,12 @@ function Perfil_admin() {
               <p>Email</p>
               <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled />
-                <label for="floatingInputDisabled">Email</label>
+                <label for="floatingInputDisabled">{email}</label>
               </div>
               <p>Senha</p>
               <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled />
-                <label for="floatingInputDisabled">Senha</label>
+                <label for="floatingInputDisabled">*********</label>
               </div>
               <a href="/administrador/senha/alteracao" className='alterarSenhaAdm'>Alterar senha</a>
             </div>
