@@ -88,7 +88,7 @@ function Escolher_plano() {
 
 
       <h1 className='text-center mt-5 fs-1 fw-bold'>Planos e preços</h1>
-      <div className='container col-md-5 col-10 mt-3 justify-content-center border border-2 border-warning  p-3 rounded-4'>
+      <div className='container col-md-4 col-10 mt-3 justify-content-center border border-2 border-warning p-5 rounded-4'>
         <div className="text-center">
           <h3>Profissional</h3>
           <p >Pacote especial</p>
@@ -102,7 +102,7 @@ function Escolher_plano() {
         </div>
 
         <div className="text-center mt-5">
-          <h2 className='fw-bold'>R$300,00/Mês</h2>
+          <h2 className='fw-bold'>R$200,00/Mês</h2>
 
           <a href='/empresas/pagamento' type="button" className="btnSelecionarPlano btn mt-md-2 mt-2">Selecionar plano</a>
         </div>
