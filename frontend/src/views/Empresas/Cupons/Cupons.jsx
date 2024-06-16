@@ -2,19 +2,22 @@ import { useState, useEffect } from 'react'
 import './Cupons.css'
 import logoJPets from './img/logoJPets.png'
 import { notifications } from '@mantine/notifications'
+import { Loader } from '@mantine/core';
 function Cupons() {
 
   const [porcentagemCupom, setPorcentagemCupom] = useState('')
   const [nomeCupom, setNomeCupom] = useState('')
   const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
   const [cupom, setCupom] = useState('')
+  const [carregando, setCarregando] = useState(false)
 
   const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
   const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
 
   useEffect(() => {
     document.title = "Cupom"
-  })
+    exibirCupom()
+  }, [])
 
   async function atualizarCupom() {
     const cupomDados = {
@@ -38,14 +41,49 @@ function Cupons() {
       }
 
       notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      exibirCupom()
       setTimeout(() => {
       }, 1500);
+
+
     } catch (error) {
       console.log(error)
       notifications.show({ message: error.message, color: "white", icon: errorIcon });
     }
   }
 
+  async function exibirCupom() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresas/ " + idEmpresa)
+      const dados = await resposta.json()
+      console.log(dados)
+
+      // porcentagemCupom = dados.porcentagem_cupom
+      // nomeCupom = dados.nome_cupom
+      if (!dados.nomeCupom) {
+        setCupom("Exemplo nome")
+      }
+
+      setCupom(`${dados.nome_cupom}${dados.porcentagem_cupom}`)
+
+    } catch (error) {
+      window.alert(error)
+      window.alert("Erro ao exibir cupom", error)
+    }
+  }
+
+  async function apagarCupom() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresas/excluir/cupom/" + idEmpresa, {
+        method: "PUT",
+      })
+      const dados = await resposta.json()
+      console.log(dados)
+      setCupom('')
+    } catch (error) {
+      window.alert("Erro ao deletar cupom", error)
+    }
+  }
   return (
     <div>
 
@@ -143,19 +181,19 @@ function Cupons() {
               <div className="mb-3">
                 <label for="exampleFormControlInput1" className="form-label mt-3 fs-3">Nome do desconto</label>
                 <input
-                value={nomeCupom}
-                onChange={(e) => setNomeCupom(e.target.value)}
-                type="email"
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Ex.: Paulo" />
+                  value={nomeCupom}
+                  onChange={(e) => setNomeCupom(e.target.value)}
+                  type="email"
+                  className="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="Ex.: Paulo" />
               </div>
 
               <select
-              value={porcentagemCupom}
-              onChange={(e) => setPorcentagemCupom(e.target.value)}
-              className="form-select mb-3 w-100 "
-              aria-label="Default select example">
+                value={porcentagemCupom}
+                onChange={(e) => setPorcentagemCupom(e.target.value)}
+                className="form-select mb-3 w-100 "
+                aria-label="Default select example">
                 <option value="">Selecione</option>
                 <option value="5">5%</option>
                 <option value="10">10%</option>
@@ -172,10 +210,14 @@ function Cupons() {
               <div className='containerCupomGerado rounded-3 p-md-2'>
 
                 <div className="text-end pb-5 ms-5">
-                  <button type="button" className="btn-close" aria-label="Close"></button>
+                  <button
+                    onClick={apagarCupom}
+                    type="button"
+                    className="btn-close"
+                    aria-label="Close"></button>
                 </div>
 
-                <h1 className='pb-5'>PAULO5</h1>
+                <h1 className='pb-5'>{cupom}</h1>
               </div>
             </div>
           </div>

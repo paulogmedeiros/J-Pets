@@ -45,7 +45,7 @@ function Remover_produtos() {
       console.log(dados)
 
       setProdutos(dados.map(value => {
-        return { value: value.servico_id.toString(), label: value.servicos.nome }
+        return { value: value.produto_id.toString(), label: value.produtos.nome }
       }))
 
     } catch (error) {
