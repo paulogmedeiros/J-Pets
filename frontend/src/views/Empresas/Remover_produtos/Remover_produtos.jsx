@@ -16,6 +16,42 @@ function Remover_produtos() {
   const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
   const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
 
+  useEffect(() => {
+    document.title = "Remover | Produtos"
+    pegarIdAnimais()
+  }, [])
+
+  // função para pegar o ID dos animais
+  //get    :: Empresas_Servicos/getServicosDaEmpresaPorIdEmpresaIdAnimal
+  async function pegarIdAnimais() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasAnimais/ " + idEmpresa)
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setAnimal(dados.map(value => {
+        return { value: value.animal_id.toString(), label: value.animais.nome }
+      }))
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
+  async function selectProdutos(animalId) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasProdutos/" + idEmpresa + "/animais/" + animalId)
+      const dados = await resposta.json()
+      console.log(dados)
+
+      setProdutos(dados.map(value => {
+        return { value: value.servico_id.toString(), label: value.servicos.nome }
+      }))
+
+    } catch (error) {
+      window.alert("Erro ao carregar serviços", error)
+    }
+  }
   return (
 
     <>
@@ -106,17 +142,25 @@ function Remover_produtos() {
               Remover produtos
             </p>
 
-            {/* lista suspensa para selecionar o animal */}
-            <div className="form-floating mb-3 mb-md-4">
+           {/* lista suspensa para selecionar o animal */}
+            <div className="form-floating mb-3 mb-md-3">
               <select
+                value={animalId}
+                onChange={e => {
+                  setAnimalId(e.target.value);
+                  // selectServicos(e.target.value)
+                }}
                 className="form-select"
                 id="floatingSelect"
                 aria-label="Floating label select example">
+
                 <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
+                {animais.map(animal => (
+                  <option
+                    key={animal.value}
+                    value={animal.value}>{animal.label}</option>
+                ))}
+
               </select>
               <label for="floatingSelect">Animal</label>
             </div>

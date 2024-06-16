@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import { useState,useEffect } from 'react';
 import logoJPets from './img/logoJPets.png';
 import './CadastroPerfilProfissional.css';
 import { notifications } from '@mantine/notifications'
 
 function CadastroPerfilProfissional() {
 
+  useEffect(() => {
+    document.title = "Cadastro de perfil"
+  })
   const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa);
   const [cep, setCep] = useState('');
   const [telefone, setTelefone] = useState('')

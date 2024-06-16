@@ -1,8 +1,51 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import './Cupons.css'
 import logoJPets from './img/logoJPets.png'
-import iconePorcentagem from './img/porcentagem.png'
+import { notifications } from '@mantine/notifications'
 function Cupons() {
+
+  const [porcentagemCupom, setPorcentagemCupom] = useState('')
+  const [nomeCupom, setNomeCupom] = useState('')
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
+  const [cupom, setCupom] = useState('')
+
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
+  useEffect(() => {
+    document.title = "Cupom"
+  })
+
+  async function atualizarCupom() {
+    const cupomDados = {
+      porcentagemCupom,
+      nomeCupom
+    }
+    console.log(cupomDados)
+    try {
+      const result = await fetch(process.env.REACT_APP_URL_API + '/empresas/criar/cupom/' + idEmpresa, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json' // Especificando o corpo como JSON
+        },
+        body: JSON.stringify(cupomDados)
+      })
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+      }, 1500);
+    } catch (error) {
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
   return (
     <div>
 
@@ -92,30 +135,40 @@ function Cupons() {
 
       <div className="container text-center mt-5 pt-md-5">
 
-        <div className="row">
-          <div className="col-md-6">
+        <div className="row ">
+          <div className="col-md-6 ">
             <h1 className='tituloAreaDescontos fw-semibold'>Área de descontos</h1>
-            <div className='container border rounded-3'>
+            <div className='container border rounded-4 shadow-sm p-3 mb-5 bg-body-tertiary rounded'>
 
               <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label mt-3">Nome do desconto</label>
-                <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Ex.: Paulo" />
+                <label for="exampleFormControlInput1" className="form-label mt-3 fs-3">Nome do desconto</label>
+                <input
+                value={nomeCupom}
+                onChange={(e) => setNomeCupom(e.target.value)}
+                type="email"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Ex.: Paulo" />
               </div>
 
-              <select className="form-select mb-3 w-100 " aria-label="Default select example">
-                <option selected>Selecione</option>
-                <option value="1">5%</option>
-                <option value="2">10%</option>
-                <option value="3">15%</option>
+              <select
+              value={porcentagemCupom}
+              onChange={(e) => setPorcentagemCupom(e.target.value)}
+              className="form-select mb-3 w-100 "
+              aria-label="Default select example">
+                <option value="">Selecione</option>
+                <option value="5">5%</option>
+                <option value="10">10%</option>
+                <option value="15">15%</option>
               </select>
 
-              <button className="btnGerarCupom btn mb-5 mt-5" type="submit">Gerar cupom</button>
+              <button className="btnGerarCupom btn mb-5 mt-5" onClick={atualizarCupom}>Gerar cupom</button>
             </div>
           </div>
 
           <div className="col-md-6 mt-5 mt-md-0 mb-3">
             <h1 className='tituloCupom fw-semibold '>Cupom gerado</h1>
-            <div className='container border rounded-3 p-md-5 p-4'>
+            <div className='container border rounded-4 shadow-sm p-3 mb-5 bg-body-tertiary rounded p-5'>
               <div className='containerCupomGerado rounded-3 p-md-2'>
 
                 <div className="text-end pb-5 ms-5">

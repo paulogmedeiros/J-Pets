@@ -22,7 +22,6 @@ function Remover_servicos() {
     pegarIdAnimais()
   }, [])
 
-
   // função para pegar o ID dos animais
   //get    :: Empresas_Servicos/getServicosDaEmpresaPorIdEmpresaIdAnimal
   async function pegarIdAnimais() {
