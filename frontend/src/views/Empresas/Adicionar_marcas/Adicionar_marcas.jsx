@@ -25,7 +25,7 @@ function Adicionar_marcas() {
   }, [])
 
   // função para pegar o ID dos animais
-  // (animais > getAnimais)
+
   async function pegarIdAnimais() {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasAnimais/ " + idEmpresa)

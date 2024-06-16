@@ -1,8 +1,21 @@
-import React from 'react'
+import {useState, useEffect} from 'react'
 import Produtos_img from './img/Produtos_img.svg'
 import './Remover_produtos.css'
 import logoJPets from './img/logoJPets.png'
+import { MultiSelect } from '@mantine/core';
+import { notifications } from '@mantine/notifications'
+
 function Remover_produtos() {
+
+  const [animais, setAnimal] = useState([])
+  const [produtos, setProdutos] = useState([])
+  const [animalId, setAnimalId] = useState('')
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
+  const [opcoes, setOpcoes] = useState([]);
+
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
   return (
 
     <>
@@ -83,10 +96,10 @@ function Remover_produtos() {
       <div className="container">
 
         {/* container para formulario e imagem */}
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+        <div className="row justify-content-center border rounded-4 bg-light shadow-sm mb-5 bg-body-tertiary rounded col-12 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
           {/* container para formulario */}
-          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
+          <div className="col-md-6 d-flex-md-5 mt-5 mt-md-0 p-5">
 
             {/* Título */}
             <p className="tituloRemoverProdutosEmpresa fs-md-2 fs-3 fw-semibold text-center mb-4 mb-md-4 mt-md-5">
@@ -132,7 +145,7 @@ function Remover_produtos() {
             </div>
 
           </div>
-          <div className="imgRemoverProdutosEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4 p-3">
+          <div className="imgRemoverProdutosEmpresa col-md-6 d-flex mt-3 mt-md-0 rounded-4 p-3 justify-content-center">
             <img src={Produtos_img} className="img-fluid"></img>
           </div>
         </div>
