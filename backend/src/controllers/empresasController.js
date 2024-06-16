@@ -124,6 +124,7 @@ class EmpresasController {
 
     async putCriarInformacoesEmpresa(req, res) {
         try {
+            console.log(req.body)
             const data = req.body;
             const param = parseInt(req.params.id)
             const result = await EmpresasService.editCriarInformacoesEmpresa(data, param);

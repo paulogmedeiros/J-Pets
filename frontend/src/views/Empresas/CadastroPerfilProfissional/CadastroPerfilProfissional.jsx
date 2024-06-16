@@ -7,7 +7,9 @@ function CadastroPerfilProfissional() {
 
   useEffect(() => {
     document.title = "Cadastro de perfil"
-  })
+    pegarInformacoes()
+  },[])
+  
   const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa);
   const [cep, setCep] = useState('');
   const [telefone, setTelefone] = useState('')
@@ -17,8 +19,8 @@ function CadastroPerfilProfissional() {
   const [horaAbertura, setHoraAbertura] = useState('')
   const [horaFechamento, setHoraFechamento] = useState('')
 
-  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
-  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+  const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
 
   const [endereco, setEndereco] = useState({
     rua: '',
@@ -71,8 +73,8 @@ function CadastroPerfilProfissional() {
         horaFechamento
       }
 
-      const result = await fetch(process.env.REACT_APP_URL_API + '/empresas/informacoes' + idEmpresa, {
-        method: 'POST',
+      const result = await fetch(process.env.REACT_APP_URL_API + '/empresas/informacoes/' + idEmpresa, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json' // Especificando o corpo como JSON
         },
@@ -86,13 +88,38 @@ function CadastroPerfilProfissional() {
       }
       notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
       setTimeout(() => {
-
-        window.location.href = '/';
       }, 1500);
 
     } catch (error) {
       console.log(error)
       notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
+  async function pegarInformacoes() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresas/ " + idEmpresa)
+      const dados = await resposta.json()
+      console.log(dados)
+
+      setCep(dados.cep)
+      setEndereco({
+        rua: dados.rua,
+        bairro: dados.bairro,
+        cidade: dados.cidade,
+        uf: dados.uf,
+      })
+
+        setTelefone(dados.telefone)
+        setNumeroResidencia(dados.numero_residencia)
+        setDiaSemanaFim(dados.dia_semana_fim)
+        setDiaSemanaInicio(dados.dia_semana_inicio)
+        setHoraAbertura(dados.hora_abertura)
+        setHoraFechamento(dados.hora_fechamento)
+
+    } catch (error) {
+      window.alert(error)
+      window.alert("Erro ao exibir cupom", error)
     }
   }
 
@@ -295,7 +322,7 @@ function CadastroPerfilProfissional() {
                             <label htmlFor="horarioFim" className="form-label">Fim</label>
                             <input
                               value={horaFechamento}
-                              onClick={(e) => setHoraFechamento(e.target.value)}
+                              onChange={(e) => setHoraFechamento(e.target.value)}
                               type="time"
                               className="form-control"
                               id="horarioFim" placeholder="" />
@@ -335,7 +362,7 @@ function CadastroPerfilProfissional() {
                             <label htmlFor="diaFim" className="form-label">Fim</label>
                             <select
                             value={diaSemanaFim}
-                            onClick={(e) => setDiaSemanaFim(e.target.value)}
+                            onChange={(e) => setDiaSemanaFim(e.target.value)}
                               className="form-select"
                               aria-label="Default select example">
                                 <option value="">Selecione</option>
