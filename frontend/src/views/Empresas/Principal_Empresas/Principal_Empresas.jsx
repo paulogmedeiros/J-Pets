@@ -80,7 +80,7 @@ function Principal_Empresas() {
                 </span>
                 </a>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Meu perfil</a></li>
+                <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
                 <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
               </ul>
             </div>

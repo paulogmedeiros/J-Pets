@@ -1,7 +1,98 @@
-import React from 'react'
-import logoJPets from './img/logoJPets.png'
-import './CadastroPerfilProfissional.css'
+import React, { useState } from 'react';
+import logoJPets from './img/logoJPets.png';
+import './CadastroPerfilProfissional.css';
+import { notifications } from '@mantine/notifications'
+
 function CadastroPerfilProfissional() {
+
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa);
+  const [cep, setCep] = useState('');
+  const [telefone, setTelefone] = useState('')
+  const [numeroResidencia, setNumeroResidencia] = useState('')
+  const [diaSemanaFim, setDiaSemanaFim] = useState('')
+  const [diaSemanaInicio, setDiaSemanaInicio] = useState('')
+  const [horaAbertura, setHoraAbertura] = useState('')
+  const [horaFechamento, setHoraFechamento] = useState('')
+
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
+  const [endereco, setEndereco] = useState({
+    rua: '',
+    bairro: '',
+    cidade: '',
+    uf: ''
+  });
+
+  // função para a API de CEP ViaCEP
+  const handleCepChange = (e) => {
+    const cepValue = e.target.value;
+    setCep(cepValue);
+
+    if (cepValue.length === 8) {
+      fetch(`https://viacep.com.br/ws/${cepValue}/json/`)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.erro) {
+            setEndereco({
+              rua: data.logradouro,
+              bairro: data.bairro,
+              cidade: data.localidade,
+              uf: data.uf
+            });
+          } else {
+            alert('CEP não encontrado');
+          }
+        })
+        .catch(() => {
+          alert('Erro ao buscar CEP');
+        });
+    }
+  };
+
+  async function cadastrarPerfilProfissional(event) {
+    try {
+      event.preventDefault()
+
+      const perfilDados = {
+        cep,
+        rua: endereco.rua,
+        bairro: endereco.bairro,
+        cidade: endereco.cidade,
+        uf: endereco.uf,
+        telefone,
+        numeroResidencia,
+        diaSemanaFim,
+        diaSemanaInicio,
+        horaAbertura,
+        horaFechamento
+      }
+
+      const result = await fetch(process.env.REACT_APP_URL_API + '/empresas/informacoes' + idEmpresa, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' // Especificando o corpo como JSON
+        },
+        body: JSON.stringify(perfilDados)
+      })
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+
+        window.location.href = '/';
+      }, 1500);
+
+    } catch (error) {
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
   return (
     <div>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -9,7 +100,7 @@ function CadastroPerfilProfissional() {
 
           {/* Logo do projeto */}
           <a className="navbar-brand" href="#">
-            <img src={logoJPets} width={45} height={45} />
+            <img src={logoJPets} width={45} height={45} alt="Logo JPets" />
           </a>
           <button
             className="navbar-toggler"
@@ -84,7 +175,7 @@ function CadastroPerfilProfissional() {
 
       <div className="container mt-5">
         <div className="row">
-          <div className="col-md-3 text-center mt-md-5 mb-5 ">
+          <div className="col-md-3 text-center mt-md-5 mb-5">
             <div className="list-group">
 
               <a href="/empresas/perfil" className="list-group-item list-group-item-action ">Geral</a>
@@ -97,64 +188,117 @@ function CadastroPerfilProfissional() {
           <div className="col-md-9 container col-11 text-center ">
             <h1 className='perfilProfissionalTitulo text-md-start'>Cadastre seu perfil</h1>
 
-            <div className="row mt-3  rounded-3 p-3 border rounded-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+            <div className="row mt-3 rounded-3 p-3 border rounded-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
               <h3 className='text-start'>Jamille Galazi</h3>
+              <hr />
               <div className="col-md-3">
                 <div className="mb-3 text-start">
-                  <label for="exampleFormControlInput1" className="form-label">CEP</label>
-                  <input type="number" className="form-control" id="exampleFormControlInput1" placeholder="" />
+                  <label htmlFor="cep" className="form-label">CEP</label>
+                  <input type="number" className="form-control" id="cep" value={cep} onChange={handleCepChange} />
                 </div>
               </div>
               <div className="col-md-5">
                 <div className="mb-3 text-start">
-                  <label for="exampleFormControlInput1" className="form-label">Rua</label>
-                  <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="" />
+                  <label htmlFor="rua" className="form-label">Rua</label>
+                  <input
+                    onChange={(e) => setEndereco.rua(e.target.value)}
+                    type="text"
+                    className="form-control"
+                    id="rua"
+                    value={endereco.rua} />
                 </div>
               </div>
               <div className="col">
                 <div className="mb-3 text-start">
-                  <label for="exampleFormControlInput1" className="form-label">Bairro</label>
-                  <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="" />
+                  <label htmlFor="bairro" className="form-label">Bairro</label>
+                  <input
+                    onChange={(e) => setEndereco.bairro(e.target.value)}
+                    type="text"
+                    className="form-control"
+                    id="bairro"
+                    value={endereco.bairro} />
                 </div>
               </div>
               <div className="w-100"></div>
               <div className="col-md-4">
                 <div className="mb-3 text-start">
-                  <label for="exampleFormControlInput1" className="form-label">Cidade</label>
-                  <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="" />
+                  <label htmlFor="cidade" className="form-label">Cidade</label>
+                  <input
+                    onChange={(e) => setEndereco.cidade(e.target.value)}
+                    type="text"
+                    className="form-control"
+                    id="cidade"
+                    value={endereco.cidade} />
+                </div>
+              </div>
+              <div className="col-md-1">
+                <div className="mb-3 text-start">
+                  <label htmlFor="uf" className="form-label">UF</label>
+                  <input
+                    onChange={(e) => setEndereco.uf(e.target.value)}
+                    type="text"
+                    className="form-control text-center"
+                    id="uf"
+                    value={endereco.uf} />
+                </div>
+              </div>
+              <div className="col-md-5">
+                <div className="mb-3 text-start">
+                  <label
+                    htmlFor="contato" className="form-label">Contato</label>
+                  <input
+                    value={telefone}
+                    onChange={(e) => setTelefone(e.target.value)}
+                    type="number"
+                    className="form-control"
+                    id="contato" placeholder="" />
                 </div>
               </div>
               <div className="col-md-2">
                 <div className="mb-3 text-start">
-                  <label for="exampleFormControlInput1" className="form-label">UF</label>
-                  <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="" />
+                  <label htmlFor="contato" className="form-label">N° Residência</label>
+                  <input
+                    value={numeroResidencia}
+                    onChange={(e) => setNumeroResidencia(e.target.value)}
+                    type="number"
+                    className="form-control"
+                    id="contato"
+                    placeholder="" />
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="mb-3 text-start">
-                  <label for="exampleFormControlInput1" className="form-label">Contato</label>
-                  <input type="number" className="form-control" id="exampleFormControlInput1" placeholder="" />
-                </div>
-              </div>
-              <h4 className='text-start'>Funcionamento</h4>
+              <h4 className='text-start mt-2'>Funcionamento</h4>
+              <hr />
               <div className="container text-center">
                 <div className="row">
                   <div className="col-md-6">
                     <p>Horário</p>
                     <div className="container text-center">
+
                       <div className="row">
                         <div className="col">
                           <div className="mb-3">
-                            <label for="exampleFormControlInput1" className="form-label">Início</label>
-                            <input type="time" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                            <label htmlFor="horarioInicio" className="form-label">Início</label>
+                            <input
+                              value={horaAbertura}
+                              onChange={(e) => setHoraAbertura(e.target.value)}
+                              type="time"
+                              className="form-control"
+                              id="horarioInicio" placeholder="" />
                           </div>
+
                         </div>
                         <div className="col">
                           <div className="mb-3">
-                            <label for="exampleFormControlInput1" className="form-label">Fim</label>
-                            <input type="time" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                            <label htmlFor="horarioFim" className="form-label">Fim</label>
+                            <input
+                              value={horaFechamento}
+                              onClick={(e) => setHoraFechamento(e.target.value)}
+                              type="time"
+                              className="form-control"
+                              id="horarioFim" placeholder="" />
                           </div>
                         </div>
+
                       </div>
                     </div>
                   </div>
@@ -164,32 +308,41 @@ function CadastroPerfilProfissional() {
                       <div className="row">
                         <div className="col">
                           <div className="mb-3">
-                            <label for="exampleFormControlInput1" className="form-label">Início</label>
-                            <select className="form-select" aria-label="Default select example">
-                              <option selected>Selecione</option>
-                              <option value="1">Segunda</option>
-                              <option value="2">Terça</option>
-                              <option value="3">Quarta</option>
-                              <option value="3">Quinta</option>
-                              <option value="3">Sexta</option>
-                              <option value="3">Sábado</option>
-                              <option value="3">Domingo</option>
+                            <label htmlFor="diaInicio" className="form-label">Início</label>
+                            <select
+                              value={diaSemanaInicio}
+                              onChange={(e) => setDiaSemanaInicio(e.target.value)}
+                              className="form-select"
+                              aria-label="Default select example">
+                              <option value="">Selecione</option>
+
+                              <option value="segunda-feira">Segunda-feira</option>
+                              <option value="terca-feira">Terça-feira</option>
+                              <option value="quarta-feira">Quarta-feira</option>
+                              <option value="quinta-feira">Quinta-feira</option>
+                              <option value="sexta-feira">Sexta-feira</option>
+                              <option value="sabado">Sábado</option>
+                              <option value="domingo">Domingo</option>
                             </select>
                           </div>
                         </div>
 
                         <div className="col">
                           <div className="mb-3">
-                            <label for="exampleFormControlInput1" className="form-label">Fim</label>
-                            <select className="form-select" aria-label="Default select example">
-                              <option selected>Selecione</option>
-                              <option value="1">Segunda</option>
-                              <option value="2">Terça</option>
-                              <option value="3">Quarta</option>
-                              <option value="3">Quinta</option>
-                              <option value="3">Sexta</option>
-                              <option value="3">Sábado</option>
-                              <option value="3">Domingo</option>
+                            <label htmlFor="diaFim" className="form-label">Fim</label>
+                            <select
+                            value={diaSemanaFim}
+                            onClick={(e) => setDiaSemanaFim(e.target.value)}
+                              className="form-select"
+                              aria-label="Default select example">
+                                <option value="">Selecione</option>
+                              <option value="segunda-feira">Segunda-feira</option>
+                              <option value="terça-feira">Terça-feira</option>
+                              <option value="quarta-feira">Quarta-feira</option>
+                              <option value="quinta-feira">Quinta-feira</option>
+                              <option value="sexta-feira">Sexta-feira</option>
+                              <option value="sábado">Sábado</option>
+                              <option value="domingo">Domingo</option>
                             </select>
                           </div>
                         </div>
@@ -198,12 +351,16 @@ function CadastroPerfilProfissional() {
                   </div>
                 </div>
               </div>
+              <button
+              onClick={cadastrarPerfilProfissional}
+              type="button"
+              className="btn btn-warning w-25 mt-5">Salvar</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CadastroPerfilProfissional
+export default CadastroPerfilProfissional;
