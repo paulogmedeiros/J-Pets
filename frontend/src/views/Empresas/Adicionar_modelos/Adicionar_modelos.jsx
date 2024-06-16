@@ -7,8 +7,10 @@ import { notifications } from '@mantine/notifications'
 function Adicionar_modelos() {
 
   const [animais, setAnimal] = useState([])
-  const [marca_id, setMarca_id] = useState('')
   const [animalId, setAnimalId] = useState('')
+  const [produtos, setProdutos] = useState([])
+  const [produto_id, setProduto_id] = useState('')
+  const [marca_id, setMarca_id] = useState('')
   const [modelos, setModelos] = useState([])
   const [marcas, setMarcas] = useState([])
   const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
@@ -26,22 +28,40 @@ function Adicionar_modelos() {
   // (animais > getAnimais)
   async function pegarIdAnimais() {
     try {
-      const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasAnimais/ " + idEmpresa)
 
       const dados = await resposta.json()
       console.log(dados)
-      setAnimal(dados)
+      setAnimal(dados.map(value => {
+        return { value: value.animal_id.toString(), label: value.animais.nome }
+      }))
 
     } catch (error) {
       window.alert("Erro ao carregar animais", error)
     }
   }
 
+  // função para pegar os produtos por id empresa e id animal
+  // - get  :: Empresas_Produtos/
+
+  async function pegarEmpresasProdutosPorIdEmpresIdAnimal(animal_id) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasProdutos/" + idEmpresa + "/animais/" + animalId)
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setProdutos(dados.map(value => {
+        return {value: value.produto_id.toString(), label: value.produtos.nome}
+      }))
+    } catch (error) {
+      window.alert("Erro ao carregar marcas", error)
+    }
+  }
   // função para pegar as marcas por id empresa e id animal
   // (Empresas_Marcas > getEmpresasMarcasPorIdEmpresaIdAnimal)
-  async function pegarEmpresasMarcasPorIdEmpresaIdAnimal(animalId) {
+  async function pegarEmpresasMarcasPorIdEmpresaIdAnimal(produto_id) {
     try {
-      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasMarcas/" + idEmpresa + "/animais/" + animalId)
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasMarcas/" + idEmpresa + "/produto/" + produto_id)
 
       const dados = await resposta.json()
       console.log(dados)
@@ -56,7 +76,7 @@ function Adicionar_modelos() {
 
   useEffect(() => {
     if (animalId) {
-      pegarEmpresasMarcasPorIdEmpresaIdAnimal(animalId)
+      pegarEmpresasProdutosPorIdEmpresIdAnimal(animalId)
     }
   }, [animalId])
 
@@ -212,6 +232,7 @@ function Adicionar_modelos() {
                 value={animalId}
                 onChange={(e) => {
                   setAnimalId(e.target.value);
+                  setProdutos(e.target.value)
                 }}
                 className="form-select"
                 id="floatingSelect"
@@ -220,15 +241,31 @@ function Adicionar_modelos() {
                 <option value="">Selecione</option>
                 {animais.map(animal => (
                   <option
-                    key={animal.id}
-                    value={animal.id}>{animal.nome}</option>
+                    key={animal.value}
+                    value={animal.value}>{animal.label}</option>
                 ))}
 
               </select>
               <label for="floatingSelect">Animal</label>
             </div>
 
-            {/* lista suspensa para selecionar o animal */}
+            {/* lista suspensa para selecionar o produto */}
+            <div className="form-floating mb-3 mb-md-4">
+              <select
+              
+                className="form-select "
+                id="floatingSelect"
+                aria-label="Floating label select example">
+                <option value="">Selecione</option>
+                <option value="Cachorro">teste</option>
+                <option value="Gato">teste</option>
+                <option value="Pássaro">teste</option>
+                <option value="Peixe">teste</option>
+              </select>
+              <label for="floatingSelect">Produtos</label>
+            </div>
+
+            {/* lista suspensa para selecionar a marca */}
             <div className="form-floating mb-3 mb-md-4">
               <select
                 value={marca_id}
@@ -250,7 +287,7 @@ function Adicionar_modelos() {
               <label for="floatingSelect">Marca</label>
             </div>
 
-            {/* lista suspensa para escolher o produto */}
+            {/* select múltiplo para escolher os modelos */}
             <div className=" mb-3 mb-md-4">
               <label for="floatingSelect">Modelos</label>
               <MultiSelect className='multipleSelect'
@@ -260,9 +297,9 @@ function Adicionar_modelos() {
               />
             </div>
             <button
-            onClick={adicionarModelos}
-            className="btnAdicionarModeloEmpresa btn w-100 mt-md-4"
-            role="button">
+              onClick={adicionarModelos}
+              className="btnAdicionarModeloEmpresa btn w-100 mt-md-4"
+              role="button">
               Adicionar
             </button>
           </div>

@@ -28,11 +28,13 @@ function Adicionar_marcas() {
   // (animais > getAnimais)
   async function pegarIdAnimais() {
     try {
-      const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasAnimais/ " + idEmpresa)
 
       const dados = await resposta.json()
       console.log(dados)
-      setAnimal(dados)
+      setAnimal(dados.map(value => {
+        return{value: value.animal_id.toString(), label: value.animais.nome}
+      }))
 
     } catch (error) {
       window.alert("Erro ao carregar animais", error)
@@ -225,8 +227,8 @@ function Adicionar_marcas() {
                 <option value="">Selecione</option>
                 {animais.map(animal => (
                   <option
-                    key={animal.id}
-                    value={animal.id}>{animal.nome}</option>
+                    key={animal.value}
+                    value={animal.value}>{animal.label}</option>
                 ))}
 
               </select>

@@ -63,6 +63,7 @@ function Adicionar_servicos() {
     }
   }
 
+  // - get  :: Animais/getanimais
   async function pegarIdAnimais() {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/animais")
