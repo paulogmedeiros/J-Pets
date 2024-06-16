@@ -4,6 +4,7 @@ import './Adicionar_modelos.css'
 import logoJPets from './img/logoJPets.png'
 import { MultiSelect } from '@mantine/core';
 import { notifications } from '@mantine/notifications'
+
 function Adicionar_modelos() {
 
   const [animais, setAnimal] = useState([])
@@ -41,25 +42,34 @@ function Adicionar_modelos() {
     }
   }
 
-  // função para pegar os produtos por id empresa e id animal
-  // - get  :: Empresas_Produtos/
-
-  async function pegarEmpresasProdutosPorIdEmpresIdAnimal(animal_id) {
+  // função para pegar o produto de acordo com o ID do animal
+  // (Empresas_Produtos > getEmpresasProdutosPorIdEmpresaIdAnimal)
+  async function pegarProdutosPorIdEmpresaIdAnimal(animalId) {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasProdutos/" + idEmpresa + "/animais/" + animalId)
 
       const dados = await resposta.json()
       console.log(dados)
       setProdutos(dados.map(value => {
-        return {value: value.produto_id.toString(), label: value.produtos.nome}
+        return { value: value.produto_id.toString(), label: value.produtos.nome }
       }))
+
     } catch (error) {
-      window.alert("Erro ao carregar marcas", error)
+      window.alert(error)
+      window.alert("Erro ao carregar produtos", error)
     }
   }
+
+  // já carrega os produtos caso um animal seja selecionado
+  useEffect(() => {
+    if (animalId) {
+      pegarProdutosPorIdEmpresaIdAnimal(animalId)
+    }
+  }, [animalId])
+
   // função para pegar as marcas por id empresa e id animal
   // (Empresas_Marcas > getEmpresasMarcasPorIdEmpresaIdAnimal)
-  async function pegarEmpresasMarcasPorIdEmpresaIdAnimal(produto_id) {
+  async function pegarEmpresasMarcasPorIdEmpresaIdProduto(produto_id) {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasMarcas/" + idEmpresa + "/produto/" + produto_id)
 
@@ -75,11 +85,10 @@ function Adicionar_modelos() {
   }
 
   useEffect(() => {
-    if (animalId) {
-      pegarEmpresasProdutosPorIdEmpresIdAnimal(animalId)
+    if (produto_id) {
+      pegarEmpresasMarcasPorIdEmpresaIdProduto(produto_id)
     }
-  }, [animalId])
-
+  })
   // função para pegar os modelos disponíveis de acordo com a marca escolhida
   // (modelos > getModelosPorIdMarcaIdEmpresa)
   async function pegarModelosPorIdMarcaIdEmpresa(marca_id) {
@@ -96,6 +105,11 @@ function Adicionar_modelos() {
     }
   }
 
+  useEffect(() => {
+    if (marca_id) {
+      pegarModelosPorIdMarcaIdEmpresa(marca_id)
+    }
+  })
   // função para adicionar modelos
   // (Empresas_Modelos > postEmpresasModelos)
   async function adicionarModelos(event) {
@@ -232,7 +246,7 @@ function Adicionar_modelos() {
                 value={animalId}
                 onChange={(e) => {
                   setAnimalId(e.target.value);
-                  setProdutos(e.target.value)
+                  pegarProdutosPorIdEmpresaIdAnimal(e.target.value);
                 }}
                 className="form-select"
                 id="floatingSelect"
@@ -252,17 +266,23 @@ function Adicionar_modelos() {
             {/* lista suspensa para selecionar o produto */}
             <div className="form-floating mb-3 mb-md-4">
               <select
-              
-                className="form-select "
+                value={produto_id}
+                onChange={(e) => {
+                  setProduto_id(e.target.value);
+                  // selectMarcas(e.target.value)
+                }}
+                className="form-select"
                 id="floatingSelect"
                 aria-label="Floating label select example">
+
                 <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
+                {produtos.map(produto => (
+                  <option
+                    key={produto.value}
+                    value={produto.value}>{produto.label}</option>
+                ))}
               </select>
-              <label for="floatingSelect">Produtos</label>
+              <label for="floatingSelect">Produto</label>
             </div>
 
             {/* lista suspensa para selecionar a marca */}
