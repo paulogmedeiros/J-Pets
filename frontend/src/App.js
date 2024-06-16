@@ -20,7 +20,7 @@ import Empresas_Mapa from './views/Donos_pet/Empresas_Mapa/Empresas_Mapa.jsx';
 import Perfil_Empresa from './views/Donos_pet/Perfil_Empresa/Perfil_Empresa.jsx';
 import Perfil_DonosDePet from './views/Donos_pet/Perfil_DonosDePet/Perfil_DonosDePet.jsx';
 import Favoritos from './views/Donos_pet/Favoritos/Favoritos.jsx';
-
+import Alterar_senha_empresa from './views/Empresas/Alterar_senha/Alterar_senha.jsx';
 
 
 // Importando itens da pasta "Empresas"
@@ -91,6 +91,7 @@ function App() {
       {/* Rotas para os itens da pasta "Empresas" */}
       <Route path='/empresas/principal' element={<Principal_Empresas/>}/>
       <Route path='/cadastro/empresa' element={<Cadastro_empresa/>}/>
+      <Route path='/senha/empresas/alteracao' element={<Alterar_senha_empresa/>}/>
       <Route path='/senha/empresas/redefinicao' element={<Redefinir_senha_empresa/>}/>
       <Route path='/empresas/adicionarServicos' element={<Adicionar_servicos/>}/>
       <Route path='/empresas/removerServicos' element={<Remover_servicos/>}/>
