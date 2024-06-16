@@ -1,9 +1,43 @@
-import React from 'react'
-import './Visualizar_servicos.css'
-import logoJPets from './img/logoJPets.png'
-import iconePesquisa from './img/iconePesquisa.svg'
+import { useState, useEffect } from 'react';
+import './Visualizar_servicos.css';
+import logoJPets from './img/logoJPets.png';
+import iconePesquisa from './img/iconePesquisa.svg';
 
 function Visualizar_servicos() {
+
+  const [servicos, setServicos] = useState([]);
+  const [filtro, setFiltro] = useState(''); // Estado para armazenar o texto da pesquisa
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa);
+
+  useEffect(() => {
+    document.title = "Tabela de serviços";
+    pegarServicos();
+  }, []); // Adicione um array de dependências vazio aqui para chamar apenas uma vez
+
+  async function pegarServicos() {
+    const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasSevico/" + idEmpresa);
+    const dados = await resposta.json();
+    console.log(dados);
+
+    // Transformando os dados para facilitar a renderização
+    const servicosTransformados = dados.map(dado => ({
+      servico: dado.servicos.nome,
+      animal: dado.servicos.animais.nome
+    }));
+    setServicos(servicosTransformados);
+  }
+
+  // Função para atualizar o estado do filtro
+  const handleFiltroChange = (e) => {
+    setFiltro(e.target.value);
+  };
+
+  // Filtrando os serviços com base no filtro de pesquisa
+  const servicosFiltrados = servicos.filter(servico =>
+    servico.servico.toLowerCase().includes(filtro.toLowerCase()) ||
+    servico.animal.toLowerCase().includes(filtro.toLowerCase())
+  );
+
   return (
     <div>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -84,7 +118,6 @@ function Visualizar_servicos() {
         </div>
       </nav>
 
-
       <div className="">
         <div className="">
           <div className="container text-center mt-5 border p-4 rounded-4">
@@ -94,7 +127,15 @@ function Visualizar_servicos() {
               </div>
               <div className="col-md-6">
                 <div className="input-group mb-3">
-                  <input type="text" className="form-control" placeholder="Pesquisar serviços" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Pesquisar serviços"
+                    aria-label="Pesquisar serviços"
+                    aria-describedby="basic-addon2"
+                    value={filtro}
+                    onChange={handleFiltroChange}
+                  />
                   <span className="input-group-text bg-warning" id="basic-addon2"><img src={iconePesquisa} width={20} /></span>
                 </div>
               </div>
@@ -102,33 +143,24 @@ function Visualizar_servicos() {
             <table className="container mt-1 p-4 border table table-striped">
               <thead className='tabelaProdutosEmpresas'>
                 <tr>
-
                   <th scope="col">Serviços</th>
                   <th scope="col">Animais</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Mark</td>
-                  <td>Mark</td>
-
-                </tr>
-                <tr>
-                  <td>Mark</td>
-                  <td>Jacob</td>
-
-                </tr>
-                <tr>
-                  <td>Mark</td>
-                  <td>Thornton</td>
-                </tr>
+                {servicosFiltrados.map((servico, index) => (
+                  <tr key={index}>
+                    <td>{servico.servico}</td>
+                    <td>{servico.animal}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Visualizar_servicos
+export default Visualizar_servicos;

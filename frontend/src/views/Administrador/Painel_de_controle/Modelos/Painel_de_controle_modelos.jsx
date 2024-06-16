@@ -8,13 +8,13 @@ import iconLixeira_adm from '../img/icone_lixeira.svg'
 
 function Painel_de_controle_modelos() {
 
-    //Estado para armazenar os usuários
+    //Estado para armazenar os modelos
     const [modelos, setModelos] = useState([])
 
     useEffect(() => {
         document.title = "Painel de controle | Modelos"
 
-        // Chamando função carregar usuários
+        // Chamando função carregar modelos
         carregarModelos()
     })
     // Função carregar modelos
