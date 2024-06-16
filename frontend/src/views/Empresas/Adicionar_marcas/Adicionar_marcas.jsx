@@ -272,7 +272,7 @@ function Adicionar_marcas() {
             </button>
 
             <div className='text-center'>
-              <a className="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="#" role="button">Adicionar modelo</a>
+              <a className="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="/empresas/adicionarModelos" role="button">Adicionar modelo</a>
             </div>
 
           </div>

@@ -1,14 +1,50 @@
-import React from 'react'
-import './Visualizar_produtos.css'
-import logoJPets from './img/logoJPets.png'
-import iconePesquisa from './img/iconePesquisa.svg'
+import { useState, useEffect } from 'react';
+import './Visualizar_produtos.css';
+import logoJPets from './img/logoJPets.png';
+import iconePesquisa from './img/iconePesquisa.svg';
 
 function Visualizar_produtos() {
+
+  const [produtos, setProdutos] = useState([]);
+  const [filtro, setFiltro] = useState('');  // Estado para armazenar o texto da pesquisa
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa);
+
+  useEffect(() => {
+    document.title = "Tabela de produtos";
+    pegarProdutos();
+  }, []); // Adicione um array de dependências vazio aqui para chamar apenas uma vez
+
+  async function pegarProdutos() {
+    const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasModelos/" + idEmpresa);
+    const dados = await resposta.json();
+    console.log(dados);
+    // Transformando os dados para facilitar a renderização
+    const produtosTransformados = dados.map(dado => ({
+      produto: dado.modelos.marcas.produtos.nome,
+      marca: dado.modelos.marcas.nome,
+      modelo: dado.modelos.nome,
+      animal: dado.modelos.marcas.produtos.animais.nome
+    }));
+    setProdutos(produtosTransformados);
+  }
+
+  // Função para atualizar o estado do filtro
+  const handleFiltroChange = (e) => {
+    setFiltro(e.target.value);
+  };
+
+  // Filtrando os produtos com base no filtro de pesquisa
+  const produtosFiltrados = produtos.filter(produto =>
+    produto.produto.toLowerCase().includes(filtro.toLowerCase()) ||
+    produto.marca.toLowerCase().includes(filtro.toLowerCase()) ||
+    produto.modelo.toLowerCase().includes(filtro.toLowerCase()) ||
+    produto.animal.toLowerCase().includes(filtro.toLowerCase())
+  );
+
   return (
     <div>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
         <div className="container-fluid">
-
           {/* Logo do projeto */}
           <a className="navbar-brand" href="#">
             <img src={logoJPets} width={45} height={45} />
@@ -84,7 +120,6 @@ function Visualizar_produtos() {
         </div>
       </nav>
 
-
       <div className="">
         <div className="">
           <div className="container text-center mt-5 border p-4 rounded-4">
@@ -94,7 +129,15 @@ function Visualizar_produtos() {
               </div>
               <div className="col-md-6">
                 <div className="input-group mb-3">
-                  <input type="text" className="form-control" placeholder="Pesquisar produtos" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Pesquisar produtos"
+                    aria-label="Pesquisar produtos"
+                    aria-describedby="basic-addon2"
+                    value={filtro}
+                    onChange={handleFiltroChange}
+                  />
                   <span className="input-group-text bg-warning" id="basic-addon2"><img src={iconePesquisa} width={20} /></span>
                 </div>
               </div>
@@ -109,31 +152,21 @@ function Visualizar_produtos() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Mark</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>Mark</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>Mark</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>@twitter</td>
-                </tr>
+                {produtosFiltrados.map((produto, index) => (
+                  <tr key={index}>
+                    <td>{produto.produto}</td>
+                    <td>{produto.marca}</td>
+                    <td>{produto.modelo}</td>
+                    <td>{produto.animal}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Visualizar_produtos
+export default Visualizar_produtos;

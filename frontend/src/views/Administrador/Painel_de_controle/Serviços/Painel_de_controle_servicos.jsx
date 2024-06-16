@@ -58,7 +58,7 @@ function Painel_de_controle_servicos() {
     }
 
 
-    // Função carregar usuários
+    // Função carregar serviços
     async function carregarServicos() {
         try {
             // Fazer uma chamada da API
