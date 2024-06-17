@@ -41,7 +41,7 @@ routes.post("/servicos", servico.postServicos);
 routes.put("/servicos/:id", servico.putServicos);
 routes.delete("/servicos/:id", servico.deleteServicos);
 
-// rota de produtos 
+// rota de produtos
 routes.get("/produtos",produtos.getProdutos);
 routes.get("/produtos/animais/:animalId/empresa/:empresaId", produtos.getProdutosPorIdAnimalIdEmpresa);
 routes.get("/produtos/animais/:animalId",produtos.getProdutosPorIdAnimal);
@@ -72,7 +72,7 @@ routes.delete("/modelos/:id", modelos.deleteModelos);
 // rota empresas
 routes.get("/empresas", empresa.getEmpresas);
 routes.get("/empresas/:tipo/servicosProdutos/:id", empresa.getEmpresasPeloProudutoOuServico);
-routes.put("/empresas/imagem/:id", empresa.putEmpresasImagem);
+routes.post("/empresas/imagem/:id", empresa.putEmpresasImagem);
 routes.get("/empresas/cupom/:id",empresa.getCupom);
 routes.get("/empresas/:id",empresa.getEmpresaPorId);
 routes.post("/empresas",empresaValidation.validarCriacaoEmpresa,empresa.postEmpresa);

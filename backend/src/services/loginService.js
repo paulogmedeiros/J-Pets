@@ -46,6 +46,9 @@ class LoginService {
             if (!usuario) {
                 throw new ExcecaoGenericaDeErro("Usuario não encontrado")
             }
+            if (!usuario.empresas.foto_perfil) {
+                usuario.empresas.foto_perfil = "default.png"
+            }
             // retorno
             return usuario
         } else {
@@ -53,6 +56,7 @@ class LoginService {
             if (!usuario) {
                 throw new ExcecaoGenericaDeErro("Usuario não encontrado")
             }
+
             // retorno
             return usuario
         }
@@ -116,7 +120,7 @@ class LoginService {
          // faço a criptografia da senha
          let salt = bcrypt.genSaltSync(10)
          data.novaSenha = bcrypt.hashSync(data.novaSenha, salt)
- 
+
          // retorno
          return await LoginRepository.updateSenha(data.novaSenha, id)
     }

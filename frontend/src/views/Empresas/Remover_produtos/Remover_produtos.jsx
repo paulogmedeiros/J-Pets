@@ -52,6 +52,7 @@ function Remover_produtos() {
       window.alert("Erro ao carregar serviços", error)
     }
   }
+
   return (
 
     <>
@@ -148,7 +149,7 @@ function Remover_produtos() {
                 value={animalId}
                 onChange={e => {
                   setAnimalId(e.target.value);
-                  // selectServicos(e.target.value)
+                  selectProdutos(e.target.value)
                 }}
                 className="form-select"
                 id="floatingSelect"

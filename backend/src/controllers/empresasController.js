@@ -59,6 +59,7 @@ class EmpresasController {
 
     async putEmpresasImagem(req, res) {
         try {
+            console.log(req.file)
             const param = parseInt(req.params.id)
             let nomeImagem = req.files.imagem.name
             nomeImagem = nomeImagem.split(".")

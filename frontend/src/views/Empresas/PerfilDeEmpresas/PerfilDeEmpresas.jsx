@@ -1,24 +1,31 @@
 import { useState, useEffect } from 'react'
 import logoJPets from './img/logoJPets.png'
+import teste from './img/teste.png'
 import './PerfilDeEmpresas.css'
-
+import axios from 'axios'
+import { notifications } from '@mantine/notifications'
 function PerfilDeEmpresas() {
 
   const [email, setEmail] = useState('');
   const [nome, setNome] = useState('');
+  const [foto, setFoto] = useState(null)
+  const [imagem, setImagem] = useState('')
   const decodedToken = JSON.parse(localStorage.getItem("decodedToken"))
-  const token= JSON.parse(localStorage.getItem("token"))
+  const token = JSON.parse(localStorage.getItem("token"))
   const usuario_id = decodedToken['usuario_id']
-
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
+  const [carregando, setCarregando] = useState(false)
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
   useEffect(() => {
     document.title = "Perfil | Empresa"
     pegarInformacoes()
   }, []);
 
-  async function pegarInformacoes(){
+  async function pegarInformacoes() {
     try {
 
-      if(!usuario_id){
+      if (!usuario_id) {
         window.location.href = './'
       }
 
@@ -29,17 +36,43 @@ function PerfilDeEmpresas() {
         }
       })
 
-      if(!resposta.ok){
+      if (!resposta.ok) {
         throw new Error('HTTP Erro' + resposta.status)
       }
 
       const dados = await resposta.json()
       setEmail(dados.email)
       setNome(dados.empresas.nome_fantasia)
+      setImagem(dados.empresas.foto_perfil)
     } catch (error) {
       throw new Error('HTTP Erro' + error)
     }
   }
+
+
+  async function atualizarFoto() {
+    if (!foto) {
+      return
+    }
+    try {
+      setCarregando(true)
+      console.log(foto)
+      const data = new FormData()
+      data.append('imagem', foto)
+      const resposta = await axios.post(process.env.REACT_APP_URL_API + "/empresas/imagem/" + idEmpresa, data)
+      setTimeout(() => {
+        setCarregando(false)
+      }, 1500);
+      pegarInformacoes()
+      setFoto(null)
+    } catch (error) {
+
+    }
+  }
+
+  useEffect(() => {
+    atualizarFoto()
+  }, [foto]);
 
   return (
     <div>
@@ -89,7 +122,7 @@ function PerfilDeEmpresas() {
                   Serviços
                 </a>
                 <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><a className="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
                   <li><a className="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
@@ -117,7 +150,6 @@ function PerfilDeEmpresas() {
         </div>
       </nav>
 
-
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-3 text-center mt-md-5 mb-5 ">
@@ -136,8 +168,19 @@ function PerfilDeEmpresas() {
 
               <div className="container text-center border shadow-sm p-3 mb-5 bg-body-tertiary rounded rounded-3 p-4">
                 <div className="row">
-                  <div className="col">
-                    <img src={logoJPets} width={90} /><button type="button" className="btn btn-warning m-3 rounded-4">Atualizar foto</button>
+                  <div className="col ">
+
+                    <img src={process.env.REACT_APP_URL_API_IMG + imagem} width={120} height={120} style={{ borderRadius: "50%" }} />
+
+                    <label htmlFor="formFile" class="form-label" style={{ backgroundColor: '#DEA100', outline: "none", cursor: 'pointer', padding: '8px 10px', borderRadius: '16px', color: "white", marginLeft: "15px" }}>Atualizar foto</label>
+
+                    <input
+                    accept='image/png'
+                      onChange={(e) => {
+                        console.log(e.target.files[0]);
+                        setFoto(e.target.files[0])
+                      }}
+                      className="" type="file" id="formFile" style={{ backgroundColor: 'transparent', outline: "none", display: "none" }} />
                     <button type="button" className="btn btn-secondary m-3 rounded-4">Remover</button>
                   </div>
                   <div className="col p-4">

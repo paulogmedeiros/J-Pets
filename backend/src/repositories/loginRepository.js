@@ -59,7 +59,8 @@ class LoginRepository {
                 email: true,
                 empresas: {
                     select: {
-                        nome_fantasia: true
+                        nome_fantasia: true,
+                        foto_perfil: true
                     }
                 }
             }

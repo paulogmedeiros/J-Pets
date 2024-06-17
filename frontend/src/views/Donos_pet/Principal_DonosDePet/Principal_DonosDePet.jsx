@@ -9,17 +9,21 @@ import imgDogWalking from './img/dogWalking.svg'
 import imgRacao from './img/racao.svg'
 import imgVeterinario from './img/veterinario.svg'
 import imgServicos from './img/servicos.svg'
+import { Loader } from '@mantine/core';
 
 function Principal_DonosDePet() {
+
 
   useEffect(() => {
 
     document.title = "Página inicial"
   })
 
+  async function pegarProdutosEServicos() {
+
+  }
   return (
     <>
-
       <nav className="navbarDonoDePet navbar navbar-expand-lg ">
         <div className="container-fluid">
 
@@ -49,9 +53,9 @@ function Principal_DonosDePet() {
                   Cachorro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -59,9 +63,8 @@ function Principal_DonosDePet() {
                   Gato
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -69,9 +72,9 @@ function Principal_DonosDePet() {
                   Pássaro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -79,9 +82,8 @@ function Principal_DonosDePet() {
                   Peixe
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
                 </ul>
               </li>
             </ul>
