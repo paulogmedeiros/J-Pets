@@ -10,7 +10,6 @@ function Empresas_Mapa() {
   return (
 
     <>
-      {/* Barra de navegação da página */}
       <nav className="navbarDonoDePet navbar navbar-expand-lg ">
         <div className="container-fluid">
 
@@ -40,9 +39,9 @@ function Empresas_Mapa() {
                   Cachorro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -50,9 +49,9 @@ function Empresas_Mapa() {
                   Gato
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -60,9 +59,9 @@ function Empresas_Mapa() {
                   Pássaro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -70,9 +69,9 @@ function Empresas_Mapa() {
                   Peixe
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
             </ul>

@@ -3,7 +3,6 @@ import './Novo_modelo.css'
 import imgCadastroItens from '../img/imgCadastro.svg'
 import logoJPets_adm from '../img/logoJPets.png'
 import { notifications } from '@mantine/notifications'
-import { Loader } from '@mantine/core';
 import iconeVoltar from '../img/iconeVoltar.svg'
 
 function Novo_modelo() {

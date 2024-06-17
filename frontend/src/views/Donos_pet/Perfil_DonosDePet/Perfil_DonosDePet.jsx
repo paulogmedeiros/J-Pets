@@ -37,9 +37,9 @@ function Perfil_DonosDePet() {
                   Cachorro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -47,9 +47,9 @@ function Perfil_DonosDePet() {
                   Gato
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -57,9 +57,9 @@ function Perfil_DonosDePet() {
                   Pássaro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -67,9 +67,9 @@ function Perfil_DonosDePet() {
                   Peixe
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
             </ul>
@@ -100,19 +100,15 @@ function Perfil_DonosDePet() {
         </div>
       </nav>
 
+      <h1 className='perfilUsuarioTitulo fw-semibold fs-1  mt-5 text-center'>Meu Perfil</h1>
 
-
-
-
-        <h1 className='perfilUsuarioTitulo fw-semibold fs-1  mt-5 text-center'>Meu Perfil</h1>
-
-      <div className="position-absolute top-50 start-50 translate-middle border rounded-4 p-5 w-50 mt-5 mt-md-3">
+      <div className="position-absolute top-50 start-50 translate-middle border rounded-4 p-5 w-50 mt-5 mt-md-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
 
         <div className="text-center ">
           <div className="row">
             <div className="col-md-6">
-              <h1 className='fs-2 fw-semibold mb-5'>Jamille Galazi</h1>
-
+              <h1 className='fs-2 fw-semibold mb-5 mb-md-0'>Jamille Galazi</h1>
+              <hr />
               <input className="form-control mb-3 " type="text" value="Email" aria-label="Disabled input example" disabled readonly></input>
 
               <input className="form-control mb-3 " type="text" value="Senha" aria-label="Disabled input example" disabled readonly />
@@ -125,7 +121,6 @@ function Perfil_DonosDePet() {
             <div className="col-md-6 mt-3 mt-md-0">
               <button type="button" className="btn btn-danger">Desativar conta</button>
             </div>
-
           </div>
         </div>
       </div>

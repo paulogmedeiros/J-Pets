@@ -37,9 +37,9 @@ function Perfil_Empresa() {
                   Cachorro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -47,9 +47,9 @@ function Perfil_Empresa() {
                   Gato
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -57,9 +57,9 @@ function Perfil_Empresa() {
                   Pássaro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -67,9 +67,9 @@ function Perfil_Empresa() {
                   Peixe
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
             </ul>
@@ -100,10 +100,11 @@ function Perfil_Empresa() {
         </div>
       </nav>
 
+
       {/* conteúdo principal */}
       <div>
         <button type="button" class="voltarBotao btn m-5 rounded-5"><span><img src={iconeVoltar} width={20} height={20} /></span> Voltar</button>
-        
+
         <div className="containerGeralAvaliacoes">
           <div className="containerPerfilAvaliacoes row justify-content-center border row-cols-md-2 row-cols-1">
             <div className="col-md-5 d-md-flex text-center p-md-5 p-3 ps-md-5"><img src={logoJPets} width={100} height={100} className='me-md-3 m-3' />

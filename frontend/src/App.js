@@ -21,7 +21,7 @@ import Perfil_Empresa from './views/Donos_pet/Perfil_Empresa/Perfil_Empresa.jsx'
 import Perfil_DonosDePet from './views/Donos_pet/Perfil_DonosDePet/Perfil_DonosDePet.jsx';
 import Favoritos from './views/Donos_pet/Favoritos/Favoritos.jsx';
 import Alterar_senha_empresa from './views/Empresas/Alterar_senha/Alterar_senha.jsx';
-
+import Buscar_produtoOuServico from './views/Donos_pet/Buscar_produtoOuServico/Buscar_produtoOuServico.jsx';
 
 // Importando itens da pasta "Empresas"
 import Principal_Empresas from './views/Empresas/Principal_Empresas/Principal_Empresas.jsx';
@@ -87,6 +87,7 @@ function App() {
       <Route path='/usuario/perfilEmpresa' element={<Perfil_Empresa/>}/>
       <Route path='/usuario/perfil' element={<Perfil_DonosDePet/>}/>
       <Route path='/usuario/favoritos' element={<Favoritos/>}/>
+      <Route path='/usuario/buscar' element={<Buscar_produtoOuServico/>}/>
 
       {/* Rotas para os itens da pasta "Empresas" */}
       <Route path='/empresas/principal' element={<Principal_Empresas/>}/>

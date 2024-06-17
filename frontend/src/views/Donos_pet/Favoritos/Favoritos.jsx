@@ -36,9 +36,9 @@ function Favoritos() {
                   Cachorro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -46,9 +46,9 @@ function Favoritos() {
                   Gato
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -56,9 +56,9 @@ function Favoritos() {
                   Pássaro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -66,9 +66,9 @@ function Favoritos() {
                   Peixe
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
+                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                <li><a className="dropdown-item" href="/">Serviços</a></li>
+
                 </ul>
               </li>
             </ul>
