@@ -10,23 +10,30 @@ import imgRacao from './img/racao.svg'
 import imgVeterinario from './img/veterinario.svg'
 import imgServicos from './img/servicos.svg'
 import { Loader } from '@mantine/core';
+import { Menu, NavLink } from "@mantine/core";
 
 function Principal_DonosDePet() {
 
+  const [hovered, setHovered] = useState(false);
+  const [hoveredProducts, setHoveredProducts] = useState(false);
+  const [hoveredServices, setHoveredServices] = useState(false);
+  const [hoveredProduct1, setHoveredProduct1] = useState(false);
+  const [hoveredProduct2, setHoveredProduct2] = useState(false);
+  const [hoveredMarca1, setHoveredMarca1] = useState(false);
+  const [hoveredMarca2, setHoveredMarca2] = useState(false);
 
   useEffect(() => {
-
     document.title = "Página inicial"
   })
 
   async function pegarProdutosEServicos() {
-
+    // Lógica para pegar produtos e serviços
   }
+
   return (
     <>
       <nav className="navbarDonoDePet navbar navbar-expand-lg ">
         <div className="container-fluid">
-
           {/* Logo do projeto */}
           <a className="navbar-brand" href="/usuario/principal">
             <img src={logoJPets} width={45} height={45} />
@@ -53,9 +60,225 @@ function Principal_DonosDePet() {
                   Cachorro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Produtos</a></li>
-                  <li><a className="dropdown-item" href="/">Serviços</a></li>
-
+                  <li>
+                    {/* Itens da barra de navegação */}
+                    <div style={{ position: "relative", width: "200px" }}>
+                      <NavLink
+                        href="#"
+                        label="Produtos"
+                        onMouseEnter={() => setHoveredProducts(true)}
+                        onMouseLeave={() => setHoveredProducts(false)}
+                      />
+                      {hoveredProducts && (
+                        <div
+                          onMouseEnter={() => setHoveredProducts(true)}
+                          onMouseLeave={() => setHoveredProducts(false)}
+                          style={{
+                            position: "absolute",
+                            width: "200px",
+                            top: "0px", // Ajuste aqui para mover os produtos para baixo
+                            left: "200px",
+                            zIndex: 2,
+                            backgroundColor: "white",
+                            color: 'black',
+                            border: "1px solid #d2d2d2",
+                            borderRadius: "8px"
+                          }}
+                        >
+                          <Menu>
+                            <NavLink
+                              label="Produto 1"
+                              onMouseEnter={() => setHoveredProduct1(true)}
+                              onMouseLeave={() => setHoveredProduct1(false)}
+                            />
+                            {hoveredProduct1 && (
+                              <div
+                                onMouseEnter={() => setHoveredProduct1(true)}
+                                onMouseLeave={() => setHoveredProduct1(false)}
+                                style={{
+                                  position: "absolute",
+                                  width: "200px",
+                                  top: "10px",
+                                  left: "200px",
+                                  zIndex: 2,
+                                  backgroundColor: "white",
+                                  color: 'black',
+                                  border: "1px solid #d2d2d2",
+                                  borderRadius: "8px"
+                                }}
+                              >
+                                <Menu>
+                                  <NavLink
+                                    label="Marca 1"
+                                    onMouseEnter={() => setHoveredMarca1(true)}
+                                    onMouseLeave={() => setHoveredMarca1(false)}
+                                  />
+                                  {hoveredMarca1 && (
+                                    <div
+                                      onMouseEnter={() => setHoveredMarca1(true)}
+                                      onMouseLeave={() => setHoveredMarca1(false)}
+                                      style={{
+                                        position: "absolute",
+                                        width: "200px",
+                                        top: "20px",
+                                        left: "200px",
+                                        zIndex: 2,
+                                        backgroundColor: "white",
+                                        color: 'black',
+                                        border: "1px solid #d2d2d2",
+                                        borderRadius: "8px"
+                                      }}
+                                    >
+                                      <Menu>
+                                        <NavLink label="Modelo 1" />
+                                        <NavLink label="Modelo 2" />
+                                      </Menu>
+                                    </div>
+                                  )}
+                                  <NavLink
+                                    label="Marca 2"
+                                    onMouseEnter={() => setHoveredMarca2(true)}
+                                    onMouseLeave={() => setHoveredMarca2(false)}
+                                  />
+                                  {hoveredMarca2 && (
+                                    <div
+                                      onMouseEnter={() => setHoveredMarca2(true)}
+                                      onMouseLeave={() => setHoveredMarca2(false)}
+                                      style={{
+                                        position: "absolute",
+                                        width: "200px",
+                                        top: "40px",
+                                        left: "200px",
+                                        zIndex: 2,
+                                        backgroundColor: "white",
+                                        color: 'black',
+                                        border: "1px solid #d2d2d2",
+                                        borderRadius: "8px"
+                                      }}
+                                    >
+                                      <Menu>
+                                        <NavLink label="Modelo 1" />
+                                        <NavLink label="Modelo 2" />
+                                      </Menu>
+                                    </div>
+                                  )}
+                                </Menu>
+                              </div>
+                            )}
+                            <NavLink
+                              label="Produto 2"
+                              onMouseEnter={() => setHoveredProduct2(true)}
+                              onMouseLeave={() => setHoveredProduct2(false)}
+                            />
+                            {hoveredProduct2 && (
+                              <div
+                                onMouseEnter={() => setHoveredProduct2(true)}
+                                onMouseLeave={() => setHoveredProduct2(false)}
+                                style={{
+                                  position: "absolute",
+                                  width: "200px",
+                                  top: "50px",
+                                  left: "200px",
+                                  zIndex: 2,
+                                  backgroundColor: "white",
+                                  color: 'black',
+                                  border: "1px solid #d2d2d2",
+                                  borderRadius: "8px"
+                                }}
+                              >
+                                <Menu>
+                                  <NavLink
+                                    label="Marca 1"
+                                    onMouseEnter={() => setHoveredMarca1(true)}
+                                    onMouseLeave={() => setHoveredMarca1(false)}
+                                  />
+                                  {hoveredMarca1 && (
+                                    <div
+                                      onMouseEnter={() => setHoveredMarca1(true)}
+                                      onMouseLeave={() => setHoveredMarca1(false)}
+                                      style={{
+                                        position: "absolute",
+                                        width: "200px",
+                                        top: "30px",
+                                        left: "200px",
+                                        zIndex: 2,
+                                        backgroundColor: "white",
+                                        color: 'black',
+                                        border: "1px solid #d2d2d2",
+                                        borderRadius: "8px"
+                                      }}
+                                    >
+                                      <Menu>
+                                        <NavLink label="Modelo 1" />
+                                        <NavLink label="Modelo 2" />
+                                      </Menu>
+                                    </div>
+                                  )}
+                                  <NavLink
+                                    label="Marca 2"
+                                    onMouseEnter={() => setHoveredMarca2(true)}
+                                    onMouseLeave={() => setHoveredMarca2(false)}
+                                  />
+                                  {hoveredMarca2 && (
+                                    <div
+                                      onMouseEnter={() => setHoveredMarca2(true)}
+                                      onMouseLeave={() => setHoveredMarca2(false)}
+                                      style={{
+                                        position: "absolute",
+                                        width: "200px",
+                                        top: "50px",
+                                        left: "200px",
+                                        zIndex: 2,
+                                        backgroundColor: "white",
+                                        color: 'black',
+                                        border: "1px solid #d2d2d2",
+                                        borderRadius: "8px"
+                                      }}
+                                    >
+                                      <Menu>
+                                        <NavLink label="Modelo 1" />
+                                        <NavLink label="Modelo 2" />
+                                      </Menu>
+                                    </div>
+                                  )}
+                                </Menu>
+                              </div>
+                            )}
+                          </Menu>
+                        </div>
+                      )}
+                    </div>
+                    <div style={{ position: "relative", width: "200px" }}>
+                      <NavLink
+                        href="#"
+                        label="Serviços"
+                        onMouseEnter={() => setHoveredServices(true)}
+                        onMouseLeave={() => setHoveredServices(false)}
+                      />
+                      {hoveredServices && (
+                        <div
+                          onMouseEnter={() => setHoveredServices(true)}
+                          onMouseLeave={() => setHoveredServices(false)}
+                          style={{
+                            position: "absolute",
+                            width: "200px",
+                            top: "10px", // Ajuste aqui para mover os serviços para baixo
+                            left: "200px",
+                            zIndex: 2,
+                            backgroundColor: "white",
+                            color: 'black',
+                            border: "1px solid #d2d2d2",
+                            borderRadius: "8px"
+                          }}
+                        >
+                          <Menu>
+                            <NavLink label="Serviço 1" />
+                            <NavLink label="Serviço 2" />
+                          </Menu>
+                        </div>
+                      )}
+                    </div>
+                  </li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -74,7 +297,6 @@ function Principal_DonosDePet() {
                 <ul className="dropdown-menu">
                   <li><a className="dropdown-item" href="/">Produtos</a></li>
                   <li><a className="dropdown-item" href="/">Serviços</a></li>
-
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -135,7 +357,6 @@ function Principal_DonosDePet() {
       <div className='text-center m-3'>
         <h2 className='mb-4 mt-5'>Alguns dos nossos serviços</h2>
         <div className="row">
-
           <div className="col-md-3">
             <div className="card mb-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
               <img src={imgDogWalking} className="card-img-top" alt="Dog Walking" />
