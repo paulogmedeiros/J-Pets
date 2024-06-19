@@ -204,7 +204,7 @@ function Alterar_senha_empresa() {
             className="btnAlteracaoSenhaEmpresas btn w-100" role="button">Confirmar</button>
 
             <p className="text-body-dark text-center mt-3">
-              <a href="#" className="cancelarAlterarSenhaEmpresas link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Voltar à tela de login</a>
+              <a href="/empresas/perfil" className="cancelarAlterarSenhaEmpresas link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Cancelar</a>
             </p>
           </div>
         </div>

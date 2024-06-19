@@ -88,8 +88,7 @@ function Novo_modelo() {
       marca_id: parseInt(marca_id),
       nome
     }
-    window.alert(modeloDados.marca_id)
-    window.alert(modeloDados.nome)
+
 
     try {
       // Realiza POST para a API

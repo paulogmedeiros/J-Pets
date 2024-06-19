@@ -40,9 +40,6 @@ function Novo_servico() {
       nome
     }
 
-    // window alert para teste
-    window.alert(servicoDados.animal_id)
-    window.alert(servicoDados.nome)
 
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/servicos", { // rota para cadastrar serviços

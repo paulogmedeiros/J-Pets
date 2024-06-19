@@ -24,7 +24,7 @@ function Quem_e_voce() {
 
                                 <a href='/cadastro/usuario' type="button"
                                     className="btnConfirmacaoDonoDePet btn border border-3 rounded-5 border-primary">
-                                    <p className="text-md-center fw-bold fs-4">Dono de pet</p>
+                                    <p className="text-md-center fw-bold fs-4">Tutor de pet</p>
                                     <img src={imagemDonoPet} className='img-fluid' width={410} />
                                 </a>
                             </div>

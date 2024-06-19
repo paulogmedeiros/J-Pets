@@ -30,9 +30,7 @@ function Nova_marca() {
       nome
     }
 
-    window.alert(marcaDados.produto_id)
-    window.alert(marcaDados.nome)
-
+  
     try {
       // Realiza POST para a API
       const result = await fetch(process.env.REACT_APP_URL_API + '/marcas', {

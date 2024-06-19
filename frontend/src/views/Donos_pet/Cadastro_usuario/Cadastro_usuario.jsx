@@ -4,7 +4,7 @@ import cachorro from './img/imagem_cachorro.svg'
 import iconeUsuario from './img/icone_usuario.svg'
 import iconeEmail from './img/icone_email.svg'
 import iconeSenha from './img/icone_senha_login.svg'
-
+import { notifications } from '@mantine/notifications';
 
 function Cadastro_usuario() {
   useEffect(() => {
@@ -16,6 +16,9 @@ function Cadastro_usuario() {
   const [senha, setSenha] = useState('')
   const [confirmarSenha, setConfirmarSenha] = useState('')
   const [erroSenha, setErroSenha] = useState(''); // Novo estado para mensagem de erro
+
+  const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>;
+  const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>;
 
   // função assíncrona para ser chamadd no clique do botão de criar conta
   async function cadastrarUsuario(event) {
@@ -44,20 +47,23 @@ function Cadastro_usuario() {
         },
         body: JSON.stringify(usuarioDados)
       })
+      if (resposta.status >= 400) {
+        throw new Error(resposta.message);
+      }
 
       if (!resposta.ok) {
         console.debug("Erro ao criar usuário")
       } else {
-        window.alert('Usuário cadastrado!')
+        notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
         console.debug("Usuário inserido!")
         window.location.href = "/"
       }
 
     } catch (error) {
-      console.debug(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
     }
   }
-  
+
   return (
     <div className="container">
 

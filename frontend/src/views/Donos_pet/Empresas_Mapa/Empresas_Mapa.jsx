@@ -49,8 +49,8 @@ function Empresas_Mapa() {
                   Gato
                 </a>
                 <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
-                <li><a className="dropdown-item" href="/">Serviços</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
 
                 </ul>
               </li>
@@ -59,8 +59,8 @@ function Empresas_Mapa() {
                   Pássaro
                 </a>
                 <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
-                <li><a className="dropdown-item" href="/">Serviços</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
 
                 </ul>
               </li>
@@ -69,8 +69,8 @@ function Empresas_Mapa() {
                   Peixe
                 </a>
                 <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
-                <li><a className="dropdown-item" href="/">Serviços</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/">Serviços</a></li>
 
                 </ul>
               </li>
@@ -103,59 +103,57 @@ function Empresas_Mapa() {
       </nav>
 
       {/* Conteúdo principal */}
-      <div>
-
+      <div className='position-absolute top-50 start-50 translate-middle'>
+        
         {/* Título */}
-        <div className="container text-center mt-3 pt-5">
-          <h3>Empresas que trabalham com o modelo <span className='text-warning'>(modelo)</span></h3>
+        <div className="container text-center mt-3 ">
+          <h3 className='mb-5'>Empresas que trabalham com o modelo <span className='text-warning'>(modelo)</span></h3>
 
           {/* Empresas */}
-          <div className="row mt-5">
-            <div className="col-md-6">
-              <div className="col-md-6 d-flex border rounded-4 w-auto w-auto p-3 p-md-4 bg-body-secondary mb-5">
+          <div className="col-md-6 d-flex border rounded-4 w-auto w-auto p-3 p-md-4 bg-body-secondary mb-5">
 
-                <img src={logoJPets} width={70} height={70} className='img-fluid d-flex' />
+            <img src={logoJPets} width={70} height={70} className='img-fluid d-flex' />
 
-                <div className="flex-column">
-                  <p className='ms-md-3 d-flex'>Nome da empresa</p>
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
-                </div>
-                <div className="col-md-3"></div>
-                <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
-              </div>
-
-              <div className="col-md-6 d-flex border rounded-4  w-auto w-auto p-3 p-md-4 p-3 bg-body-secondary mb-5">
-
-                <img src={logoJPets} width={70} height={70} className='img-fluid d-flex' />
-
-                <div className="flex-column">
-                  <p className='ms-md-3 d-flex'>Nome da empresa</p>
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <img src={imgEstrela} width={25} />
-                  <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
-                </div>
-                <div className="col-md-3"></div>
-                <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
-              </div>
+            <div className="flex-column">
+              <p className='ms-md-3 d-flex'>Nome da empresa</p>
+              <img src={imgEstrela} width={25} />
+              <img src={imgEstrela} width={25} />
+              <img src={imgEstrela} width={25} />
+              <img src={imgEstrela} width={25} />
+              <img src={imgEstrela} width={25} />
+              <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
             </div>
+            <div className="col-md-3"></div>
+            <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
+          </div>
 
-            {/* API */}
+          <div className="col-md-6 d-flex border rounded-4  w-auto w-auto p-3 p-md-4 p-3 bg-body-secondary mb-5">
+
+            <img src={logoJPets} width={70} height={70} className='img-fluid d-flex' />
+
+            <div className="flex-column">
+              <p className='ms-md-3 d-flex'>Nome da empresa</p>
+              <img src={imgEstrela} width={25} />
+              <img src={imgEstrela} width={25} />
+              <img src={imgEstrela} width={25} />
+              <img src={imgEstrela} width={25} />
+              <img src={imgEstrela} width={25} />
+              <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
+            </div>
+            <div className="col-md-3"></div>
+            <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
+          </div>
+        </div>
+
+        {/* API
             <div className="col-md-6">
               <div className='apiTela border rounded-4'>
                 <img src={mapaImg} width={600} height={400} className='img-fluid rounded-4' />
               </div>
-            </div>
-          </div>
-        </div>
+            </div> */}
       </div>
+
+
     </>
   )
 }

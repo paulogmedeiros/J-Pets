@@ -41,10 +41,6 @@ function Novo_produto() {
       nome
     }
 
-    // window alert para teste
-    window.alert(produtoDados.animal_id)
-    window.alert(produtoDados.nome)
-
     try {
       // Realiza POST para a API
       const result = await fetch(process.env.REACT_APP_URL_API + '/produtos', {
