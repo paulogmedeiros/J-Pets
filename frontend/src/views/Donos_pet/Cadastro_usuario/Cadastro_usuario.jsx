@@ -5,6 +5,7 @@ import iconeUsuario from './img/icone_usuario.svg'
 import iconeEmail from './img/icone_email.svg'
 import iconeSenha from './img/icone_senha_login.svg'
 import { notifications } from '@mantine/notifications';
+import { Loader } from '@mantine/core';
 
 function Cadastro_usuario() {
   useEffect(() => {
@@ -17,11 +18,13 @@ function Cadastro_usuario() {
   const [confirmarSenha, setConfirmarSenha] = useState('')
   const [erroSenha, setErroSenha] = useState(''); // Novo estado para mensagem de erro
 
+  const [carregando, setCarregando] = useState(false)
   const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>;
   const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>;
 
   // função assíncrona para ser chamadd no clique do botão de criar conta
   async function cadastrarUsuario(event) {
+    setCarregando(true)
     event.preventDefault()
 
     // tratamento pra ver se as senhas são iguais
@@ -40,28 +43,32 @@ function Cadastro_usuario() {
 
     try {
 
-      const resposta = await fetch(`${process.env.REACT_APP_URL_API}/donoPet`, { // rota da API para cadastrar donos de pet
+      const result = await fetch(`${process.env.REACT_APP_URL_API}/donoPet`, { // rota da API para cadastrar donos de pet
         method: 'POST',
         headers: {
           'Content-Type': 'application/json' // especificando o corpo como json
         },
         body: JSON.stringify(usuarioDados)
       })
-      if (resposta.status >= 400) {
-        throw new Error(resposta.message);
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
       }
 
-      if (!resposta.ok) {
-        console.debug("Erro ao criar usuário")
-      } else {
-        notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
-        console.debug("Usuário inserido!")
-        window.location.href = "/"
-      }
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+        setCarregando(false)
+        window.location.href = '/';
+      }, 1500);
 
     } catch (error) {
+      setCarregando(false)
+      console.log(error)
       notifications.show({ message: error.message, color: "white", icon: errorIcon });
     }
+
   }
 
   return (
@@ -120,7 +127,8 @@ function Cadastro_usuario() {
           <button
             type="button"
             onClick={cadastrarUsuario}
-            className="btn_cadastro_usuario btn w-100">Criar conta</button>
+            className="btn_cadastro_usuario btn w-100">
+            {carregando ? <Loader color="white" /> : "Criar conta"}</button>
 
           <p className=" text-body-dark text-center mt-4">
             Já possui uma conta? <a href="/" className="redirecionamento_cadastro_usuario link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Entrar</a>
