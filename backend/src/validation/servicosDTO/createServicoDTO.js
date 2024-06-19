@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const produtoDTO = Joi.object({
+const servicoDTO = Joi.object({
 
     animal_id: Joi.number()
         .required()
@@ -28,4 +28,4 @@ const produtoDTO = Joi.object({
 
 });
 
-module.exports = produtoDTO;
+module.exports = servicoDTO;

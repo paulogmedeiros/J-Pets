@@ -1,14 +1,14 @@
 const Joi = require('joi');
 
-const produtoDTO = Joi.object({
+const marcaDTO = Joi.object({
 
-    animal_id: Joi.number()
+    produto_id: Joi.number()
         .required()
         .empty('')
         .messages({
-            'number.base': 'O id do animal deve ser um number.',
-            'any.required': 'O id do animal é obrigatório.',
-            'any.empty': 'O id do animal não pode ser vazio.'
+            'number.base': 'O id do produto deve ser um number.',
+            'any.required': 'O id do produto é obrigatório.',
+            'any.empty': 'O id do produto não pode ser vazio.'
         }),
 
     nome: Joi.string()
@@ -28,4 +28,4 @@ const produtoDTO = Joi.object({
 
 });
 
-module.exports = produtoDTO;
+module.exports = marcaDTO;
