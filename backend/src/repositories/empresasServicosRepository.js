@@ -103,7 +103,13 @@ class EmpresasServicosRepository {
                 }
             })
 
-            if (!servico) {
+            const produtos = await prismaTx.empresas_produtos.findFirst({
+                where:{
+                    empresa_id: empresaId
+                }
+            })
+
+            if (!servico && !produtos) {
                 await prismaTx.empresas_animais.deleteMany({
                     where: {
                         animal_id: data.animalId,
