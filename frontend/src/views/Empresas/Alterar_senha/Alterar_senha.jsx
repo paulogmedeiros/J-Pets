@@ -1,8 +1,76 @@
-import React from 'react'
+import {useState, useEffect} from 'react'
 import './Alterar_senha.css'
 import icone_senha from './img/icone_senha.svg'
 import logoJPets from './img/logoJPets.png'
+import { notifications } from '@mantine/notifications';
+
 function Alterar_senha_empresa() {
+
+  const [senha, setSenha] = useState('');
+  const [novaSenha, setNovaSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [erroSenha, setErroSenha] = useState(''); // Novo estado para mensagem de erro
+  const usuario_id = JSON.parse(localStorage.getItem("decodedToken"))?.usuario_id;
+
+  const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>;
+  const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>;
+
+  async function alterarSenhaEMP(event) {
+    event.preventDefault();
+
+    if (novaSenha !== confirmarSenha) {
+      setErroSenha("As senhas não coincidem");
+      return;
+    }
+
+    const alterarSenhaDados = {
+      senha,
+      novaSenha
+    };
+
+    try {
+      console.log("Enviando dados para o servidor:", alterarSenhaDados);
+
+      const response = await fetch(`${process.env.REACT_APP_URL_API}/senha/${usuario_id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(alterarSenhaDados)
+      });
+
+      const resposta = await response.json();
+      console.log("Resposta do servidor:", resposta);
+
+      if (response.status >= 400) {
+        throw new Error(resposta.message);
+      }
+
+      // Notifica o usuário sobre o sucesso
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+
+      // Limpa os campos de senha
+      setSenha('');
+      setNovaSenha('');
+      setConfirmarSenha('');
+
+      // Faz logout e redireciona o usuário
+      setTimeout(() => {
+        logOff();
+      }, 1500);
+
+    } catch (error) {
+      console.log("Erro ao alterar a senha:", error);
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
+  async function logOff() {
+    localStorage.clear();
+    window.location.href = '/';
+  }
+
+
   return (
     <>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -97,21 +165,43 @@ function Alterar_senha_empresa() {
             <p className='text-center'>Altere sua senha.</p>
 
             <div className="form-floating mt-md-3 mb-3">
-              <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+              <input
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              type="password"
+              className="form-control"
+              id="floatingPassword"
+              placeholder="Password" />
               <label for="floatingPassword">Senha atual</label>
             </div>
 
             <div className="form-floating mt-md-3 mb-3">
-              <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+              <input
+              value={novaSenha}
+              onChange={(e) => setNovaSenha(e.target.value)}
+              type="password"
+              className="form-control"
+              id="floatingPassword"
+              placeholder="Password" />
               <label for="floatingPassword">Nova senha</label>
+              {erroSenha && <div className="text-danger">{erroSenha}</div>}
             </div>
 
             <div className="form-floating mt-md-3 mb-4">
-              <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+              <input
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
+              type="password"
+              className="form-control"
+              id="floatingPassword"
+              placeholder="Password" />
               <label for="floatingPassword">Confirmação da nova senha</label>
+              {erroSenha && <div className="text-danger">{erroSenha}</div>}
             </div>
 
-            <a className="btnAlteracaoSenhaEmpresas btn w-100" href="#" role="button">Confirmar</a>
+            <button
+            onClick={alterarSenhaEMP}
+            className="btnAlteracaoSenhaEmpresas btn w-100" role="button">Confirmar</button>
 
             <p className="text-body-dark text-center mt-3">
               <a href="#" className="cancelarAlterarSenhaEmpresas link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Voltar à tela de login</a>

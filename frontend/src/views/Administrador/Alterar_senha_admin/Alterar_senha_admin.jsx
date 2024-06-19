@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import{ useState, useEffect } from 'react';
 import imgSenha from '../img/img_senha.svg';
 import './Alterar_senha_admin.css';
 import logoJPets_adm from '../img/logoJPets.png';

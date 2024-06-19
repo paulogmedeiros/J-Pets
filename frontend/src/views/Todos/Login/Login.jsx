@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './Login.css'
 import imagem_login from '../../../img/imagem_login.png'
 import { jwtDecode } from "jwt-decode";
+import { notifications } from '@mantine/notifications';
 
 function Login() {
 
@@ -12,6 +13,9 @@ function Login() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [erroDados, setErroDados] = useState('')
+    const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>;
+    const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>;
+
 
     async function efetuarLogin(event) {
         event.preventDefault(); // Prevenir o comportamento padrão do formulário
@@ -28,7 +32,7 @@ function Login() {
                 setErroDados("Usuário ou senha inválidos");
                 throw new Error("Erro na requisição" + resposta.status);
             } else {
-                window.alert("Logado com sucesso!");
+                notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
                 const token = await resposta.json();
 
                 const decodedToken = jwtDecode(token);
@@ -49,7 +53,7 @@ function Login() {
                 localStorage.setItem("token", JSON.stringify(token));
             }
         } catch (error) {
-            console.error("Erro ao fazer login", error);
+            notifications.show({ message: error.message, color: "white", icon: errorIcon });
         }
     }
 

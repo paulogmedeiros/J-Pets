@@ -113,7 +113,7 @@ function Perfil_DonosDePet() {
 
               <input className="form-control mb-3 " type="text" value="Senha" aria-label="Disabled input example" disabled readonly />
 
-              <a className="mb-5 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="#">
+              <a className="mb-5 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/senha/alteracao">
                 Alterar senha
               </a>
             </div>

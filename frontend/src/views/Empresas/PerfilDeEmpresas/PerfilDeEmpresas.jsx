@@ -198,7 +198,7 @@ function PerfilDeEmpresas() {
                       <input className="form-control" type="password" value="Senha" aria-label="Disabled input example" disabled
                         readonly />
                       <div className='mt-3 text-start'>
-                        <a href="/senha/alteracao">Alterar senha</a>
+                        <a href="/senha/empresas/alteracao">Alterar senha</a>
                       </div>
                     </div>
                     {/* <div className="col">
