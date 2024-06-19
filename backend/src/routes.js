@@ -28,6 +28,8 @@ const modeloValidation = require("./middleware/modeloValidation.js")
 const recuperacaoSenhaValidation = require("./middleware/recuperacaoSenha.js")
 const empresaValidation = require("./middleware/empresasValidation.js")
 const produtosValidation = require("./middleware/produtosValidation.js")
+const cartaoValidation = require("./middleware/cartoesValidation.js")
+const loginValidation = require("./middleware/loginValidation.js")
 const tokenValidation = require("./middleware/tokenValidation.js")
 //rotas
 routes.get("/", (req,res)=>{
@@ -43,7 +45,7 @@ routes.get("/servicos/animais/:animalId/empresa/:empresaId", servico.getServicos
 routes.get("/servicos/:id", servico.getServicosPorId);
 routes.get("/servicos/animais/:animalId", servico.getServicosPorIdAnimal);
 routes.post("/servicos",servicoValidation.validarCriacaoServico,servico.postServicos);
-routes.put("/servicos/:id", servico.putServicos);
+routes.put("/servicos/:id",produtosValidation.validarAtualizacaoProdutos, servico.putServicos);
 routes.delete("/servicos/:id", servico.deleteServicos);
 
 // rota de produtos
@@ -52,7 +54,7 @@ routes.get("/produtos/animais/:animalId/empresa/:empresaId", produtos.getProduto
 routes.get("/produtos/animais/:animalId",produtos.getProdutosPorIdAnimal);
 routes.get("/produtos/:id", produtos.getProdutosPorId);
 routes.post("/produtos",produtosValidation.validarCriacaoProdutos, produtos.postProdutos);
-routes.put("/produtos/:id", produtos.putProdutos);
+routes.put("/produtos/:id",produtosValidation.validarAtualizacaoProdutos, produtos.putProdutos);
 routes.delete("/produtos/:id", produtos.deleteProdutos);
 
 // rota de marcas
@@ -61,7 +63,7 @@ routes.get("/marcas/produtos/:produtoId/empresa/:empresaId", marcas.getMarcasPor
 routes.get("/marcas/produtos/:produtoId",marcas.getMarcasPorIdProduto);
 routes.get("/marcas/:id", marcas.getMarcasPorId);
 routes.post("/marcas",marcaValidation.validarCriacaoMarca, marcas.postMarcas);
-routes.put("/marcas/:id", marcas.putMarcas);
+routes.put("/marcas/:id",produtosValidation.validarAtualizacaoProdutos ,marcas.putMarcas);
 routes.delete("/marcas/:id", marcas.deleteMarcas);
 
 // rota de modelos
@@ -71,7 +73,7 @@ routes.get("/modelos/:id", modelos.getModelosPorId);
 routes.get("/modelos/marcas/:marcasId", modelos.getModelosPorIdMarca);
 routes.get("/modelos/marcas/:marcasId/empresa/:empresaId", modelos.getModelosPorIdMarcaIdEmpresa);
 routes.post("/modelos",modeloValidation.validarCriacaoModelo, modelos.postModelos);
-routes.put("/modelos/:id", modelos.putModelos);
+routes.put("/modelos/:id",produtosValidation.validarAtualizacaoProdutos, modelos.putModelos);
 routes.delete("/modelos/:id", modelos.deleteModelos);
 
 // rota empresas
@@ -91,7 +93,7 @@ routes.put("/empresas/excluir/cupom/:id",empresa.putExcluirCupom);
 // rota de login
 routes.get("/usuario/:id",tokenValidation.verificarToken,login.getUsuarioPorId);
 routes.post("/cadastro/administrador",administradorValidation.validarCriacaoAdministrador,login.postAdministrador);
-routes.post("/login",login.logar);
+routes.post("/login",loginValidation.validarLogin,login.logar);
 routes.post("/envio/email",recuperacaoSenhaValidation.validarEnvioEmail,login.postEnvioEmail);
 routes.put("/recuperacao/senha",tokenValidation.verificarToken,recuperacaoSenhaValidation.validarNovaSenha,login.putSenhaRecuperacao);
 routes.put("/senha/:id",alteracaoSenhaValidation.validarAlteracaoSenha,login.putSenha);
@@ -127,6 +129,6 @@ routes.post("/empresasModelos",empresasModelos.postEmpresasModelos);
 routes.delete("/empresasModelos/:empresaId",empresasModelos.deleteEmpresasModelos);
 
 // rota cartoes
-routes.post("/cartoes/:empresaId",cartoes.postCartoes)
+routes.post("/cartoes/:empresaId",cartaoValidation.validarCartao,cartoes.postCartoes)
 
 module.exports = routes

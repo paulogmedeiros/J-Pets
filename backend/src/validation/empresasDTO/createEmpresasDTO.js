@@ -14,7 +14,7 @@ const empresasDTO = Joi.object({
             'string.min': 'O email deve ter pelo menos 6 caracteres.',
             'string.max': 'O email não pode ter mais de 255 caracteres.',
             'any.required': 'O email é obrigatório.',
-            'any.empty': 'O email fantasia não pode ser vazio.'
+            'any.empty': 'O email não pode ser vazio.'
         }),
 
     senha: Joi.string()
@@ -49,13 +49,15 @@ const empresasDTO = Joi.object({
         .min(3)
         .max(30)
         .required()
+        .pattern(/^[a-zA-ZÀ-ÿ\s]*$/)
         .empty('')
         .messages({
             'string.base': 'O nome fantasia deve ser uma string.',
             'string.min': 'O nome fantasia deve ter pelo menos 3 caracteres.',
             'string.max': 'O nome fantasia não pode ter mais de 30 caracteres.',
             'any.required': 'O nome fantasia é obrigatório.',
-            'any.empty': 'O nome fantasia não pode ser vazio.'
+            'any.empty': 'O nome fantasia não pode ser vazio.',
+            'string.pattern.base': 'O nome fantasia deve conter apenas letras.'
         })
 
 });
