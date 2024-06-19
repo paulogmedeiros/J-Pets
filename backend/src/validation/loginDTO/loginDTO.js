@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const envioEmailDTO = Joi.object({
+const loginDTO = Joi.object({
 
     email: Joi.string()
         .email()
@@ -16,6 +16,15 @@ const envioEmailDTO = Joi.object({
             'any.required': 'O email é obrigatório.',
             'any.empty': 'O email não pode ser vazio.'
         }),
+
+    senha: Joi.string()
+        .required()
+        .empty('')
+        .messages({
+            'string.base': 'A senha deve ser uma string.',
+            'any.required': 'A senha é obrigatória.',
+            'any.empty': 'A senha não pode ser vazio.'
+        })
 });
 
-module.exports = envioEmailDTO;
+module.exports = loginDTO;

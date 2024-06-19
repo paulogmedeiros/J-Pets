@@ -31,7 +31,7 @@ const donoPetDTO = Joi.object({
             'string.min': 'O email deve ter pelo menos 6 caracteres.',
             'string.max': 'O email não pode ter mais de 255 caracteres.',
             'any.required': 'O email é obrigatório.',
-            'any.empty': 'O email fantasia não pode ser vazio.'
+            'any.empty': 'O email não pode ser vazio.'
         }),
 
     senha: Joi.string()

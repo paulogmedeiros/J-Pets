@@ -29,6 +29,7 @@ const recuperacaoSenhaValidation = require("./middleware/recuperacaoSenha.js")
 const empresaValidation = require("./middleware/empresasValidation.js")
 const produtosValidation = require("./middleware/produtosValidation.js")
 const cartaoValidation = require("./middleware/cartoesValidation.js")
+const loginValidation = require("./middleware/loginValidation.js")
 const tokenValidation = require("./middleware/tokenValidation.js")
 //rotas
 routes.get("/", (req,res)=>{
@@ -92,7 +93,7 @@ routes.put("/empresas/excluir/cupom/:id",empresa.putExcluirCupom);
 // rota de login
 routes.get("/usuario/:id",tokenValidation.verificarToken,login.getUsuarioPorId);
 routes.post("/cadastro/administrador",administradorValidation.validarCriacaoAdministrador,login.postAdministrador);
-routes.post("/login",login.logar);
+routes.post("/login",loginValidation.validarLogin,login.logar);
 routes.post("/envio/email",recuperacaoSenhaValidation.validarEnvioEmail,login.postEnvioEmail);
 routes.put("/recuperacao/senha",tokenValidation.verificarToken,recuperacaoSenhaValidation.validarNovaSenha,login.putSenhaRecuperacao);
 routes.put("/senha/:id",alteracaoSenhaValidation.validarAlteracaoSenha,login.putSenha);
