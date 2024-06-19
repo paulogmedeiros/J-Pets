@@ -25,3 +25,8 @@
 .loginContainer{
     background-color: #DCECF6 !important;
 }
+
+.btn_login:hover{
+    background-color: #2641B7;
+    color: white;
+}

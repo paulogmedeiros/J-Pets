@@ -3,6 +3,7 @@ import './Login.css';
 import imagem_login from '../../../img/imagem_login.png';
 import { jwtDecode } from "jwt-decode";
 import { notifications } from '@mantine/notifications';
+import { Loader } from '@mantine/core';
 
 function Login() {
     useEffect(() => {
@@ -12,10 +13,12 @@ function Login() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [erroDados, setErroDados] = useState('');
+    const [carregando, setCarregando] = useState(false)
     const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>;
     const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>;
 
     async function efetuarLogin(event) {
+        setCarregando(true)
         event.preventDefault(); // Prevenir o comportamento padrão do formulário
 
         try {
@@ -33,23 +36,35 @@ function Login() {
                 setErroDados(responseData.message);
                 notifications.show({ message: responseData.message, color: "white", icon: errorIcon });
             } else {
-                notifications.show({ message: responseData.message, color: "white", icon: sucessIcon });
-                const { token } = responseData;
+                notifications.show({ message: "Login efetuado com sucesso", color: "white", icon: sucessIcon });
+                const token = responseData;
                 const decodedToken = jwtDecode(token);
                 const { usuario_tipo } = decodedToken;
 
                 if (usuario_tipo === 'EMP') {
-                    window.location.href = '/empresas/principal';
-                } else if (usuario_tipo === 'DNP') {
-                    window.location.href = '/usuario/principal';
-                } else {
-                    window.location.href = '/administrador/painel';
-                }
+                    setTimeout(() => {
+                        setCarregando(false)
+                        window.location.href = '/empresas/principal';
+                    }, 1500);
 
+                } else if (usuario_tipo === 'DNP') {
+                    setTimeout(() => {
+                        setCarregando(false)
+                        window.location.href = '/usuario/principal';
+                    }, 1500);
+
+                } else {
+                    setTimeout(() => {
+                        setCarregando(false)
+                        window.location.href = '/administrador/painel';
+                    }, 1500);
+                }
+                
                 localStorage.setItem("decodedToken", JSON.stringify(decodedToken));
                 localStorage.setItem("token", JSON.stringify(token));
             }
         } catch (error) {
+            setCarregando(false)
             notifications.show({ message: error.message, color: "white", icon: errorIcon });
         }
     }
@@ -88,7 +103,7 @@ function Login() {
 
                     <button
                         onClick={efetuarLogin}
-                        className="btn_login btn w-100 ">Acessar</button>
+                        className="btn_login btn w-100 ">{carregando ? <Loader color="white" /> : "Acessar"} </button>
 
                     <p className="text-body-dark text-center mt-4">
                         Não possui uma conta? <a href="/cadastro/confirmacao" className="esqueceu_a_senha_login link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Registre-se</a>
