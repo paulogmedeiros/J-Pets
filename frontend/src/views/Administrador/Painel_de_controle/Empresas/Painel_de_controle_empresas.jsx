@@ -7,14 +7,15 @@ function Painel_de_controle_empresas() {
 
     //Estado para armazenar os usuários
     const [empresas, setEmpresas] = useState([])
+    const [pesquisar, setPesquisar] = useState('')
 
     useEffect(() => {
-            document.title = "Painel de controle | Empresas"
+        document.title = "Painel de controle | Empresas"
         // Função carregar usuários
         async function carregarUsuarios() {
             try {
                 // Fazer uma chamada da API
-                const resposta = await fetch(process.env.REACT_APP_URL_API +'/empresas')
+                const resposta = await fetch(process.env.REACT_APP_URL_API + '/empresas')
                 if (!resposta.ok) {
 
                     // Exibindo erro API
@@ -87,8 +88,15 @@ function Painel_de_controle_empresas() {
 
                             <div className="input-group d-flex mb-3 col-4 w-50 me-3 mt-5">
                                 <div className="input-group mb-3">
-                                    <input type="text" className="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="button-addon2" />
-                                    <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30}/></button>
+
+                                    <input
+                                        value={pesquisar}
+                                        onChange={(e) => setPesquisar(e.target.value)}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Pesquisar empresa"
+                                        aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                    <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30} /></button>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +110,7 @@ function Painel_de_controle_empresas() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {empresas.map(empresa => (
+                                {empresas.filter((e) => e.nome_fantasia.includes(pesquisar) || e.nome_fantasia.toUpperCase().includes(pesquisar) || e.nome_fantasia.toLowerCase().includes(pesquisar) || pesquisar == '').map(empresa => (
                                     <tr key={empresa.id}>
                                         <td>{empresa.nome_fantasia}</td>
                                         <td>{trueFalse(empresa.status_pagamento)}</td>

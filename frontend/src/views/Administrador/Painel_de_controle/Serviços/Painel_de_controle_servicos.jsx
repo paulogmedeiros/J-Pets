@@ -13,7 +13,7 @@ function Painel_de_controle_servicos() {
     const [pesquisar, setPesquisar] = useState('')
     const [nomeServico, setNomeServico] = useState('')
     const [idServico, setIdServico] = useState('')
-
+    
     useEffect(() => {
 
         document.title = "Painel de controle | Serviços"
