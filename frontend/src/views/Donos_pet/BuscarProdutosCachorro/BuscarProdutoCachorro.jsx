@@ -217,7 +217,7 @@ function BuscarProdutosCachorro() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(2).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -234,7 +234,7 @@ function BuscarProdutosCachorro() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(3).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -250,7 +250,7 @@ function BuscarProdutosCachorro() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(4).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
