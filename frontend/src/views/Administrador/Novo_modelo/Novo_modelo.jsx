@@ -83,13 +83,12 @@ function Novo_modelo() {
   async function cadastrarModelo(event) {
     event.preventDefault()
 
-     // dados para enviar para o backend
+    // dados para enviar para o backend
     const modeloDados = {
       marca_id: parseInt(marca_id),
       nome
     }
-    window.alert(modeloDados.marca_id)
-    window.alert(modeloDados.nome)
+
 
     try {
       // Realiza POST para a API
@@ -118,6 +117,10 @@ function Novo_modelo() {
 
   }
 
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
 
     <div className="admPainel">
@@ -132,13 +135,13 @@ function Novo_modelo() {
               <li className="nav-item dropdown">
                 <div className="dropdown">
                   <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    P.G.
+                    ADM
                   </button>
                   <ul className="dropdown-menu ">
-                    <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
+                    <li><a className="dropdown-item disabled" href="#">ADM</a></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-                    <li><a className="dropdown-item" href="#">Sair</a></li>
+                    <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
+                    <li><button className="dropdown-item" onClick={logOff}>Sair</button></li>
                   </ul>
                 </div>
               </li>
@@ -212,18 +215,18 @@ function Novo_modelo() {
             <div className="form-floating mb-3 mb-md-3">
 
               <select
-              value={marca_id}
-              onChange={(e) => setMarca_id(e.target.value)}
-              className="form-select"
-              id="floatingSelect"
-              aria-label="Floating label select example">
+                value={marca_id}
+                onChange={(e) => setMarca_id(e.target.value)}
+                className="form-select"
+                id="floatingSelect"
+                aria-label="Floating label select example">
 
                 <option value="">Selecione</option>
 
                 {marcas.map(marca => (
                   <option
-                  key={marca.value}
-                  value={marca.value}>{marca.label}</option>
+                    key={marca.value}
+                    value={marca.value}>{marca.label}</option>
                 ))}
 
               </select>
@@ -233,20 +236,20 @@ function Novo_modelo() {
             {/* Input para inserir o nome do modelo */}
             <div className="form-floating mb-3">
               <input
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-              type="text"
-              className="form-control"
-              id="floatingInput"
-              placeholder="" />
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                type="text"
+                className="form-control"
+                id="floatingInput"
+                placeholder="" />
               <label for="floatingInput">Nome do modelo</label>
             </div>
 
 
             <button
-            onClick={cadastrarModelo}
-            className="btnNovoModelo btn w-100"
-            role="button">Cadastrar modelo</button>
+              onClick={cadastrarModelo}
+              className="btnNovoModelo btn w-100"
+              role="button">Cadastrar modelo</button>
 
           </div>
           <div className="imgNovoModelo col-md-6 d-flex mt-3 mt-md-0 rounded-4">

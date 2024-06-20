@@ -1,9 +1,124 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import Marcas_img from './img/Marcas_img.svg'
 import './Remover_marcas.css'
 import logoJPets from './img/logoJPets.png'
+import { MultiSelect } from '@mantine/core';
+import { notifications } from '@mantine/notifications'
 
 function Remover_marcas() {
+  const [animais, setAnimal] = useState([])
+  const [animalId, setAnimalId] = useState('')
+  const [produtos, setProdutos] = useState([])
+  const [produto_id, setProduto_id] = useState('')
+  const [marcas, setMarcas] = useState([])
+  const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa)
+  const [opcoes, setOpcoes] = useState([]);
+
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
+
+  useEffect(() => {
+    document.title = "Remover | Marcas"
+    pegarIdAnimais()
+  }, [])
+
+
+  // função para pegar o ID dos animais
+  //get    :: Empresas_Servicos/getServicosDaEmpresaPorIdEmpresaIdAnimal
+  async function pegarIdAnimais() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasAnimais/ " + idEmpresa)
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setAnimal(dados.map(value => {
+        return { value: value.animal_id.toString(), label: value.animais.nome }
+      }))
+
+    } catch (error) {
+      window.alert("Erro ao carregar animais", error)
+    }
+  }
+
+  // função para pegar o produto de acordo com o ID do animal
+  // (Empresas_Produtos > getEmpresasProdutosPorIdEmpresaIdAnimal)
+  async function pegarProdutosPorIdEmpresaIdAnimal(animalId) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasProdutos/" + idEmpresa + "/animais/" + animalId)
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setProdutos(dados.map(value => {
+        return { value: value.produto_id.toString(), label: value.produtos.nome }
+      }))
+
+    } catch (error) {
+      window.alert(error)
+      window.alert("Erro ao carregar produtos", error)
+    }
+  }
+
+  // já carrega os produtos caso um animal seja selecionado
+  useEffect(() => {
+    if (animalId) {
+      pegarProdutosPorIdEmpresaIdAnimal(animalId)
+    }
+  }, [animalId])
+
+  async function selectMarcas(produto_id) {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasMarcas/" + idEmpresa + "/produto/" + produto_id)
+
+      const dados = await resposta.json()
+      console.log(dados)
+
+      setMarcas(dados.map(value => {
+        return { value: value.marca_id.toString(), label: value.marcas.nome }
+      }))
+    } catch (error) {
+      window.alert("Erro ao carregar serviços", error)
+    }
+  }
+
+  async function removerMarcas() {
+    const marcaDados = {
+      marcasId: opcoes.map(opcao => {
+        return parseInt(opcao)
+      })
+    }
+    console.log(marcaDados)
+
+    try {
+      const result = await fetch(process.env.REACT_APP_URL_API + "/empresasMarcas/" + idEmpresa, {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(marcaDados)
+      })
+
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+
+      }, 1500);
+    } catch (error) {
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
 
     <>
@@ -63,7 +178,7 @@ function Remover_marcas() {
                 <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
@@ -78,8 +193,8 @@ function Remover_marcas() {
                 {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
               </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>
@@ -88,10 +203,10 @@ function Remover_marcas() {
       <div className="container">
 
         {/* container para formulario e imagem */}
-        <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">
+        <div className="row justify-content-center border rounded-4 bg-light shadow-sm mb-5 bg-body-tertiary rounded col-12 col-md-8 position-absolute top-50 start-50 translate-middle ">
 
           {/* container para formulario */}
-          <div className="col-md-5 d-flex-md-5 mt-5 mt-md-0">
+          <div className="col-md-6 d-flex-md-5 mt-5 mt-md-0 p-5">
 
             {/* Título */}
             <p className="tituloRemoverMarcaEmpresa fs-md-2 fs-3 fw-semibold text-center mb-4 mb-md-4 mt-md-5">
@@ -99,45 +214,72 @@ function Remover_marcas() {
             </p>
 
             {/* lista suspensa para selecionar o animal */}
+            <div className="form-floating mb-3 mb-md-3">
+              <select
+                value={animalId}
+                onChange={e => {
+                  setAnimalId(e.target.value);
+
+                }}
+                className="form-select"
+                id="floatingSelect"
+                aria-label="Floating label select example">
+
+                <option value="">Selecione</option>
+                {animais.map(animal => (
+                  <option
+                    key={animal.value}
+                    value={animal.value}>{animal.label}</option>
+                ))}
+
+              </select>
+              <label for="floatingSelect">Animal</label>
+            </div>
+
+            {/* lista suspensa para selecionar o produto */}
             <div className="form-floating mb-3 mb-md-4">
               <select
+                value={produto_id}
+                onChange={(e) => {
+                  setProduto_id(e.target.value)
+                  selectMarcas(e.target.value)
+                }}
                 className="form-select"
                 id="floatingSelect"
                 aria-label="Floating label select example">
                 <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
+                {produtos.map(produto => (
+                  <option
+                    key={produto.value}
+                    value={produto.value}>{produto.label}</option>
+                ))}
               </select>
               <label for="floatingSelect">Produto</label>
             </div>
 
-            {/* lista suspensa para escolher o produto */}
-            <div className="form-floating mb-3 mb-md-4">
-              <select
-                className="form-select "
-                id="floatingSelect"
-                aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
-              </select>
+            {/* select múltiplo para escolher a marca */}
+            <div className=" mb-3 mb-md-4">
               <label for="floatingSelect">Marcas</label>
+              <MultiSelect className='multipleSelect'
+                onChange={(e) => setOpcoes(e)}
+                placeholder="Selecione"
+                data={marcas}
+              />
             </div>
 
-            <a className="btnRemoverMarcaEmpresa btn w-100 mt-md-4" href="#" role="button">
+            <button
+              onClick={removerMarcas}
+              className="btnRemoverMarcaEmpresa btn w-100 mt-md-4"
+              role="button">
               Remover
-            </a>
+            </button>
 
             <div className='text-center'>
-              <a className="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="#" role="button">Remover modelo</a>
+              <a className="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="/empresas/removerModelos" role="button">Remover modelo</a>
             </div>
 
           </div>
-          <div className="imgRemoverMarcaEmpresa col-md-5 d-flex mt-3 mt-md-0 rounded-4 p-3">
+          <div className="imgRemoverMarcaEmpresa col-md-6 justify-content-center d-flex mt-3 mt-md-0 rounded-4 p-3">
             <img src={Marcas_img} className="img-fluid"></img>
           </div>
         </div>

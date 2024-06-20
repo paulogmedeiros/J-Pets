@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import Produtos_img from './img/Produtos_img.svg'
 import './Remover_produtos.css'
 import logoJPets from './img/logoJPets.png'
@@ -38,6 +38,7 @@ function Remover_produtos() {
     }
   }
 
+
   async function selectProdutos(animalId) {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresasProdutos/" + idEmpresa + "/animais/" + animalId)
@@ -53,6 +54,45 @@ function Remover_produtos() {
     }
   }
 
+  async function removerProdutos() {
+
+    const produtoDados = {
+      animalId: parseInt(animalId),
+      produtosId: opcoes.map(opcao => {
+        return parseInt(opcao)
+      })
+    }
+
+    console.log(produtoDados)
+
+    try {
+      const result = await fetch(process.env.REACT_APP_URL_API + "/empresasProdutos/" + idEmpresa, {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(produtoDados)
+      })
+      const resposta = await result.json()
+      console.log(resposta.status, result.status)
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+
+      }, 1500);
+    } catch (error) {
+      console.log(error)
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
 
     <>
@@ -78,15 +118,17 @@ function Remover_produtos() {
           <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul className="navbar-nav nav-underline">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Início</a>
+                <a className="nav-link active" aria-current="page" href="/empresas/principal">Início</a>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Produtos
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produto</a></li>
-                  <li><a className="dropdown-item" href="/empresas/removerProdutos">Remover produto</a></li>
+                  <li><a className="dropdown-item" href="/empresas/visualizarProdutos">Visualizar produtos</a></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><a className="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produtos</a></li>
+                  <li><a className="dropdown-item" href="/empresas/removerProdutos">Remover produtos</a></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="/empresas/adicionarMarcas">Adicionar marcas</a></li>
                   <li><a className="dropdown-item" href="/empresas/removerMarcas">Remover marcas</a></li>
@@ -100,15 +142,17 @@ function Remover_produtos() {
                   Serviços
                 </a>
                 <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
                   <li><a className="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
                 </ul>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Cupons</a>
+                <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
@@ -123,8 +167,8 @@ function Remover_produtos() {
                 {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
               </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>
@@ -143,7 +187,7 @@ function Remover_produtos() {
               Remover produtos
             </p>
 
-           {/* lista suspensa para selecionar o animal */}
+            {/* lista suspensa para selecionar o animal */}
             <div className="form-floating mb-3 mb-md-3">
               <select
                 value={animalId}
@@ -166,27 +210,25 @@ function Remover_produtos() {
               <label for="floatingSelect">Animal</label>
             </div>
 
-            {/* lista suspensa para escolher o produto */}
-            <div className="form-floating mb-3 mb-md-4">
-              <select
-                className="form-select "
-                id="floatingSelect"
-                aria-label="Floating label select example">
-                <option value="">Selecione</option>
-                <option value="Cachorro">teste</option>
-                <option value="Gato">teste</option>
-                <option value="Pássaro">teste</option>
-                <option value="Peixe">teste</option>
-              </select>
+            {/* select múltiplo para escolher o produto */}
+            <div className=" mb-3 mb-md-3">
+
               <label for="floatingSelect">Produtos</label>
+              <MultiSelect className='multipleSelect'
+                onChange={(e) => setOpcoes(e)}
+                placeholder="Selecione"
+                data={produtos}
+              />
             </div>
 
-            <a className="btnRemoverProdutosEmpresa btn w-100 mt-md-4" href="#" role="button">
+            <button
+              onClick={removerProdutos}
+              className="btnRemoverProdutosEmpresa btn w-100 mt-md-4" role="button">
               Remover
-            </a>
+            </button>
 
             <div className='text-center'>
-              <a className="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="#" role="button">Remover marca</a>
+              <a className="btn btn-dark btn-sm w-md-50 mt-md-4 mt-3" href="/empresas/removerMarcas" role="button">Remover marca</a>
             </div>
 
           </div>

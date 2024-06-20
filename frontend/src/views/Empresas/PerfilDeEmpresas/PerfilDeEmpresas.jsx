@@ -74,6 +74,10 @@ function PerfilDeEmpresas() {
     atualizarFoto()
   }, [foto]);
 
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
     <div>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -132,19 +136,23 @@ function PerfilDeEmpresas() {
                 <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
           <div className="dropdown me-5">
             <button className="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Nome
+              <span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+              </span>
             </button>
             <ul className="dropdown-menu">
-              <a className="nav-link disabled ms-3" aria-disabled="true">Nome</a>
+              <a className="nav-link disabled ms-3" aria-disabled="true"><span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+              </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>
@@ -175,7 +183,7 @@ function PerfilDeEmpresas() {
                     <label htmlFor="formFile" class="form-label" style={{ backgroundColor: '#DEA100', outline: "none", cursor: 'pointer', padding: '8px 10px', borderRadius: '16px', color: "white", marginLeft: "15px" }}>Atualizar foto</label>
 
                     <input
-                    accept='image/png'
+                      accept='image/png'
                       onChange={(e) => {
                         console.log(e.target.files[0]);
                         setFoto(e.target.files[0])
@@ -198,7 +206,7 @@ function PerfilDeEmpresas() {
                       <input className="form-control" type="password" value="Senha" aria-label="Disabled input example" disabled
                         readonly />
                       <div className='mt-3 text-start'>
-                        <a href="/senha/alteracao">Alterar senha</a>
+                        <a href="/senha/empresas/alteracao">Alterar senha</a>
                       </div>
                     </div>
                     {/* <div className="col">

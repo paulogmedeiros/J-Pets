@@ -21,7 +21,12 @@ import Perfil_Empresa from './views/Donos_pet/Perfil_Empresa/Perfil_Empresa.jsx'
 import Perfil_DonosDePet from './views/Donos_pet/Perfil_DonosDePet/Perfil_DonosDePet.jsx';
 import Favoritos from './views/Donos_pet/Favoritos/Favoritos.jsx';
 import Alterar_senha_empresa from './views/Empresas/Alterar_senha/Alterar_senha.jsx';
-import Buscar_produtoOuServico from './views/Donos_pet/Buscar_produtoOuServico/Buscar_produtoOuServico.jsx';
+
+import BuscarProdutosCachorro from './views/Donos_pet/BuscarProdutosCachorro/BuscarProdutoCachorro.jsx';
+import BuscarProdutoGato from './views/Donos_pet/BuscarProdutosGato/BuscarProdutoGato.jsx';
+import BuscarProdutoPassaro from './views/Donos_pet/BuscarProdutosPassaro/BuscarProdutoPassaro.jsx';
+import BuscarProdutoPeixe from './views/Donos_pet/BuscarProdutosPeixe/BuscarProdutoPeixe.jsx';
+
 
 // Importando itens da pasta "Empresas"
 import Principal_Empresas from './views/Empresas/Principal_Empresas/Principal_Empresas.jsx';
@@ -66,6 +71,7 @@ import Novo_modelo from './views/Administrador/Novo_modelo/Novo_modelo.jsx';
 import Novo_produto from './views/Administrador/Novo_produto/Novo_produto.jsx';
 import Novo_servico from './views/Administrador/Novo_servico/Novo_servico.jsx';
 
+
 // Rotas para o frontend
 function App() {
   return (
@@ -87,7 +93,11 @@ function App() {
       <Route path='/usuario/perfilEmpresa' element={<Perfil_Empresa/>}/>
       <Route path='/usuario/perfil' element={<Perfil_DonosDePet/>}/>
       <Route path='/usuario/favoritos' element={<Favoritos/>}/>
-      <Route path='/usuario/buscar' element={<Buscar_produtoOuServico/>}/>
+      <Route path='/usuario/buscarProdutos/cachorro' element={<BuscarProdutosCachorro/>}/>
+      <Route path='/usuario/buscarProdutos/gato' element={<BuscarProdutoGato/>}/>
+      <Route path='/usuario/buscarProdutos/passaro' element={<BuscarProdutoPassaro/>}/>
+      <Route path='/usuario/buscarProdutos/peixe' element={<BuscarProdutoPeixe/>}/>
+
 
       {/* Rotas para os itens da pasta "Empresas" */}
       <Route path='/empresas/principal' element={<Principal_Empresas/>}/>

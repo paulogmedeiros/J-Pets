@@ -6,7 +6,7 @@ const produtoDTO = Joi.object({
         .required()
         .empty('')
         .messages({
-            'number.base': 'O id do animal deve ser uma number.',
+            'number.base': 'O id do animal deve ser um number.',
             'any.required': 'O id do animal é obrigatório.',
             'any.empty': 'O id do animal não pode ser vazio.'
         }),

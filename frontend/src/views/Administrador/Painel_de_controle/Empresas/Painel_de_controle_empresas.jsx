@@ -2,19 +2,20 @@ import { useEffect, useState } from 'react'
 import logoJPets_adm from '../img/logoJPets.png'
 import './Painel_de_controle_empresas.css'
 import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
-
+import iconeVoltar from './img/iconeVoltar.svg'
 function Painel_de_controle_empresas() {
 
     //Estado para armazenar os usuários
     const [empresas, setEmpresas] = useState([])
+    const [pesquisar, setPesquisar] = useState('')
 
     useEffect(() => {
-            document.title = "Painel de controle | Empresas"
+        document.title = "Painel de controle | Empresas"
         // Função carregar usuários
         async function carregarUsuarios() {
             try {
                 // Fazer uma chamada da API
-                const resposta = await fetch(process.env.REACT_APP_URL_API +'/empresas')
+                const resposta = await fetch(process.env.REACT_APP_URL_API + '/empresas')
                 if (!resposta.ok) {
 
                     // Exibindo erro API
@@ -34,6 +35,10 @@ function Painel_de_controle_empresas() {
         carregarUsuarios()
     })
 
+    async function logOff() {
+        localStorage.clear()
+        window.location.href = "/"
+    }
     return (
         // Container geral para propriedades de fundo
         <div className="admPainel">
@@ -48,13 +53,13 @@ function Painel_de_controle_empresas() {
                             <li className="nav-item dropdown">
                                 <div className="dropdown">
                                     <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        P.G.
+                                        ADM
                                     </button>
                                     <ul className="dropdown-menu ">
-                                        <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
+                                        <li><a className="dropdown-item disabled" href="#">ADM</a></li>
                                         <li><hr className="dropdown-divider" /></li>
                                         <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
-                                        <li><a className="dropdown-item" href="#">Sair</a></li>
+                                        <li><button className="dropdown-item" onClick={logOff}>Sair</button></li>
                                     </ul>
                                 </div>
                             </li>
@@ -62,6 +67,7 @@ function Painel_de_controle_empresas() {
                     </div>
                 </div>
             </nav>
+
 
             {/* Conteúdo principal  */}
             <div className="container-md mt-5">
@@ -87,8 +93,15 @@ function Painel_de_controle_empresas() {
 
                             <div className="input-group d-flex mb-3 col-4 w-50 me-3 mt-5">
                                 <div className="input-group mb-3">
-                                    <input type="text" className="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="button-addon2" />
-                                    <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30}/></button>
+
+                                    <input
+                                        value={pesquisar}
+                                        onChange={(e) => setPesquisar(e.target.value)}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Pesquisar empresa"
+                                        aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                    <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30} /></button>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +115,7 @@ function Painel_de_controle_empresas() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {empresas.map(empresa => (
+                                {empresas.filter((e) => e.nome_fantasia.includes(pesquisar) || e.nome_fantasia.toUpperCase().includes(pesquisar) || e.nome_fantasia.toLowerCase().includes(pesquisar) || pesquisar == '').map(empresa => (
                                     <tr key={empresa.id}>
                                         <td>{empresa.nome_fantasia}</td>
                                         <td>{trueFalse(empresa.status_pagamento)}</td>

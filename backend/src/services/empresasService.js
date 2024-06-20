@@ -32,11 +32,18 @@ class EmpresasService {
     }
 
     async findEmpresasPeloProudutoOuServico(tipo, id) {
+        let users;
         if (tipo == 'SVC') {
-            return await EmpresasRepository.selectEmpresasPorServicoId(id)
+             users = await EmpresasRepository.selectEmpresasPorServicoId(id)
         } else {
-            return await EmpresasRepository.selectEmpresaPorModeloId(id)
+            users = await EmpresasRepository.selectEmpresaPorModeloId(id)
         }
+
+        let usersUpdate = users.map(user =>
+            user.foto_perfil === null ? { ...user, foto_perfil: 'default.png' } : user
+          );
+
+       return usersUpdate
     }
 
     async createEmpresas(data) {

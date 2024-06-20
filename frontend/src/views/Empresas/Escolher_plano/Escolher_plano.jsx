@@ -3,6 +3,11 @@ import logoJPets from './img/logoJPets.png'
 import iconChecklist from './img/checklist.svg'
 import './Escolher_plano.css'
 function Escolher_plano() {
+
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
 
     <>
@@ -64,7 +69,7 @@ function Escolher_plano() {
                 <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
@@ -79,8 +84,8 @@ function Escolher_plano() {
                 {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
               </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>

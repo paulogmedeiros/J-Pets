@@ -147,6 +147,12 @@ function Adicionar_modelos() {
       notifications.show({ message: error.message, color: "white", icon: errorIcon });
     }
   }
+
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
+
   return (
     <>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -205,7 +211,7 @@ function Adicionar_modelos() {
                 <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
@@ -220,8 +226,8 @@ function Adicionar_modelos() {
                 {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
               </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>

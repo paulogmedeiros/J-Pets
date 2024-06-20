@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import imgSenha from '../img/img_senha.svg';
 import './Alterar_senha_admin.css';
 import logoJPets_adm from '../img/logoJPets.png';
@@ -83,13 +83,13 @@ function Alterar_senha_admin() {
               <li className="nav-item dropdown">
                 <div className="dropdown">
                   <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    P.G.
+                    ADM
                   </button>
                   <ul className="dropdown-menu ">
-                    <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
+                    <li><a className="dropdown-item disabled" href="#">ADM</a></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-                    <li><a onClick={logOff} className="dropdown-item" >Sair</a></li>
+                    <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
+                    <li><button className="dropdown-item" onClick={logOff}>Sair</button></li>
                   </ul>
                 </div>
               </li>

@@ -20,11 +20,11 @@ function Principal_DonosDePet() {
     // JavaScript para habilitar os submenus
     const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
     dropdownSubmenus.forEach(submenu => {
-      submenu.addEventListener('mouseenter', function() {
+      submenu.addEventListener('mouseenter', function () {
         this.classList.add('show');
         this.querySelector('.dropdown-menu').classList.add('show');
       });
-      submenu.addEventListener('mouseleave', function() {
+      submenu.addEventListener('mouseleave', function () {
         this.classList.remove('show');
         this.querySelector('.dropdown-menu').classList.remove('show');
       });
@@ -41,12 +41,27 @@ function Principal_DonosDePet() {
       });
   };
 
+  async function visualizarEmpresasServicos(id){
+    const sesaoBusca = {
+      titulo: 'serviço',
+      id: id,
+      tipo: 'SVC'
+    }
+    console.log(sesaoBusca)
+    localStorage.removeItem(sesaoBusca)
+    localStorage.setItem("sesaoBusca", JSON.stringify(sesaoBusca));
+    window.location.href = '/usuario/visualizarEmpresas'
+  }
+
   // Filtra os serviços por animal
   const filtrarServicosPorAnimal = (animalId) => {
     return servicos.filter(servico => servico.animal_id === animalId);
   };
 
-
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
     <>
       <nav className="navbarDonoDePet navbar navbar-expand-lg">
@@ -78,12 +93,12 @@ function Principal_DonosDePet() {
                   Cachorro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscarProdutos/cachorro">Produtos</a></li>
                   <li className="dropdown-submenu">
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(1).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -94,12 +109,12 @@ function Principal_DonosDePet() {
                   Gato
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscarProdutos/gato">Produtos</a></li>
                   <li className="dropdown-submenu">
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(2).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -111,12 +126,12 @@ function Principal_DonosDePet() {
                   Pássaro
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscarProdutos/passaro">Produtos</a></li>
                   <li className="dropdown-submenu">
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(3).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -127,12 +142,12 @@ function Principal_DonosDePet() {
                   Peixe
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/usuario/buscar">Produtos</a></li>
+                  <li><a className="dropdown-item" href="/usuario/buscarProdutos/peixe">Produtos</a></li>
                   <li className="dropdown-submenu">
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(4).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -160,7 +175,7 @@ function Principal_DonosDePet() {
                 </a>
                 <li><hr className="dropdown-divider" /></li>
                 <li><a className="dropdown-item" href="/usuario/perfil">Meu perfil</a></li>
-                <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+                <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
               </ul>
             </div>
           </div>

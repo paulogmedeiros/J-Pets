@@ -28,10 +28,12 @@ function Cadastro_empresa() {
     event.preventDefault()
     setCarregando(true)
 
+    try {
     // tratamento pra ver se as senhas são iguais
     if (senha !== confirmarSenha) {
       setErroSenha("As senhas não coincidem")
-      return; // Adiciona este retorno para sair da função se as senhas não coincidirem
+      throw new Error("As senhas não coincidem")
+       // Adiciona este retorno para sair da função se as senhas não coincidirem
     }
     // Criando objeto com os dados do usuário que serão enviados para a API
     const empresasDados = {
@@ -41,7 +43,6 @@ function Cadastro_empresa() {
       nomeFantasia
     }
 
-    try {
       // Realiza POST para a API
       const result = await fetch(process.env.REACT_APP_URL_API + '/empresas', {
         method: 'POST',
@@ -70,6 +71,7 @@ function Cadastro_empresa() {
     }
 
   }
+
   return (
     <div className="container">
 

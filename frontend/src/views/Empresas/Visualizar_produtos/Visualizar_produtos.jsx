@@ -41,10 +41,15 @@ function Visualizar_produtos() {
     produto.animal.toLowerCase().includes(filtro.toLowerCase())
   );
 
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
     <div>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
         <div className="container-fluid">
+
           {/* Logo do projeto */}
           <a className="navbar-brand" href="#">
             <img src={logoJPets} width={45} height={45} />
@@ -98,7 +103,7 @@ function Visualizar_produtos() {
                 <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
@@ -113,8 +118,8 @@ function Visualizar_produtos() {
                 {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
               </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>

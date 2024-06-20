@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import logoJPets from './img/logoJPets.png';
 import './CadastroPerfilProfissional.css';
 import { notifications } from '@mantine/notifications'
@@ -8,8 +8,8 @@ function CadastroPerfilProfissional() {
   useEffect(() => {
     document.title = "Cadastro de perfil"
     pegarInformacoes()
-  },[])
-  
+  }, [])
+
   const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa);
   const [cep, setCep] = useState('');
   const [telefone, setTelefone] = useState('')
@@ -110,12 +110,12 @@ function CadastroPerfilProfissional() {
         uf: dados.uf,
       })
 
-        setTelefone(dados.telefone)
-        setNumeroResidencia(dados.numero_residencia)
-        setDiaSemanaFim(dados.dia_semana_fim)
-        setDiaSemanaInicio(dados.dia_semana_inicio)
-        setHoraAbertura(dados.hora_abertura)
-        setHoraFechamento(dados.hora_fechamento)
+      setTelefone(dados.telefone)
+      setNumeroResidencia(dados.numero_residencia)
+      setDiaSemanaFim(dados.dia_semana_fim)
+      setDiaSemanaInicio(dados.dia_semana_inicio)
+      setHoraAbertura(dados.hora_abertura)
+      setHoraFechamento(dados.hora_fechamento)
 
     } catch (error) {
       window.alert(error)
@@ -123,6 +123,10 @@ function CadastroPerfilProfissional() {
     }
   }
 
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
     <div>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -130,7 +134,7 @@ function CadastroPerfilProfissional() {
 
           {/* Logo do projeto */}
           <a className="navbar-brand" href="#">
-            <img src={logoJPets} width={45} height={45} alt="Logo JPets" />
+            <img src={logoJPets} width={45} height={45} />
           </a>
           <button
             className="navbar-toggler"
@@ -181,7 +185,7 @@ function CadastroPerfilProfissional() {
                 <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
@@ -196,8 +200,8 @@ function CadastroPerfilProfissional() {
                 {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
               </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>
@@ -361,11 +365,11 @@ function CadastroPerfilProfissional() {
                           <div className="mb-3">
                             <label htmlFor="diaFim" className="form-label">Fim</label>
                             <select
-                            value={diaSemanaFim}
-                            onChange={(e) => setDiaSemanaFim(e.target.value)}
+                              value={diaSemanaFim}
+                              onChange={(e) => setDiaSemanaFim(e.target.value)}
                               className="form-select"
                               aria-label="Default select example">
-                                <option value="">Selecione</option>
+                              <option value="">Selecione</option>
                               <option value="segunda-feira">Segunda-feira</option>
                               <option value="terça-feira">Terça-feira</option>
                               <option value="quarta-feira">Quarta-feira</option>
@@ -382,9 +386,9 @@ function CadastroPerfilProfissional() {
                 </div>
               </div>
               <button
-              onClick={cadastrarPerfilProfissional}
-              type="button"
-              className="btn btn-warning w-25 mt-5">Salvar</button>
+                onClick={cadastrarPerfilProfissional}
+                type="button"
+                className="btn btn-warning w-25 mt-5">Salvar</button>
             </div>
           </div>
         </div>
