@@ -67,6 +67,10 @@ const PaymentForm = () => {
     }
   }
 
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
     <div>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -74,7 +78,7 @@ const PaymentForm = () => {
 
           {/* Logo do projeto */}
           <a className="navbar-brand" href="#">
-            <img src={logoJPets} width={45} height={45} alt="Logo JPets" />
+            <img src={logoJPets} width={45} height={45} />
           </a>
           <button
             className="navbar-toggler"
@@ -125,19 +129,23 @@ const PaymentForm = () => {
                 <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
           <div className="dropdown me-5">
             <button className="btnPerfilEmpresa btn btn-secondary rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Nome
+              <span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+              </span>
             </button>
             <ul className="dropdown-menu">
-              <a className="nav-link disabled ms-3" aria-disabled="true">Nome</a>
+              <a className="nav-link disabled ms-3" aria-disabled="true"><span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
+                {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
+              </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>

@@ -3,6 +3,7 @@ import './Redefinir_senha_empresa.css'
 import icone_senha from './img/icone_senha.svg'
 
 function Redefinir_senha_empresa() {
+  
   return (
     <div className="container">
 

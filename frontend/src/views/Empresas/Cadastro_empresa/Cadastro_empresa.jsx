@@ -71,6 +71,7 @@ function Cadastro_empresa() {
     }
 
   }
+
   return (
     <div className="container">
 

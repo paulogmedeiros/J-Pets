@@ -89,6 +89,10 @@ function Remover_produtos() {
       notifications.show({ message: error.message, color: "white", icon: errorIcon });
     }
   }
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
 
     <>
@@ -114,15 +118,17 @@ function Remover_produtos() {
           <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul className="navbar-nav nav-underline">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Início</a>
+                <a className="nav-link active" aria-current="page" href="/empresas/principal">Início</a>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Produtos
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produto</a></li>
-                  <li><a className="dropdown-item" href="/empresas/removerProdutos">Remover produto</a></li>
+                  <li><a className="dropdown-item" href="/empresas/visualizarProdutos">Visualizar produtos</a></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><a className="dropdown-item" href="/empresas/adicionarProdutos">Adicionar produtos</a></li>
+                  <li><a className="dropdown-item" href="/empresas/removerProdutos">Remover produtos</a></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="/empresas/adicionarMarcas">Adicionar marcas</a></li>
                   <li><a className="dropdown-item" href="/empresas/removerMarcas">Remover marcas</a></li>
@@ -136,15 +142,17 @@ function Remover_produtos() {
                   Serviços
                 </a>
                 <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/empresas/visualizarServicos">Visualizar serviços</a></li>
+                  <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="/empresas/adicionarServicos">Adicionar serviços</a></li>
                   <li><a className="dropdown-item" href="/empresas/removerServicos">Remover serviços</a></li>
                 </ul>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Cupons</a>
+                <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
@@ -159,8 +167,8 @@ function Remover_produtos() {
                 {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
               </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>
@@ -214,8 +222,8 @@ function Remover_produtos() {
             </div>
 
             <button
-            onClick={removerProdutos}
-            className="btnRemoverProdutosEmpresa btn w-100 mt-md-4"  role="button">
+              onClick={removerProdutos}
+              className="btnRemoverProdutosEmpresa btn w-100 mt-md-4" role="button">
               Remover
             </button>
 
