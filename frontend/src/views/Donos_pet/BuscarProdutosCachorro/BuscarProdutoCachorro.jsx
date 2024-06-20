@@ -50,6 +50,18 @@ function BuscarProdutosCachorro() {
     window.location.href = '/usuario/visualizarEmpresas'
   }
 
+  async function visualizarEmpresasServicos(id){
+    const sesaoBusca = {
+      titulo: 'serviço',
+      id: id,
+      tipo: 'SVC'
+    }
+    console.log(sesaoBusca)
+    localStorage.removeItem(sesaoBusca)
+    localStorage.setItem("sesaoBusca", JSON.stringify(sesaoBusca));
+    window.location.href = '/usuario/visualizarEmpresas'
+  }
+
   // função para pegar as marcas correspondentes dos produtos
   // (marcas > getMarcasPorIdProduto)
   async function pegarMarcasPorProduto(produto_id) {
@@ -189,7 +201,7 @@ function BuscarProdutosCachorro() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(1).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
