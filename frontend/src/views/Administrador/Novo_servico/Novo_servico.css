@@ -1,0 +1,12 @@
+.tituloNovoServico{
+  color: black;
+}
+
+.btnNovoServico, .btnVoltarServico{
+  background-color: #7E57C2;
+  color: white;
+}
+
+.imgNovoServico{
+  background-color: #7E57C2;
+}

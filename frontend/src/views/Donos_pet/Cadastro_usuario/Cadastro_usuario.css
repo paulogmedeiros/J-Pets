@@ -4,106 +4,20 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100vh;
-    background-color: #DCECF6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container{
-    display: flex;
-    height: 841px;
-    width: 1606px;
-}
-
-.container_imagem{
+.img_cadastro_usuario, .btn_cadastro_usuario{
     background-color: #2641B7;
-    height: 841px;
-    width: 803px;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: white;
 }
 
-.conteiner_formulario{
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
-    background-color: #FFFFFF;
-    height: 841px;
-    width: 803px;
-}
-
-.titulo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #2641B7;
-    width: 449px;
-    height: 96px;
-    font-size: 31px;
-    margin: 40px 167px 63px 167px;
-
-}
-
-.form{
-    padding-right:93px;
-    padding-left:93px;
-    display: flex;
-    flex-direction: column;
-}
-
-.input-wrapper input{
-    width: 544px;
-    height: 60px;
-    margin-bottom: 35px;
-    border-radius: 30px;
-    border: 2px solid #B5B5B5;
-    padding-left: 80px;
-    font-size: 20px;
-}
-
-
-.form button{
-    width: 630px;
-    height: 60px;
-    border-radius: 30px;
+.btn_cadastro_usuario:hover{
     background-color: #2641B7;
-    color: #FFFFFF;
-    font-size: 20px;
-    font-weight: bolder;
-    
+    color: white;
 }
 
-.form button:hover{
-    background-color: #FFFFFF;
+.titulo_cadastro_usuario{
     color: #2641B7;
-    border: 1px solid #2641B7;
-}
- .input-wrapper{
-    position: relative;
- }
-
-.input-wrapper img{
-    position: absolute;
-    top:8px;
-    left: 10px;
 }
 
-p{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 60px;
-    font-size: 20px;
-    padding-left: 20px;
+.redirecionamento_cadastro_usuario{
+    color: #2641B7;
 }
-
-
-

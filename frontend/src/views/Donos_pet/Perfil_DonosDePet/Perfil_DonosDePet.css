@@ -1,0 +1,13 @@
+.perfilUsuarioTitulo{
+  color: #2641B7;
+}
+
+.voltarBotao{
+  background-color: #2641B7;
+  color: white;
+}
+
+.voltarBotao:hover{
+  background-color: #2641B7;
+  color: white;
+}

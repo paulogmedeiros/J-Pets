@@ -1,5 +1,5 @@
 const LoginRepository = require("../repositories/loginRepository.js")
-const { ExcecaoIdNaoEncontrado } = require('../exception/customExceptions.js')
+const { ExcecaoGenericaDeErro } = require('../exception/customExceptions.js')
 const bcrypt = require("bcryptjs")
 
 class LoginService {
@@ -8,23 +8,59 @@ class LoginService {
         // valido se o email está certo
         const user = await LoginRepository.selectLogarPorEmail(data.email)
         if (!user) {
-            throw new ExcecaoIdNaoEncontrado("Email ou senha incorreto")
+            throw new ExcecaoGenericaDeErro("Email ou senha incorreto")
         }
         // valido se a senha está certa
         if (!bcrypt.compareSync(data.senha, user.senha)) {
-            throw new ExcecaoIdNaoEncontrado("Email ou senha incorreto")
+            throw new ExcecaoGenericaDeErro("Email ou senha incorreto")
         }
+
+        if (user.tipo == 'EMP') {
+            const empresa = await LoginRepository.selectEmpresasPorLoginId(user.id)
+            user.statusPagamento = empresa.status_pagamento
+            user.statusAtivo = empresa.status_ativo
+            user.idEmpresa = empresa.id
+            user.nome = empresa.nome_fantasia
+        }
+
+        if (user.tipo == 'DNP') {
+            const donoPet = await LoginRepository.selectDonoPetPorLoginId(user.id)
+            user.nome = donoPet.nome
+        }
+
         return user;
     }
 
-    async findAdministradorPorId(id) {
+    async findUsuarioPorId(id, usuarioTipo) {
         // coleto o usuario com o id e verifico se ele existe
-        const usuarioAdm = await LoginRepository.selectAdministradorPorId(id)
-        if (!usuarioAdm) {
-            throw new ExcecaoIdNaoEncontrado("Usuario não encontrado")
+        let usuario;
+        if (usuarioTipo === "ADM") {
+            usuario = await LoginRepository.selectAdministradorPorId(id)
+            if (!usuario) {
+                throw new ExcecaoGenericaDeErro("Usuario não encontrado")
+            }
+            // retorno
+            return usuario
+        } else if (usuarioTipo === "EMP") {
+            usuario = await LoginRepository.selectEmpresaPorId(id)
+            if (!usuario) {
+                throw new ExcecaoGenericaDeErro("Usuario não encontrado")
+            }
+            if (!usuario.empresas.foto_perfil) {
+                usuario.empresas.foto_perfil = "default.png"
+            }
+            // retorno
+            return usuario
+        } else {
+            usuario = await LoginRepository.selectDonoPetPorId(id)
+            if (!usuario) {
+                throw new ExcecaoGenericaDeErro("Usuario não encontrado")
+            }
+
+            // retorno
+            return usuario
         }
-        // retorno
-        return usuarioAdm
+
     }
     async createAdministrador(data) {
         // valido se o email já está cadastrado
@@ -42,7 +78,7 @@ class LoginService {
         // valido se o email já está cadastrado
         const login = await LoginRepository.selectLogarPorEmail(email)
         if (login) {
-            throw new ExcecaoIdNaoEncontrado("Email já cadastrado")
+            throw new ExcecaoGenericaDeErro("Email já cadastrado")
         }
         // retorno
         return login
@@ -52,7 +88,7 @@ class LoginService {
         // valido se usuario existe
         const user = await LoginRepository.selectUsuarioPorId(id)
         if (!user) {
-            throw new ExcecaoIdNaoEncontrado("Usuario não encontrado")
+            throw new ExcecaoGenericaDeErro("Usuario não encontrado")
         }
 
         // faço a criptografia da senha
@@ -68,33 +104,34 @@ class LoginService {
         // valido se usuario existe
         const user = await LoginRepository.selectUsuarioPorId(id)
         if (!user) {
-            throw new ExcecaoIdNaoEncontrado("Usuario não encontrado")
+            throw new ExcecaoGenericaDeErro("Usuario não encontrado")
         }
 
         // valido se a senha está certa
         if (!bcrypt.compareSync(data.senha, user.senha)) {
-            throw new ExcecaoIdNaoEncontrado("Senha incorreta")
+            throw new ExcecaoGenericaDeErro("Senha incorreta")
         }
 
         // valido se a nova senha é igual a anterior
         if (bcrypt.compareSync(data.novaSenha, user.senha)) {
-            throw new ExcecaoIdNaoEncontrado("A senha não pode ser igual a anterior")
+            throw new ExcecaoGenericaDeErro("A senha não pode ser igual a anterior")
         }
 
-        // faço a criptografia da senha
-        let salt = bcrypt.genSaltSync(10)
-        data.senha = bcrypt.hashSync(data.senha, salt)
+         // faço a criptografia da senha
+         let salt = bcrypt.genSaltSync(10)
+         data.novaSenha = bcrypt.hashSync(data.novaSenha, salt)
 
-        // retorno
-        return await LoginRepository.updateSenha(data, id)
+         // retorno
+         return await LoginRepository.updateSenha(data.novaSenha, id)
     }
 
     async createEnvioEmail(data) {
         // valido se o email já está cadastrado
         const login = await LoginRepository.selectLogarPorEmail(data.email)
         if (!login) {
-            throw new ExcecaoIdNaoEncontrado("Email não cadastrado")
+            throw new ExcecaoGenericaDeErro("Email não cadastrado")
         }
+        return login
     }
 }
 

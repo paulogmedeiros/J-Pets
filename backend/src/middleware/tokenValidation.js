@@ -8,10 +8,10 @@ class TokenValidation {
         const token = req.headers['x-access-token']
         jwt.verify(token,secret,(erro,decoded) => {
             if(erro){
-                return res.status(401).json("Usuário não autenticado")
+                return res.status(401).json({ message: "Usuário não autenticado"})
             }else{
-                // req.usuario_id = decoded.usuario_id
-                // req.usuario_tipo = decoded.usuario_tipo
+                req.usuario_id = decoded.usuario_id
+                req.usuario_tipo = decoded.usuario_tipo
                 next()
             }
         })

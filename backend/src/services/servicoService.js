@@ -1,12 +1,30 @@
 const ServicosRepository = require("../repositories/servicosRepository.js")
 const AnimalService = require("../services/animaisService.js")
-const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
+const EmpresaService = require("../services/empresasService.js")
+const {ExcecaoGenericaDeErro} =  require('../exception/customExceptions.js')
 
 class ServicosService{
-  
+
     async findServicos(){
         // retorno
         return await ServicosRepository.selectServicos()
+    }
+
+    async findServicosPorIdAnimalIdEmpresa(animalId,empresaId){
+        // valido se o id do animal é valido
+        await AnimalService.findAnimaisPorId(animalId)
+
+        // valido se o id da empresa é valido
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await ServicosRepository.selectServicosPorIdAnimalIdEmpresa(animalId,empresaId)
+    }
+
+    async findServicosPorIdAnimal(animalId){
+        // valido se o id do animal é valido
+        await AnimalService.findAnimaisPorId(animalId)
+
+        return await ServicosRepository.selectServicosPorIdAnimal(animalId)
     }
 
     async createServicos(data){
@@ -26,7 +44,7 @@ class ServicosService{
 
         // valido se o nome do serviço já existe registrado para o animal escolhido
         await this.findSevicosPorIdNome(servico.animal_id,data.nome)
-        
+
         // retorno
         return await ServicosRepository.updateServicos(servicoId, data)
     }
@@ -43,17 +61,17 @@ class ServicosService{
         // valido se servico com esse id existe
         const servico = await ServicosRepository.selectServicosPorId(servicoId)
         if(!servico){
-            throw new ExcecaoIdNaoEncontrado("Servico não encontrado")
+            throw new ExcecaoGenericaDeErro("Servico não encontrado")
         }
         // retorno
         return servico
     }
 
     async findSevicosPorIdNome(animal_id,nome){
-        // valido se o nome do serviço já existe registrado para o animal escolhido 
+        // valido se o nome do serviço já existe registrado para o animal escolhido
         const servicoNome = await ServicosRepository.selectSevicosPorIdNome(animal_id,nome)
         if(servicoNome){
-            throw new ExcecaoIdNaoEncontrado("Nome de serviço já cadastrado")
+            throw new ExcecaoGenericaDeErro("Nome de serviço já cadastrado")
         }
         // retorno
         return servicoNome

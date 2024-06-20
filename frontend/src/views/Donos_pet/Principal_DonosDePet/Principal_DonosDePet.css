@@ -1,0 +1,28 @@
+.navbarDonoDePet {
+  background-color: #DCECF6 !important;
+}
+
+.btnSaibaMais {
+  background-image: linear-gradient(to right, #DEA100 30%, #A67800 70%);
+  color: white;
+}
+
+.anuncioPagInicial{
+  background: #DCECF6;
+}
+
+.navbarDonoDePet .dropdown-menu .dropdown-submenu {
+  position: relative;
+}
+
+.navbarDonoDePet .dropdown-menu .dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: 0;
+  border-radius: 0.25rem;
+}
+
+.navbarDonoDePet .dropdown-menu .dropdown-submenu:hover .dropdown-menu {
+  display: block;
+}

@@ -1,84 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-* {
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100vh;
-    background-color: #DCECF6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container{
-    height: 572px;
-    width: 1606px;
-    background-color: white;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; 
-}
-
-.titulo{
-    height: 286px;
-    width: 1606px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; 
-}
-
-.titulo h1{
-    font-size: 50px;
-    margin: 10px;
+.EsqueceuASenhaTitulo{
     color: #2641B7;
 }
 
-.titulo p{
-    font-size: 20px;
-    margin: 0px;
-}
-
-.formulario{
-    padding-top: 20px;
-    height: 286px;
-    width: 1606px;
-    display: flex;
-    justify-content: center;
-    align-items: top;
-}
-
-.formulario input{
-    width: 597px;
-    height: 74px;
-    margin-bottom: 35px;
-    border-radius: 30px;
-    border: 2px solid #B5B5B5;
-    padding-left: 25px;
-    font-size: 20px;
-}
-
-#btn1{
-    font-size: 20px;
-    width: 333px;
-    height: 70px;
+.btnEsqueceuASenha{
     background-color: #2641B7;
-    border-radius: 30px;
-    margin-right: 55px;
     color: white;
 }
-#btn2{
-    font-size: 20px;
-    width: 237px;
-    height: 70px;
-    text-decoration: underline;
-    border: none;
-    background-color: white;
+
+.btnEsqueceuASenha:hover{
+    background-color: #2641B7;
+    color: white;
+}
+
+.cancelarEsqueceuASenha{
+    color: black;
 }

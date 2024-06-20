@@ -1,6 +1,7 @@
 const MarcasRepository = require("../repositories/marcasRepository.js")
 const ProdutosService = require("../services/produtosService.js")
-const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
+const EmpresaService = require("../services/empresasService.js")
+const {ExcecaoGenericaDeErro} =  require('../exception/customExceptions.js')
 
 class MarcasService {
 
@@ -17,9 +18,16 @@ class MarcasService {
         return await MarcasRepository.selectMarcasPorIdProduto(produtoId)
     }
 
+    async findMarcasPorIdProdutoIdEmpresa(produtoId,empresaId){
+        // valido se o id da empresa é valido
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await MarcasRepository.selectMarcasPorIdProdutoIdEmpresa(produtoId,empresaId)
+    }
+
     async createMarcas(data) {
          // valido se o id do produto é valido
-         await ProdutosService.findProdutosPorId(data.produto_id)
+        await ProdutosService.findProdutosPorId(data.produto_id)
 
         // valido se o nome da marca já existe registrado para o produto escolhido
         await this.findMarcasPorIdNome(data.produto_id,data.nome)
@@ -48,10 +56,10 @@ class MarcasService {
     }
 
     async findMarcasPorIdNome(produto_id,nome){
-        // valido se o nome da marca já existe registrado para o produto escolhido 
+        // valido se o nome da marca já existe registrado para o produto escolhido
         const marcaNome = await MarcasRepository.selectMarcasPorIdNome(produto_id,nome)
         if(marcaNome){
-            throw new ExcecaoIdNaoEncontrado("Nome da marca já cadastrado")
+            throw new ExcecaoGenericaDeErro("Nome da marca já cadastrado")
         }
         // retorno
         return marcaNome
@@ -61,9 +69,9 @@ class MarcasService {
         // valido se marca com esse id existe
         const marca = await MarcasRepository.selectMarcasPorId(marcaId)
         if(!marca){
-            throw new ExcecaoIdNaoEncontrado("Marca não encontrada")
+            throw new ExcecaoGenericaDeErro("Marca não encontrada")
         }
-        
+
         // retorno
         return marca
     }

@@ -1,6 +1,7 @@
 const ProdutosRepository = require("../repositories/produtosRepository.js")
 const AnimalService = require("../services/animaisService.js")
-const {ExcecaoIdNaoEncontrado} =  require('../exception/customExceptions.js')
+const EmpresaService = require("../services/empresasService.js")
+const {ExcecaoGenericaDeErro} =  require('../exception/customExceptions.js')
 
 class ProdutosService{
   
@@ -15,6 +16,16 @@ class ProdutosService{
 
         // retorno
         return await ProdutosRepository.selectProdutosPorIdAnimal(animalId)
+    }
+
+    async findProdutosPorIdAnimalIdEmpresa(animalId,empresaId){
+        // valido se o id do animal é valido
+        await AnimalService.findAnimaisPorId(animalId)
+
+        // valido se o id da empresa é valido
+        await EmpresaService.findEmpresasPorId(empresaId)
+
+        return await ProdutosRepository.selectProdutosPorIdAnimalIdEmpresa(animalId,empresaId)
     }
 
     async createProdutos(data){
@@ -51,7 +62,7 @@ class ProdutosService{
         // valido se o nome do produto já existe registrado para o animal escolhido 
         const produtoNome = await ProdutosRepository.selectProdutosPorIdNome(animal_id,nome)
         if(produtoNome){
-            throw new ExcecaoIdNaoEncontrado("Nome do produto já cadastrado")
+            throw new ExcecaoGenericaDeErro("Nome do produto já cadastrado")
         }
         // retorno
         return produtoNome
@@ -61,7 +72,7 @@ class ProdutosService{
         // valido se produto com esse id existe
         const produto = await ProdutosRepository.selectProdutosPorId(produtoId)
         if(!produto){
-            throw new ExcecaoIdNaoEncontrado("Produto não encontrado")
+            throw new ExcecaoGenericaDeErro("Produto não encontrado")
         }
         
         // retorno

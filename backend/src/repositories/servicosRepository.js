@@ -12,7 +12,7 @@ class ServicosRepository {
             select: {
                 id: true,
                 nome: true,
-                animal_id:true,
+                animal_id: true,
                 animais: {
                     select: {
                         id: true,
@@ -21,6 +21,29 @@ class ServicosRepository {
                 }
             }
         });
+    }
+    
+    // retorno todos os servicos pelo id do animal relacionado e da empresa
+    async selectServicosPorIdAnimalIdEmpresa(animalId, empresaId) {
+        return await this.prisma.servicos.findMany({
+            where: {
+                animal_id: animalId,
+                empresas_servicos: {
+                  none: {
+                    empresa_id: empresaId,
+                  },
+                },
+              },
+        })
+    }
+
+    // retorno servico por id no animal
+    async selectServicosPorIdAnimal(animalId) {
+        return await this.prisma.servicos.findMany({
+            where: {
+                animal_id: animalId,
+            }
+        })
     }
 
     // retorno servico por id e pelo nome
@@ -34,9 +57,9 @@ class ServicosRepository {
     }
 
     // retorno o servico pelo id
-    async selectServicosPorId(id){
+    async selectServicosPorId(id) {
         return await this.prisma.servicos.findFirst({
-            where:{
+            where: {
                 id
             }
         })
@@ -65,20 +88,20 @@ class ServicosRepository {
     }
 
     // excluindo o servico
-    async deleteServicos(id){
+    async deleteServicos(id) {
         return await this.prisma.$transaction(async (prismaTx) => {
-            
+
             // excluindo todas entidades que tem relacionamento com servico
             await prismaTx.empresas_servicos.deleteMany({
-                where:{
+                where: {
                     servico_id: id
                 }
             })
 
             // excluindo o servico
-            await  prismaTx.servicos.delete({
-                where:{
-                    id:id
+            await prismaTx.servicos.delete({
+                where: {
+                    id: id
                 }
             })
         })

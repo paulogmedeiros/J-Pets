@@ -1,0 +1,17 @@
+.tituloAdicionarServicoEmpresa{
+  color: black;
+}
+
+.btnAdicionarServicoEmpresa{
+  background-color: #DEA100;
+  color: white;
+}
+
+.imgAdicionarServicosEmpresa{
+  background-color: #DEA100;
+}
+
+.btnAdicionarServicoEmpresa:focus, .btnAdicionarServicoEmpresa:hover{
+  background-color: #DEA100 !important;
+  color: white !important;
+}

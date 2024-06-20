@@ -8,34 +8,92 @@ class LoginRepository {
 
     async selectLogarPorEmail(email) {
         return await this.prisma.login.findFirst({
-            where:{
-                email:email
+            where: {
+                email: email
             }
         })
     }
 
-    async selectAdministradorPorId(id){
-        return await this.prisma.login.findFirst({
-            where:{
-                id:id
+    async selectEmpresasPorLoginId(loginId) {
+        return await this.prisma.empresas.findFirst({
+            where: {
+                login_id: loginId
             },
-            select:{
-                email:true,
+            select: {
+                id: true,
+                status_pagamento: true,
+                status_ativo: true,
+                nome_fantasia: true
             }
         })
     }
 
-    async selectUsuarioPorId(id){
+    async selectDonoPetPorLoginId(loginId) {
+        return await this.prisma.tutores_pets.findFirst({
+            where: {
+                login_id: loginId
+            },
+            select: {
+                nome:true
+            }
+        })
+    }
+
+    async selectAdministradorPorId(id) {
         return await this.prisma.login.findFirst({
-            where:{
-                id:id
+            where: {
+                id: id
+            },
+            select: {
+                email: true,
+            }
+        })
+    }
+
+    async selectEmpresaPorId(id) {
+        return await this.prisma.login.findFirst({
+            where: {
+                id: id
+            },
+            select: {
+                email: true,
+                empresas: {
+                    select: {
+                        nome_fantasia: true,
+                        foto_perfil: true
+                    }
+                }
+            }
+        })
+    }
+
+    async selectDonoPetPorId(id) {
+        return await this.prisma.login.findFirst({
+            where: {
+                id: id
+            },
+            select: {
+                email: true,
+                tutores_pets: {
+                    select: {
+                        nome: true
+                    }
+                }
+            }
+        })
+    }
+
+    async selectUsuarioPorId(id) {
+        return await this.prisma.login.findFirst({
+            where: {
+                id: id
             },
         })
     }
 
     async insertAdministrador(data) {
         return await this.prisma.login.create({
-            data:{
+            data: {
                 email: data.email,
                 senha: data.senha,
                 tipo: 'ADM',
@@ -60,7 +118,7 @@ class LoginRepository {
                 id
             },
             data: {
-                senha: data.senha
+                senha: data
             }
         })
     }

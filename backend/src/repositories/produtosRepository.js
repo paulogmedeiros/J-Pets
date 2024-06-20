@@ -22,6 +22,19 @@ class ProdutosRepository {
         })
     }
 
+    async selectProdutosPorIdAnimalIdEmpresa(animalId, empresaId) {
+        return await this.prisma.produtos.findMany({
+            where: {
+                animal_id: animalId,
+                empresas_produtos: {
+                  none: {
+                    empresa_id: empresaId,
+                  },
+                },
+              },
+        })
+    }
+
     // retorno produto por id e pelo nome
     async selectProdutosPorIdNome(animal_id, nome) {
         return await this.prisma.produtos.findFirst({
@@ -37,11 +50,6 @@ class ProdutosRepository {
         return await this.prisma.produtos.findMany({
             where: {
                 animal_id: animalId
-            },
-            select: {
-                id: true,
-                nome: true,
-                animal_id: true
             }
         })
     }

@@ -1,11 +1,11 @@
-class ExcecaoIdNaoEncontrado extends Error {
-    constructor(mensage) {
-        super(mensage);
-        this.name = 'ExcecaoIdNaoEncontrado';
+class ExcecaoGenericaDeErro extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'ExcecaoGenericaDeErro';
         this.status = 400
     }
 }
 
 module.exports = {
-    ExcecaoIdNaoEncontrado
+    ExcecaoGenericaDeErro
 };

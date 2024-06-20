@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
 import logoJPets_adm from '../img/logoJPets.png'
-// import './Painel_de_controle_empresas.css'
+import './Painel_de_controle_empresas.css'
 import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
-
+import iconeVoltar from './img/iconeVoltar.svg'
 function Painel_de_controle_empresas() {
 
     //Estado para armazenar os usuários
     const [empresas, setEmpresas] = useState([])
+    const [pesquisar, setPesquisar] = useState('')
 
     useEffect(() => {
-
+        document.title = "Painel de controle | Empresas"
         // Função carregar usuários
         async function carregarUsuarios() {
             try {
                 // Fazer uma chamada da API
-                const resposta = await fetch('/empresas')
+                const resposta = await fetch(process.env.REACT_APP_URL_API + '/empresas')
                 if (!resposta.ok) {
 
                     // Exibindo erro API
@@ -22,6 +23,7 @@ function Painel_de_controle_empresas() {
                 }
                 else {
                     let dados = await resposta.json()
+                    console.debug(resposta)
                     setEmpresas(dados)
                 }
             } catch (error) {
@@ -32,27 +34,32 @@ function Painel_de_controle_empresas() {
         // Chamando função carregar usuários
         carregarUsuarios()
     })
+
+    async function logOff() {
+        localStorage.clear()
+        window.location.href = "/"
+    }
     return (
         // Container geral para propriedades de fundo
-        <div class="admPainel">
-            <nav class="admNavbar navbar navbar-expand-lg">
-                <div class="container-fluid d-flex">
-                    <a class="navbar-brand" href="#"><img src={logoJPets_adm} alt="" srcset="" width={50} height={50} /></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+        <div className="admPainel">
+            <nav className="admNavbar navbar navbar-expand-md">
+                <div className="container-fluid d-flex">
+                    <a className="navbar-brand" href="/administrador/painel"><img src={logoJPets_adm} alt="" srcSet="" width={50} height={50} /></a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse justify-content-end pe-5 me-5" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <div class="dropdown">
-                                    <button class="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        P.G.
+                    <div className="collapse navbar-collapse justify-content-end pe-5 me-5" id="navbarNavDropdown">
+                        <ul className="navbar-nav">
+                            <li className="nav-item dropdown">
+                                <div className="dropdown">
+                                    <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        ADM
                                     </button>
-                                    <ul class="dropdown-menu ">
-                                        <li><a class="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
-                                        <li><hr class="dropdown-divider" /></li>
-                                        <li><a class="dropdown-item" href="#">Meu perfil</a></li>
-                                        <li><a class="dropdown-item" href="#">Sair</a></li>
+                                    <ul className="dropdown-menu ">
+                                        <li><a className="dropdown-item disabled" href="#">ADM</a></li>
+                                        <li><hr className="dropdown-divider" /></li>
+                                        <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
+                                        <li><button className="dropdown-item" onClick={logOff}>Sair</button></li>
                                     </ul>
                                 </div>
                             </li>
@@ -61,43 +68,57 @@ function Painel_de_controle_empresas() {
                 </div>
             </nav>
 
+
             {/* Conteúdo principal  */}
-            <div class="container mt-5">
-                <div class="row">
+            <div className="container-md mt-5">
+                <div className="row">
 
                     {/* Menu lateral */}
 
-                    <div class="admMenuLateral col-3 mt-5 pr-5">
-                        <div id="list-example" class="list-group">
-                            <a class="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
-                            <a class="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
-                            <a class="list-group-item list-group-item-action" href="/administrador/painel/servicos">Serviços</a>
+                    <div className="admMenuLateral col-3 mt-5 pr-5">
+                        <div id="list-example" className="list-group">
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel">Empresas</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/cadastroAdmin">Cadastrar admin</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/produtos">Produtos</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/marcas">Marcas</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/modelos">Modelos</a>
+                            <a className="list-group-item list-group-item-action" href="/administrador/painel/servicos">Serviços</a>
                         </div>
                     </div>
 
                     {/* Tabela */}
-                    <div class="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5 text-center">
+                    <div className="admTabelaPrincipal col-9 border border-2 rounded-3 mt-5 text-center">
                         <div className='row '>
                             <p className='d-flex col-4 mt-5 me-5 fs-5 fw-semibold'>Todas as empresas</p>
-                            <div class="input-group d-flex mb-3 col-4 w-50 me-3 mt-5">
-                                <input type="text" class="form-control" placeholder="Pesquisar empresa" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                                <span class="input-group-text" id="basic-addon2"><img src={pesquisaIcone_adm} alt="" srcset="" width={20} color='back' /></span>
+
+                            <div className="input-group d-flex mb-3 col-4 w-50 me-3 mt-5">
+                                <div className="input-group mb-3">
+
+                                    <input
+                                        value={pesquisar}
+                                        onChange={(e) => setPesquisar(e.target.value)}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Pesquisar empresa"
+                                        aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                    <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30} /></button>
+                                </div>
                             </div>
                         </div>
 
 
-                        <table class="table table-striped border border-1">
-                            <thead>
+                        <table className="table table-striped border border-1">
+                            <thead className="roxo">
                                 <tr className='text-center'>
                                     <th scope="col">Empresa</th>
                                     <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {empresas.map(empresa => (
+                                {empresas.filter((e) => e.nome_fantasia.includes(pesquisar) || e.nome_fantasia.toUpperCase().includes(pesquisar) || e.nome_fantasia.toLowerCase().includes(pesquisar) || pesquisar == '').map(empresa => (
                                     <tr key={empresa.id}>
                                         <td>{empresa.nome_fantasia}</td>
-                                        <td>{trueFalse(empresa.status_empresa)}</td>
+                                        <td>{trueFalse(empresa.status_pagamento)}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -109,10 +130,10 @@ function Painel_de_controle_empresas() {
     )
 }
 
-function trueFalse(status){
-    if(status===true){
+function trueFalse(status) {
+    if (status === true) {
         return "Ativo"
-    }else{
+    } else {
         return "Inativo"
     }
 

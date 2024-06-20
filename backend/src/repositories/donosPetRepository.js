@@ -26,6 +26,52 @@ class DonosPetRepository {
         })
 
     }
+
+    async deleteDonoPetPorIdLogin(loginId, donoPetId){
+        return await this.prisma.$transaction(async (prismaTx) => {
+            await prismaTx.avaliacoes.deleteMany({
+                where:{
+                    tutor_pet_id: donoPetId
+                }
+            })
+
+            await prismaTx.favoritos.deleteMany({
+                where:{
+                    tutor_pet_id: donoPetId
+                }
+            })
+
+            await prismaTx.tutores_pets.delete({
+                where:{
+                    id: donoPetId
+                }
+            })
+
+            await prismaTx.login.delete({
+                where:{
+                    id: loginId
+                }
+            })
+        })
+    }
+
+    async selectLoginDonoPets(loginId){
+        return await this.prisma.login.findFirst({
+            where:{
+                id: loginId
+            },
+            select:{
+                id: true,
+                email: true,
+                tipo: true,
+                tutores_pets:{
+                    select:{
+                        id:true
+                    }
+                }
+            }
+        })
+    }
 }
 
 module.exports = new DonosPetRepository()
