@@ -10,6 +10,9 @@ function Painel_de_controle_marcas() {
 
   //Estado para armazenar os usuários
   const [marcas, setMarcas] = useState([]);
+  const [pesquisar, setPesquisar] = useState('')
+  const [nomeMarca, setNomeMarca] = useState('')
+  const [idMarca, setIdMarca] = useState('')
 
   useEffect(() => {
 
@@ -51,6 +54,40 @@ function Painel_de_controle_marcas() {
       } catch (error) {
         console.error("Erro ao deletar marca: ", error);
       }
+    }
+  }
+
+  async function atualizarMarca(event) {
+
+    event.preventDefault()
+
+    const marcaDados = {
+      nome: nomeMarca
+    }
+
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/marcas/" + idMarca, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(marcaDados)
+      });
+
+      const responseData = await resposta.json();
+
+      if (!resposta.ok) {
+        console.error("Erro ao atualizar modelos:", responseData);
+        window.alert("Erro ao atualizar modelos: " + JSON.stringify(responseData));
+        throw new Error('Erro ao atualizar modelos: ' + resposta.statusText);
+      } else {
+        console.log("Resposta do servidor:", responseData);
+
+        window.location.href = "/administrador/painel/marcas";
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar serviço:", error);
+      window.alert("Erro ao atualizar serviço: " + error.message);
     }
   }
 
@@ -125,7 +162,13 @@ function Painel_de_controle_marcas() {
                 Todas as marcas
               </p>
               <div className="input-group d-flex mb-5 col-4 w-25 h-25 me-2 mt-5">
-                <input type="text" className="form-control" placeholder="Pesquisar marca" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                <input
+                  value={pesquisar}
+                  onChange={(e) => setPesquisar(e.target.value)}
+                  type="text"
+                  className="form-control"
+                  placeholder="Pesquisar marca"
+                  aria-label="Recipient's username" aria-describedby="basic-addon2" />
                 <button type="button" className="btnPesquisa btn"><img src={pesquisaIcone_adm} width={30} /></button>
               </div>
 
@@ -144,12 +187,22 @@ function Painel_de_controle_marcas() {
                 </tr>
               </thead>
               <tbody>
-                {marcas.map((marca) => (
+                {marcas.filter((e) => e.nome.includes(pesquisar) || e.nome.toUpperCase().includes(pesquisar) || e.nome.toLowerCase().includes(pesquisar) || pesquisar == '').map((marca) => (
                   <tr key={marca.id}>
                     <td>{marca.nome}</td>
                     <td>{marca.produtos.nome}</td>
                     <td>
-                      <img src={iconeAtualizar_adm} width={25} height={25} />{" "}
+                      <img
+                        onClick={() => {
+                          setNomeMarca(marca.nome);
+                          setIdMarca(marca.id)
+                        }}
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        src={iconeAtualizar_adm}
+                        width={25}
+                        height={25} />
+
                       <img
                         src={iconLixeira_adm}
                         width={25}
@@ -164,16 +217,33 @@ function Painel_de_controle_marcas() {
           </div>
         </div>
       </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Atualizar marca</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input type="text"
+                  value={nomeMarca}
+                  onChange={(e) => setNomeMarca(e.target.value)}
+                  class="form-control"
+                  id="floatingInput"
+                  placeholder="name@example.com" />
+                <label for="floatingInput">Nome da marca</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="button" onClick={atualizarMarca} class="btn btn-primary">Salvar alterações</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
-
-function trueFalse(status) {
-  if (status === true) {
-    return "Ativo";
-  } else {
-    return "Inativo";
-  }
 }
 
 export default Painel_de_controle_marcas;
