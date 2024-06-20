@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import logoJPets_adm from '../img/logoJPets.png'
 import './Painel_de_controle_empresas.css'
 import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
-
+import iconeVoltar from './img/iconeVoltar.svg'
 function Painel_de_controle_empresas() {
 
     //Estado para armazenar os usuários
@@ -35,6 +35,10 @@ function Painel_de_controle_empresas() {
         carregarUsuarios()
     })
 
+    async function logOff() {
+        localStorage.clear()
+        window.location.href = "/"
+    }
     return (
         // Container geral para propriedades de fundo
         <div className="admPainel">
@@ -49,13 +53,13 @@ function Painel_de_controle_empresas() {
                             <li className="nav-item dropdown">
                                 <div className="dropdown">
                                     <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        P.G.
+                                        ADM
                                     </button>
                                     <ul className="dropdown-menu ">
-                                        <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
+                                        <li><a className="dropdown-item disabled" href="#">ADM</a></li>
                                         <li><hr className="dropdown-divider" /></li>
                                         <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
-                                        <li><a className="dropdown-item" href="#">Sair</a></li>
+                                        <li><button className="dropdown-item" onClick={logOff}>Sair</button></li>
                                     </ul>
                                 </div>
                             </li>
@@ -63,6 +67,7 @@ function Painel_de_controle_empresas() {
                     </div>
                 </div>
             </nav>
+
 
             {/* Conteúdo principal  */}
             <div className="container-md mt-5">
