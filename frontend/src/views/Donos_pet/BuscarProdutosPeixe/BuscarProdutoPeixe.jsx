@@ -39,6 +39,30 @@ function BuscarProdutoPeixe() {
     }
   }
 
+  async function visualizarEmpresas(){
+    const sesaoBusca = {
+      titulo: 'modelo',
+      id: modelo_id,
+      tipo: 'PDR'
+    }
+    console.log(sesaoBusca)
+    localStorage.removeItem(sesaoBusca)
+    localStorage.setItem("sesaoBusca", JSON.stringify(sesaoBusca));
+    window.location.href = '/usuario/visualizarEmpresas'
+  }
+
+  async function visualizarEmpresasServicos(id){
+    const sesaoBusca = {
+      titulo: 'serviço',
+      id: id,
+      tipo: 'SVC'
+    }
+    console.log(sesaoBusca)
+    localStorage.removeItem(sesaoBusca)
+    localStorage.setItem("sesaoBusca", JSON.stringify(sesaoBusca));
+    window.location.href = '/usuario/visualizarEmpresas'
+  }
+
   // função para pegar as marcas correspondentes dos produtos
   // (marcas > getMarcasPorIdProduto)
   async function pegarMarcasPorProduto(produto_id) {
@@ -357,7 +381,7 @@ function BuscarProdutoPeixe() {
               <label htmlFor="floatingSelect">Modelo</label>
             </div>
             {/* Botão de busca */}
-            <button className="btnBuscar border btn w-100" role="button">
+            <button onClick={visualizarEmpresas} className="btnBuscar border btn w-100" role="button">
               Buscar
             </button>
           </div>

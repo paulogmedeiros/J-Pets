@@ -45,6 +45,18 @@ function Empresas_Mapa() {
       });
   };
 
+  async function visualizarEmpresasServicos(id){
+    const sesaoBusca = {
+      titulo: 'serviço',
+      id: id,
+      tipo: 'SVC'
+    }
+    console.log(sesaoBusca)
+    localStorage.removeItem(sesaoBusca)
+    localStorage.setItem("sesaoBusca", JSON.stringify(sesaoBusca));
+    window.location.href = '/usuario/visualizarEmpresas'
+  }
+
   async function buscaEmpresas() {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + '/empresas/' + tipo + '/servicosProdutos/' + id)
@@ -110,7 +122,7 @@ function Empresas_Mapa() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(1).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -126,7 +138,7 @@ function Empresas_Mapa() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(2).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -143,7 +155,7 @@ function Empresas_Mapa() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(3).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -159,7 +171,7 @@ function Empresas_Mapa() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(4).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -205,7 +217,7 @@ function Empresas_Mapa() {
           {/* Empresas */}
           {empresas.map((empresa) => (
             <div key={empresa.id} className="col-md-6 d-flex border rounded-4 w-auto w-auto p-3 p-md-4 bg-body-secondary mb-5">
-              <img src={process.env.REACT_APP_URL_API_IMG+empresa.foto_perfil} width={70} height={70} className='img-fluid d-flex' alt={empresa.nome_fantasia} />
+              <img src={process.env.REACT_APP_URL_API_IMG+empresa.foto_perfil} width={70} height={70} style={{ borderRadius: "50%" }} className='img-fluid d-flex' alt={empresa.nome_fantasia} />
               <div className="flex-column">
                 <p className='ms-md-3 d-flex'>{empresa.nome_fantasia}</p>
                 <a 
