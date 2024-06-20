@@ -30,7 +30,7 @@ function Nova_marca() {
       nome
     }
 
-  
+
     try {
       // Realiza POST para a API
       const result = await fetch(process.env.REACT_APP_URL_API + '/marcas', {
@@ -94,6 +94,10 @@ function Nova_marca() {
     }
   }, [animal_id])
 
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
     <div className="admPainel">
       <nav className="admNavbar navbar navbar-expand-md">
@@ -107,13 +111,13 @@ function Nova_marca() {
               <li className="nav-item dropdown">
                 <div className="dropdown">
                   <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    P.G.
+                    ADM
                   </button>
                   <ul className="dropdown-menu ">
-                    <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
+                    <li><a className="dropdown-item disabled" href="#">ADM</a></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-                    <li><a className="dropdown-item" href="#">Sair</a></li>
+                    <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
+                    <li><button className="dropdown-item" onClick={logOff}>Sair</button></li>
                   </ul>
                 </div>
               </li>
@@ -176,18 +180,18 @@ function Nova_marca() {
 
             <div className="form-floating mb-3">
               <input
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-              type="text"
-              className="form-control"
-              id="floatingInput"
-              placeholder="" />
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                type="text"
+                className="form-control"
+                id="floatingInput"
+                placeholder="" />
               <label htmlFor="floatingInput">Nome da marca</label>
             </div>
             <button
-            onClick={cadastrarMarca}
-            className="btnNovaMarca btn w-100"
-            role="button">Cadastrar marca</button>
+              onClick={cadastrarMarca}
+              className="btnNovaMarca btn w-100"
+              role="button">Cadastrar marca</button>
           </div>
           <div className="imgNovaMarca col-md-6 d-flex mt-3 mt-md-0 rounded-4">
             <img src={imgCadastroItens} className="img-fluid" alt="Cadastro Itens" />

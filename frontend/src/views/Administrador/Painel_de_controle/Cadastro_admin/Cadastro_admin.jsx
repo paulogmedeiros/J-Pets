@@ -67,6 +67,10 @@ function Cadastro_admin() {
 
   }
 
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
 
     // barra de navegação
@@ -82,13 +86,13 @@ function Cadastro_admin() {
               <li className="nav-item dropdown">
                 <div className="dropdown">
                   <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    P.G.
+                    ADM
                   </button>
                   <ul className="dropdown-menu ">
-                    <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
+                    <li><a className="dropdown-item disabled" href="#">ADM</a></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-                    <li><a className="dropdown-item" href="#">Sair</a></li>
+                    <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
+                    <li><button className="dropdown-item" onClick={logOff}>Sair</button></li>
                   </ul>
                 </div>
               </li>
@@ -96,6 +100,7 @@ function Cadastro_admin() {
           </div>
         </div>
       </nav>
+      
       {/* fim da barra de navegação */}
 
       {/* início do conteúdo principal */}

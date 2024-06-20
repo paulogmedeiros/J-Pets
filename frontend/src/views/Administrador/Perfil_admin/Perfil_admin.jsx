@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import './Perfil_admin.css'
 import logoJPets_adm from '../img/logoJPets.png'
-
+import iconeVoltar from './img/iconeVoltar.svg'
 
 function Perfil_admin() {
   const [email, setEmail] = useState('');
   const decodedToken = JSON.parse(localStorage.getItem("decodedToken"))
-  const token= JSON.parse(localStorage.getItem("token"))
+  const token = JSON.parse(localStorage.getItem("token"))
   const usuario_id = decodedToken['usuario_id']
 
   useEffect(() => {
@@ -14,10 +14,16 @@ function Perfil_admin() {
     pegarEmail()
   }, []);
 
-  async function pegarEmail(){
+
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
+
+  async function pegarEmail() {
     try {
 
-      if(!usuario_id){
+      if (!usuario_id) {
         window.location.href = './'
       }
 
@@ -28,7 +34,7 @@ function Perfil_admin() {
         }
       })
 
-      if(!resposta.ok){
+      if (!resposta.ok) {
         throw new Error('HTTP Erro' + resposta.status)
       }
 
@@ -54,13 +60,13 @@ function Perfil_admin() {
                 <li className="nav-item dropdown">
                   <div className="dropdown">
                     <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      P.G.
+                      ADM
                     </button>
                     <ul className="dropdown-menu ">
-                      <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
+                      <li><a className="dropdown-item disabled" href="#">ADM</a></li>
                       <li><hr className="dropdown-divider" /></li>
-                      <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-                      <li><a className="dropdown-item" href="#">Sair</a></li>
+                      <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
+                      <li><button className="dropdown-item" onClick={logOff}>Sair</button></li>
                     </ul>
                   </div>
                 </li>
@@ -70,6 +76,12 @@ function Perfil_admin() {
         </nav>
       </div>
 
+      <a href="/administrador/painel" type="button" class="btnVoltarServico btn m-5 rounded-5">
+        <span>
+          <img src={iconeVoltar} width={20} height={20} />
+        </span>
+        Voltar
+      </a>
       <div className="container">
 
         <div className="row justify-content-center col-12 ps-4 col-md-8 position-absolute top-50 start-50 translate-middle ">

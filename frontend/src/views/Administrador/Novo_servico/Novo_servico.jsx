@@ -68,6 +68,10 @@ function Novo_servico() {
     }
   }
 
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
 
     <div className="admPainel">
@@ -82,13 +86,13 @@ function Novo_servico() {
               <li className="nav-item dropdown">
                 <div className="dropdown">
                   <button className="admInfo btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    P.G.
+                    ADM
                   </button>
                   <ul className="dropdown-menu ">
-                    <li><a className="dropdown-item disabled" href="#">Paulo Gabriel</a></li>
+                    <li><a className="dropdown-item disabled" href="#">ADM</a></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-                    <li><a className="dropdown-item" href="#">Sair</a></li>
+                    <li><a className="dropdown-item" href="/administrador/perfil">Meu perfil</a></li>
+                    <li><button className="dropdown-item" onClick={logOff}>Sair</button></li>
                   </ul>
                 </div>
               </li>
