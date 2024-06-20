@@ -27,21 +27,21 @@ function Cadastro_usuario() {
     setCarregando(true)
     event.preventDefault()
 
-    // tratamento pra ver se as senhas são iguais
-    if (senha !== confirmarSenha) {
-      setErroSenha("As senhas não coincidem")
-      return; // Adiciona este retorno para sair da função se as senhas não coincidirem
-    }
-
-    setErroSenha(''); // Limpa a mensagem de erro se as senhas coincidirem
-
-    const usuarioDados = {
-      nome,
-      email,
-      senha
-    }
-
     try {
+      // tratamento pra ver se as senhas são iguais
+      if (senha !== confirmarSenha) {
+        setErroSenha("As senhas não coincidem")
+        throw new Error("As senhas não coincidem")
+       // Adiciona este retorno para sair da função se as senhas não coincidirem
+      }
+
+      setErroSenha(''); // Limpa a mensagem de erro se as senhas coincidirem
+
+      const usuarioDados = {
+        nome,
+        email,
+        senha
+      }
 
       const result = await fetch(`${process.env.REACT_APP_URL_API}/donoPet`, { // rota da API para cadastrar donos de pet
         method: 'POST',
