@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import './Alterar_senha.css'
 import icone_senha from './img/icone_senha.svg'
 import logoJPets from './img/logoJPets.png'
@@ -71,6 +71,10 @@ function Alterar_senha_empresa() {
   }
 
 
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
     <>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -129,7 +133,7 @@ function Alterar_senha_empresa() {
                 <a className="nav-link" href="/empresas/cupons">Cupons</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Avaliações</a>
+                <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
               </li>
             </ul>
           </div>
@@ -144,8 +148,8 @@ function Alterar_senha_empresa() {
                 {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
               </span></a>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#">Meu perfil</a></li>
-              <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+              <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
+              <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
             </ul>
           </div>
         </div>
@@ -166,42 +170,42 @@ function Alterar_senha_empresa() {
 
             <div className="form-floating mt-md-3 mb-3">
               <input
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              type="password"
-              className="form-control"
-              id="floatingPassword"
-              placeholder="Password" />
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password" />
               <label for="floatingPassword">Senha atual</label>
             </div>
 
             <div className="form-floating mt-md-3 mb-3">
               <input
-              value={novaSenha}
-              onChange={(e) => setNovaSenha(e.target.value)}
-              type="password"
-              className="form-control"
-              id="floatingPassword"
-              placeholder="Password" />
+                value={novaSenha}
+                onChange={(e) => setNovaSenha(e.target.value)}
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password" />
               <label for="floatingPassword">Nova senha</label>
               {erroSenha && <div className="text-danger">{erroSenha}</div>}
             </div>
 
             <div className="form-floating mt-md-3 mb-4">
               <input
-              value={confirmarSenha}
-              onChange={(e) => setConfirmarSenha(e.target.value)}
-              type="password"
-              className="form-control"
-              id="floatingPassword"
-              placeholder="Password" />
+                value={confirmarSenha}
+                onChange={(e) => setConfirmarSenha(e.target.value)}
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password" />
               <label for="floatingPassword">Confirmação da nova senha</label>
               {erroSenha && <div className="text-danger">{erroSenha}</div>}
             </div>
 
             <button
-            onClick={alterarSenhaEMP}
-            className="btnAlteracaoSenhaEmpresas btn w-100" role="button">Confirmar</button>
+              onClick={alterarSenhaEMP}
+              className="btnAlteracaoSenhaEmpresas btn w-100" role="button">Confirmar</button>
 
             <p className="text-body-dark text-center mt-3">
               <a href="/empresas/perfil" className="cancelarAlterarSenhaEmpresas link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Cancelar</a>

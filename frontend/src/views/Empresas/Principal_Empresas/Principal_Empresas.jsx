@@ -4,6 +4,10 @@ import './Principal_Empresas.css'
 import imgAnuncioEmpresas from './img/imgAnuncioEmpresas.svg'
 
 function Principal_Empresas() {
+  async function logOff() {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
     <>
       <div>
@@ -12,7 +16,7 @@ function Principal_Empresas() {
           <div className="container-fluid">
 
             {/* Logo do projeto */}
-            <a className="navbar-brand" href="/empresas/principal">
+            <a className="navbar-brand" href="#">
               <img src={logoJPets} width={45} height={45} />
             </a>
             <button
@@ -64,7 +68,7 @@ function Principal_Empresas() {
                   <a className="nav-link" href="/empresas/cupons">Cupons</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Avaliações</a>
+                  <a className="nav-link" href="/empresas/avaliacoes">Avaliações</a>
                 </li>
               </ul>
             </div>
@@ -75,13 +79,12 @@ function Principal_Empresas() {
                 </span>
               </button>
               <ul className="dropdown-menu">
-                <a className="nav-link disabled ms-3" aria-disabled="true"> <span className='d-inline-block ' style={{ maxWidth: '100px' }}>
+                <a className="nav-link disabled ms-3" aria-disabled="true"><span className='d-inline-block mt-2 text-truncate' style={{ maxWidth: '100px' }}>
                   {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
-                </span>
-                </a>
+                </span></a>
                 <li><hr className="dropdown-divider" /></li>
                 <li><a className="dropdown-item" href="/empresas/perfil">Meu perfil</a></li>
-                <li><a className="dropdown-item text-warning" href="/">Sair</a></li>
+                <li><button className="dropdown-item text-warning" onClick={logOff}>Sair</button></li>
               </ul>
             </div>
           </div>
