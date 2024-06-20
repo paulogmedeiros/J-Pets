@@ -67,6 +67,18 @@ function Alterar_senha() {
     }
   }
 
+  async function visualizarEmpresasServicos(id){
+    const sesaoBusca = {
+      titulo: 'serviço',
+      id: id,
+      tipo: 'SVC'
+    }
+    console.log(sesaoBusca)
+    localStorage.removeItem(sesaoBusca)
+    localStorage.setItem("sesaoBusca", JSON.stringify(sesaoBusca));
+    window.location.href = '/usuario/visualizarEmpresas'
+  }
+
   async function logOff() {
     localStorage.clear();
     window.location.href = '/';
@@ -146,7 +158,7 @@ function Alterar_senha() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(1).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -162,7 +174,7 @@ function Alterar_senha() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(2).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -179,7 +191,7 @@ function Alterar_senha() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(3).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -195,7 +207,7 @@ function Alterar_senha() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(4).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" href="/">{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -206,7 +218,7 @@ function Alterar_senha() {
           <div className='d-flex justify-content-end'>
             <div className=''>
               <span>
-                <img src={iconeCoracao} width={40} height={40} alt="Ícone Coração" />
+                {/* <img src={iconeCoracao} width={40} height={40} alt="Ícone Coração" /> */}
               </span>
             </div>
             <div className="dropdown me-5">

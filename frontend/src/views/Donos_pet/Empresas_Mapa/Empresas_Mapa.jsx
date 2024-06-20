@@ -221,7 +221,7 @@ function Empresas_Mapa() {
               <div className="flex-column">
                 <p className='ms-md-3 d-flex'>{empresa.nome_fantasia}</p>
                 <a 
-                className='ms-md-4 d-flex'
+                className='ms-md-4 d-flex verPerfil'
                 onClick={(e) => {
                   visualizarInformaçõesEmpresas(empresa.id); // Chama a função de clique
                 }}

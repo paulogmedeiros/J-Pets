@@ -194,8 +194,12 @@ function Perfil_Empresa() {
 
       {/* conteúdo principal */}
       <div>
-        <button type="button" class="voltarBotao btn m-5 rounded-5"><span><img src={iconeVoltar} width={20} height={20} /></span> Voltar</button>
-
+        <a href="/usuario/visualizarEmpresas" type="button" className="btnVoltarBusca btn m-5 rounded-5">
+        <span>
+          <img src={iconeVoltar} width={20} height={20} alt="Ícone Voltar" />
+        </span>
+        Voltar
+      </a>             
         <div className="containerGeralAvaliacoes">
           <div className="containerPerfilAvaliacoes row justify-content-center border row-cols-md-2 row-cols-1">
             <div className="col-md-5 d-md-flex text-center p-md-5 p-3 ps-md-5"><img src={process.env.REACT_APP_URL_API_IMG+empresa.foto_perfil} width={100} height={100} style={{ borderRadius: "50%" }} className='me-md-3 m-3' />
