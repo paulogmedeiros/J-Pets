@@ -8,13 +8,13 @@ import iconeVoltar from './img/iconeVoltar.svg'
 import axios from 'axios'
 
 function Perfil_Empresa() {
-
+  const id = JSON.parse(localStorage.getItem("sesaoBuscaIdEmpresa"))?.id;
   const [servicos, setServicos] = useState([]);
-
+  const [empresa, setEmpresa] = useState({})
   useEffect(() => {
     document.title = "Página inicial";
     buscarServicos(); // Chamada inicial para buscar os serviços
-
+    buscaEmpresa()
     // JavaScript para habilitar os submenus
     const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
     dropdownSubmenus.forEach(submenu => {
@@ -43,6 +43,18 @@ function Perfil_Empresa() {
   const filtrarServicosPorAnimal = (animalId) => {
     return servicos.filter(servico => servico.animal_id === animalId);
   };
+
+  async function buscaEmpresa() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + '/empresas/'+ id)
+      const dados = await resposta.json()
+      console.log(dados)
+      setEmpresa(dados)
+      
+    } catch (error) {
+
+    }
+  }
 
   async function logOff() {
     localStorage.clear()
@@ -174,9 +186,16 @@ function Perfil_Empresa() {
 
         <div className="containerGeralAvaliacoes">
           <div className="containerPerfilAvaliacoes row justify-content-center border row-cols-md-2 row-cols-1">
-            <div className="col-md-5 d-md-flex text-center p-md-5 p-3 ps-md-5"><img src={logoJPets} width={100} height={100} className='me-md-3 m-3' />
-              <h2 className='mt-4'>Nome da empresa</h2>
-              <br />
+            <div className="col-md-5 d-md-flex text-center p-md-5 p-3 ps-md-5"><img src={process.env.REACT_APP_URL_API_IMG+empresa.foto_perfil} width={100} height={100} className='me-md-3 m-3' />
+              <div className='mt-4 text-start' >
+                <h2 >{empresa.nome_fantasia}</h2>
+                <p className='mt-4'>Aberto: {empresa.dia_semana_inicio}</p>
+                <p>Fechado: {empresa.dia_semana_fim}</p>
+                <p>Horário de funcionamento: {empresa.hora_abertura} às {empresa.hora_fechamento}</p>
+                <p>Cidade: {empresa.cidade}</p>
+                <p>Bairro: {empresa.bairro}</p>
+                <p>Rua: {empresa.rua}     número: {empresa.numero_residencia}</p>
+              </div>
             </div>
 
             <div className="col-md-3 p-3 text-center ">

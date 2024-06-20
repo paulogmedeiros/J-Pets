@@ -55,6 +55,16 @@ function Empresas_Mapa() {
     }
   }
 
+  const visualizarInformaçõesEmpresas = (id) => {
+    const sesaoBuscaIdEmpresa = {
+      id
+    }
+    console.log(sesaoBuscaIdEmpresa)
+    localStorage.removeItem(sesaoBuscaIdEmpresa)
+    localStorage.setItem("sesaoBuscaIdEmpresa", JSON.stringify(sesaoBuscaIdEmpresa));
+    window.location.href = '/usuario/perfilEmpresa'
+  }
+
   // Filtra os serviços por animal
   const filtrarServicosPorAnimal = (animalId) => {
     return servicos.filter(servico => servico.animal_id === animalId);
@@ -198,7 +208,12 @@ function Empresas_Mapa() {
               <img src={process.env.REACT_APP_URL_API_IMG+empresa.foto_perfil} width={70} height={70} className='img-fluid d-flex' alt={empresa.nome_fantasia} />
               <div className="flex-column">
                 <p className='ms-md-3 d-flex'>{empresa.nome_fantasia}</p>
-                <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
+                <a 
+                className='ms-md-4 d-flex'
+                onClick={(e) => {
+                  visualizarInformaçõesEmpresas(empresa.id); // Chama a função de clique
+                }}
+                >Ver perfil</a>
               </div>
               <div className="col-md-3"></div>
               <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
