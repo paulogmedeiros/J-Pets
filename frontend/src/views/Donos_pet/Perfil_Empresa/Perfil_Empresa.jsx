@@ -168,7 +168,7 @@ function Perfil_Empresa() {
           <div className='d-flex justify-content-end'>
             <div className=''>
               <span>
-                <img src={iconeCoracao} width={40} height={40} alt="Ícone Coração" />
+                {/* <img src={iconeCoracao} width={40} height={40} alt="Ícone Coração" /> */}
               </span>
             </div>
             <div className="dropdown me-5">
