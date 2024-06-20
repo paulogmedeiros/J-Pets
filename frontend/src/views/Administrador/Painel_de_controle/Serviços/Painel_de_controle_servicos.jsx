@@ -5,6 +5,7 @@ import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
 import botaoMais from '../img/botao_mais.svg'
 import iconeAtualizar_adm from '../img/icone_atualizar.svg'
 import iconLixeira_adm from '../img/icone_lixeira.svg'
+import { notifications } from '@mantine/notifications'
 
 function Painel_de_controle_servicos() {
 
@@ -13,7 +14,10 @@ function Painel_de_controle_servicos() {
     const [pesquisar, setPesquisar] = useState('')
     const [nomeServico, setNomeServico] = useState('')
     const [idServico, setIdServico] = useState('')
-    
+
+    const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+    const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+
     useEffect(() => {
 
         document.title = "Painel de controle | Serviços"
@@ -43,20 +47,22 @@ function Painel_de_controle_servicos() {
             const responseData = await resposta.json();
 
             if (!resposta.ok) {
+                notifications.show({ message: responseData.message, color: "white", icon: errorIcon });
                 console.error("Erro ao cadastrar serviços:", responseData);
-                window.alert("Erro ao cadastrar serviços: " + JSON.stringify(responseData));
                 throw new Error('Erro ao cadastrar serviços: ' + resposta.statusText);
             } else {
-                console.log("Resposta do servidor:", responseData);
 
-                window.location.href = "/administrador/painel/servicos";
+                notifications.show({ message: responseData.message, color: "white", icon: sucessIcon });
+                console.log("Resposta do servidor:", responseData);
+                setTimeout(() => {
+                    window.location.href = "/administrador/painel/servicos";
+                }, 1000);
+
             }
         } catch (error) {
             console.error("Erro ao cadastrar serviço:", error);
-            window.alert("Erro ao cadastrar serviço: " + error.message);
         }
     }
-
 
     // Função carregar serviços
     async function carregarServicos() {

@@ -18,7 +18,7 @@ function Login() {
     const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>;
 
     async function efetuarLogin(event) {
-        setCarregando(true)
+
         event.preventDefault(); // Prevenir o comportamento padrão do formulário
 
         try {
@@ -36,6 +36,7 @@ function Login() {
                 setErroDados(responseData.message);
                 notifications.show({ message: responseData.message, color: "white", icon: errorIcon });
             } else {
+                setCarregando(true)
                 notifications.show({ message: "Login efetuado com sucesso", color: "white", icon: sucessIcon });
                 const token = responseData;
                 const decodedToken = jwtDecode(token);
@@ -59,7 +60,7 @@ function Login() {
                         window.location.href = '/administrador/painel';
                     }, 1500);
                 }
-                
+
                 localStorage.setItem("decodedToken", JSON.stringify(decodedToken));
                 localStorage.setItem("token", JSON.stringify(token));
             }

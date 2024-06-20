@@ -5,6 +5,7 @@ import pesquisaIcone_adm from '../img/pesquisa_icone.svg'
 import botaoMais from '../img/botao_mais.svg'
 import iconeAtualizar_adm from '../img/icone_atualizar.svg'
 import iconLixeira_adm from '../img/icone_lixeira.svg'
+import { notifications } from '@mantine/notifications'
 
 function Painel_de_controle_modelos() {
 
@@ -13,6 +14,9 @@ function Painel_de_controle_modelos() {
     const [pesquisar, setPesquisar] = useState('')
     const [nomeModelo, setNomeModelo] = useState('')
     const [idModelo, setIdModelo] = useState('')
+
+    const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+    const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
 
     useEffect(() => {
         document.title = "Painel de controle | Modelos"
@@ -78,17 +82,20 @@ function Painel_de_controle_modelos() {
             const responseData = await resposta.json();
 
             if (!resposta.ok) {
+                notifications.show({ message: responseData.message, color: "white", icon: errorIcon });
                 console.error("Erro ao atualizar modelos:", responseData);
-                window.alert("Erro ao atualizar modelos: " + JSON.stringify(responseData));
                 throw new Error('Erro ao atualizar modelos: ' + resposta.statusText);
-            } else {
-                console.log("Resposta do servidor:", responseData);
 
-                window.location.href = "/administrador/painel/modelos";
+            } else {
+                notifications.show({ message: responseData.message, color: "white", icon: sucessIcon });
+                console.log("Resposta do servidor:", responseData);
+                setTimeout(() => {
+                    window.location.href = "/administrador/painel/modelos";
+                }, 1000);
+
             }
         } catch (error) {
             console.error("Erro ao atualizar modelo:", error);
-            window.alert("Erro ao atualizar modelo: " + error.message);
         }
     }
 

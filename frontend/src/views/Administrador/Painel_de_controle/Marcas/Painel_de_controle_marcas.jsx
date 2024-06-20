@@ -5,6 +5,7 @@ import pesquisaIcone_adm from "../img/pesquisa_icone.svg";
 import botaoMais from "../img/botao_mais.svg";
 import iconeAtualizar_adm from "../img/icone_atualizar.svg";
 import iconLixeira_adm from "../img/icone_lixeira.svg";
+import { notifications } from '@mantine/notifications'
 
 function Painel_de_controle_marcas() {
 
@@ -13,6 +14,9 @@ function Painel_de_controle_marcas() {
   const [pesquisar, setPesquisar] = useState('')
   const [nomeMarca, setNomeMarca] = useState('')
   const [idMarca, setIdMarca] = useState('')
+
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
 
   useEffect(() => {
 
@@ -78,16 +82,20 @@ function Painel_de_controle_marcas() {
 
       if (!resposta.ok) {
         console.error("Erro ao atualizar modelos:", responseData);
-        window.alert("Erro ao atualizar modelos: " + JSON.stringify(responseData));
+        notifications.show({ message: responseData.message, color: "white", icon: errorIcon });
         throw new Error('Erro ao atualizar modelos: ' + resposta.statusText);
+
       } else {
+        notifications.show({ message: responseData.message, color: "white", icon: sucessIcon });
         console.log("Resposta do servidor:", responseData);
 
-        window.location.href = "/administrador/painel/marcas";
+        setTimeout(() => {
+          window.location.href = "/administrador/painel/marcas";
+        }, 1000);
+
       }
     } catch (error) {
       console.error("Erro ao atualizar serviço:", error);
-      window.alert("Erro ao atualizar serviço: " + error.message);
     }
   }
 

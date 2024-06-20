@@ -3,13 +3,15 @@ import "./Novo_servico.css";
 import imgCadastroItens from "../img/imgCadastro.svg";
 import logoJPets_adm from '../img/logoJPets.png'
 import iconeVoltar from '../img/iconeVoltar.svg'
+import { notifications } from '@mantine/notifications'
 
 function Novo_servico() {
-
-
   const [animais, setAnimal] = useState([])
   const [nome, setNome] = useState('')
   const [animal_id, setAnimalId] = useState('')
+
+  const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
 
   useEffect(() => {
     document.title = "Cadastro | Serviços"
@@ -53,17 +55,16 @@ function Novo_servico() {
       const responseData = await resposta.json();
 
       if (!resposta.ok) {
+        notifications.show({ message: responseData.message, color: "white", icon: errorIcon });
         console.error("Erro ao cadastrar serviços:", responseData);
-        window.alert("Erro ao cadastrar serviços: " + JSON.stringify(responseData));
         throw new Error('Erro ao cadastrar serviços: ' + resposta.statusText);
+
       } else {
+        notifications.show({ message: responseData.message, color: "white", icon: sucessIcon });
         console.log("Resposta do servidor:", responseData);
-        window.alert("Serviço cadastrado com sucesso");
-        window.location.href = "/administrador/painel/servicos";
       }
     } catch (error) {
       console.error("Erro ao cadastrar serviço:", error);
-      window.alert("Erro ao cadastrar serviço: " + error.message);
     }
   }
 
