@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import './Empresas_Mapa.css'
 import logoJPets from './img/logoJPets.png'
 import iconeCoracao from './img/icone_coracao.svg'
@@ -9,20 +9,26 @@ import imgDesconto from './img/desconto_botao.svg'
 import axios from 'axios'
 
 function Empresas_Mapa() {
+
   const [servicos, setServicos] = useState([]);
+  const [empresas, setEmpresas] = useState([])
+  const tipo = JSON.parse(localStorage.getItem("sesaoBusca"))?.tipo;
+  const id = JSON.parse(localStorage.getItem("sesaoBusca"))?.id;
+  const titulo = JSON.parse(localStorage.getItem("sesaoBusca"))?.titulo;
 
   useEffect(() => {
     document.title = "Visualização";
-    buscarServicos(); // Chamada inicial para buscar os serviços
+    buscarServicos(); // Chamada inicial para buscar os serviços                   
+    buscaEmpresas()
 
     // JavaScript para habilitar os submenus
     const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
     dropdownSubmenus.forEach(submenu => {
-      submenu.addEventListener('mouseenter', function() {
+      submenu.addEventListener('mouseenter', function () {
         this.classList.add('show');
         this.querySelector('.dropdown-menu').classList.add('show');
       });
-      submenu.addEventListener('mouseleave', function() {
+      submenu.addEventListener('mouseleave', function () {
         this.classList.remove('show');
         this.querySelector('.dropdown-menu').classList.remove('show');
       });
@@ -38,6 +44,16 @@ function Empresas_Mapa() {
         console.error('Erro ao buscar serviços:', error);
       });
   };
+
+  async function buscaEmpresas() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + '/empresas/' + tipo + '/servicosProdutos/' + id)
+      const dados = await resposta.json()
+      setEmpresas(dados)
+    } catch (error) {
+
+    }
+  }
 
   // Filtra os serviços por animal
   const filtrarServicosPorAnimal = (animalId) => {
@@ -174,42 +190,21 @@ function Empresas_Mapa() {
 
         {/* Título */}
         <div className="container text-center mt-3 ">
-          <h3 className='mb-5'>Empresas que trabalham com o modelo <span className='text-warning'>(modelo)</span></h3>
+          <h3 className='mb-5'>Empresas que trabalham com o {titulo}</h3>
 
           {/* Empresas */}
-          <div className="col-md-6 d-flex border rounded-4 w-auto w-auto p-3 p-md-4 bg-body-secondary mb-5">
-
-            <img src={logoJPets} width={70} height={70} className='img-fluid d-flex' />
-
-            <div className="flex-column">
-              <p className='ms-md-3 d-flex'>Nome da empresa</p>
-              <img src={imgEstrela} width={25} />
-              <img src={imgEstrela} width={25} />
-              <img src={imgEstrela} width={25} />
-              <img src={imgEstrela} width={25} />
-              <img src={imgEstrela} width={25} />
-              <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
+          {empresas.map((empresa) => (
+            <div key={empresa.id} className="col-md-6 d-flex border rounded-4 w-auto w-auto p-3 p-md-4 bg-body-secondary mb-5">
+              <img src={process.env.REACT_APP_URL_API_IMG+empresa.foto_perfil} width={70} height={70} className='img-fluid d-flex' alt={empresa.nome_fantasia} />
+              <div className="flex-column">
+                <p className='ms-md-3 d-flex'>{empresa.nome_fantasia}</p>
+                <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
+              </div>
+              <div className="col-md-3"></div>
+              <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
             </div>
-            <div className="col-md-3"></div>
-            <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
-          </div>
+          ))}
 
-          <div className="col-md-6 d-flex border rounded-4  w-auto w-auto p-3 p-md-4 p-3 bg-body-secondary mb-5">
-
-            <img src={logoJPets} width={70} height={70} className='img-fluid d-flex' />
-
-            <div className="flex-column">
-              <p className='ms-md-3 d-flex'>Nome da empresa</p>
-              <img src={imgEstrela} width={25} />
-              <img src={imgEstrela} width={25} />
-              <img src={imgEstrela} width={25} />
-              <img src={imgEstrela} width={25} />
-              <img src={imgEstrela} width={25} />
-              <a href='' className='ms-md-4 d-flex'>Ver perfil</a>
-            </div>
-            <div className="col-md-3"></div>
-            <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
-          </div>
         </div>
 
         {/* API
