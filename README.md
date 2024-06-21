@@ -14,3 +14,15 @@ O projeto é nosso T.C.C. e fruto de um ano e meio de estudos no SENAI de Vitór
 
 # </> Desenvolvedores
 <a href="https://github.com/paulogmedeiros">Paulo Gabriel</a> e <a href="https://github.com/galazzij">Jamille Galazi</a>
+
+# 📝 Passo a passo para inicializar o projeto
+Frontend<br>
+● cd frontend/ <br>
+● npm install (para instalar todas as dapêndencias) <br>
+● npm start (para inicializar a aplicação) <br>
+
+Backend<br>
+● cd backend/ <br>
+● npm install (para instalar todas as dapêndencias) <br>
+● npx prisma generate (para gerar a tipagem do banco de dados no código fonte por meio da PrimaORM) <br>
+● npm run dev (para inicializar a aplicação) <br>
