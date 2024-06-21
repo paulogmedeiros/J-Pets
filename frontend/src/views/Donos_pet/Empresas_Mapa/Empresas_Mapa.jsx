@@ -182,7 +182,7 @@ function Empresas_Mapa() {
           <div className='d-flex justify-content-end'>
             <div className=''>
               <span>
-                <img src={iconeCoracao} width={40} height={40} alt="Ícone Coração" />
+                {/* <img src={iconeCoracao} width={40} height={40} alt="Ícone Coração" /> */}
               </span>
             </div>
             <div className="dropdown me-5">
@@ -221,14 +221,14 @@ function Empresas_Mapa() {
               <div className="flex-column">
                 <p className='ms-md-3 d-flex'>{empresa.nome_fantasia}</p>
                 <a 
-                className='ms-md-4 d-flex'
+                className='ms-md-4 d-flex verPerfil'
                 onClick={(e) => {
                   visualizarInformaçõesEmpresas(empresa.id); // Chama a função de clique
                 }}
                 >Ver perfil</a>
               </div>
               <div className="col-md-3"></div>
-              <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} /></button>
+              <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} style={{ borderRadius: "50%" }} /></button>
             </div>
           ))}
 

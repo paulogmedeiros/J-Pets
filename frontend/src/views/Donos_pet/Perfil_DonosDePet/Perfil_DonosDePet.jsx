@@ -7,11 +7,16 @@ import axios from 'axios'
 function Perfil_DonosDePet() {
 
   const [servicos, setServicos] = useState([]);
+  const [email, setEmail] = useState('');
+  const [nomeUsuario, setNomeUsuario] = useState('');
+  const decodedToken = JSON.parse(localStorage.getItem("decodedToken"))
+  const token = JSON.parse(localStorage.getItem("token"))
+  const usuario_id = decodedToken['usuario_id']
 
   useEffect(() => {
     document.title = "Página inicial";
     buscarServicos(); // Chamada inicial para buscar os serviços
-
+    pegarEmail()
     // JavaScript para habilitar os submenus
     const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
     dropdownSubmenus.forEach(submenu => {
@@ -25,6 +30,33 @@ function Perfil_DonosDePet() {
       });
     });
   }, []);
+
+  async function pegarEmail() {
+    try {
+
+      if (!usuario_id) {
+        window.location.href = './'
+      }
+
+      const resposta = await fetch(process.env.REACT_APP_URL_API + '/usuario/' + usuario_id, {
+        method: 'GET',
+        headers: {
+          'x-access-token': token
+        }
+      })
+
+      if (!resposta.ok) {
+        throw new Error('HTTP Erro' + resposta.status)
+      }
+
+      const dados = await resposta.json()
+      console.log(dados)
+      setEmail(dados.email)
+      setNomeUsuario(dados.tutores_pets.nome)
+    } catch (error) {
+      throw new Error('HTTP Erro' + error)
+    }
+  }
 
   async function visualizarEmpresasServicos(id){
     const sesaoBusca = {
@@ -153,7 +185,7 @@ function Perfil_DonosDePet() {
           <div className='d-flex justify-content-end'>
             <div className=''>
               <span>
-                <img src={iconeCoracao} width={40} height={40} alt="Ícone Coração" />
+                {/* <img src={iconeCoracao} width={40} height={40} alt="Ícone Coração" /> */}
               </span>
             </div>
             <div className="dropdown me-5">
@@ -184,11 +216,11 @@ function Perfil_DonosDePet() {
         <div className="text-center ">
           <div className="row">
             <div className="col-md-6">
-              <h1 className='fs-2 fw-semibold mb-5 mb-md-0'>Jamille Galazi</h1>
+              <h1 className='fs-2 fw-semibold mb-5 mb-md-0'>{nomeUsuario}</h1>
               <hr />
-              <input className="form-control mb-3 " type="text" value="Email" aria-label="Disabled input example" disabled readonly></input>
+              <input className="form-control mb-3 " type="text" value={email} aria-label="Disabled input example" disabled readonly></input>
 
-              <input className="form-control mb-3 " type="text" value="Senha" aria-label="Disabled input example" disabled readonly />
+              <input className="form-control mb-3 " type="text" value="********" aria-label="Disabled input example" disabled readonly />
 
               <a className="mb-5 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/senha/alteracao">
                 Alterar senha
