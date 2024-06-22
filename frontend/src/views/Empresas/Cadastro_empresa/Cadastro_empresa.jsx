@@ -3,6 +3,7 @@ import './Cadastro_empresa.css'
 import imagemCadastroEmpresa from './img/imagem_cadastro_empresa.svg'
 import { notifications } from '@mantine/notifications'
 import { Loader } from '@mantine/core';
+import InputMask from 'react-input-mask'
 
 function Cadastro_empresa() {
 
@@ -26,22 +27,25 @@ function Cadastro_empresa() {
 
     // impede o comportamento padrão de reload da página
     event.preventDefault()
-    setCarregando(true)
+    
 
+
+    const cnpjLimpo = cnpj.replace(/\D/g, '');
+   
     try {
-    // tratamento pra ver se as senhas são iguais
-    if (senha !== confirmarSenha) {
-      setErroSenha("As senhas não coincidem")
-      throw new Error("As senhas não coincidem")
-       // Adiciona este retorno para sair da função se as senhas não coincidirem
-    }
-    // Criando objeto com os dados do usuário que serão enviados para a API
-    const empresasDados = {
-      email,
-      senha,
-      cnpj,
-      nomeFantasia
-    }
+      // tratamento pra ver se as senhas são iguais
+      if (senha !== confirmarSenha) {
+        setErroSenha("As senhas não coincidem")
+        throw new Error("As senhas não coincidem")
+        // Adiciona este retorno para sair da função se as senhas não coincidirem
+      }
+      // Criando objeto com os dados do usuário que serão enviados para a API
+      const empresasDados = {
+        email,
+        senha,
+        cnpj: cnpjLimpo,
+        nomeFantasia
+      }
 
       // Realiza POST para a API
       const result = await fetch(process.env.REACT_APP_URL_API + '/empresas', {
@@ -60,7 +64,7 @@ function Cadastro_empresa() {
 
       notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
       setTimeout(() => {
-        setCarregando(false)
+        setCarregando(true)
         window.location.href = '/';
       }, 1500);
 
@@ -92,12 +96,12 @@ function Cadastro_empresa() {
           </div>
 
           <div className="form-floating mb-1 mb-md-3">
-            <input type="number"
-              value={cnpj}
+            <InputMask mask="99.999.999/9999-99" value={cnpj}
               onChange={e => setCNPJ(e.target.value)}
               className="form-control"
               id="floatingInput"
               placeholder="Password" />
+
             <label for="floatingInput">CNPJ</label>
           </div>
 
