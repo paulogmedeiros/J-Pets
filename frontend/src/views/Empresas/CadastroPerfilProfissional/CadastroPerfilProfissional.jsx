@@ -5,11 +5,6 @@ import { notifications } from '@mantine/notifications'
 
 function CadastroPerfilProfissional() {
 
-  useEffect(() => {
-    document.title = "Cadastro de perfil"
-    pegarInformacoes()
-  }, [])
-
   const [idEmpresa, setIdEmpresa] = useState(JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa);
   const [cep, setCep] = useState('');
   const [telefone, setTelefone] = useState('')
@@ -18,16 +13,21 @@ function CadastroPerfilProfissional() {
   const [diaSemanaInicio, setDiaSemanaInicio] = useState('')
   const [horaAbertura, setHoraAbertura] = useState('')
   const [horaFechamento, setHoraFechamento] = useState('')
-
+  const [nome, setNome] = useState('')
   const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
   const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
-
   const [endereco, setEndereco] = useState({
     rua: '',
     bairro: '',
     cidade: '',
     uf: ''
   });
+
+  useEffect(() => {
+    document.title = "Cadastro de perfil"
+    pegarInformacoes()
+  }, [])
+
 
   // função para a API de CEP ViaCEP
   const handleCepChange = (e) => {
@@ -100,8 +100,7 @@ function CadastroPerfilProfissional() {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresas/ " + idEmpresa)
       const dados = await resposta.json()
-      console.log(dados)
-
+      setNome(dados.nome_fantasia)
       setCep(dados.cep)
       setEndereco({
         rua: dados.rua,
@@ -223,7 +222,7 @@ function CadastroPerfilProfissional() {
             <h1 className='perfilProfissionalTitulo text-md-start'>Cadastre seu perfil</h1>
 
             <div className="row mt-3 rounded-3 p-3 border rounded-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
-              <h3 className='text-start'>Jamille Galazi</h3>
+              <h3 className='text-start'>{nome}</h3>
               <hr />
               <div className="col-md-3">
                 <div className="mb-3 text-start">

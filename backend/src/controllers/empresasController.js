@@ -116,7 +116,11 @@ class EmpresasController {
         try {
             const param = parseInt(req.params.id)
             const result = await EmpresasService.editStatus(param);
-            res.status(200).json(result)
+            if(result.status_ativo){
+                res.status(200).json({message: 'Conta ativida com sucesso', status: result.status_ativo})
+            } else {
+                res.status(200).json({message: 'Conta desativada com sucesso', status_ativo: result.status_ativo})
+            }
         } catch (error) {
             const retorno = FiltroExcecoes.tratarErro(error)
             res.status(retorno.status).json({message: retorno.message})

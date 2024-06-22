@@ -1,11 +1,71 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
 import logoJPets from './img/logoJPets.png'
 import './DesativarConta.css'
+import { notifications } from '@mantine/notifications'
+
 function DesativarConta() {
+  const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+  const idEmpresa = JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa;
+  const [statusEmpresa, setStatusEmpresa] = useState('')
+  const [buttonColor, setButtonColor] = useState('')
+  const [nome, setNome] = useState('')
+  const [nomeParagrafo, setNomeParagrafo] = useState('')
+
+  useEffect(() => {
+    document.title = "Conta empresa"
+    pegarInformacoes()
+  }, [])
+
   async function logOff() {
     localStorage.clear()
     window.location.href = "/"
   }
+
+  async function pegarInformacoes() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresas/ " + idEmpresa)
+      const dados = await resposta.json()
+      setNome(dados.nome_fantasia)
+      if(dados.status_ativo){
+        setStatusEmpresa('Desativar')
+        setNomeParagrafo('desativar')
+        setButtonColor('btn-danger')
+      } else {
+        setStatusEmpresa('Ativar')
+        setNomeParagrafo('ativar')
+        setButtonColor('btn-success')
+      }
+    } catch (error) {
+      window.alert(error)
+      window.alert("Erro ao exibir cupom", error)
+    }
+  }
+
+  async function alterarStatusEmpresa(event) {
+    try {
+      
+      event.preventDefault()
+
+      const result = await fetch(process.env.REACT_APP_URL_API + '/empresas/status/' + idEmpresa, {
+        method: 'PUT',
+      })
+
+      const resposta = await result.json()
+ 
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      pegarInformacoes()
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      
+    } catch (error) {
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
   return (
     <div>
       <nav className="navbarEmpresas navbar navbar-expand-lg">
@@ -102,11 +162,11 @@ function DesativarConta() {
           <div className="col-md-9 text-center text-md-start">
             <h1 className='desativarContaTitulo'>Perfil profissional</h1>
             <div className=' rounded-3 p-3 border rounded-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded'>
-              <h3 className='text-md-start mb-5'>Jamille Galazi</h3>
+              <h3 className='text-md-start mb-5'>{nome}</h3>
               <div className="w-100"></div>
-              <h4>Desativar conta</h4>
-              <p>Tem certeza que deseja desativar a conta? A sua conta pode ser reativada em outro momento.</p>
-              <button type="button" className="btn btn-danger">Desativar</button>
+              <h4>{statusEmpresa} conta</h4>
+              <p>Tem certeza que deseja {nomeParagrafo} a conta? A sua conta pode ser ativada ou desativada a qualquer momento.</p>
+              <button onClick={alterarStatusEmpresa} type="button" className={`btn ${buttonColor}`}>{statusEmpresa}</button>
             </div>
           </div>
         </div>

@@ -1,11 +1,56 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
 import './CancelarAssinatura.css'
 import logoJPets from './img/logoJPets.png'
+import { notifications } from '@mantine/notifications'
+
 function CancelarAssinatura() {
+
+  const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+  const idEmpresa = JSON.parse(localStorage.getItem("decodedToken"))?.idEmpresa;
+  const [nome, setNome] = useState('')
+
+  useEffect(() => {
+    document.title = "Conta empresa"
+    pegarInformacoes()
+  }, [])
 
   async function logOff() {
     localStorage.clear()
     window.location.href = "/"
+  }
+
+  async function pegarInformacoes() {
+    try {
+      const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresas/ " + idEmpresa)
+      const dados = await resposta.json()
+      setNome(dados.nome_fantasia)
+    } catch (error) {
+      window.alert(error)
+      window.alert("Erro ao exibir cupom", error)
+    }
+  }
+
+  async function cancelarAssinatura(event) {
+    try {
+
+      event.preventDefault()
+
+      const result = await fetch(process.env.REACT_APP_URL_API + '/empresas/cancelar/assinatura/' + idEmpresa, {
+        method: 'PUT',
+      })
+
+      const resposta = await result.json()
+      
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      
+    } catch (error) {
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
   }
 
   return (
@@ -104,11 +149,11 @@ function CancelarAssinatura() {
           <div className="col-md-9 text-center text-md-start">
             <h1 className='cancelarAssinaturaTitulo'>Perfil profissional</h1>
             <div className=' rounded-3 p-3 border rounded-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded'>
-              <h3 className='text-md-start mb-5'>Jamille Galazi</h3>
+              <h3 className='text-md-start mb-5'>{nome}</h3>
               <div className="w-100"></div>
               <h4>Cancelar assinatura</h4>
               <p>Tem certeza que deseja cancelar a assinatura? Você perderá todos os seus benefícios.</p>
-              <button type="button" className="btn btn-danger">Cancelar assinatura</button>
+              <button onClick={cancelarAssinatura} type="button" className="btn btn-danger">Cancelar assinatura</button>
             </div>
 
           </div>
