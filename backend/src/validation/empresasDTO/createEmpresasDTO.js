@@ -28,7 +28,7 @@ const empresasDTO = Joi.object({
             'string.min': 'A senha deve ter pelo menos 8 caracteres.',
             'string.max': 'A senha não pode ter mais de 20 caracteres.',
             'any.required': 'A senha é obrigatória.',
-            'string.pattern.base': 'A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um digito numérico e no minimo 8 caracteres.',
+            'string.pattern.base': 'A senha deve conter pelo menos um caractere especial, uma letra maiúscula, uma letra minúscula, um digito numérico e no minimo 8 caracteres.',
             'any.empty': 'A senha não pode ser vazio.'
         }),
 
