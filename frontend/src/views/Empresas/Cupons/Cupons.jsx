@@ -56,15 +56,15 @@ function Cupons() {
     try {
       const resposta = await fetch(process.env.REACT_APP_URL_API + "/empresas/ " + idEmpresa)
       const dados = await resposta.json()
-      console.log(dados)
 
       // porcentagemCupom = dados.porcentagem_cupom
       // nomeCupom = dados.nome_cupom
-      if (!dados.nomeCupom) {
-        setCupom("Exemplo nome")
+      if (!dados.nome_cupom) {
+        setCupom("Nome do Cupom")
+      } else {
+        setCupom(`${dados.nome_cupom}${dados.porcentagem_cupom}`)
       }
 
-      setCupom(`${dados.nome_cupom}${dados.porcentagem_cupom}`)
 
     } catch (error) {
       window.alert(error)

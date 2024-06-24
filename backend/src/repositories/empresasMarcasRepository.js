@@ -47,6 +47,17 @@ class EmpresasMarcasRepository {
         })
     }
 
+    async selectEmpresasMarcasPorIdEmpresa(empresaId) {
+        return await this.prisma.empresas_marcas.findMany({
+            where: {
+                empresa_id: empresaId,
+            },
+            select: {
+                marca_id: true,
+            }
+        })
+    }
+
     async insertEmpresasMarcas(data) {
         return await this.prisma.$transaction(async (prismaTx) => {
             for (const marcaId of data.marcasId) {

@@ -24,6 +24,14 @@ class EmpresasMarcasService {
 }
 
     async createEmpresasMarcas(data) {
+        const marcasEmpresa = await EmpresasMarcasRepository.selectEmpresasMarcasPorIdEmpresa(data.empresaId)
+        const marcasCadastrados = marcasEmpresa.map((e)=> e.marca_id)
+
+        for(const marca of data.marcasId){
+            if(marcasCadastrados.includes(marca)){
+                throw new ExcecaoGenericaDeErro("Marca já cadastrado")
+            }
+        }
        return await EmpresasMarcasRepository.insertEmpresasMarcas(data)
     }
 

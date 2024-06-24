@@ -71,6 +71,20 @@ function PerfilDeEmpresas() {
     }
   }
 
+  async function excluirFoto() {
+    try {
+      setCarregando(true)
+      const resposta = await axios.put(process.env.REACT_APP_URL_API + "/empresas/remover/foto/" + idEmpresa)
+      setTimeout(() => {
+        setCarregando(false)
+      }, 1500);
+      pegarInformacoes()
+      setFoto(null)
+    } catch (error) {
+
+    }
+  }
+
   useEffect(() => {
     atualizarFoto()
   }, [foto]);
@@ -190,7 +204,7 @@ function PerfilDeEmpresas() {
                         setFoto(e.target.files[0])
                       }}
                       className="" type="file" id="formFile" style={{ backgroundColor: 'transparent', outline: "none", display: "none" }} />
-                    <button type="button" className="btn btn-secondary m-3 rounded-4">Remover</button>
+                    <button onClick={excluirFoto} type="button" className="btn btn-secondary m-3 rounded-4">Remover</button>
                   </div>
                   <div className="col p-4">
                     <h2>{nome}</h2>

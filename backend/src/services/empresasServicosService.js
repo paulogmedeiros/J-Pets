@@ -27,6 +27,15 @@ class EmpresasServicosService {
         // valido se a empresa já tem o animal cadastrado
         const result = await EmpresasAnimaisServico.findEmpresasAnimaisPorEmpresaIdEAnimalId(data)
 
+        const servicosEmpresa = await EmpresasServicosRepository.selectEmpresasSevicoPorIdEmpresa(data.empresaId)
+        const servicosCadastrados = servicosEmpresa.map((e)=> e.servicos.id)
+
+        for(const servico of data.servicosId){
+            if(servicosCadastrados.includes(servico)){
+                throw new ExcecaoGenericaDeErro("Serviço já cadastrado")
+            }
+        }
+
         // valido se a empresa já tiver o animal cadastrado criar apenas os relacionamentos com os serviço, caso contrario cria o relacionamento com o animal tambem
         if (result) {
             return await EmpresasServicosRepository.insertEmpresasServicos(data)

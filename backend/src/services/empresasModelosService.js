@@ -21,6 +21,14 @@ class EmpresasModelosService {
     }
 
     async createEmpresasModelos(data) {
+        const modelosEmpresa = await EmpresasModelosRepository.selectEmpresasModelosPorIdEmpresa(data.empresaId)
+        const modelosCadastrados = modelosEmpresa.map((e)=> e.modelos.id)
+
+        for(const modelo of data.modelosId){
+            if(modelosCadastrados.includes(modelo)){
+                throw new ExcecaoGenericaDeErro("Modelo já cadastrado")
+            }
+        }
         return await EmpresasModelosRepository.insertEmpresasModelos(data)
     }
 
