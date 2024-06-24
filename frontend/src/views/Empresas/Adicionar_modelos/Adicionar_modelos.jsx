@@ -88,7 +88,7 @@ function Adicionar_modelos() {
     if (produto_id) {
       pegarEmpresasMarcasPorIdEmpresaIdProduto(produto_id)
     }
-  })
+  }, [])
   // função para pegar os modelos disponíveis de acordo com a marca escolhida
   // (modelos > getModelosPorIdMarcaIdEmpresa)
   async function pegarModelosPorIdMarcaIdEmpresa(marca_id) {
@@ -109,7 +109,8 @@ function Adicionar_modelos() {
     if (marca_id) {
       pegarModelosPorIdMarcaIdEmpresa(marca_id)
     }
-  })
+  }, [])
+
   // função para adicionar modelos
   // (Empresas_Modelos > postEmpresasModelos)
   async function adicionarModelos(event) {
