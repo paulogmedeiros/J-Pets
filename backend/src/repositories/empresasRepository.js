@@ -47,6 +47,7 @@ class EmpresasRepository {
     async selectEmpresasPorServicoId(id) {
         return await this.prisma.empresas.findMany({
             where: {
+                status_pagamento: true,
                 empresas_servicos: {
                     some: {
                         servico_id: id
@@ -59,6 +60,7 @@ class EmpresasRepository {
     async selectEmpresaPorModeloId(modeloId) {
         return await this.prisma.empresas.findMany({
             where: {
+                status_pagamento: true,
                 empresas_modelos: {
                     some: {
                         modelo_id: modeloId

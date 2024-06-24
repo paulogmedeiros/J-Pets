@@ -4,8 +4,11 @@ import iconeCoracao from './img/icone_coracao.svg'
 import iconeUsuarioLogin from './img/icone_usuarioLogin.svg'
 import './Perfil_DonosDePet.css'
 import axios from 'axios'
-function Perfil_DonosDePet() {
+import { notifications } from '@mantine/notifications'
 
+function Perfil_DonosDePet() {
+  const errorIcon = <i className="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
+  const sucessIcon = <i className="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
   const [servicos, setServicos] = useState([]);
   const [email, setEmail] = useState('');
   const [nomeUsuario, setNomeUsuario] = useState('');
@@ -58,7 +61,31 @@ function Perfil_DonosDePet() {
     }
   }
 
-  async function visualizarEmpresasServicos(id){
+  async function excluirConta(event) {
+    try {
+
+      event.preventDefault()
+
+      const result = await fetch(process.env.REACT_APP_URL_API + '/donoPet/' + usuario_id, {
+        method: 'DELETE',
+      })
+
+      const resposta = await result.json()
+
+      if (result.status >= 400) { // Verifica se o status é 201 Created
+        throw new Error(resposta.message)
+      }
+
+      notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+
+      localStorage.clear()
+      window.location.href = "/"
+    } catch (error) {
+      notifications.show({ message: error.message, color: "white", icon: errorIcon });
+    }
+  }
+
+  async function visualizarEmpresasServicos(id) {
     const sesaoBusca = {
       titulo: 'serviço',
       id: id,
@@ -125,7 +152,7 @@ function Perfil_DonosDePet() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(1).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => { visualizarEmpresasServicos(servico.id) }}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -141,7 +168,7 @@ function Perfil_DonosDePet() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(2).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => { visualizarEmpresasServicos(servico.id) }}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -158,7 +185,7 @@ function Perfil_DonosDePet() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(3).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => { visualizarEmpresasServicos(servico.id) }}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -174,7 +201,7 @@ function Perfil_DonosDePet() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(4).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => { visualizarEmpresasServicos(servico.id) }}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -228,7 +255,7 @@ function Perfil_DonosDePet() {
             </div>
 
             <div className="col-md-6 mt-3 mt-md-0">
-              <button type="button" className="btn btn-danger">Desativar conta</button>
+              <button onClick={excluirConta} type="button" className="btn btn-danger">Excluir conta</button>
             </div>
           </div>
         </div>
