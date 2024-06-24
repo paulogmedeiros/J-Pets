@@ -80,7 +80,11 @@ class EmpresasService {
 
     async editCancelarAssinatura(id) {
         // valido o id da empresa existe já está cadastrado
-        await this.findEmpresasPorId(id)
+        const empresa = await this.findEmpresasPorId(id)
+
+        if(!empresa.status_pagamento){
+            throw new ExcecaoGenericaDeErro("Sua empresa não está assinando o plano de afiliados no momento")
+        }
 
         return await EmpresasRepository.updateCancelarAssinatura(id)
     }

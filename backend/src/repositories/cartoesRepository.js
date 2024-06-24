@@ -17,6 +17,14 @@ class CartoesRepository {
         })
     }
 
+    async selectEmpresas(id){
+        return await this.prisma.empresas.findFirst({
+            where:{
+                id
+            }
+        })
+    }
+
     // atualizo o status de pagamento da empresa
     async updateStatusPagamento(id){
         return await this.prisma.empresas.update({

@@ -17,6 +17,7 @@ function PerfilDeEmpresas() {
   const [carregando, setCarregando] = useState(false)
   const errorIcon = <i class="fa-solid fa-circle-exclamation" style={{ color: "red", fontSize: "20px" }}></i>
   const sucessIcon = <i class="fa-solid fa-circle-check" style={{ color: "green", fontSize: "20px" }}></i>
+  
   useEffect(() => {
     document.title = "Perfil | Empresa"
     pegarInformacoes()

@@ -9,6 +9,11 @@ class CartoesService{
         if (!cartao) {
             throw new ExcecaoGenericaDeErro("Informações do cartão não encontrada em nossa base de dados")
         }
+        // valido se empresa já está fazendo a assinatura
+        const empresa = await CartoesRepository.selectEmpresas(id)
+        if(empresa.status_pagamento){
+            throw new ExcecaoGenericaDeErro("Sua assinatura já está feita!!!!")
+        }
         // valido se o valor do cartão está de acordo
         if(cartao.valor_conta < 200.00){
             throw new ExcecaoGenericaDeErro("Saldo insuficiente para realizar operação")
