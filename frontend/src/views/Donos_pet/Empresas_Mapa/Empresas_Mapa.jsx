@@ -18,7 +18,7 @@ function Empresas_Mapa() {
 
   useEffect(() => {
     document.title = "Visualização";
-    buscarServicos(); // Chamada inicial para buscar os serviços                   
+    buscarServicos(); // Chamada inicial para buscar os serviços
     buscaEmpresas()
 
     // JavaScript para habilitar os submenus
@@ -193,7 +193,7 @@ function Empresas_Mapa() {
               </button>
               <ul className="dropdown-menu">
                 <a className="nav-link disabled ms-3" aria-disabled="true">
-                  <span className='d-inline-block' style={{ maxWidth: '100px' }}>
+                  <span className='d-inline-block text-truncate' style={{ maxWidth: '100px' }}>
                     {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
                   </span>
                 </a>
@@ -220,7 +220,7 @@ function Empresas_Mapa() {
               <img src={process.env.REACT_APP_URL_API_IMG+empresa.foto_perfil} width={70} height={70} style={{ borderRadius: "50%" }} className='img-fluid d-flex' alt={empresa.nome_fantasia} />
               <div className="flex-column">
                 <p className='ms-md-3 d-flex'>{empresa.nome_fantasia}</p>
-                <a 
+                <a
                 className='ms-md-4 d-flex verPerfil'
                 onClick={(e) => {
                   visualizarInformaçõesEmpresas(empresa.id); // Chama a função de clique

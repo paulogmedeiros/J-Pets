@@ -77,9 +77,11 @@ function Perfil_DonosDePet() {
       }
 
       notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
+      setTimeout(() => {
+        localStorage.clear()
+        window.location.href = "/"
+      }, 1500);
 
-      localStorage.clear()
-      window.location.href = "/"
     } catch (error) {
       notifications.show({ message: error.message, color: "white", icon: errorIcon });
     }
@@ -223,7 +225,7 @@ function Perfil_DonosDePet() {
               </button>
               <ul className="dropdown-menu">
                 <a className="nav-link disabled ms-3" aria-disabled="true">
-                  <span className='d-inline-block' style={{ maxWidth: '100px' }}>
+                  <span className='d-inline-block text-truncate' style={{ maxWidth: '100px' }}>
                     {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
                   </span>
                 </a>
