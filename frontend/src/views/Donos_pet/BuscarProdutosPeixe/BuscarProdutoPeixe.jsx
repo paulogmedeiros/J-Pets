@@ -272,7 +272,7 @@ function BuscarProdutoPeixe() {
               </button>
               <ul className="dropdown-menu">
                 <a className="nav-link disabled ms-3" aria-disabled="true">
-                  <span className='d-inline-block' style={{ maxWidth: '100px' }}>
+                  <span className='d-inline-block text-truncate' style={{ maxWidth: '100px' }}>
                     {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
                   </span>
                 </a>

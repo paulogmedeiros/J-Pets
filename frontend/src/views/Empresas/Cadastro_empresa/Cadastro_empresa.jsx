@@ -27,11 +27,11 @@ function Cadastro_empresa() {
 
     // impede o comportamento padrão de reload da página
     event.preventDefault()
-    
+
 
 
     const cnpjLimpo = cnpj.replace(/\D/g, '');
-   
+
     try {
       // tratamento pra ver se as senhas são iguais
       if (senha !== confirmarSenha) {
@@ -62,9 +62,9 @@ function Cadastro_empresa() {
         throw new Error(resposta.message)
       }
 
+      setCarregando(true)
       notifications.show({ message: resposta.message, color: "white", icon: sucessIcon });
       setTimeout(() => {
-        setCarregando(true)
         window.location.href = '/';
       }, 1500);
 

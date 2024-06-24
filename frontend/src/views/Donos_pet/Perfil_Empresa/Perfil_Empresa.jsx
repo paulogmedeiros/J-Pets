@@ -29,7 +29,7 @@ function Perfil_Empresa() {
     });
   }, []);
 
-  async function visualizarEmpresasServicos(id){
+  async function visualizarEmpresasServicos(id) {
     const sesaoBusca = {
       titulo: 'serviço',
       id: id,
@@ -58,11 +58,11 @@ function Perfil_Empresa() {
 
   async function buscaEmpresa() {
     try {
-      const resposta = await fetch(process.env.REACT_APP_URL_API + '/empresas/'+ id)
+      const resposta = await fetch(process.env.REACT_APP_URL_API + '/empresas/' + id)
       const dados = await resposta.json()
       console.log(dados)
       setEmpresa(dados)
-      
+
     } catch (error) {
 
     }
@@ -108,7 +108,7 @@ function Perfil_Empresa() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(1).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => { visualizarEmpresasServicos(servico.id) }}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -124,7 +124,7 @@ function Perfil_Empresa() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(2).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => { visualizarEmpresasServicos(servico.id) }}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -141,7 +141,7 @@ function Perfil_Empresa() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(3).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => { visualizarEmpresasServicos(servico.id) }}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -157,7 +157,7 @@ function Perfil_Empresa() {
                     <a className="dropdown-item dropdown-toggle" href="#">Serviços</a>
                     <ul className="dropdown-menu">
                       {filtrarServicosPorAnimal(4).map(servico => (
-                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => {visualizarEmpresasServicos(servico.id)}}>{servico.nome}</a></li>
+                        <li key={servico.id}><a className="dropdown-item" onClick={(e) => { visualizarEmpresasServicos(servico.id) }}>{servico.nome}</a></li>
                       ))}
                     </ul>
                   </li>
@@ -179,7 +179,7 @@ function Perfil_Empresa() {
               </button>
               <ul className="dropdown-menu">
                 <a className="nav-link disabled ms-3" aria-disabled="true">
-                  <span className='d-inline-block' style={{ maxWidth: '100px' }}>
+                  <span className='d-inline-block text-truncate' style={{ maxWidth: '100px' }}>
                     {JSON.parse(localStorage.getItem("decodedToken"))?.nome}
                   </span>
                 </a>
@@ -193,54 +193,54 @@ function Perfil_Empresa() {
       </nav>
 
       {/* conteúdo principal */}
-      <div>
-        <a href="/usuario/visualizarEmpresas" type="button" className="btnVoltarBusca btn m-5 rounded-5">
+
+
+      <a href="/usuario/visualizarEmpresas" type="button" className="btnVoltarBusca btn m-5 rounded-5">
         <span>
           <img src={iconeVoltar} width={20} height={20} alt="Ícone Voltar" />
         </span>
         Voltar
-      </a>             
-        <div className="containerGeralAvaliacoes">
-          <div className="containerPerfilAvaliacoes row justify-content-center border row-cols-md-2 row-cols-1">
-            <div className="col-md-5 d-md-flex text-center p-md-5 p-3 ps-md-5"><img src={process.env.REACT_APP_URL_API_IMG+empresa.foto_perfil} width={100} height={100} style={{ borderRadius: "50%" }} className='me-md-3 m-3' />
-              <div className='mt-4 text-start' >
-                <h2 >{empresa.nome_fantasia}</h2>
-                <p className='mt-4'>Aberto: {empresa.dia_semana_inicio}</p>
-                <p>Fechado: {empresa.dia_semana_fim}</p>
-                <p>Horário de funcionamento: {empresa.hora_abertura} às {empresa.hora_fechamento}</p>
-                <p>Cidade: {empresa.cidade}</p>
-                <p>Bairro: {empresa.bairro}</p>
-                <p>Rua: {empresa.rua}     número: {empresa.numero_residencia}</p>
-              </div>
+      </a>
+      <div className="containerGeralAvaliacoes container border rounded-4 mt-5 mb-5 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+        <div className="containerPerfilAvaliacoes row justify-content-center row-cols-md-2 row-cols-1 bg-body-tertiary">
+          <div className="col-md-6 d-md-flex text-center p-md-5 p-3 ps-md-5">
+            <img src={process.env.REACT_APP_URL_API_IMG + empresa.foto_perfil} width={200} height={200} style={{ borderRadius: "50%" }} className='me-md-3 m-3' />
+            <div className='mt-4 text-start' >
+              <h2 >{empresa.nome_fantasia}</h2>
+              <p className='mt-4'>Aberto: {empresa.dia_semana_inicio}</p>
+              <p>Fechado: {empresa.dia_semana_fim}</p>
+              <p>Horário de funcionamento: {empresa.hora_abertura} às {empresa.hora_fechamento}</p>
+              <p>Cidade: {empresa.cidade}</p>
+              <p>Bairro: {empresa.bairro}</p>
+              <p>Rua: {empresa.rua}</p>
+              <p>Número: {empresa.numero_residencia}</p>
             </div>
-
-            <div className="col-md-3 p-3 text-center ">
-              <div className="card text-center">
-
-                <div className="card-body">
-                  <h5 className="card-title ">
-                    <div className="d-flex justify-content-center">
-                      <img src={mapaImg} alt="" srcset="" className='img-fluid rounded-3' />
-                    </div>
-                  </h5>
-                </div>
+          </div>
+          <div className="col-md-6 p-3 text-center">
+            <div className="card text-center">
+              <div className="card-body">
+                <h5 className="card-title ">
+                  <div className="d-flex justify-content-center">
+                    <img src={mapaImg} width={500} height={500} alt="" srcset="" className='img-fluid rounded-3' />
+                  </div>
+                </h5>
               </div>
             </div>
           </div>
-          <h4 className='container pt-5 text-md-start text-center'>Comentários</h4>
-          <div className="containerPerfilAvaliacoes container col-md-6 border rounded-4 p-md-5 p-3 mt-md-5 mt-3 ">
-            <div className='container'>
-              <div className="card">
-                <div className="card-header">
-                  Usuário
-                </div>
-                <div className="">
-                  <div className="card-body">
-                    <p className="card-text">comentário</p>
-                    <div className="form-floating">
-                      <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                      <label for="floatingTextarea">Inserir comentário</label>
-                    </div>
+        </div>
+        <h4 className='container pt-5 text-center'>Comentários</h4>
+        <div className="containerPerfilAvaliacoes container col-md-6 border rounded-4 p-md-5 p-3 mt-md-5 mt-3 mb-md-5">
+          <div className='container'>
+            <div className="card">
+              <div className="card-header">
+                Usuário
+              </div>
+              <div className="">
+                <div className="card-body">
+                  <p className="card-text">comentário</p>
+                  <div className="form-floating">
+                    <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                    <label for="floatingTextarea">Inserir comentário</label>
                   </div>
                 </div>
               </div>
