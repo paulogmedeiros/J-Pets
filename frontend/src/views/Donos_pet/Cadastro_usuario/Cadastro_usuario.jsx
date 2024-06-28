@@ -10,7 +10,7 @@ import { Loader } from '@mantine/core';
 function Cadastro_usuario() {
   useEffect(() => {
     document.title = "Cadastro | Dono de Pet"
-  })
+  },[])
 
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')

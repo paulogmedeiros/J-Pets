@@ -24,7 +24,7 @@ function Painel_de_controle_marcas() {
 
     // Chamando função carregar usuários
     carregarMarcas();
-  });
+  },[]);
 
   // Função carregar usuários
   async function carregarMarcas() {

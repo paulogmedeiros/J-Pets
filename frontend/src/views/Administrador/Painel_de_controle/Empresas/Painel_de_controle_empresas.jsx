@@ -33,7 +33,7 @@ function Painel_de_controle_empresas() {
 
         // Chamando função carregar usuários
         carregarUsuarios()
-    })
+    },[])
 
     async function logOff() {
         localStorage.clear()

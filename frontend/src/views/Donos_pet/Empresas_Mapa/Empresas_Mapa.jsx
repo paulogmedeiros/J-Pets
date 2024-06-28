@@ -228,7 +228,7 @@ function Empresas_Mapa() {
                 >Ver perfil</a>
               </div>
               <div className="col-md-3"></div>
-              <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} style={{ borderRadius: "50%" }} /></button>
+              {/* <button type="button" className="btnDisconto btn btn-sm ms-md-5 rounded-5"><img src={imgDesconto} style={{ borderRadius: "50%" }} /></button> */}
             </div>
           ))}
 

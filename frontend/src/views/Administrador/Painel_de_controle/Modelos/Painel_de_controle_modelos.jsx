@@ -23,7 +23,7 @@ function Painel_de_controle_modelos() {
 
         // Chamando função carregar modelos
         carregarModelos()
-    })
+    },[])
     // Função carregar modelos
     async function carregarModelos() {
         try {

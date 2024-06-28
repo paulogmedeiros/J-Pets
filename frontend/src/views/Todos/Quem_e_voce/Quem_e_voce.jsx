@@ -6,7 +6,7 @@ function Quem_e_voce() {
 
     useEffect(() => {
         document.title = "Quem é você?"
-    })
+    },[])
 
     return (
         <div className="container">

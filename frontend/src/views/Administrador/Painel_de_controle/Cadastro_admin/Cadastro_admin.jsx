@@ -17,7 +17,7 @@ function Cadastro_admin() {
 
   useEffect(() => {
     document.title = "Painel de controle | Cadastro administrador"
-  })
+  },[])
 
   // função para cadastrar administradores (login>postAdministrador)
   async function cadastrarAdministrador(event) {

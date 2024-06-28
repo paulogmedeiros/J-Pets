@@ -25,7 +25,7 @@ function Painel_de_controle_servicos() {
         // Chamando função carregar servicos
         carregarServicos()
 
-    })
+    },[])
 
     async function atualizarServico(event) {
 

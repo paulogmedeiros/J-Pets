@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import logoJPets from './img/logoJPets.png';
 import './CadastroPerfilProfissional.css';
 import { notifications } from '@mantine/notifications'
+import InputMask from 'react-input-mask'
 
 function CadastroPerfilProfissional() {
 
@@ -31,7 +32,8 @@ function CadastroPerfilProfissional() {
 
   // função para a API de CEP ViaCEP
   const handleCepChange = (e) => {
-    const cepValue = e.target.value;
+    const cepMascara = e.target.value;
+    const cepValue = cepMascara.replace(/\D/g, '');
     setCep(cepValue);
 
     if (cepValue.length === 8) {
@@ -58,14 +60,14 @@ function CadastroPerfilProfissional() {
   async function cadastrarPerfilProfissional(event) {
     try {
       event.preventDefault()
-
+      const contatoLimpo = telefone.replace(/\D/g, '');
       const perfilDados = {
         cep,
         rua: endereco.rua,
         bairro: endereco.bairro,
         cidade: endereco.cidade,
         uf: endereco.uf,
-        telefone,
+        telefone:contatoLimpo,
         numeroResidencia,
         diaSemanaFim,
         diaSemanaInicio,
@@ -227,7 +229,13 @@ function CadastroPerfilProfissional() {
               <div className="col-md-3">
                 <div className="mb-3 text-start">
                   <label htmlFor="cep" className="form-label">CEP</label>
-                  <input type="number" className="form-control" id="cep" value={cep} onChange={handleCepChange} />
+                  <InputMask mask="99999-999"
+                  type="text" 
+                  className="form-control" 
+                  id="cep" 
+                  value={cep} 
+                  onChange={handleCepChange} 
+                  />
                 </div>
               </div>
               <div className="col-md-5">
@@ -238,7 +246,10 @@ function CadastroPerfilProfissional() {
                     type="text"
                     className="form-control"
                     id="rua"
-                    value={endereco.rua} />
+                    value={endereco.rua} 
+                    aria-label="Disabled input example" disabled readonly
+                    />
+                    
                 </div>
               </div>
               <div className="col">
@@ -249,7 +260,9 @@ function CadastroPerfilProfissional() {
                     type="text"
                     className="form-control"
                     id="bairro"
-                    value={endereco.bairro} />
+                    value={endereco.bairro}
+                    aria-label="Disabled input example" disabled readonly
+                    />
                 </div>
               </div>
               <div className="w-100"></div>
@@ -261,7 +274,9 @@ function CadastroPerfilProfissional() {
                     type="text"
                     className="form-control"
                     id="cidade"
-                    value={endereco.cidade} />
+                    value={endereco.cidade} 
+                    aria-label="Disabled input example" disabled readonly
+                    />
                 </div>
               </div>
               <div className="col-md-1">
@@ -272,19 +287,22 @@ function CadastroPerfilProfissional() {
                     type="text"
                     className="form-control text-center"
                     id="uf"
-                    value={endereco.uf} />
+                    value={endereco.uf} 
+                    aria-label="Disabled input example" disabled readonly
+                    />
                 </div>
               </div>
               <div className="col-md-5">
                 <div className="mb-3 text-start">
                   <label
                     htmlFor="contato" className="form-label">Contato</label>
-                  <input
+                  <InputMask mask="(99)99999-9999"
                     value={telefone}
                     onChange={(e) => setTelefone(e.target.value)}
-                    type="number"
+                    type="text"
                     className="form-control"
-                    id="contato" placeholder="" />
+                    id="contato" placeholder="" 
+                    />
                 </div>
               </div>
               <div className="col-md-2">

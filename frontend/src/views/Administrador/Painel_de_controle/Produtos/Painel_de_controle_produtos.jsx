@@ -24,7 +24,7 @@ function Painel_de_controle_produtos() {
         // Chamando função carregar produtos ao carregar a tela
         carregarProdutos()
 
-    })
+    },[])
     // Função carregar produtos
     async function carregarProdutos() {
         try {
