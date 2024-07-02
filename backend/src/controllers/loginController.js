@@ -94,8 +94,8 @@ class LoginController {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'zenzin1237@gmail.com',
-                    pass: 'tjxt zlqx sdrj zylg'
+                    user: '',
+                    pass: ''
                 }
             });
 
@@ -103,7 +103,7 @@ class LoginController {
             const token = jwt.sign({ usuario_id, usuario_tipo }, secret, { expiresIn: 3600 })
             
             const mailOptions = {
-                from: 'zenzin1237@gmail.com',
+                from: '',
                 to: user.email,
                 subject: 'Recuperação de senha',
                 html: `
