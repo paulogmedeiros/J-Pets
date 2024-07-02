@@ -24,5 +24,7 @@ Frontend<br>
 Backend<br>
 ● cd backend/ <br>
 ● npm install (para instalar todas as dapêndencias) <br>
-● npx prisma generate (para gerar a tipagem do banco de dados no código fonte por meio da PrimaORM) <br>
+● npx prisma generate (para gerar a tipagem do banco de dados no código fonte por meio do PrimaORM) <br>
 ● npm run dev (para inicializar a aplicação) <br>
+
+
