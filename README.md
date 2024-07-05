@@ -16,13 +16,13 @@ O projeto é nosso T.C.C. e fruto de um ano e meio de estudos no SENAI de Vitór
 # 📝 Passo a passo para inicializar o projeto
 Frontend<br>
 ● cd frontend/ <br>
-● npm install (para instalar todas as dapêndencias) <br>
+● npm install (para instalar todas as depêndencias) <br>
 ● npm start (para inicializar a aplicação) <br>
 
 Backend<br>
 ● cd backend/ <br>
-● npm install (para instalar todas as dapêndencias) <br>
-● npx prisma generate (para gerar a tipagem do banco de dados no código fonte por meio do PrimaORM) <br>
+● npm install (para instalar todas as depêndencias) <br>
+● npx prisma generate (para gerar a tipagem do banco de dados no código fonte por meio do PrismaORM) <br>
 ● npm run dev (para inicializar a aplicação) <br>
 
 # 📖 Regras de negócio 
